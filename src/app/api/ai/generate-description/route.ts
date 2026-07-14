@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
 
     return apiSuccessResponse({
       ...(result as Record<string, unknown>),
-      meta: { model: 'gemini-2.0-flash' },
+      meta: { tokensUsed: text.length, model: process.env.AI_MODEL || 'gemini-2.0-flash' },
     });
   } catch (err) {
     return apiErrorResponse(handleApiError(err));
