@@ -1,10 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 import { tools } from '@/content/tools-metadata';
-import { cn } from '@/lib/utils';
+import { ChevronDown, Play, Image, Tags, Hash, FileText, Sparkles, PenLine, BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare } from 'lucide-react';
 
 const categoryLabels: Record<string, string> = {
   downloader: 'Downloaders',
@@ -12,6 +12,11 @@ const categoryLabels: Record<string, string> = {
   'ai-generator': 'AI Generators',
   analytics: 'Analytics',
   seo: 'SEO Tools',
+};
+
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Image, Tags, Hash, FileText, Sparkles, PenLine,
+  BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare,
 };
 
 export function ToolsDropdown() {
@@ -34,36 +39,48 @@ export function ToolsDropdown() {
       onMouseLeave={() => setOpen(false)}
     >
       <button
-        className="px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground rounded-md transition-colors flex items-center gap-1"
+        className="px-3 py-1.5 text-[13px] font-medium text-muted-foreground hover:text-foreground rounded-md transition-colors flex items-center gap-1"
         onClick={() => setOpen(!open)}
       >
         Tools
-        <ChevronDown className={cn('size-3 transition-transform', open && 'rotate-180')} />
+        <ChevronDown className={`size-3 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
 
-      {open && (
-        <div className="absolute top-full left-0 mt-1 w-[560px] bg-background border rounded-lg shadow-lg p-4 z-50">
-          <div className="grid grid-cols-2 gap-4">
-            {Object.entries(categorized).map(([category, categoryTools]) => (
-              <div key={category} className="space-y-2">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  {categoryLabels[category] || category}
-                </p>
-                {categoryTools.map((tool) => (
-                  <Link
-                    key={tool.slug}
-                    href={tool.route}
-                    className="block text-sm py-1 rounded hover:text-primary hover:bg-muted/50 px-2 transition-colors"
-                    onClick={() => setOpen(false)}
-                  >
-                    {tool.name}
-                  </Link>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -8, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.97 }}
+            transition={{ duration: 0.15 }}
+            className="absolute top-full left-0 mt-2 w-[560px] bg-card border rounded-2xl shadow-xl p-5 z-50"
+          >
+            <div className="grid grid-cols-2 gap-5">
+              {Object.entries(categorized).map(([category, categoryTools]) => (
+                <div key={category} className="space-y-2">
+                  <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-2">
+                    {categoryLabels[category] || category}
+                  </p>
+                  {categoryTools.map((tool) => {
+                    const Icon = iconMap[tool.icon] || Sparkles;
+                    return (
+                      <Link
+                        key={tool.slug}
+                        href={tool.route}
+                        className="flex items-center gap-2.5 py-1.5 px-2 rounded-lg text-[13px] hover:bg-secondary transition-colors font-medium group"
+                        onClick={() => setOpen(false)}
+                      >
+                        <Icon className="size-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                        {tool.name}
+                      </Link>
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
