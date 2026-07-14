@@ -15,7 +15,11 @@ function getModel(): GenerativeModel {
   }
   if (!model) {
     model = genAI.getGenerativeModel({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-2.0-flash',
+      generationConfig: {
+        maxOutputTokens: 2048,
+        temperature: 0.7,
+      },
       safetySettings: [
         { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
         { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
@@ -31,6 +35,13 @@ interface GenerateOptions {
   temperature?: number;
   maxTokens?: number;
   systemInstruction?: string;
+}
+
+export function safeJsonParse(text: string): unknown {
+  const cleaned = text.trim();
+  const jsonMatch = cleaned.match(/```(?:json)?\s*\n?([\s\S]*?)\n?```/);
+  const raw = jsonMatch ? jsonMatch[1]!.trim() : cleaned;
+  return JSON.parse(raw);
 }
 
 async function generateWithGemini(prompt: string, options: GenerateOptions = {}): Promise<string> {
@@ -63,7 +74,7 @@ export async function generateContent(
   options: GenerateOptions = {},
 ): Promise<string> {
   const hasOpenRouter = !!process.env.OPENROUTER_API_KEY;
- 
+
   if (apiKey) {
     try {
       return await generateWithGemini(prompt, options);
@@ -77,7 +88,6 @@ export async function generateContent(
   }
 
   if (hasOpenRouter) {
-    console.log('No Gemini key found, using OpenRouter:', process.env.AI_MODEL || 'google/gemini-2.5-flash');
     return await generateWithOpenRouter(prompt, options);
   }
 

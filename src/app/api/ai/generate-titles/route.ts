@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server';
-import { generateContent } from '@/lib/ai/gemini';
+import { generateContent, safeJsonParse } from '@/lib/ai/gemini';
 import { titleGenerationPrompt } from '@/lib/ai/prompts';
 import { titleGeneratorSchema } from '@/lib/validators/tool-inputs';
-import { apiSuccessResponse, apiErrorResponse, handleApiError, AppError, ErrorCodes } from '@/lib/errors';
+import { apiSuccessResponse, apiErrorResponse, handleApiError, AppError } from '@/lib/errors';
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,11 +16,11 @@ export async function POST(request: NextRequest) {
     const { systemInstruction, prompt } = titleGenerationPrompt({ topic, keyword, language, tone, count });
 
     const text = await generateContent(prompt, { systemInstruction, temperature: 0.7 });
-    const titles = JSON.parse(text);
+    const titles = safeJsonParse(text);
 
     return apiSuccessResponse({
-      titles: Array.isArray(titles) ? titles : titles.titles ?? [],
-      meta: { model: 'gemini-2.5-flash' },
+      titles: Array.isArray(titles) ? titles : (titles as { titles: unknown[] }).titles ?? [],
+      meta: { tokensUsed: text.length, model: 'gemini-2.0-flash' },
     });
   } catch (err) {
     return apiErrorResponse(handleApiError(err));

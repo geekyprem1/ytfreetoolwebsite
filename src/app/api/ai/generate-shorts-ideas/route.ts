@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { generateContent } from '@/lib/ai/gemini';
+import { generateContent, safeJsonParse } from '@/lib/ai/gemini';
 import { shortsIdeasPrompt } from '@/lib/ai/prompts';
 import { shortsIdeasSchema } from '@/lib/validators/tool-inputs';
 import { apiSuccessResponse, apiErrorResponse, handleApiError, AppError } from '@/lib/errors';
@@ -13,11 +13,12 @@ export async function POST(request: NextRequest) {
     }
 
     const { topic, count } = parsed.data;
-    const { systemInstruction, prompt } = shortsIdeasPrompt({ topic, count });
+    const limitedCount = Math.min(count, 20);
+    const { systemInstruction, prompt } = shortsIdeasPrompt({ topic, count: limitedCount });
     const text = await generateContent(prompt, { systemInstruction, temperature: 0.9, maxTokens: 4096 });
-    const result = JSON.parse(text);
+    const result = safeJsonParse(text);
 
-    return apiSuccessResponse({ ...result, meta: { model: 'gemini-2.5-flash' } });
+    return apiSuccessResponse({ ...(result as Record<string, unknown>), meta: { model: 'gemini-2.0-flash' } });
   } catch (err) {
     return apiErrorResponse(handleApiError(err));
   }
