@@ -25,7 +25,9 @@ function normalizeTimestamps(raw: unknown): Chapter[] {
         const trimmed = item.trim();
         if (!trimmed) return null;
         const match = trimmed.match(/^(\d{1,2}:\d{2}(?::\d{2})?)\s+(.+)$/);
-        if (match) return { timestamp: match[1], title: match[2].trim() };
+        if (match?.[1] && match[2]) {
+          return { timestamp: match[1], title: match[2].trim() };
+        }
         return { timestamp: '0:00', title: trimmed };
       }
 
@@ -37,7 +39,9 @@ function normalizeTimestamps(raw: unknown): Chapter[] {
         // Sometimes model puts full "0:00 Intro" only in title
         if (!timestamp && title) {
           const match = title.match(/^(\d{1,2}:\d{2}(?::\d{2})?)\s+(.+)$/);
-          if (match) return { timestamp: match[1], title: match[2].trim() };
+          if (match?.[1] && match[2]) {
+            return { timestamp: match[1], title: match[2].trim() };
+          }
         }
         return { timestamp: timestamp || '0:00', title: title || 'Chapter' };
       }

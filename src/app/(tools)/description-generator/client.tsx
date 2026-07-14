@@ -11,7 +11,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select } from '@/components/ui/select';
-import { Separator } from '@/components/ui/separator';
 import { useToolApi } from '@/hooks/use-tool-api';
 
 const TONES = [
@@ -43,7 +42,9 @@ function normalizeChapters(raw: DescriptionResponse['timestamps'] | undefined): 
         const trimmed = item.trim();
         if (!trimmed) return null;
         const match = trimmed.match(/^(\d{1,2}:\d{2}(?::\d{2})?)\s+(.+)$/);
-        if (match) return { timestamp: match[1], title: match[2].trim() };
+        if (match?.[1] && match[2]) {
+          return { timestamp: match[1], title: match[2].trim() };
+        }
         return { timestamp: '0:00', title: trimmed };
       }
       if (item && typeof item === 'object') {
