@@ -8,7 +8,7 @@ import { useYouTubeUrl } from '@/hooks/use-youtube-url';
 import { cn } from '@/lib/utils';
 
 interface YouTubeUrlInputProps {
-  onValidUrl: (videoId: string, url: string) => void;
+  onValidUrl: (id: string, url: string) => void;
   placeholder?: string;
   className?: string;
   disabled?: boolean;
@@ -24,9 +24,11 @@ export function YouTubeUrlInput({
   initialUrl,
   autoSubmit = false,
 }: YouTubeUrlInputProps) {
-  const { url, isValid, videoId, error, setUrl } = useYouTubeUrl();
+  const { url, isValid, videoId, channelId, error, setUrl } = useYouTubeUrl();
   const [submitted, setSubmitted] = useState(false);
   const initialized = useRef(false);
+
+  const activeId = videoId || channelId;
 
   useEffect(() => {
     if (initialUrl && !initialized.current) {
@@ -36,18 +38,18 @@ export function YouTubeUrlInput({
   }, [initialUrl, setUrl]);
 
   useEffect(() => {
-    if (autoSubmit && initialized.current && isValid && videoId && !submitted && !disabled) {
+    if (autoSubmit && initialized.current && isValid && activeId && !submitted && !disabled) {
       setSubmitted(true);
-      onValidUrl(videoId, url);
+      onValidUrl(activeId, url);
     }
-  }, [autoSubmit, isValid, videoId, submitted, disabled, url, onValidUrl]);
+  }, [autoSubmit, isValid, activeId, submitted, disabled, url, onValidUrl]);
 
   const handleSubmit = useCallback(() => {
     setSubmitted(true);
-    if (isValid && videoId) {
-      onValidUrl(videoId, url);
+    if (isValid && activeId) {
+      onValidUrl(activeId, url);
     }
-  }, [isValid, videoId, url, onValidUrl]);
+  }, [isValid, activeId, url, onValidUrl]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') handleSubmit();

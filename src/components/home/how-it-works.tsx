@@ -3,26 +3,26 @@
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Link2, LayoutGrid, Zap, ArrowRight, Play } from 'lucide-react';
+import { Link2, LayoutGrid, Zap, ArrowRight } from 'lucide-react';
 
 const steps = [
   {
-    num: '01',
+    num: '1',
     icon: Link2,
     title: 'Paste any YouTube URL',
-    description: 'Copy the link of any video or channel and paste it. Our smart parser instantly recognizes the content type.',
+    description: 'Copy a video or channel link. Our parser instantly detects the content type.',
   },
   {
-    num: '02',
+    num: '2',
     icon: LayoutGrid,
     title: 'Pick your tool',
-    description: 'Choose from 15+ tools — thumbnails, tags, transcripts, AI generators, analytics, and SEO tools.',
+    description: 'Choose from thumbnails, tags, AI generators, analytics, or SEO tools.',
   },
   {
-    num: '03',
+    num: '3',
     icon: Zap,
     title: 'Get instant results',
-    description: 'Results appear instantly. Copy, download, or share with one click. Regenerate AI content as needed.',
+    description: 'Results appear instantly. Copy, download, or regenerate with one click.',
   },
 ];
 
@@ -37,54 +37,50 @@ function StepCard({ num, icon: Icon, title, description, index }: {
       ref={ref}
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.4, delay: index * 0.12 }}
-      className="relative group"
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      className="flex flex-col items-center text-center p-6"
     >
-      <div className="rounded-2xl border bg-card p-6 hover:shadow-lg transition-all duration-300">
-        <div className="flex items-start gap-4">
-          <span className="text-[48px] font-extrabold tracking-tighter text-muted/30 leading-none shrink-0 select-none">
-            {num}
-          </span>
-          <div className="pt-1.5">
-            <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
-              <span style={{ color: '#FF3B30' }}><Icon className="size-5" /></span>
-            </div>
-            <h3 className="text-[17px] font-bold tracking-tight mb-1.5">{title}</h3>
-            <p className="text-[14px] text-muted-foreground leading-relaxed">{description}</p>
-          </div>
+      <div className="relative mb-4">
+        <div className="size-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+          <span style={{ color: '#FF3B30' }}><Icon className="size-6" /></span>
         </div>
+        <span className="absolute -top-1.5 -right-1.5 size-6 rounded-full bg-primary text-[11px] font-bold text-white flex items-center justify-center">
+          {num}
+        </span>
       </div>
+      <h3 className="text-[16px] font-bold tracking-tight mb-1.5">{title}</h3>
+      <p className="text-[13px] text-muted-foreground leading-relaxed max-w-[240px]">{description}</p>
     </motion.div>
   );
 }
 
 export function HowItWorks() {
   return (
-    <section className="py-24 px-4 bg-secondary/30 border-y border-border/30">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-14">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30 border-y border-border/30">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/15 text-[13px] font-medium text-primary mb-5">
-            <Play className="size-3.5" />
+            <Zap className="size-3.5" />
             Simple workflow
           </div>
           <h2 className="text-3xl md:text-[40px] font-bold tracking-tight mb-3">
             How it works
           </h2>
-          <p className="text-[17px] text-muted-foreground max-w-xl mx-auto">
-            Three steps. No signup. Instant results.
+          <p className="text-[16px] text-muted-foreground">
+            Three simple steps. No signup needed. Start in seconds.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
           {steps.map((step, i) => (
             <StepCard key={step.num} {...step} index={i} />
           ))}
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="text-center">
           <Link
             href="/thumbnail-downloader"
-            className="inline-flex items-center gap-2 bg-[#FF3B30] hover:bg-[#E0352B] text-white px-6 py-3 rounded-xl text-[15px] font-semibold transition-all shadow-lg shadow-primary/20"
+            className="inline-flex items-center gap-2 bg-[#FF3B30] hover:bg-[#E0352B] text-white px-6 py-3 rounded-xl text-[14px] font-semibold transition-all shadow-md shadow-primary/15 hover:shadow-lg"
           >
             Try your first tool <ArrowRight className="size-4" />
           </Link>

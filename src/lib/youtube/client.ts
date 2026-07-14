@@ -69,12 +69,20 @@ export async function getVideoTags(videoId: string): Promise<{
   };
 }
 
-export async function getChannelDetails(channelId: string): Promise<YouTubeChannel> {
+export async function getChannelDetails(channelIdOrHandle: string): Promise<YouTubeChannel> {
   const yt = getClient();
-  const res = await yt.channels.list({
-    id: [channelId],
+
+  const params: Record<string, unknown> = {
     part: ['snippet', 'statistics', 'brandingSettings'],
-  });
+  };
+
+  if (channelIdOrHandle.startsWith('UC')) {
+    params.id = [channelIdOrHandle];
+  } else {
+    params.forHandle = channelIdOrHandle.replace(/^@/, '');
+  }
+
+  const res = await yt.channels.list(params as never);
 
   const item = res.data.items?.[0];
   if (!item) {
@@ -125,11 +133,8 @@ export async function resolveUrl(url: string): Promise<ResolveResult> {
       const details = await getVideoDetails(parsed.id);
       return { type: 'video', id: parsed.id, title: details.title };
     }
-    if (parsed.id.startsWith('UC')) {
-      const details = await getChannelDetails(parsed.id);
-      return { type: 'channel', id: parsed.id, title: details.title };
-    }
-    return { type: 'channel', id: parsed.id };
+    const details = await getChannelDetails(parsed.id);
+    return { type: 'channel', id: details.id, title: details.title };
   } catch {
     return { type: parsed.type, id: parsed.id };
   }

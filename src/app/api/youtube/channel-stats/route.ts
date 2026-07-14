@@ -6,39 +6,41 @@ import { TTL } from '@/lib/cache/cache-policies';
 import { formatNumber } from '@/lib/utils/format';
 import { apiSuccessResponse, apiErrorResponse, handleApiError } from '@/lib/errors';
 
+async function fetchChannelStats(input: string) {
+  const channel = await getChannelDetails(input);
+  const recentUploads = await getChannelVideos(channel.id);
+
+  return {
+    ...channel,
+    subscriberCount: formatNumber(channel.subscriberCount),
+    videoCount: formatNumber(channel.videoCount),
+    viewCount: formatNumber(channel.viewCount),
+    recentUploads,
+  };
+}
+
 export async function GET(request: NextRequest) {
   try {
-    const channelId = request.nextUrl.searchParams.get('c');
-    if (!channelId || channelId.length < 24) {
-      const [channel, recentUploads] = await Promise.all([
-        getChannelDetails(channelId ?? ''),
-        getChannelVideos(channelId ?? ''),
-      ]);
-
-      return apiSuccessResponse({
-        ...channel,
-        subscriberCount: formatNumber(channel.subscriberCount),
-        videoCount: formatNumber(channel.videoCount),
-        viewCount: formatNumber(channel.viewCount),
-        recentUploads,
-      });
+    const input = request.nextUrl.searchParams.get('c');
+    if (!input) {
+      return apiErrorResponse({
+        code: 'MISSING_PARAM',
+        message: 'Missing channel identifier',
+        status: 400,
+      } as never);
     }
 
-    const result = await getCachedOrFetch(cacheKeys.channelStats(channelId), TTL.channelStats, async () => {
-      const [channel, recentUploads] = await Promise.all([
-        getChannelDetails(channelId!),
-        getChannelVideos(channelId!),
-      ]);
+    const isChannelId = input.startsWith('UC') && input.length >= 24;
+    if (isChannelId) {
+      const result = await getCachedOrFetch(
+        cacheKeys.channelStats(input),
+        TTL.channelStats,
+        () => fetchChannelStats(input),
+      );
+      return apiSuccessResponse(result);
+    }
 
-      return {
-        ...channel,
-        subscriberCount: formatNumber(channel.subscriberCount),
-        videoCount: formatNumber(channel.videoCount),
-        viewCount: formatNumber(channel.viewCount),
-        recentUploads,
-      };
-    });
-
+    const result = await fetchChannelStats(input);
     return apiSuccessResponse(result);
   } catch (err) {
     return apiErrorResponse(handleApiError(err));
