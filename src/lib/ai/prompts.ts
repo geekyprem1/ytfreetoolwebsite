@@ -49,7 +49,7 @@ export const descriptionGenerationPrompt = ({
   includeHashtags: boolean;
   includeCTA: boolean;
 }) => ({
-  systemInstruction: `${SYSTEM_ROLE} You generate comprehensive, SEO-optimized YouTube video descriptions that include keywords, chapters, hashtags, and engaging calls-to-action.`,
+  systemInstruction: `${SYSTEM_ROLE} You generate comprehensive, SEO-optimized YouTube video descriptions that include keywords, chapters, hashtags, and engaging calls-to-action. Output plain text only — YouTube does not render markdown.`,
   prompt: `Generate a YouTube video description for:
 Topic: "${topic}"
 Keyword: "${keyword}"
@@ -64,10 +64,11 @@ ${includeTimestamps ? '- Include 4-6 timestamp chapters (00:00 format)' : ''}
 ${includeHashtags ? '- Include 10-15 relevant hashtags' : ''}
 ${includeCTA ? '- Include a call-to-action (subscribe, like, comment)' : ''}
 - Total length: 150-300 words
+- PLAIN TEXT ONLY: never use markdown (no **bold**, *italic*, # headings, bullet markdown, or backticks). YouTube shows stars/asterisks as raw characters.
 
 Return as a valid JSON object:
 {
-  "description": "full description text",
+  "description": "full description text with no markdown",
   "hashtags": ["#tag1", "#tag2", ...],
   "timestamps": ["0:00 Introduction", ...],
   "cta": "call to action text"

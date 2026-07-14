@@ -26,7 +26,6 @@ interface DescriptionResponse {
   hashtags: string[];
   timestamps: { timestamp: string; title: string }[];
   cta: string;
-  meta: { tokensUsed: number; model: string };
 }
 
 export function DescriptionGeneratorClient() {
@@ -145,10 +144,7 @@ export function DescriptionGeneratorClient() {
         <div className="space-y-4">
           <ToolOutput title="Generated Description">
             <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <p className="text-xs text-muted-foreground">
-                  Tokens: {data.meta.tokensUsed} · {data.meta.model}
-                </p>
+              <div className="flex items-center justify-end">
                 <OutputActions
                   copyText={data.description}
                   copyLabel="Description"
