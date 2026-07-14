@@ -60,17 +60,20 @@ Requirements:
 - Write in ${tone} tone
 - Include a compelling first 2-3 lines (above the fold)
 - Naturally incorporate the keyword 2-3 times
-${includeTimestamps ? '- Include 4-6 timestamp chapters (00:00 format)' : ''}
-${includeHashtags ? '- Include 10-15 relevant hashtags' : ''}
-${includeCTA ? '- Include a call-to-action (subscribe, like, comment)' : ''}
-- Total length: 150-300 words
+${includeTimestamps ? '- Create 4-6 video chapters with realistic timestamps (0:00, 1:30, etc.) in the timestamps array. Also paste those same chapters into the description body under a "Chapters:" or "Timestamps:" line.' : '- Do NOT include chapters/timestamps in the description or timestamps array (return timestamps as []).'}
+${includeHashtags ? '- Provide 10-15 relevant hashtags in the hashtags array only (do not dump a long hashtag wall into the description body)' : '- Return hashtags as []'}
+${includeCTA ? '- Include a short call-to-action in the cta field (and optionally one line in the description)' : '- Return cta as empty string'}
+- Total length: 150-300 words for description
 - PLAIN TEXT ONLY: never use markdown (no **bold**, *italic*, # headings, bullet markdown, or backticks). YouTube shows stars/asterisks as raw characters.
 
-Return as a valid JSON object:
+Return as a valid JSON object with this EXACT shape:
 {
-  "description": "full description text with no markdown",
-  "hashtags": ["#tag1", "#tag2", ...],
-  "timestamps": ["0:00 Introduction", ...],
+  "description": "full description plain text",
+  "hashtags": ["#tag1", "#tag2"],
+  "timestamps": [
+    { "timestamp": "0:00", "title": "Introduction" },
+    { "timestamp": "1:30", "title": "Main Topic" }
+  ],
   "cta": "call to action text"
 }
 Respond ONLY with the JSON object, no other text.`,

@@ -21,11 +21,40 @@ const TONES = [
   { value: 'enthusiastic', label: '🎉 Enthusiastic' },
 ];
 
+interface Chapter {
+  timestamp: string;
+  title: string;
+}
+
 interface DescriptionResponse {
   description: string;
   hashtags: string[];
-  timestamps: { timestamp: string; title: string }[];
+  timestamps: Chapter[] | string[];
   cta: string;
+}
+
+/** Normalize chapters whether API/AI returned objects or "0:00 Title" strings. */
+function normalizeChapters(raw: DescriptionResponse['timestamps'] | undefined): Chapter[] {
+  if (!Array.isArray(raw) || raw.length === 0) return [];
+
+  return raw
+    .map((item): Chapter | null => {
+      if (typeof item === 'string') {
+        const trimmed = item.trim();
+        if (!trimmed) return null;
+        const match = trimmed.match(/^(\d{1,2}:\d{2}(?::\d{2})?)\s+(.+)$/);
+        if (match) return { timestamp: match[1], title: match[2].trim() };
+        return { timestamp: '0:00', title: trimmed };
+      }
+      if (item && typeof item === 'object') {
+        const timestamp = String(item.timestamp ?? '').trim();
+        const title = String(item.title ?? '').trim();
+        if (!timestamp && !title) return null;
+        return { timestamp: timestamp || '0:00', title: title || 'Chapter' };
+      }
+      return null;
+    })
+    .filter((c): c is Chapter => c !== null);
 }
 
 export function DescriptionGeneratorClient() {
@@ -56,6 +85,8 @@ export function DescriptionGeneratorClient() {
   };
 
   const isValid = topic.length >= 3 && keyword.length >= 1 && summary.length >= 10;
+  const chapters = data ? normalizeChapters(data.timestamps) : [];
+  const hashtags = data?.hashtags?.filter((t) => typeof t === 'string' && t.trim()) ?? [];
 
   return (
     <div className="space-y-4">
@@ -158,18 +189,18 @@ export function DescriptionGeneratorClient() {
             </div>
           </ToolOutput>
 
-          {data.timestamps && data.timestamps.length > 0 && includeTimestamps && (
+          {includeTimestamps && chapters.length > 0 && (
             <ToolOutput title="Chapters">
               <div className="space-y-1">
-                {data.timestamps.map((ts, i) => (
+                {chapters.map((ts, i) => (
                   <div key={i} className="flex gap-2 text-sm">
-                    <span className="text-primary font-mono">{ts.timestamp}</span>
+                    <span className="text-primary font-mono shrink-0">{ts.timestamp}</span>
                     <span>{ts.title}</span>
                   </div>
                 ))}
                 <div className="mt-2">
                   <OutputActions
-                    copyText={data.timestamps.map((t) => `${t.timestamp} ${t.title}`).join('\n')}
+                    copyText={chapters.map((t) => `${t.timestamp} ${t.title}`).join('\n')}
                     copyLabel="Chapters"
                   />
                 </div>
@@ -177,10 +208,10 @@ export function DescriptionGeneratorClient() {
             </ToolOutput>
           )}
 
-          {data.hashtags && data.hashtags.length > 0 && includeHashtags && (
+          {includeHashtags && hashtags.length > 0 && (
             <ToolOutput title="Hashtags">
               <div className="flex flex-wrap gap-2">
-                {data.hashtags.map((tag) => (
+                {hashtags.map((tag) => (
                   <span key={tag} className="text-sm text-primary font-medium">
                     {tag}
                   </span>
@@ -188,7 +219,7 @@ export function DescriptionGeneratorClient() {
               </div>
               <div className="mt-2">
                 <OutputActions
-                  copyText={data.hashtags.join(' ')}
+                  copyText={hashtags.join(' ')}
                   copyLabel="Hashtags"
                 />
               </div>
