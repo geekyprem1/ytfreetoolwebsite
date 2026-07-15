@@ -32,8 +32,9 @@ export function CookieConsent() {
         <div className="flex items-start gap-3 flex-1">
           <Cookie className="size-5 text-primary shrink-0 mt-0.5" />
           <p className="text-sm text-muted-foreground">
-            We use cookies to analyze site usage and serve relevant ads. By clicking Accept, you
-            consent to our use of cookies. See our{' '}
+            We use cookies for essential preferences, analytics, and — where enabled — advertising
+            partners such as Google AdSense. By clicking Accept, you consent to non-essential cookies.
+            See our{' '}
             <a href="/privacy" className="text-primary underline">
               Privacy Policy
             </a>

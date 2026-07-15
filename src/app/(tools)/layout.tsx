@@ -6,7 +6,7 @@ export default function ToolsLayout({ children }: { children: React.ReactNode })
     <>
       <Header />
       <main id="main-content" className="flex-1">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
           {children}
         </div>
       </main>

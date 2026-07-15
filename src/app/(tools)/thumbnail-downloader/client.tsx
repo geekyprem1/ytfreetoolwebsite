@@ -33,6 +33,7 @@ export function ThumbnailDownloaderClient({ initialUrl }: { initialUrl?: string 
         disabled={isLoading}
         initialUrl={initialUrl}
         autoSubmit
+        submitLabel="Download"
       />
 
       {isLoading && <ToolLoading variant="card" />}

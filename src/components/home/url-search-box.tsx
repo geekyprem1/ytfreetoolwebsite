@@ -5,18 +5,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { parseYouTubeUrl } from '@/lib/youtube/url-parser';
-import { Search, Link2, Film, Sparkles } from 'lucide-react';
+import { Link2, Film, Search, BarChart3, Tags, Users, Hash } from 'lucide-react';
 
 const toolSuggestions: Record<string, { name: string; slug: string; icon: React.ComponentType<{ className?: string }> }[]> = {
   video: [
     { name: 'Thumbnail Downloader', slug: 'thumbnail-downloader', icon: Film },
-    { name: 'Tags Extractor', slug: 'tags-extractor', icon: Sparkles },
+    { name: 'Tags Extractor', slug: 'tags-extractor', icon: Tags },
     { name: 'Transcript Extractor', slug: 'transcript-extractor', icon: Search },
-    { name: 'Video Statistics', slug: 'video-statistics', icon: Sparkles },
+    { name: 'Video Statistics', slug: 'video-statistics', icon: BarChart3 },
   ],
   channel: [
-    { name: 'Channel Statistics', slug: 'channel-statistics', icon: Sparkles },
-    { name: 'Channel Tags', slug: 'channel-tags', icon: Sparkles },
+    { name: 'Channel Statistics', slug: 'channel-statistics', icon: Users },
+    { name: 'Channel Tags', slug: 'channel-tags', icon: Hash },
   ],
 };
 
@@ -32,15 +32,15 @@ export function UrlSearchBox() {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto">
+    <div className="w-full">
       <div
-        className={`relative rounded-2xl border bg-card transition-all duration-300 ${
-          focused ? 'border-primary/40 shadow-lg shadow-primary/5 ring-2 ring-primary/10' : 'border-border shadow-sm'
+        className={`relative rounded-2xl border bg-background/80 backdrop-blur-sm transition-all duration-300 ${
+          focused ? 'border-foreground/20 ring-1 ring-foreground/10' : 'border-border/80'
         }`}
       >
-        <div className="flex items-center gap-3 p-2 pr-4">
+        <div className="flex items-center gap-3 p-2.5 pr-4">
           <div className="shrink-0 pl-3">
-            <Link2 className={`size-5 transition-colors duration-300 ${focused || url ? 'text-primary' : 'text-muted-foreground'}`} />
+            <Link2 className={`size-5 transition-colors duration-300 ${focused || url ? 'text-foreground' : 'text-muted-foreground'}`} />
           </div>
           <Input
             type="text"
@@ -49,7 +49,7 @@ export function UrlSearchBox() {
             onChange={(e) => handleChange(e.target.value)}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
-            className="flex-1 border-0 bg-transparent px-0 h-11 text-[15px] placeholder:text-muted-foreground/60 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
+            className="flex-1 border-0 bg-transparent px-0 h-12 text-base placeholder:text-muted-foreground/60 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none md:text-base"
           />
         </div>
       </div>
@@ -57,31 +57,29 @@ export function UrlSearchBox() {
       <AnimatePresence>
         {parsed && toolSuggestions[parsed.type] && (
           <motion.div
-            initial={{ opacity: 0, y: -8, height: 0 }}
+            initial={{ opacity: 0, y: -6, height: 0 }}
             animate={{ opacity: 1, y: 0, height: 'auto' }}
-            exit={{ opacity: 0, y: -8, height: 0 }}
+            exit={{ opacity: 0, y: -6, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="mt-3 overflow-hidden"
+            className="mt-4 overflow-hidden"
           >
-            <div className="bg-card rounded-xl border p-3 shadow-sm">
-              <p className="text-xs text-muted-foreground mb-2 px-1 font-medium uppercase tracking-wider">
-                {parsed.type === 'video' ? 'Detected Video' : 'Detected Channel'}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {toolSuggestions[parsed.type]?.map((tool) => {
-                  const Icon = tool.icon;
-                  return (
-                    <Link
-                      key={tool.slug}
-                      href={`/${tool.slug}?url=${encodeURIComponent(url)}`}
-                      className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-secondary hover:bg-muted text-[13px] font-medium transition-colors border border-transparent hover:border-border"
-                    >
-                      <Icon className="size-3.5 text-primary" />
-                      {tool.name}
-                    </Link>
-                  );
-                })}
-              </div>
+            <p className="text-caption text-muted-foreground mb-2.5 px-1 font-medium tracking-[0.06em] uppercase">
+              {parsed.type === 'video' ? 'Detected video' : 'Detected channel'}
+            </p>
+            <div className="flex flex-col divide-y divide-border/60 border-t border-border/60">
+              {toolSuggestions[parsed.type]?.map((tool) => {
+                const Icon = tool.icon;
+                return (
+                  <Link
+                    key={tool.slug}
+                    href={`/${tool.slug}?url=${encodeURIComponent(url)}`}
+                    className="flex items-center gap-3 py-3.5 px-1 text-base font-medium text-foreground/90 hover:text-primary transition-colors"
+                  >
+                    <Icon className="size-4 text-muted-foreground" />
+                    {tool.name}
+                  </Link>
+                );
+              })}
             </div>
           </motion.div>
         )}

@@ -2,7 +2,6 @@
 
 import { AlertCircle, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 
 interface ToolErrorProps {
   message: string;
@@ -25,20 +24,18 @@ export function ToolError({ message, onRetry }: ToolErrorProps) {
   const friendlyMessage = friendlyMessages[message] || message;
 
   return (
-    <Card className="mt-6 border-destructive/50 bg-destructive/5">
-      <CardContent className="flex items-start gap-4 pt-6">
-        <AlertCircle className="size-5 text-destructive shrink-0 mt-0.5" />
-        <div className="space-y-2">
-          <p className="text-sm font-medium text-destructive">Something went wrong</p>
-          <p className="text-sm text-muted-foreground">{friendlyMessage}</p>
-          {onRetry && (
-            <Button variant="outline" size="sm" onClick={onRetry} className="mt-2">
-              <RotateCw className="size-3 mr-1.5" />
-              Try Again
-            </Button>
-          )}
-        </div>
-      </CardContent>
-    </Card>
+    <div className="mt-6 flex items-start gap-3 rounded-xl border border-destructive/30 bg-destructive/5 px-4 py-4">
+      <AlertCircle className="size-5 text-destructive shrink-0 mt-0.5" />
+      <div className="space-y-2 min-w-0">
+        <p className="text-sm font-medium text-destructive">Something went wrong</p>
+        <p className="text-sm text-muted-foreground">{friendlyMessage}</p>
+        {onRetry && (
+          <Button variant="outline" size="sm" onClick={onRetry} className="mt-1 rounded-lg">
+            <RotateCw className="size-3 mr-1.5" />
+            Try Again
+          </Button>
+        )}
+      </div>
+    </div>
   );
 }

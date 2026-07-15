@@ -3,13 +3,14 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 const QUALITIES = [
-  { value: 'max', label: 'Max (1280×720)', width: 1280, height: 720 },
-  { value: 'hd', label: 'HD (1280×720)', width: 1280, height: 720 },
-  { value: 'sd', label: 'SD (640×480)', width: 640, height: 480 },
-  { value: 'hq', label: 'HQ (480×360)', width: 480, height: 360 },
-  { value: 'mq', label: 'MQ (320×180)', width: 320, height: 180 },
+  { value: 'max', label: 'Max', detail: '1280×720' },
+  { value: 'hd', label: 'HD', detail: '1280×720' },
+  { value: 'sd', label: 'SD', detail: '640×480' },
+  { value: 'hq', label: 'HQ', detail: '480×360' },
+  { value: 'mq', label: 'MQ', detail: '320×180' },
 ];
 
 interface ThumbnailPreviewProps {
@@ -42,22 +43,8 @@ export function ThumbnailPreview({ thumbnails, videoTitle, videoId }: ThumbnailP
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap gap-2">
-        {QUALITIES.map((q) => (
-          <Button
-            key={q.value}
-            variant={selected === q.value ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setSelected(q.value)}
-            disabled={!thumbnails[q.value]}
-          >
-            {q.label.split(' ')[0]}
-          </Button>
-        ))}
-      </div>
-
-      <div className="rounded-xl overflow-hidden border bg-muted/50">
+    <div className="space-y-6">
+      <div className="overflow-hidden rounded-2xl border border-border/60 bg-muted/30">
         {currentUrl ? (
           <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
             <Image
@@ -66,26 +53,49 @@ export function ThumbnailPreview({ thumbnails, videoTitle, videoId }: ThumbnailP
               fill
               className="object-contain"
               unoptimized
+              priority
             />
           </div>
         ) : (
-          <div className="aspect-video flex items-center justify-center text-muted-foreground">
+          <div className="aspect-video flex items-center justify-center text-muted-foreground text-sm">
             No thumbnail available
           </div>
         )}
       </div>
 
+      <div className="flex flex-wrap gap-2">
+        {QUALITIES.map((q) => (
+          <button
+            key={q.value}
+            type="button"
+            onClick={() => setSelected(q.value)}
+            disabled={!thumbnails[q.value]}
+            className={cn(
+              'px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors border',
+              selected === q.value
+                ? 'bg-foreground text-background border-foreground'
+                : 'bg-transparent text-muted-foreground border-border/80 hover:border-foreground/30 hover:text-foreground',
+              !thumbnails[q.value] && 'opacity-40 cursor-not-allowed',
+            )}
+          >
+            {q.label}
+          </button>
+        ))}
+      </div>
+
       {currentQuality && (
-        <p className="text-xs text-muted-foreground text-center">
-          {currentQuality.label} • {currentQuality.width}×{currentQuality.height}
+        <p className="text-sm text-muted-foreground">
+          {currentQuality.label} · {currentQuality.detail}
         </p>
       )}
 
-      <div className="flex justify-center">
-        <Button onClick={handleDownload} disabled={!currentUrl}>
-          Download {selected.toUpperCase()}
-        </Button>
-      </div>
+      <Button
+        onClick={handleDownload}
+        disabled={!currentUrl}
+        className="h-11 px-6 rounded-xl bg-[#FF3B30] hover:bg-[#E0352B] text-white"
+      >
+        Download {selected.toUpperCase()}
+      </Button>
     </div>
   );
 }

@@ -39,7 +39,7 @@ export function ToolsDropdown() {
       onMouseLeave={() => setOpen(false)}
     >
       <button
-        className="px-3 py-1.5 text-[13px] font-medium text-muted-foreground hover:text-foreground rounded-md transition-colors flex items-center gap-1"
+        className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground rounded-md transition-colors flex items-center gap-1"
         onClick={() => setOpen(!open)}
       >
         Tools
@@ -58,7 +58,7 @@ export function ToolsDropdown() {
             <div className="grid grid-cols-2 gap-5">
               {Object.entries(categorized).map(([category, categoryTools]) => (
                 <div key={category} className="space-y-2">
-                  <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider px-2">
+                  <p className="text-caption font-semibold text-muted-foreground uppercase tracking-wider px-2">
                     {categoryLabels[category] || category}
                   </p>
                   {categoryTools.map((tool) => {
@@ -67,7 +67,7 @@ export function ToolsDropdown() {
                       <Link
                         key={tool.slug}
                         href={tool.route}
-                        className="flex items-center gap-2.5 py-1.5 px-2 rounded-lg text-[13px] hover:bg-secondary transition-colors font-medium group"
+                        className="flex items-center gap-2.5 py-2 px-2 rounded-lg text-sm hover:bg-secondary transition-colors font-medium group"
                         onClick={() => setOpen(false)}
                       >
                         <Icon className="size-4 text-muted-foreground group-hover:text-primary transition-colors" />

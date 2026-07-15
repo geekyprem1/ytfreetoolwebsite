@@ -1,5 +1,6 @@
 import { ToolSchema } from '@/components/tools/tool-schema';
 import { BreadcrumbSchema } from '@/components/tools/breadcrumb-schema';
+import { site } from '@/content/site';
 
 interface ToolPageSchemaProps {
   toolName: string;
@@ -9,16 +10,14 @@ interface ToolPageSchemaProps {
 }
 
 export function ToolPageSchema({ toolName, toolDescription, toolSlug, children }: ToolPageSchemaProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yttoolkit.com';
-
   return (
     <>
       <ToolSchema name={toolName} description={toolDescription} slug={toolSlug} />
       <BreadcrumbSchema
         items={[
-          { name: 'Home', url: baseUrl },
-          { name: 'Tools', url: `${baseUrl}/` },
-          { name: toolName, url: `${baseUrl}/${toolSlug}` },
+          { name: 'Home', url: site.url },
+          { name: 'Tools', url: `${site.url}/#tools` },
+          { name: toolName, url: `${site.url}/${toolSlug}` },
         ]}
       />
       {children}

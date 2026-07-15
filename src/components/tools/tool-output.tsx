@@ -1,7 +1,6 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface ToolOutputProps {
   title?: string;
@@ -11,15 +10,11 @@ interface ToolOutputProps {
 
 export function ToolOutput({ title, children, className }: ToolOutputProps) {
   return (
-    <Card className={cn('mt-6', className)}>
-      {title && (
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-        </CardHeader>
-      )}
-      <CardContent>
-        {children}
-      </CardContent>
-    </Card>
+    <div className={cn('mt-8 pt-8 border-t border-border/60', className)}>
+      {title ? (
+        <h2 className="text-display text-xl font-semibold tracking-tight mb-4">{title}</h2>
+      ) : null}
+      {children}
+    </div>
   );
 }

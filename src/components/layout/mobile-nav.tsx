@@ -51,7 +51,7 @@ export function MobileNav({ links }: { links: NavLink[] }) {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="px-3 py-2.5 text-[15px] font-medium rounded-lg hover:bg-secondary transition-colors"
+                  className="px-3 py-3 text-base font-medium rounded-lg hover:bg-secondary transition-colors"
                   onClick={() => setOpen(false)}
                 >
                   {link.label}
@@ -60,7 +60,7 @@ export function MobileNav({ links }: { links: NavLink[] }) {
 
               <Separator className="my-3" />
 
-              <p className="px-3 py-1 text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">
+              <p className="px-3 py-1 text-caption font-semibold text-muted-foreground uppercase tracking-wider">
                 All Tools
               </p>
 
@@ -70,7 +70,7 @@ export function MobileNav({ links }: { links: NavLink[] }) {
                   <Link
                     key={tool.slug}
                     href={tool.route}
-                    className="flex items-center gap-3 px-3 py-2 text-[14px] rounded-lg hover:bg-secondary transition-colors font-medium"
+                    className="flex items-center gap-3 px-3 py-2.5 text-base rounded-lg hover:bg-secondary transition-colors font-medium"
                     onClick={() => setOpen(false)}
                   >
                     <Icon className="size-4 text-muted-foreground" />

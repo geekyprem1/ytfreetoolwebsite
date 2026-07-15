@@ -1,0 +1,4 @@
+# ads.txt — replace pub-XXXXXXXXXXXXXXXX with your AdSense publisher ID before go-live
+# Format: google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+# Documentation: https://support.google.com/adsense/answer/7532444
+google.com, pub-PLACEHOLDER-REPLACE-ME, DIRECT, f08c47fec0942fa0
