@@ -15,6 +15,33 @@ const FREE_TIER: Record<string, RateLimitConfig> = {
 
 type RateLimitTier = keyof typeof FREE_TIER;
 
+/** Per-isolate sliding window when Redis is unavailable (fail-closed locally). */
+const memoryWindows = new Map<string, number[]>();
+
+function checkMemoryRateLimit(
+  key: string,
+  config: RateLimitConfig,
+): { allowed: boolean; remaining: number; reset: number } {
+  const now = Date.now();
+  const windowStart = now - config.windowMs;
+  const timestamps = (memoryWindows.get(key) ?? []).filter((t) => t > windowStart);
+
+  if (timestamps.length >= config.maxRequests) {
+    const oldest = timestamps[0] ?? now;
+    const reset = Math.max(1, Math.ceil((oldest + config.windowMs - now) / 1000));
+    memoryWindows.set(key, timestamps);
+    return { allowed: false, remaining: 0, reset };
+  }
+
+  timestamps.push(now);
+  memoryWindows.set(key, timestamps);
+  return {
+    allowed: true,
+    remaining: config.maxRequests - timestamps.length,
+    reset: 0,
+  };
+}
+
 export async function checkRateLimit(
   identifier: string,
   tier: RateLimitTier,
@@ -30,7 +57,7 @@ export async function checkRateLimit(
 
   const redis = getRedis();
   if (!redis) {
-    return { allowed: true, remaining: config.maxRequests, reset: 0 };
+    return checkMemoryRateLimit(key, config);
   }
 
   try {
@@ -38,8 +65,15 @@ export async function checkRateLimit(
     const count = await redis.zcard(key);
 
     if (count >= config.maxRequests) {
-      const oldest = (await redis.zrange(key, 0, 0, { withScores: true })) as unknown as [string, number][];
-      const reset = oldest.length > 0 ? Math.ceil((oldest[0]![1] + config.windowMs - now) / 1000) : 60;
+      const oldest = await redis.zrange(key, 0, 0, { withScores: true });
+      // Upstash returns flat [member, score] for withScores
+      const oldestScore =
+        typeof oldest?.[1] === 'number'
+          ? oldest[1]
+          : typeof oldest?.[0] === 'object' && oldest[0] !== null && 'score' in oldest[0]
+            ? Number((oldest[0] as { score: number }).score)
+            : now;
+      const reset = Math.max(1, Math.ceil((oldestScore + config.windowMs - now) / 1000));
       return { allowed: false, remaining: 0, reset };
     }
 
@@ -52,6 +86,10 @@ export async function checkRateLimit(
       reset: 0,
     };
   } catch {
-    return { allowed: true, remaining: config.maxRequests, reset: 0 };
+    return checkMemoryRateLimit(key, config);
   }
+}
+
+export function getRateLimitMax(tier: RateLimitTier): number {
+  return FREE_TIER[tier]?.maxRequests ?? 60;
 }

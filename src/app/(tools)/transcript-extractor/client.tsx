@@ -8,7 +8,6 @@ import { ToolError } from '@/components/tools/tool-error';
 import { OutputActions } from '@/components/tools/output-actions';
 import { RelatedTools } from '@/components/tools/related-tools';
 import { Button } from '@/components/ui/button';
-import { Select } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useToolApi } from '@/hooks/use-tool-api';
 
@@ -31,20 +30,12 @@ export function TranscriptExtractorClient({ initialUrl }: { initialUrl?: string 
     error: summaryError,
     execute: summarize,
   } = useToolApi<SummaryResponse>();
-  const [lang, setLang] = useState('en');
   const [manualText, setManualText] = useState('');
   const [showManual, setShowManual] = useState(false);
 
   const handleValidUrl = (videoId: string) => {
     setShowManual(false);
     execute(`/api/youtube/transcript?v=${videoId}`);
-  };
-
-  const handleLangChange = (newLang: string) => {
-    setLang(newLang);
-    if (data?.videoId) {
-      execute(`/api/youtube/transcript?v=${data.videoId}&lang=${newLang}`);
-    }
   };
 
   const handleSummarize = () => {

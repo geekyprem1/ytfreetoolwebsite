@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { parseYouTubeUrl } from '@/lib/youtube/url-parser';
 import { Search, Link2, Film, Sparkles } from 'lucide-react';
@@ -39,7 +38,7 @@ export function UrlSearchBox() {
           focused ? 'border-primary/40 shadow-lg shadow-primary/5 ring-2 ring-primary/10' : 'border-border shadow-sm'
         }`}
       >
-        <div className="flex items-center gap-3 p-2">
+        <div className="flex items-center gap-3 p-2 pr-4">
           <div className="shrink-0 pl-3">
             <Link2 className={`size-5 transition-colors duration-300 ${focused || url ? 'text-primary' : 'text-muted-foreground'}`} />
           </div>
@@ -52,13 +51,6 @@ export function UrlSearchBox() {
             onBlur={() => setFocused(false)}
             className="flex-1 border-0 bg-transparent px-0 h-11 text-[15px] placeholder:text-muted-foreground/60 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
           />
-          <Button
-            size="sm"
-            className="bg-[#FF3B30] hover:bg-[#E0352B] text-white h-10 px-5 rounded-xl text-sm font-medium shadow-sm shadow-primary/20 shrink-0"
-            disabled={!url}
-          >
-            Analyze
-          </Button>
         </div>
       </div>
 

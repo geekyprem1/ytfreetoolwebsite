@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { checkRateLimit } from '@/lib/rate-limit/limiter';
+import { checkRateLimit, getRateLimitMax } from '@/lib/rate-limit/limiter';
 
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
@@ -49,7 +49,7 @@ export async function middleware(request: NextRequest) {
           status: 429,
           headers: {
             'Retry-After': String(result.reset),
-            'X-RateLimit-Limit': '60',
+            'X-RateLimit-Limit': String(getRateLimitMax(tier)),
             'X-RateLimit-Remaining': '0',
             'X-RateLimit-Reset': String(Math.floor(Date.now() / 1000) + result.reset),
           },
