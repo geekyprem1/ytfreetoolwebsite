@@ -6,7 +6,6 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { ClientProviders } from '@/components/layout/client-providers';
 import { JsonLd } from '@/components/seo/json-ld';
 import { site } from '@/content/site';
-import { homeFaqs } from '@/content/home-faqs';
 import '@/styles/globals.css';
 
 const instrumentSans = Instrument_Sans({
@@ -62,27 +61,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     url: site.url,
     description: site.description,
     publisher: { '@type': 'Organization', name: site.legalName, url: site.url },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${site.url}/#tools`,
-      },
-      'query-input': 'required name=search_term_string',
-    },
-  };
-
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: homeFaqs.map((item) => ({
-      '@type': 'Question',
-      name: item.q,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.a,
-      },
-    })),
   };
 
   return (
@@ -94,7 +72,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <JsonLd data={orgSchema} />
         <JsonLd data={websiteSchema} />
-        <JsonLd data={faqSchema} />
       </head>
       <body className="font-sans antialiased min-h-screen flex flex-col">
         <ThemeProvider>
