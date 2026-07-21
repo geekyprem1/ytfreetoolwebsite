@@ -69,6 +69,13 @@ export function handleApiError(err: unknown): AppError {
   if (message.includes('quota') || message.includes('QUOTA_EXCEEDED')) {
     return new AppError('YOUTUBE_QUOTA_EXCEEDED', ErrorCodes.YOUTUBE_QUOTA_EXCEEDED.message, 503);
   }
+  if (
+    message.includes('Channel not found') ||
+    message.includes('CHANNEL_NOT_FOUND') ||
+    message.includes('Could not resolve channel')
+  ) {
+    return new AppError('CHANNEL_NOT_FOUND', ErrorCodes.CHANNEL_NOT_FOUND.message, 404);
+  }
   if (message.includes('not found') || message.includes('NOT_FOUND')) {
     return new AppError('VIDEO_NOT_FOUND', ErrorCodes.VIDEO_NOT_FOUND.message, 404);
   }

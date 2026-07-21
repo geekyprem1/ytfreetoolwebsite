@@ -16,6 +16,7 @@ const toolSuggestions = {
   channel: [
     { slug: 'channel-statistics', name: 'Channel Statistics' },
     { slug: 'channel-tags', name: 'Channel Tags' },
+    { slug: 'monetization-checker', name: 'YouTube Monetization Checker' },
   ],
 };
 

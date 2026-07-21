@@ -6,6 +6,7 @@ export const TTL = {
   videoStatsOld: 60 * 60,          // 1 hour (older than 7 days)
   videoStatsRecent: 60 * 15,       // 15 minutes (< 7 days)
   channelStats: 60 * 60 * 24,      // 24 hours
+  monetizationCheck: 60 * 60 * 12, // 12 hours
   resolve: 60 * 60 * 24,           // 24 hours
   rateLimit: 60,                   // 1 minute window
 } as const;

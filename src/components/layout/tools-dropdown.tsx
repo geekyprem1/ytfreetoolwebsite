@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { tools } from '@/content/tools-metadata';
-import { ChevronDown, Play, Image, Tags, Hash, FileText, Sparkles, PenLine, BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare } from 'lucide-react';
+import { ChevronDown, Play, Image, Tags, Hash, FileText, Sparkles, PenLine, BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, BadgeDollarSign } from 'lucide-react';
 
 const categoryLabels: Record<string, string> = {
   downloader: 'Downloaders',
@@ -16,7 +16,7 @@ const categoryLabels: Record<string, string> = {
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Image, Tags, Hash, FileText, Sparkles, PenLine,
-  BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare,
+  BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, BadgeDollarSign,
 };
 
 export function ToolsDropdown() {

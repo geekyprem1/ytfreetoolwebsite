@@ -6,6 +6,7 @@ const iconMap: Record<string, string> = {
   Image: '🖼️', Tags: '🏷️', Hash: '#️⃣', FileText: '📄', Sparkles: '✨',
   PenLine: '✍️', HashIcon: '🔖', BarChart3: '📊', Users: '👥', Search: '🔍',
   Zap: '⚡', Clock: '🕐', Lightbulb: '💡', Target: '🎯', GitCompare: '⚖️',
+  BadgeDollarSign: '💵',
 };
 
 const categoryLabels: Record<string, string> = {

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { parseYouTubeUrl } from '@/lib/youtube/url-parser';
-import { Link2, Film, Search, BarChart3, Tags, Users, Hash } from 'lucide-react';
+import { Link2, Film, Search, BarChart3, Tags, Users, Hash, BadgeDollarSign } from 'lucide-react';
 
 const toolSuggestions: Record<string, { name: string; slug: string; icon: React.ComponentType<{ className?: string }> }[]> = {
   video: [
@@ -17,6 +17,7 @@ const toolSuggestions: Record<string, { name: string; slug: string; icon: React.
   channel: [
     { name: 'Channel Statistics', slug: 'channel-statistics', icon: Users },
     { name: 'Channel Tags', slug: 'channel-tags', icon: Hash },
+    { name: 'Monetization Checker', slug: 'monetization-checker', icon: BadgeDollarSign },
   ],
 };
 

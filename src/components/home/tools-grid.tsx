@@ -6,12 +6,12 @@ import { motion, useInView } from 'framer-motion';
 import { tools, type ToolMetadata } from '@/content/tools-metadata';
 import {
   Image, Tags, Hash, FileText, Sparkles, PenLine,
-  BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, ArrowRight,
+  BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, ArrowRight, BadgeDollarSign,
 } from 'lucide-react';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Image, Tags, Hash, FileText, Sparkles, PenLine,
-  BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare,
+  BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, BadgeDollarSign,
 };
 
 const categoryLabels: Record<string, string> = {

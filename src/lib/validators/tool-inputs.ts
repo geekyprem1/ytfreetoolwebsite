@@ -5,6 +5,7 @@ export const youtubeUrlSchema = z
   .min(1, 'YouTube URL is required')
   .refine(
     (url) => {
+      const trimmed = url.trim();
       const patterns = [
         /youtube\.com\/watch\?v=[a-zA-Z0-9_-]{11}/,
         /youtu\.be\/[a-zA-Z0-9_-]{11}/,
@@ -13,10 +14,13 @@ export const youtubeUrlSchema = z
         /youtube\.com\/channel\/UC[a-zA-Z0-9_-]{22}/,
         /youtube\.com\/@[a-zA-Z0-9_.-]+/,
         /youtube\.com\/c\/[a-zA-Z0-9_-]+/,
+        /youtube\.com\/user\/[a-zA-Z0-9_-]+/,
+        /^UC[a-zA-Z0-9_-]{22}$/,
+        /^@[a-zA-Z0-9_.-]+$/,
       ];
-      return patterns.some((p) => p.test(url.trim()));
+      return patterns.some((p) => p.test(trimmed));
     },
-    { message: 'Invalid YouTube URL format' },
+    { message: 'Invalid YouTube URL, @handle, or channel ID' },
   );
 
 export const videoIdSchema = z

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { tools } from '@/content/tools-metadata';
 import { Separator } from '@/components/ui/separator';
-import { Play, Image, Tags, Hash, FileText, Sparkles, PenLine, BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare } from 'lucide-react';
+import { Play, Image, Tags, Hash, FileText, Sparkles, PenLine, BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, BadgeDollarSign } from 'lucide-react';
 
 interface NavLink {
   href: string;
@@ -15,7 +15,7 @@ interface NavLink {
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Image, Tags, Hash, FileText, Sparkles, PenLine,
-  BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare,
+  BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, BadgeDollarSign,
 };
 
 export function MobileNav({ links }: { links: NavLink[] }) {

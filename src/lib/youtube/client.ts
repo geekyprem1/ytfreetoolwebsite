@@ -4,6 +4,7 @@ import type {
   YouTubeVideo,
   YouTubeChannel,
   YouTubeChannelVideo,
+  YouTubeVideoMonetizationProbe,
   ResolveResult,
 } from '@/lib/youtube/types';
 import { parseYouTubeUrl } from '@/lib/youtube/url-parser';
@@ -73,7 +74,7 @@ export async function getChannelDetails(channelIdOrHandle: string): Promise<YouT
   const yt = getClient();
 
   const params: Record<string, unknown> = {
-    part: ['snippet', 'statistics', 'brandingSettings'],
+    part: ['snippet', 'statistics', 'brandingSettings', 'status', 'contentDetails'],
   };
 
   if (channelIdOrHandle.startsWith('UC')) {
@@ -89,6 +90,13 @@ export async function getChannelDetails(channelIdOrHandle: string): Promise<YouT
     throw new AppError('CHANNEL_NOT_FOUND', ErrorCodes.CHANNEL_NOT_FOUND.message, 404);
   }
 
+  const madeForKids =
+    typeof item.status?.madeForKids === 'boolean'
+      ? item.status.madeForKids
+      : typeof item.status?.selfDeclaredMadeForKids === 'boolean'
+        ? item.status.selfDeclaredMadeForKids
+        : null;
+
   return {
     id: item.id!,
     title: item.snippet?.title ?? 'Unknown',
@@ -100,6 +108,8 @@ export async function getChannelDetails(channelIdOrHandle: string): Promise<YouT
     subscriberCount: parseInt(item.statistics?.subscriberCount ?? '0', 10),
     videoCount: parseInt(item.statistics?.videoCount ?? '0', 10),
     viewCount: parseInt(item.statistics?.viewCount ?? '0', 10),
+    madeForKids,
+    uploadsPlaylistId: item.contentDetails?.relatedPlaylists?.uploads ?? null,
   };
 }
 
@@ -120,6 +130,80 @@ export async function getChannelVideos(channelId: string, maxResults = 5): Promi
     publishedAt: item.snippet?.publishedAt ?? '',
     viewCount: 0,
   }));
+}
+
+/** Recent uploads with public fields useful for monetization heuristics (official Data API only). */
+export async function getRecentVideosMonetizationProbe(
+  channelId: string,
+  maxResults = 10,
+  uploadsPlaylistId?: string | null,
+): Promise<YouTubeVideoMonetizationProbe[]> {
+  const yt = getClient();
+  let ids: string[] = [];
+
+  // Prefer uploads playlist (cheap + reliable) over search.list
+  const playlistId = uploadsPlaylistId ?? null;
+  if (playlistId) {
+    try {
+      const playlist = await yt.playlistItems.list({
+        playlistId,
+        maxResults,
+        part: ['contentDetails', 'snippet'],
+      });
+      ids = (playlist.data.items ?? [])
+        .map((item) => item.contentDetails?.videoId)
+        .filter((id): id is string => Boolean(id));
+    } catch {
+      ids = [];
+    }
+  }
+
+  if (ids.length === 0) {
+    const search = await yt.search.list({
+      channelId,
+      type: ['video'],
+      order: 'date',
+      maxResults,
+      part: ['snippet'],
+    });
+    ids = (search.data.items ?? [])
+      .map((item) => item.id?.videoId)
+      .filter((id): id is string => Boolean(id));
+  }
+
+  if (ids.length === 0) return [];
+
+  // Omit paidProductPlacementDetails — owner-only; requesting it is useless for public checks
+  const details = await yt.videos.list({
+    id: ids,
+    part: ['snippet', 'statistics', 'contentDetails', 'status'],
+  });
+
+  return (details.data.items ?? []).map((item) => {
+    const madeForKids =
+      typeof item.status?.madeForKids === 'boolean'
+        ? item.status.madeForKids
+        : typeof item.status?.selfDeclaredMadeForKids === 'boolean'
+          ? item.status.selfDeclaredMadeForKids
+          : null;
+
+    return {
+      videoId: item.id ?? '',
+      title: item.snippet?.title ?? 'Unknown',
+      thumbnail:
+        item.snippet?.thumbnails?.medium?.url ??
+        item.snippet?.thumbnails?.default?.url ??
+        '',
+      publishedAt: item.snippet?.publishedAt ?? '',
+      viewCount: parseInt(item.statistics?.viewCount ?? '0', 10),
+      licensedContent:
+        typeof item.contentDetails?.licensedContent === 'boolean'
+          ? item.contentDetails.licensedContent
+          : null,
+      madeForKids,
+      hasPaidProductPlacement: null,
+    };
+  });
 }
 
 export async function resolveUrl(url: string): Promise<ResolveResult> {

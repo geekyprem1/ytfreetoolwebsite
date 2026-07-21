@@ -44,7 +44,7 @@ export function useYouTubeUrl() {
         videoId: null,
         channelId: null,
         type: null,
-        error: 'Invalid YouTube URL. Please check and try again.',
+        error: 'Invalid YouTube URL, @handle, or channel ID. Please check and try again.',
       });
       return;
     }

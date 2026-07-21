@@ -91,6 +91,16 @@ export const tools: ToolMetadata[] = [
     phase: 2,
   },
   {
+    slug: 'monetization-checker',
+    name: 'YouTube Monetization Checker',
+    description:
+      'Estimate whether a YouTube channel is monetized using public signals and a confidence score.',
+    icon: 'BadgeDollarSign',
+    category: 'analytics',
+    route: '/monetization-checker',
+    phase: 2,
+  },
+  {
     slug: 'keyword-generator',
     name: 'Keyword Generator',
     description: 'Find high-ranking YouTube keywords with search intent and difficulty analysis.',
