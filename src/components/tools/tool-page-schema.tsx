@@ -1,24 +1,30 @@
-import { ToolSchema } from '@/components/tools/tool-schema';
-import { BreadcrumbSchema } from '@/components/tools/breadcrumb-schema';
-import { site } from '@/content/site';
+import { JsonLd } from '@/components/seo/json-ld';
+import { toolPageGraph, type FaqItem } from '@/lib/seo/schema-graph';
 
 interface ToolPageSchemaProps {
   toolName: string;
   toolDescription: string;
   toolSlug: string;
+  faqs?: FaqItem[];
   children: React.ReactNode;
 }
 
-export function ToolPageSchema({ toolName, toolDescription, toolSlug, children }: ToolPageSchemaProps) {
+export function ToolPageSchema({
+  toolName,
+  toolDescription,
+  toolSlug,
+  faqs = [],
+  children,
+}: ToolPageSchemaProps) {
   return (
     <>
-      <ToolSchema name={toolName} description={toolDescription} slug={toolSlug} />
-      <BreadcrumbSchema
-        items={[
-          { name: 'Home', url: site.url },
-          { name: 'Tools', url: `${site.url}/#tools` },
-          { name: toolName, url: `${site.url}/${toolSlug}` },
-        ]}
+      <JsonLd
+        data={toolPageGraph({
+          name: toolName,
+          description: toolDescription,
+          slug: toolSlug,
+          faqs,
+        })}
       />
       {children}
     </>

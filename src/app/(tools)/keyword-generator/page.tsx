@@ -4,13 +4,17 @@ import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/keyword-generator';
 
 export const metadata: Metadata = {
-  title: 'YouTube Keyword Generator — Find High-Ranking Keywords',
-  description: 'Generate keyword ideas with difficulty, popularity, and search intent analysis. AI powered, no login required.',
+  title: {
+    absolute: 'YouTube Keyword Generator (Free SEO Ideas) | yttools.pro',
+  },
+  description:
+    'Free YouTube keyword generator with difficulty, popularity, and search intent labels. Expand a seed topic into SEO ideas for titles and tags. No login required.',
   keywords: ['youtube keyword generator', 'keyword research', 'seo keywords', 'video keywords'],
   alternates: { canonical: '/keyword-generator' },
   openGraph: {
-    title: 'YouTube Keyword Generator — Find High-Ranking Keywords',
-    description: 'Expand seed topics into YouTube keyword ideas with difficulty, popularity, and intent.',
+    title: 'YouTube Keyword Generator (Free SEO Ideas) | yttools.pro',
+    description:
+      'Free YouTube keyword generator with difficulty, popularity, and search intent labels. Expand a seed topic into SEO ideas for titles and tags. No login required.',
   },
 };
 
@@ -21,7 +25,7 @@ export default function KeywordGeneratorPage() {
       toolDescription="Find high-ranking YouTube keywords with search intent and difficulty analysis."
       toolSlug="keyword-generator"
       title="YouTube Keyword Generator"
-      description="Find high-ranking YouTube keywords with difficulty, popularity, and search intent analysis."
+      description="Generate free YouTube keyword ideas with difficulty, popularity, and search intent—not generic Google SEO lists. Enter a seed topic to expand into title and tag phrases you can actually publish."
       seo={<SeoContent />}
       faqs={faqs}
     >

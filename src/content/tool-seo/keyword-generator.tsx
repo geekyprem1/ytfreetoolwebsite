@@ -33,10 +33,9 @@ export function SeoContent() {
     <>
       <h2>What is a YouTube keyword generator?</h2>
       <p>
-        A YouTube keyword generator helps you move from a vague topic—“home workouts,” “Notion templates,” “DSP
-        plugins”—to a concrete list of phrases viewers might type or respond to in search and browse. You enter a
-        seed keyword, optionally set a language, and receive related ideas scored with directional difficulty,
-        popularity, and search intent labels.
+        This free YouTube Keyword Generator expands a seed topic into related phrases scored for
+        difficulty, popularity, and intent—tuned for video search, not Google blogs. Enter a seed to
+        generate typically 10–30 ideas for titles and tags.
       </p>
       <p>
         Keyword tools do not control the algorithm. YouTube ranks uploads using a mix of relevance, quality signals,

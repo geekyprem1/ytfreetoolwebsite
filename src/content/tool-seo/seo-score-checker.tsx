@@ -33,10 +33,9 @@ export function SeoContent() {
     <>
       <h2>What the YouTube SEO Score Checker measures</h2>
       <p>
-        The SEO Score Checker grades your draft title, description, tags, hashtags, and keyword usage
-        against practical packaging heuristics, then returns a score out of <strong>100</strong> with a
-        category breakdown. It is a pre-publish checklist: catch thin descriptions, missing keywords,
-        and weak CTA patterns before you hit upload.
+        This free YouTube SEO Score Checker grades title, description, tags, and hashtags against
+        packaging heuristics and returns a score out of <strong>100</strong> with category tips—not a
+        website SEO audit. Paste draft metadata before you upload.
       </p>
       <p>
         It does not watch your video file or predict virality. It audits the text layer that YouTube

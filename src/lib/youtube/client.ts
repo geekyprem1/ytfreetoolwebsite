@@ -51,11 +51,13 @@ export async function getVideoTags(videoId: string): Promise<{
   videoId: string;
   videoTitle: string;
   tags: string[];
+  duration: string;
+  isShorts: boolean;
 }> {
   const yt = getClient();
   const res = await yt.videos.list({
     id: [videoId],
-    part: ['snippet'],
+    part: ['snippet', 'contentDetails'],
   });
 
   const item = res.data.items?.[0];
@@ -63,11 +65,27 @@ export async function getVideoTags(videoId: string): Promise<{
     throw new AppError('VIDEO_NOT_FOUND', ErrorCodes.VIDEO_NOT_FOUND.message, 404);
   }
 
+  const duration = item.contentDetails?.duration ?? '';
+  const isShorts = isYouTubeShortsDuration(duration);
+
   return {
     videoId: item.id!,
     videoTitle: item.snippet?.title ?? 'Unknown',
     tags: item.snippet?.tags ?? [],
+    duration,
+    isShorts,
   };
+}
+
+/** YouTube Shorts are typically ≤ 60 seconds (ISO 8601 duration). */
+function isYouTubeShortsDuration(isoDuration: string): boolean {
+  if (!isoDuration) return false;
+  const match = isoDuration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/i);
+  if (!match) return false;
+  const hours = parseInt(match[1] || '0', 10);
+  const minutes = parseInt(match[2] || '0', 10);
+  const seconds = parseInt(match[3] || '0', 10);
+  return hours * 3600 + minutes * 60 + seconds <= 60;
 }
 
 export async function getChannelDetails(channelIdOrHandle: string): Promise<YouTubeChannel> {

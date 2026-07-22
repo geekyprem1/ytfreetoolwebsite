@@ -4,15 +4,17 @@ import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/title-analyzer';
 
 export const metadata: Metadata = {
-  title: 'Free YouTube Title Analyzer — Compare & Predict Title Performance',
+  title: {
+    absolute: 'YouTube Title Analyzer (Compare CTR) | yttools.pro',
+  },
   description:
-    'Compare two YouTube titles and predict which will get more clicks. AI-powered CTR prediction and SEO analysis.',
+    'Free YouTube title analyzer to compare two headlines and predict CTR. Get SEO and emotion scores plus a winner rationale. AI powered, not a live A/B test.',
   keywords: ['youtube title analyzer', 'title comparison', 'title ab test', 'title score'],
   alternates: { canonical: '/title-analyzer' },
   openGraph: {
-    title: 'Free YouTube Title Analyzer — Compare & Predict Title Performance',
+    title: 'YouTube Title Analyzer (Compare CTR) | yttools.pro',
     description:
-      'Compare two YouTube titles and predict which will get more clicks. AI-powered CTR prediction and SEO analysis.',
+      'Free YouTube title analyzer to compare two headlines and predict CTR. Get SEO and emotion scores plus a winner rationale. AI powered, not a live A/B test.',
   },
 };
 
@@ -23,7 +25,7 @@ export default function TitleAnalyzerPage() {
       toolDescription="Compare two titles and predict which will get more clicks and rank better."
       toolSlug="title-analyzer"
       title="YouTube Title Analyzer"
-      description="Compare two video titles and predict which one will perform better. AI-powered CTR prediction, SEO score, and emotion analysis."
+      description="Compare two YouTube titles to predict CTR—AI guidance, not a live Studio A/B test. Paste Title A, Title B, and an optional keyword for SEO and emotion scores."
       seo={<SeoContent />}
       faqs={faqs}
     >

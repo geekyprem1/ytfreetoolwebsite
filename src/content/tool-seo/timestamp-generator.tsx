@@ -33,10 +33,9 @@ export function SeoContent() {
     <>
       <h2>What is an AI YouTube timestamp generator?</h2>
       <p>
-        An AI timestamp generator turns a video transcript into a chapter list formatted for YouTube’s description
-        parser. Instead of scrubbing the timeline by hand to mark every topic shift, you paste transcript text and
-        receive lines such as <code>0:00 Introduction</code> and <code>2:41 Key takeaway</code> ready to copy into
-        the description.
+        This free YouTube Timestamp &amp; Chapter Generator turns a transcript into description-ready
+        chapter lines in MM:SS or HH:MM:SS format, always starting at 0:00. YouTube generally needs at
+        least 3 timestamps for chapters to activate.
       </p>
       <p>
         YouTube chapters are more than cosmetic. On eligible videos they add labeled markers on the progress bar,

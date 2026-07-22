@@ -33,10 +33,9 @@ export function SeoContent() {
     <>
       <h2>What the AI YouTube Title Generator does</h2>
       <p>
-        The Title Generator turns a topic, target keyword, tone, and language into multiple
-        click-oriented title drafts. It is built for the YouTube constraint set: keep the core promise
-        near the front, stay near the 50–70 character display sweet spot, and avoid empty hype that
-        mismatches the thumbnail.
+        This free AI YouTube Title Generator turns a topic and keyword into clickable title drafts near
+        the 40–60 character sweet spot—where titles often earn about 21% higher CTR. Choose tone and
+        language, then copy your best options.
       </p>
       <p>
         Good titles do two jobs at once. They tell the algorithm what the video is about, and they tell

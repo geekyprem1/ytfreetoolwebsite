@@ -33,9 +33,9 @@ export function SeoContent() {
     <>
       <h2>What the AI Description Generator creates</h2>
       <p>
-        The Description Generator builds a paste-ready YouTube description from your topic, keyword,
-        and summary. Optional blocks cover chapters, hashtags, and CTAs so you are not staring at an
-        empty Studio field after export. Output is plain text — YouTube does not render markdown.
+        This free AI YouTube Description Generator builds a paste-ready description from your topic and
+        keyword—summary, optional chapters starting at 0:00, hashtags, and CTAs in plain text. Aim for
+        roughly 150–350 words so the first lines stay scannable before Show more.
       </p>
       <p>
         Descriptions rarely create a viral spike alone, but they clarify topical relevance, house

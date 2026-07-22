@@ -33,10 +33,9 @@ export function SeoContent() {
     <>
       <h2>What is a YouTube channel tags extractor?</h2>
       <p>
-        A channel tags extractor estimates the keyword themes of a YouTube channel by reading tags on recent public
-        videos and combining them into one list. It exists because YouTube does not expose a clean, always-public
-        “channel tags” document you can download. Older channel keyword fields are not a dependable public research
-        surface today, so practical tools infer focus from upload-level metadata instead.
+        This free YouTube Channel Tags Extractor infers keyword themes by aggregating tags from about
+        10 recent public uploads—research metadata, not HTML or RFID tags. Remember video tags share a
+        500-character total budget across all tags.
       </p>
       <p>
         That inference is intentionally humble. Tags are optional. Creators can skip them entirely, use them

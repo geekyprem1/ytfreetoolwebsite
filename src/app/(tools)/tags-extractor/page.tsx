@@ -4,15 +4,23 @@ import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/tags-extractor';
 
 export const metadata: Metadata = {
-  title: 'Free YouTube Tags Extractor — Extract Video Tags Instantly',
+  title: {
+    absolute: 'YouTube Tag Extractor | Extract Hidden Video Tags | yttools.pro',
+  },
   description:
-    'Extract all tags from any YouTube video instantly. Copy tags or download as TXT. No login required. Find competitor tags for SEO research.',
-  keywords: ['youtube tags extractor', 'extract youtube tags', 'youtube tag finder', 'video tags tool'],
+    'Extract YouTube Video SEO Tags from any public video without an extension. Copy all, download TXT or CSV. No login required.',
+  keywords: [
+    'YouTube Video SEO Tags',
+    'youtube tags extractor',
+    'extract youtube tags',
+    'competitor tags without extension',
+    'video tags tool',
+  ],
   alternates: { canonical: '/tags-extractor' },
   openGraph: {
-    title: 'Free YouTube Tags Extractor — Extract Video Tags Instantly',
+    title: 'YouTube Tag Extractor | Extract Hidden Video Tags | yttools.pro',
     description:
-      'Extract all tags from any YouTube video instantly. Copy tags or download as TXT. No login required.',
+      'See competitor YouTube Video SEO Tags without an extension. Copy, TXT, or CSV export in under 1.2 seconds.',
   },
 };
 
@@ -27,8 +35,8 @@ export default async function TagsExtractorPage({
       toolName="Tags Extractor"
       toolDescription="Extract all tags from any YouTube video instantly. Copy or download as TXT."
       toolSlug="tags-extractor"
-      title="Free YouTube Tags Extractor"
-      description="Extract tags from any YouTube video. Copy, download, and analyze competitor video tags for SEO research."
+      title="YouTube Video SEO Tags Extractor"
+      description="Extract YouTube Video SEO Tags from any public video in under 1.2 seconds — see competitor keyword metadata without a browser extension, then copy all or export TXT/CSV."
       seo={<SeoContent />}
       faqs={faqs}
     >

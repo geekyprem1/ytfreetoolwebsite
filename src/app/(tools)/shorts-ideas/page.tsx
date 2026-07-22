@@ -4,15 +4,17 @@ import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/shorts-ideas';
 
 export const metadata: Metadata = {
-  title: 'Free YouTube Shorts Idea Generator — 50 Viral Ideas',
+  title: {
+    absolute: 'YouTube Shorts Idea Generator (Free) | yttools.pro',
+  },
   description:
-    'Generate 50 viral YouTube Shorts ideas with trend and virality scores. AI powered. No login required.',
+    'Free YouTube Shorts idea generator with trend and virality scores. Get up to 50 vertical video concepts from a niche seed. AI powered, no login required.',
   keywords: ['youtube shorts ideas', 'shorts generator', 'viral shorts', 'shorts content'],
   alternates: { canonical: '/shorts-ideas' },
   openGraph: {
-    title: 'Free YouTube Shorts Idea Generator — 50 Viral Ideas',
+    title: 'YouTube Shorts Idea Generator (Free) | yttools.pro',
     description:
-      'Generate 50 viral YouTube Shorts ideas with trend and virality scores. AI powered. No login required.',
+      'Free YouTube Shorts idea generator with trend and virality scores. Get up to 50 vertical video concepts from a niche seed. AI powered, no login required.',
   },
 };
 
@@ -23,7 +25,7 @@ export default function ShortsIdeasPage() {
       toolDescription="Generate 50 viral YouTube Shorts ideas with trend and virality scores."
       toolSlug="shorts-ideas"
       title="YouTube Shorts Idea Generator"
-      description="Generate viral YouTube Shorts ideas with trend and virality scores. 50 ideas in one click."
+      description="Generate free YouTube Shorts ideas with trend and virality scores—up to 50 concepts—not long-form blog topics. Enter a niche seed to plan vertical videos you can film this week."
       seo={<SeoContent />}
       faqs={faqs}
     >

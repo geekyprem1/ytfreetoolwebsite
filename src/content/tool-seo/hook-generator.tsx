@@ -33,10 +33,9 @@ export function SeoContent() {
     <>
       <h2>What the AI Hook Generator does</h2>
       <p>
-        The Hook Generator writes opening lines designed to earn attention in the first seconds of a
-        YouTube video. You provide a topic, audience, and tone; it returns hooks across question,
-        story, curiosity, and shock categories so you can cast a stronger cold open without
-        brainstorming from zero.
+        This free AI YouTube Hook Generator drafts opening lines for the first 3 seconds of a
+        video—question, story, curiosity, and shock styles—not blog introductions. Enter a topic,
+        audience, and tone to earn early watch time.
       </p>
       <p>
         Hooks are retention tools first. SEO metadata gets the impression; the open decides whether

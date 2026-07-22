@@ -33,9 +33,9 @@ export function SeoContent() {
     <>
       <h2>What the AI Hashtag Generator is for</h2>
       <p>
-        The Hashtag Generator produces topic-relevant YouTube hashtags grouped into broad, niche, and
-        trending styles. You enter a subject, choose how many ideas you want, and copy a trimmed set
-        into your description — staying inside YouTube’s <strong>15-hashtag</strong> maximum.
+        This free AI YouTube Hashtag Generator produces broad, niche, and trending hashtags for video
+        discovery—not Instagram or TikTok tags. Enter a topic, generate ideas, then trim to YouTube’s
+        hard <strong>15-hashtag</strong> maximum before publishing.
       </p>
       <p>
         Hashtags are not a substitute for a strong title or thumbnail. They help categorized browsing

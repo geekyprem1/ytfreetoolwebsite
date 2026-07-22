@@ -7,7 +7,15 @@ export const site = {
   legalName: 'YouTube Toolkit AI',
   tagline: '15+ free YouTube creator tools. No login required.',
   description:
-    'Free YouTube creator toolkit with 15+ tools. Thumbnail Downloader, Tags Extractor, Transcript Extractor, AI Title & Description Generator, analytics, and SEO helpers. No login required.',
+    '15+ free YouTube creator tools. Download thumbnails, extract tags, generate AI titles & descriptions, extract transcripts & stats. No login required.',
+  keywords: [
+    'YouTube creator tools',
+    'free YouTube tools',
+    'YouTube thumbnail downloader',
+    'YouTube tags extractor',
+    'YouTube AI title generator',
+    'YouTube transcript extractor',
+  ],
   supportEmail: 'hello@yttoolkit.com',
   get url() {
     return process.env.NEXT_PUBLIC_SITE_URL || fallbackUrl;

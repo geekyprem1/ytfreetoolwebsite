@@ -4,9 +4,11 @@ import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/monetization-checker';
 
 export const metadata: Metadata = {
-  title: 'YouTube Monetization Checker — Free Estimate Tool',
+  title: {
+    absolute: 'YouTube Monetization Checker (Free Estimate) | yttools.pro',
+  },
   description:
-    'Estimate whether a YouTube channel is monetized using public signals, with a confidence score. Not an official YouTube Partner Program status.',
+    'Free YouTube monetization checker: estimate Partner Program status from public signals + confidence score. Paste URL or @handle. Estimate only - not official.',
   keywords: [
     'youtube monetization checker',
     'is youtube channel monetized',
@@ -16,16 +18,16 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: '/monetization-checker' },
   openGraph: {
-    title: 'YouTube Monetization Checker — Free Estimate Tool',
+    title: 'YouTube Monetization Checker (Free Estimate) | yttools.pro',
     description:
-      'Estimate monetization status for any public YouTube channel with supporting signals and a confidence score. Estimate only — not official YPP status.',
+      'Free YouTube monetization checker: estimate Partner Program status from public signals + confidence score. Paste URL or @handle. Estimate only - not official.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'YouTube Monetization Checker — Free Estimate Tool',
+    title: 'YouTube Monetization Checker (Free Estimate) | yttools.pro',
     description:
-      'Estimate whether a YouTube channel is monetized using public Data API signals and a confidence score.',
+      'Estimate YouTube channel monetization from public Data API signals with a confidence score. Estimate only - not official.',
   },
 };
 
@@ -41,7 +43,7 @@ export default async function MonetizationCheckerPage({
       toolDescription="Estimate whether a YouTube channel is monetized using public signals and a confidence score."
       toolSlug="monetization-checker"
       title="YouTube Monetization Checker"
-      description="Estimate monetization status for any public channel. Paste a channel URL, @handle, or channel ID — results are estimates, not official YouTube Partner Program status."
+      description="Estimate YouTube channel monetization from public signals and a 0–100 confidence score—not official YouTube Partner Program status. Paste a channel URL or @handle for a free estimate."
       seo={<SeoContent />}
       faqs={faqs}
     >

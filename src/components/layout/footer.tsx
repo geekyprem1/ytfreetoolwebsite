@@ -18,6 +18,7 @@ const company = [
 ];
 
 const resources = [
+  { href: '/blog', label: 'Blog & Guides' },
   { href: '/docs', label: 'Documentation' },
   { href: '/changelog', label: 'Changelog' },
   { href: '/roadmap', label: 'Roadmap' },

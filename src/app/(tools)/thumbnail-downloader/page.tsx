@@ -4,20 +4,23 @@ import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/thumbnail-downloader';
 
 export const metadata: Metadata = {
-  title: 'Free YouTube Thumbnail Downloader — Download HD Thumbnails Instantly',
+  title: {
+    absolute: 'Free YouTube Thumbnail Downloader (HD, 4K) | yttools.pro',
+  },
   description:
-    'Download YouTube thumbnails in Max, HD, SD, HQ, and MQ quality. No login required. Free, fast, and easy to use. Save thumbnails from any YouTube video.',
+    'Free YouTube Video Thumbnail Downloader (HD maxresdefault). Save 1280×720, 640×480, 480×360 & more from any video URL. No login required.',
   keywords: [
-    'youtube thumbnail downloader',
+    'YouTube Video Thumbnail Downloader',
+    'HD maxresdefault',
     'download youtube thumbnail',
     'youtube thumbnail grabber',
     'free youtube thumbnail download',
-    'hd thumbnail downloader',
   ],
   alternates: { canonical: '/thumbnail-downloader' },
   openGraph: {
-    title: 'Free YouTube Thumbnail Downloader — No Login Required',
-    description: 'Download YouTube thumbnails in all qualities. Fast, free, and no signup needed.',
+    title: 'Free YouTube Thumbnail Downloader (HD, 4K) | yttools.pro',
+    description:
+      'Download YouTube video thumbnails in Max HD maxresdefault and other qualities. Fast, free, no signup.',
   },
 };
 
@@ -32,8 +35,8 @@ export default async function ThumbnailDownloaderPage({
       toolName="Thumbnail Downloader"
       toolDescription="Download YouTube thumbnails in HD, SD, HQ quality. Free and no login required."
       toolSlug="thumbnail-downloader"
-      title="Free YouTube Thumbnail Downloader"
-      description="Download thumbnails from any YouTube video in HD quality. No login, no signup, completely free."
+      title="Free YouTube Video Thumbnail Downloader (HD maxresdefault)"
+      description="Download original YouTube video thumbnails (HD maxresdefault 1280×720 and smaller CDN sizes) from any public or unlisted URL in under 0.8 seconds — no login, no extension, not Windows thumbs.db files."
       seo={<SeoContent />}
       faqs={faqs}
     >

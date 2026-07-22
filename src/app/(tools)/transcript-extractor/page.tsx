@@ -4,20 +4,23 @@ import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/transcript-extractor';
 
 export const metadata: Metadata = {
-  title: 'Free YouTube Transcript Extractor — Get Video Transcript Instantly',
+  title: {
+    absolute: 'YouTube Transcript Extractor with Timestamps | yttools.pro',
+  },
   description:
-    'Get the full transcript of any YouTube video with timestamps. Copy, download as TXT, or AI summarize. No login required.',
+    'Extract YouTube Video Transcript & Subtitles with timestamps. Copy or download a text file. Free, no login required.',
   keywords: [
+    'YouTube Video Transcript & Subtitles',
     'youtube transcript extractor',
     'youtube transcript download',
-    'video transcript',
+    'transcript with timestamps',
     'youtube caption extractor',
   ],
   alternates: { canonical: '/transcript-extractor' },
   openGraph: {
-    title: 'Free YouTube Transcript Extractor — Get Video Transcript Instantly',
+    title: 'YouTube Transcript Extractor with Timestamps | yttools.pro',
     description:
-      'Get the full transcript of any YouTube video with timestamps. Copy, download as TXT, or AI summarize.',
+      'Convert YouTube Video Transcript & Subtitles to a timestamped text file. Copy, download TXT, or AI summarize.',
   },
 };
 
@@ -32,8 +35,8 @@ export default async function TranscriptExtractorPage({
       toolName="Transcript Extractor"
       toolDescription="Get the full transcript of any YouTube video with timestamps. Copy, download as TXT, or AI summarize."
       toolSlug="transcript-extractor"
-      title="Free YouTube Transcript Extractor"
-      description="Extract the complete transcript of any YouTube video. Get timestamped text, copy it, or download as TXT."
+      title="YouTube Video Transcript & Subtitles Extractor"
+      description="Extract YouTube Video Transcript & Subtitles with timestamps from any captioned video, then copy or download a text file — caption text for creators, not academic transcripts."
       seo={<SeoContent />}
       faqs={faqs}
     >

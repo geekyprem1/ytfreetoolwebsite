@@ -4,13 +4,17 @@ import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/video-statistics';
 
 export const metadata: Metadata = {
-  title: 'YouTube Video Statistics — Free Video Analytics',
-  description: 'View detailed analytics for any YouTube video. Views, likes, comments, publish date, duration, category, and more.',
+  title: {
+    absolute: 'YouTube Video Statistics Analyzer (Free) | yttools.pro',
+  },
+  description:
+    'Free YouTube video statistics analyzer for public views, likes, comments, duration, publish date, and more. Paste any video URL. Not private Studio analytics.',
   keywords: ['youtube video statistics', 'youtube analytics', 'video stats', 'youtube video data'],
   alternates: { canonical: '/video-statistics' },
   openGraph: {
-    title: 'YouTube Video Statistics — Free Video Analytics',
-    description: 'Look up public views, likes, comments, duration, and more for any YouTube video.',
+    title: 'YouTube Video Statistics Analyzer (Free) | yttools.pro',
+    description:
+      'Free YouTube video statistics analyzer for public views, likes, comments, duration, publish date, and more. Paste any video URL. Not private Studio analytics.',
   },
 };
 
@@ -26,7 +30,7 @@ export default async function VideoStatisticsPage({
       toolDescription="View detailed analytics for any YouTube video. Views, likes, comments, and more."
       toolSlug="video-statistics"
       title="YouTube Video Statistics"
-      description="View detailed analytics for any YouTube video. Views, likes, comments, thumbnail, channel info and more."
+      description="Look up free public YouTube video statistics—views, likes, comments, duration, and publish date—not private Studio analytics. Paste any public video URL to analyze performance signals in seconds."
       seo={<SeoContent />}
       faqs={faqs}
     >

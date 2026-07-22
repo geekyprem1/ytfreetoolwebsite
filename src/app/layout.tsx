@@ -6,6 +6,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { ClientProviders } from '@/components/layout/client-providers';
 import { JsonLd } from '@/components/seo/json-ld';
 import { site } from '@/content/site';
+import { siteWideGraph } from '@/lib/seo/schema-graph';
 import '@/styles/globals.css';
 
 const instrumentSans = Instrument_Sans({
@@ -23,46 +24,26 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: 'YouTube Toolkit AI — 15+ Free YouTube Creator Tools | No Login Required',
+    default: 'Free YouTube Creator Tools - YT Toolkit | 15+ AI Video Tools',
     template: '%s | YouTube Toolkit AI',
   },
   description: site.description,
+  keywords: [...site.keywords],
   openGraph: {
     type: 'website',
     locale: 'en_US',
     siteName: site.legalName,
-    title: 'YouTube Toolkit AI — 15+ Free YouTube Creator Tools',
+    title: 'Free YouTube Creator Tools - YT Toolkit | 15+ AI Video Tools',
     description: site.description,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'YouTube Toolkit AI — Free YouTube Creator Tools',
+    title: 'Free YouTube Creator Tools - YT Toolkit | 15+ AI Video Tools',
     description: site.description,
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const orgSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: site.legalName,
-    alternateName: site.name,
-    url: site.url,
-    logo: `${site.url}/icon`,
-    description: site.description,
-    email: site.supportEmail,
-    ...(site.sameAs.length > 0 ? { sameAs: site.sameAs } : {}),
-  };
-
-  const websiteSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: site.legalName,
-    url: site.url,
-    description: site.description,
-    publisher: { '@type': 'Organization', name: site.legalName, url: site.url },
-  };
-
   return (
     <html
       lang="en"
@@ -70,8 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${instrumentSans.variable} ${geistMono.variable}`}
     >
       <head>
-        <JsonLd data={orgSchema} />
-        <JsonLd data={websiteSchema} />
+        <JsonLd data={siteWideGraph()} />
       </head>
       <body className="font-sans antialiased min-h-screen flex flex-col">
         <ThemeProvider>

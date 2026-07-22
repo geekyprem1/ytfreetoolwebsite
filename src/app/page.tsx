@@ -9,6 +9,7 @@ import { HowItWorks } from '@/components/home/how-it-works';
 import { HomeFAQ } from '@/components/home/faq-section';
 import { JsonLd } from '@/components/seo/json-ld';
 import { homeFaqs } from '@/content/home-faqs';
+import { homepageGraph } from '@/lib/seo/schema-graph';
 
 export const revalidate = 3600;
 
@@ -16,23 +17,10 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
 };
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: homeFaqs.map((item) => ({
-    '@type': 'Question',
-    name: item.q,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: item.a,
-    },
-  })),
-};
-
 export default function HomePage() {
   return (
     <>
-      <JsonLd data={faqSchema} />
+      <JsonLd data={homepageGraph(homeFaqs)} />
       <Header />
       <main id="main-content" className="flex-1">
         <HeroSection />

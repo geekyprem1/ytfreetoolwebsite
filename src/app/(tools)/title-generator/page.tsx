@@ -4,9 +4,11 @@ import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/title-generator';
 
 export const metadata: Metadata = {
-  title: 'Free AI YouTube Title Generator — SEO Optimized Titles',
+  title: {
+    absolute: 'AI YouTube Title Generator (Free Clickable Titles) | yttools.pro',
+  },
   description:
-    'Generate SEO-optimized, click-worthy YouTube titles with AI. Choose tone, language, and get multiple title ideas. No login required.',
+    'Free AI YouTube title generator for clickable SEO headlines. Get options near the 40-60 character sweet spot. Choose tone and language. No login required.',
   keywords: [
     'youtube title generator',
     'ai title generator',
@@ -16,9 +18,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: '/title-generator' },
   openGraph: {
-    title: 'Free AI YouTube Title Generator — SEO Optimized Titles',
+    title: 'AI YouTube Title Generator (Free Clickable Titles) | yttools.pro',
     description:
-      'Generate SEO-optimized, click-worthy YouTube titles with AI. Choose tone, language, and get multiple ideas.',
+      'Free AI YouTube title generator for clickable SEO headlines. Get options near the 40-60 character sweet spot. Choose tone and language. No login required.',
   },
 };
 
@@ -29,7 +31,7 @@ export default function TitleGeneratorPage() {
       toolDescription="Generate SEO-optimized, click-worthy YouTube titles with AI."
       toolSlug="title-generator"
       title="AI YouTube Title Generator"
-      description="Generate SEO-optimized, click-worthy YouTube titles with AI. Choose your tone, language, and get multiple ideas."
+      description="Generate free AI YouTube titles built to earn clicks—not blog headlines. Get SEO-friendly options near the 40–60 character range, choose a tone, and copy multiple clickable ideas with no login."
       seo={<SeoContent />}
       faqs={faqs}
     >

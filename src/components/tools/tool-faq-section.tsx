@@ -1,4 +1,3 @@
-import { JsonLd } from '@/components/seo/json-ld';
 import { site } from '@/content/site';
 
 export type ToolFaq = { q: string; a: string };
@@ -6,22 +5,8 @@ export type ToolFaq = { q: string; a: string };
 export function ToolFaqSection({ faqs }: { faqs: ToolFaq[] }) {
   if (!faqs.length) return null;
 
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((item) => ({
-      '@type': 'Question',
-      name: item.q,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.a,
-      },
-    })),
-  };
-
   return (
     <>
-      <JsonLd data={schema} />
       <h2>Frequently asked questions</h2>
       {faqs.map((faq) => (
         <div key={faq.q} className="mb-6">

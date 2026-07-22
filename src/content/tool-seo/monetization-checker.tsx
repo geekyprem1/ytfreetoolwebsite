@@ -33,10 +33,9 @@ export function SeoContent() {
     <>
       <h2>What is a YouTube monetization checker?</h2>
       <p>
-        A YouTube monetization checker estimates whether a channel may be earning through the YouTube Partner
-        Program or related features by reading public signals. Because YouTube does not expose an official
-        “is monetized” flag to third parties, honest tools present an estimated status, a confidence score, and
-        the evidence used — never a definitive claim.
+        This free YouTube Monetization Checker estimates whether a channel may be earning through the
+        Partner Program using public Data API signals and a 0–100 confidence score—not official YouTube
+        Partner Program confirmation. Paste a channel URL, @handle, or UC ID for an estimate.
       </p>
       <p>
         This free checker pulls channel metadata through the official YouTube Data API, then reads

@@ -4,15 +4,17 @@ import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/hook-generator';
 
 export const metadata: Metadata = {
-  title: 'Free AI YouTube Hook Generator — Capture Attention in 3 Seconds',
+  title: {
+    absolute: 'AI YouTube Hook Generator (Free) | yttools.pro',
+  },
   description:
-    'Generate powerful hooks for your YouTube videos — questions, stories, curiosity gaps, and shock statements.',
+    'Free AI YouTube hook generator for the first 3 seconds. Get question, story, curiosity, and shock openings that earn watch time. Paste a topic. No login.',
   keywords: ['youtube hook generator', 'video hooks', 'attention hooks', 'opening hooks'],
   alternates: { canonical: '/hook-generator' },
   openGraph: {
-    title: 'Free AI YouTube Hook Generator — Capture Attention in 3 Seconds',
+    title: 'AI YouTube Hook Generator (Free) | yttools.pro',
     description:
-      'Generate powerful hooks for your YouTube videos — questions, stories, curiosity gaps, and shock statements.',
+      'Free AI YouTube hook generator for the first 3 seconds. Get question, story, curiosity, and shock openings that earn watch time. Paste a topic. No login.',
   },
 };
 
@@ -23,7 +25,7 @@ export default function HookGeneratorPage() {
       toolDescription="Generate powerful hooks for your YouTube videos — questions, stories, curiosity gaps, and shock statements."
       toolSlug="hook-generator"
       title="AI YouTube Hook Generator"
-      description="Generate powerful hooks that grab attention in the first 3 seconds. Question, story, curiosity, and shock hooks."
+      description="Generate free AI YouTube hooks for the first 3 seconds—question, story, curiosity, and shock lines—not blog intros. Enter a topic and tone to draft cold opens that earn watch time."
       seo={<SeoContent />}
       faqs={faqs}
     >

@@ -27,7 +27,7 @@ export function HeroSection() {
           transition={{ duration: 0.55, delay: 0.06, ease: 'easeOut' }}
           className="text-display text-heading-xl mb-5 text-balance"
         >
-          Free YouTube tools for creators
+          Free YouTube Creator Tools — AI & Analytics Toolkit
         </motion.h1>
 
         <motion.p

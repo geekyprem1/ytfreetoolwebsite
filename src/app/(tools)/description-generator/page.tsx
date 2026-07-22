@@ -4,9 +4,11 @@ import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/description-generator';
 
 export const metadata: Metadata = {
-  title: 'Free AI YouTube Description Generator — SEO Optimized Descriptions',
+  title: {
+    absolute: 'AI YouTube Description Generator (Free) | yttools.pro',
+  },
   description:
-    'Generate complete YouTube video descriptions with chapters, hashtags, and CTAs using AI. No login required. Free and easy to use.',
+    'Free AI YouTube description generator with summary, chapters, hashtags, and CTAs. Paste a topic and keyword for a Studio-ready plain-text draft. No login.',
   keywords: [
     'youtube description generator',
     'ai description generator',
@@ -15,9 +17,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: '/description-generator' },
   openGraph: {
-    title: 'Free AI YouTube Description Generator — SEO Optimized Descriptions',
+    title: 'AI YouTube Description Generator (Free) | yttools.pro',
     description:
-      'Generate complete YouTube video descriptions with chapters, hashtags, and CTAs using AI. No login required.',
+      'Free AI YouTube description generator with summary, chapters, hashtags, and CTAs. Paste a topic and keyword for a Studio-ready plain-text draft. No login.',
   },
 };
 
@@ -28,7 +30,7 @@ export default function DescriptionGeneratorPage() {
       toolDescription="Generate complete video descriptions with chapters, hashtags, and CTAs using AI."
       toolSlug="description-generator"
       title="AI YouTube Description Generator"
-      description="Generate complete, SEO-optimized video descriptions with chapters, hashtags, and CTAs. Powered by AI."
+      description="Create a free AI YouTube description with summary, chapters, hashtags, and CTAs—not a product listing blurb. Paste a topic and keyword to get a Studio-ready plain-text draft in seconds."
       seo={<SeoContent />}
       faqs={faqs}
     >

@@ -33,10 +33,9 @@ export function SeoContent() {
     <>
       <h2>What the YouTube Shorts Idea Generator provides</h2>
       <p>
-        The Shorts Idea Generator brainstorms vertical video concepts from a topic seed and returns a
-        scored list — including trend and virality-oriented ratings — so you can plan a week of Shorts
-        without scrolling endlessly for prompts. Ask for a small batch or up to roughly{' '}
-        <strong>50 ideas</strong> when you need a full content sprint board.
+        This free YouTube Shorts Idea Generator brainstorms vertical concepts from a niche seed with
+        trend and virality scores—up to <strong>50 ideas</strong> per run. Plan Shorts you can film
+        this week, not long-form blog topics.
       </p>
       <p>
         Ideas are starting points. The winners still need a crisp visual hook, readable on-screen text,

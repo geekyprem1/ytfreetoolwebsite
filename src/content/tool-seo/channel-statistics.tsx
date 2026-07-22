@@ -33,10 +33,9 @@ export function SeoContent() {
     <>
       <h2>What is a YouTube channel statistics analyzer?</h2>
       <p>
-        A YouTube channel statistics analyzer pulls the public profile metrics that YouTube already shows on a
-        channel page and presents them in one place for research. Instead of opening Studio (which only the owner
-        can see) or scrolling a channel manually, you paste a channel URL and get subscriber count, lifetime views,
-        upload volume, join date, country, and a snapshot of recent uploads.
+        This free YouTube Channel Statistics Analyzer pulls public subscribers, lifetime views, video
+        count, join date, and the 5 most recent uploads—not owner-only Studio revenue or CTR. Paste a
+        channel URL or @handle to research any public creator.
       </p>
       <p>
         Public stats are not a substitute for creator analytics. They do not include revenue, average view duration,

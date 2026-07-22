@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { tools } from '@/content/tools-metadata';
+import { blogPosts } from '@/content/blog/posts';
 import { site } from '@/content/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -7,6 +8,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${site.url}${tool.route}`,
     changeFrequency: 'monthly' as const,
     priority: 0.9,
+  }));
+
+  const blogIndex = {
+    url: `${site.url}/blog`,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  };
+
+  const blogPages = blogPosts.map((post) => ({
+    url: `${site.url}/blog/${post.slug}`,
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+    lastModified: post.publishedAt,
   }));
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -20,5 +34,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/roadmap`, changeFrequency: 'monthly', priority: 0.4 },
   ];
 
-  return [...staticPages, ...toolPages];
+  return [...staticPages, blogIndex, ...blogPages, ...toolPages];
 }

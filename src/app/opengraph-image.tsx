@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'YT Toolkit — Free YouTube creator tools';
+export const alt = 'YT Toolkit - Free YouTube Creator Tools';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -47,10 +47,10 @@ export default function OpenGraphImage() {
           <span style={{ fontSize: 28, fontWeight: 600, color: '#111827' }}>YT Toolkit</span>
         </div>
         <div style={{ fontSize: 56, fontWeight: 700, color: '#111827', lineHeight: 1.15, maxWidth: 900 }}>
-          Free YouTube creator tools
+          Free YouTube Creator Tools - AI & Analytics Toolkit
         </div>
         <div style={{ marginTop: 20, fontSize: 26, color: '#6B7280', maxWidth: 800 }}>
-          Thumbnails, tags, transcripts, AI titles &amp; more — no login required
+          Thumbnails, tags, transcripts, AI titles &amp; more - no login required
         </div>
       </div>
     ),

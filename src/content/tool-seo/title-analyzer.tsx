@@ -33,10 +33,9 @@ export function SeoContent() {
     <>
       <h2>What the YouTube Title Analyzer compares</h2>
       <p>
-        The Title Analyzer places two candidate titles side by side and predicts which is more likely
-        to earn clicks while remaining searchable. You get CTR-oriented guidance, SEO and emotion
-        scores, power-word detection, and a short rationale — useful when both options feel “fine” and
-        you need a structured tie-breaker.
+        This free YouTube Title Analyzer compares two candidate headlines side by side with
+        CTR-oriented guidance, SEO and emotion scores—not a live Studio A/B test. Prefer titles near
+        40–60 characters, where about 21% higher CTR is common versus extremes.
       </p>
       <p>
         This is not a live YouTube experiment. Platform-native title A/B testing is not universally

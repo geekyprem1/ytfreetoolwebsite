@@ -29,6 +29,7 @@ export function ToolPageShell({
       toolName={toolName}
       toolDescription={toolDescription}
       toolSlug={toolSlug}
+      faqs={faqs}
     >
       <nav aria-label="Breadcrumb" className="mb-8">
         <ol className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">

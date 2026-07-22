@@ -33,10 +33,9 @@ export function SeoContent() {
     <>
       <h2>What is a YouTube video statistics lookup?</h2>
       <p>
-        A YouTube video statistics tool fetches the public performance and metadata fields attached to a single
-        video ID. Paste a watch URL and you get the numbers viewers and researchers can already see on the watch
-        page—views, likes, comments—plus structured details such as duration, publish time, category, thumbnail, and
-        channel attribution.
+        This free YouTube Video Statistics Analyzer shows public views, likes, comments, duration, and
+        publish date for any public video—not private Studio CTR or retention. Paste a URL to pull
+        structured stats typically in under 2 seconds.
       </p>
       <p>
         That public layer is enough for competitive breakdowns, thumbnail studies, and “why did this upload work?”

@@ -4,13 +4,17 @@ import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/channel-tags';
 
 export const metadata: Metadata = {
-  title: 'YouTube Channel Tags Extractor — Find Channel Keywords',
-  description: 'Discover channel keywords by analyzing recent video tags. Inferred from the 10 most recent uploads.',
+  title: {
+    absolute: 'YouTube Channel Tags Extractor (Free) | yttools.pro',
+  },
+  description:
+    'Free YouTube channel tags extractor that infers keyword themes from recent video tags (about 10 uploads). Paste a channel URL. Research only - not HTML tags.',
   keywords: ['youtube channel tags', 'channel keywords', 'channel tag extractor'],
   alternates: { canonical: '/channel-tags' },
   openGraph: {
-    title: 'YouTube Channel Tags Extractor — Find Channel Keywords',
-    description: 'Infer a channel’s keyword themes from tags on its most recent public uploads.',
+    title: 'YouTube Channel Tags Extractor (Free) | yttools.pro',
+    description:
+      'Free YouTube channel tags extractor that infers keyword themes from recent video tags (about 10 uploads). Paste a channel URL. Research only - not HTML tags.',
   },
 };
 
@@ -26,7 +30,7 @@ export default async function ChannelTagsPage({
       toolDescription="Discover channel keywords by analyzing recent video tags."
       toolSlug="channel-tags"
       title="YouTube Channel Tags Extractor"
-      description="Discover what keywords a YouTube channel targets. Tags are inferred from recent video tags."
+      description="Extract inferred YouTube channel tags from recent video metadata—keyword themes for research, not HTML or RFID tags. Paste a channel URL to aggregate tags across about 10 recent public uploads."
       seo={<SeoContent />}
       faqs={faqs}
     >

@@ -4,13 +4,17 @@ import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/channel-statistics';
 
 export const metadata: Metadata = {
-  title: 'YouTube Channel Statistics — Free Analyzer',
-  description: 'View detailed channel stats — subscribers, total views, video count, join date, and recent uploads.',
+  title: {
+    absolute: 'YouTube Channel Statistics Analyzer | yttools.pro',
+  },
+  description:
+    'Free YouTube channel statistics analyzer: subscribers, total views, video count, join date, recent uploads. Paste a channel URL or @handle. Public data only.',
   keywords: ['youtube channel statistics', 'channel analytics', 'youtube channel stats'],
   alternates: { canonical: '/channel-statistics' },
   openGraph: {
-    title: 'YouTube Channel Statistics — Free Analyzer',
-    description: 'Analyze any public YouTube channel: subscribers, views, video count, and recent uploads.',
+    title: 'YouTube Channel Statistics Analyzer | yttools.pro',
+    description:
+      'Free YouTube channel statistics analyzer: subscribers, total views, video count, join date, recent uploads. Paste a channel URL or @handle. Public data only.',
   },
 };
 
@@ -26,7 +30,7 @@ export default async function ChannelStatisticsPage({
       toolDescription="Analyze any YouTube channel. Subscribers, total views, recent uploads."
       toolSlug="channel-statistics"
       title="YouTube Channel Statistics"
-      description="Analyze any YouTube channel. Subscribers, total views, video count, join date, and recent uploads."
+      description="Analyze free public YouTube channel statistics—subscribers, lifetime views, video count, join date, and recent uploads—not owner-only Studio data. Paste a channel URL or @handle to research any public creator."
       seo={<SeoContent />}
       faqs={faqs}
     >
