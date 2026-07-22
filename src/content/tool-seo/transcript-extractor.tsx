@@ -4,7 +4,7 @@ import type { ToolFaq } from '@/components/tools/tool-faq-section';
 export const faqs: ToolFaq[] = [
   {
     q: 'Which videos have a YouTube Video Transcript & Subtitles track?',
-    a: 'Videos with captions — automatic or manual — can usually return a YouTube Video Transcript & Subtitles extract. This is caption text from the video, not a college or academic transcript. If the uploader disabled captions or none were generated, extraction will fail or return empty results.',
+    a: 'Videos with captions - automatic or manual - can usually return a YouTube Video Transcript & Subtitles extract. This is caption text from the video, not a college or academic transcript. If the uploader disabled captions or none were generated, extraction will fail or return empty results.',
   },
   {
     q: 'Are timestamps included when I convert a YouTube transcript to a text file?',
@@ -12,7 +12,7 @@ export const faqs: ToolFaq[] = [
   },
   {
     q: 'Can I convert a YouTube transcript to a text file with timestamps?',
-    a: 'Yes. Extract the caption track, then copy or download a TXT file that preserves timestamped segments for editing, translation, or repurposing into blogs and show notes.',
+    a: "Yes. YouTube (YT) Toolkit extracts the caption track, then lets you copy or download a TXT file that preserves timestamped segments for editing, translation, or repurposing into blogs and show notes - no extension required.",
   },
   {
     q: 'Does the tool create captions if none exist?',
@@ -24,7 +24,7 @@ export const faqs: ToolFaq[] = [
   },
   {
     q: 'Can YouTube Video Transcript & Subtitles help SEO?',
-    a: 'Indirectly. Transcripts reveal spoken keywords, chapter candidates, and quote hooks. You still need strong titles, thumbnails, and descriptions — but transcript research makes those assets more accurate. Titles in the 40–60 character range are often associated with about 21% higher CTR.',
+    a: 'Indirectly. Transcripts reveal spoken keywords, chapter candidates, and quote hooks. You still need strong titles, thumbnails, and descriptions - but transcript research makes those assets more accurate. Titles in the 40-60 character range are often associated with about 21% higher CTR.',
   },
 ];
 

@@ -26,6 +26,7 @@ export default function SeoScoreCheckerPage() {
       toolSlug="seo-score-checker"
       title="YouTube SEO Score Checker"
       description="Grade your YouTube video SEO score out of 100 across title, description, tags, and hashtags—not a website SEO audit. Paste draft metadata for a packaging grade and fixes before upload."
+      answerFirst="YouTube (YT) Toolkit's SEO Score Checker grades your video packaging out of 100 across title, description, tags, and hashtags. Free, no login - paste draft metadata for a score and fixes before you upload."
       seo={<SeoContent />}
       faqs={faqs}
     >

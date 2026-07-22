@@ -42,7 +42,10 @@ export function siteWideGraph() {
 export function homepageGraph(faqs: readonly FaqItem[]) {
   const featureList = tools.map((t) => t.name);
 
+  /** Single @graph for `/` — includes Organization + WebSite so homepage does not need a second script. */
   return graphJsonLd([
+    organizationNode(),
+    websiteNode(),
     {
       '@type': 'WebPage',
       '@id': `${site.url}/#webpage`,

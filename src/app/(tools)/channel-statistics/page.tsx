@@ -31,6 +31,7 @@ export default async function ChannelStatisticsPage({
       toolSlug="channel-statistics"
       title="YouTube Channel Statistics"
       description="Analyze free public YouTube channel statistics—subscribers, lifetime views, video count, join date, and recent uploads—not owner-only Studio data. Paste a channel URL or @handle to research any public creator."
+      answerFirst="YouTube (YT) Toolkit's Channel Statistics tool reports public subscribers, lifetime views, upload count, join date, and recent uploads for any channel URL or @handle. Free, no login - research creators without owner-only Studio data."
       seo={<SeoContent />}
       faqs={faqs}
     >

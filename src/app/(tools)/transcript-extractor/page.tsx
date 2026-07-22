@@ -5,10 +5,10 @@ import { SeoContent, faqs } from '@/content/tool-seo/transcript-extractor';
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'YouTube Transcript Extractor with Timestamps | yttools.pro',
+    absolute: 'YouTube Transcript Extractor - YT Toolkit | Download Subtitles Free',
   },
   description:
-    'Extract YouTube Video Transcript & Subtitles with timestamps. Copy or download a text file. Free, no login required.',
+    'Extract and download YouTube transcripts & captions in TXT or SRT formats. Free video to text transcript converter with timestamps.',
   keywords: [
     'YouTube Video Transcript & Subtitles',
     'youtube transcript extractor',
@@ -18,9 +18,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: '/transcript-extractor' },
   openGraph: {
-    title: 'YouTube Transcript Extractor with Timestamps | yttools.pro',
+    title: 'YouTube Transcript Extractor - YT Toolkit | Download Subtitles Free',
     description:
-      'Convert YouTube Video Transcript & Subtitles to a timestamped text file. Copy, download TXT, or AI summarize.',
+      'Extract and download YouTube transcripts & captions with timestamps. Free video to text converter - no login required.',
   },
 };
 
@@ -36,7 +36,8 @@ export default async function TranscriptExtractorPage({
       toolDescription="Get the full transcript of any YouTube video with timestamps. Copy, download as TXT, or AI summarize."
       toolSlug="transcript-extractor"
       title="YouTube Video Transcript & Subtitles Extractor"
-      description="Extract YouTube Video Transcript & Subtitles with timestamps from any captioned video, then copy or download a text file — caption text for creators, not academic transcripts."
+      description="Extract YouTube Video Transcript & Subtitles with timestamps from any captioned video, then copy or download a text file - caption text for creators, not academic transcripts."
+      answerFirst="YouTube (YT) Toolkit's Transcript Extractor pulls YouTube Video Transcript & Subtitles from any captioned public video and lets you convert them to a timestamped text file. No login or browser extension - export captions for blogs, chapters, and research in seconds."
       seo={<SeoContent />}
       faqs={faqs}
     >

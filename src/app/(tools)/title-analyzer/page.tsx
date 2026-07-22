@@ -26,6 +26,7 @@ export default function TitleAnalyzerPage() {
       toolSlug="title-analyzer"
       title="YouTube Title Analyzer"
       description="Compare two YouTube titles to predict CTR—AI guidance, not a live Studio A/B test. Paste Title A, Title B, and an optional keyword for SEO and emotion scores."
+      answerFirst="YouTube (YT) Toolkit's Title Analyzer compares two YouTube titles with AI CTR guidance, SEO, and emotion scores - not a live Studio A/B test. Free with no login - paste Title A, Title B, and an optional keyword."
       seo={<SeoContent />}
       faqs={faqs}
     >

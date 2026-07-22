@@ -32,6 +32,7 @@ export default function TitleGeneratorPage() {
       toolSlug="title-generator"
       title="AI YouTube Title Generator"
       description="Generate free AI YouTube titles built to earn clicks—not blog headlines. Get SEO-friendly options near the 40–60 character range, choose a tone, and copy multiple clickable ideas with no login."
+      answerFirst="YouTube (YT) Toolkit's Title Generator creates AI clickable YouTube titles in the 40-60 character range so your packaging earns more clicks. Free, no login - pick a tone and copy SEO-friendly options in seconds."
       seo={<SeoContent />}
       faqs={faqs}
     >

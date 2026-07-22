@@ -26,6 +26,7 @@ export default function KeywordGeneratorPage() {
       toolSlug="keyword-generator"
       title="YouTube Keyword Generator"
       description="Generate free YouTube keyword ideas with difficulty, popularity, and search intent—not generic Google SEO lists. Enter a seed topic to expand into title and tag phrases you can actually publish."
+      answerFirst="YouTube (YT) Toolkit's Keyword Generator expands a seed topic into YouTube keyword ideas with difficulty, popularity, and search intent. Free, no login - get title and tag phrases built for YouTube, not generic web SEO lists."
       seo={<SeoContent />}
       faqs={faqs}
     >

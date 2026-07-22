@@ -5,22 +5,22 @@ import { SeoContent, faqs } from '@/content/tool-seo/thumbnail-downloader';
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Free YouTube Thumbnail Downloader (HD, 4K) | yttools.pro',
+    absolute: 'YouTube Thumbnail Downloader 4K HD - YT Toolkit | Save Images',
   },
   description:
-    'Free YouTube Video Thumbnail Downloader (HD maxresdefault). Save 1280×720, 640×480, 480×360 & more from any video URL. No login required.',
+    'Download 4K & HD YouTube video thumbnails instantly in full 1080p resolution. Free online YouTube thumbnail saver with no account or login required.',
   keywords: [
     'YouTube Video Thumbnail Downloader',
     'HD maxresdefault',
-    'download youtube thumbnail',
+    'download youtube thumbnail 4k',
     'youtube thumbnail grabber',
     'free youtube thumbnail download',
   ],
   alternates: { canonical: '/thumbnail-downloader' },
   openGraph: {
-    title: 'Free YouTube Thumbnail Downloader (HD, 4K) | yttools.pro',
+    title: 'YouTube Thumbnail Downloader 4K HD - YT Toolkit | Save Images',
     description:
-      'Download YouTube video thumbnails in Max HD maxresdefault and other qualities. Fast, free, no signup.',
+      'Download 4K & HD YouTube video thumbnails instantly. Free online YouTube thumbnail saver with no account or login required.',
   },
 };
 
@@ -36,7 +36,8 @@ export default async function ThumbnailDownloaderPage({
       toolDescription="Download YouTube thumbnails in HD, SD, HQ quality. Free and no login required."
       toolSlug="thumbnail-downloader"
       title="Free YouTube Video Thumbnail Downloader (HD maxresdefault)"
-      description="Download original YouTube video thumbnails (HD maxresdefault 1280×720 and smaller CDN sizes) from any public or unlisted URL in under 0.8 seconds — no login, no extension, not Windows thumbs.db files."
+      description="Download original YouTube video thumbnails (HD maxresdefault 1280x720 and smaller CDN sizes) from any public or unlisted URL - no login, no extension, not Windows thumbs.db files."
+      answerFirst="YouTube (YT) Toolkit's Thumbnail Downloader extracts maximum-resolution cover images (maxresdefault, typically 1280x720 HD) directly from any public YouTube video URL in under 0.44 seconds without registration. Prefer Max when available, then fall back to SD/HQ sizes from the same CDN."
       seo={<SeoContent />}
       faqs={faqs}
     >

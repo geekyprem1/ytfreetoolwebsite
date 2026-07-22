@@ -44,6 +44,7 @@ export default async function MonetizationCheckerPage({
       toolSlug="monetization-checker"
       title="YouTube Monetization Checker"
       description="Estimate YouTube channel monetization from public signals and a 0–100 confidence score—not official YouTube Partner Program status. Paste a channel URL or @handle for a free estimate."
+      answerFirst="YouTube (YT) Toolkit's Monetization Checker estimates channel monetization from public signals and a 0-100 confidence score - not official YouTube Partner Program status. Free and no login - paste a channel URL or @handle for a quick estimate."
       seo={<SeoContent />}
       faqs={faqs}
     >

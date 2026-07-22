@@ -26,6 +26,7 @@ export default function ShortsIdeasPage() {
       toolSlug="shorts-ideas"
       title="YouTube Shorts Idea Generator"
       description="Generate free YouTube Shorts ideas with trend and virality scores—up to 50 concepts—not long-form blog topics. Enter a niche seed to plan vertical videos you can film this week."
+      answerFirst="YouTube (YT) Toolkit's Shorts Ideas tool builds a free Shorts idea list with trend and virality scores - up to 50 vertical concepts from a niche seed. No login required - plan videos you can film this week."
       seo={<SeoContent />}
       faqs={faqs}
     >

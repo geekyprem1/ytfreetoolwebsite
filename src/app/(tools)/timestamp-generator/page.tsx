@@ -26,6 +26,7 @@ export default function TimestampGeneratorPage() {
       toolSlug="timestamp-generator"
       title="AI Timestamp Generator"
       description="Generate free YouTube timestamps and chapters from a transcript in MM:SS format starting at 0:00—not generic podcast markers. Paste caption text to get clickable chapter lines for the description."
+      answerFirst="YouTube (YT) Toolkit's Timestamp Generator turns a transcript into YouTube chapters in MM:SS format starting at 0:00. Free, no login - paste caption text and copy clickable chapter lines for your description."
       seo={<SeoContent />}
       faqs={faqs}
     >

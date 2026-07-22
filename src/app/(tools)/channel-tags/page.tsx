@@ -31,6 +31,7 @@ export default async function ChannelTagsPage({
       toolSlug="channel-tags"
       title="YouTube Channel Tags Extractor"
       description="Extract inferred YouTube channel tags from recent video metadata—keyword themes for research, not HTML or RFID tags. Paste a channel URL to aggregate tags across about 10 recent public uploads."
+      answerFirst="YouTube (YT) Toolkit's Channel Tags tool infers keyword themes from about 10 recent public uploads on a channel. Free, no login - paste a channel URL to aggregate research tags from recent video metadata."
       seo={<SeoContent />}
       faqs={faqs}
     >

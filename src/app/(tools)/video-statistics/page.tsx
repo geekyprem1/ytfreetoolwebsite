@@ -31,6 +31,7 @@ export default async function VideoStatisticsPage({
       toolSlug="video-statistics"
       title="YouTube Video Statistics"
       description="Look up free public YouTube video statistics—views, likes, comments, duration, and publish date—not private Studio analytics. Paste any public video URL to analyze performance signals in seconds."
+      answerFirst="YouTube (YT) Toolkit's Video Statistics tool shows public views, likes, comments, duration, and publish date for any public video URL. Free with no login - research performance signals without Studio access."
       seo={<SeoContent />}
       faqs={faqs}
     >

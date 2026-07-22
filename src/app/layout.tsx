@@ -4,9 +4,7 @@ import { ThemeProvider } from '@/contexts/theme-provider';
 import { ToastProvider } from '@/contexts/toast-provider';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { ClientProviders } from '@/components/layout/client-providers';
-import { JsonLd } from '@/components/seo/json-ld';
 import { site } from '@/content/site';
-import { siteWideGraph } from '@/lib/seo/schema-graph';
 import '@/styles/globals.css';
 
 const instrumentSans = Instrument_Sans({
@@ -50,9 +48,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
       className={`${instrumentSans.variable} ${geistMono.variable}`}
     >
-      <head>
-        <JsonLd data={siteWideGraph()} />
-      </head>
       <body className="font-sans antialiased min-h-screen flex flex-col">
         <ThemeProvider>
           <TooltipProvider>

@@ -26,6 +26,7 @@ export default function HookGeneratorPage() {
       toolSlug="hook-generator"
       title="AI YouTube Hook Generator"
       description="Generate free AI YouTube hooks for the first 3 seconds—question, story, curiosity, and shock lines—not blog intros. Enter a topic and tone to draft cold opens that earn watch time."
+      answerFirst="YouTube (YT) Toolkit's Hook Generator writes AI cold opens for the first 3 seconds - question, story, curiosity, and shock lines that earn watch time. Free with no login - enter a topic and tone to draft hooks fast."
       seo={<SeoContent />}
       faqs={faqs}
     >

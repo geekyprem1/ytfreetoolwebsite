@@ -31,6 +31,7 @@ export default function DescriptionGeneratorPage() {
       toolSlug="description-generator"
       title="AI YouTube Description Generator"
       description="Create a free AI YouTube description with summary, chapters, hashtags, and CTAs—not a product listing blurb. Paste a topic and keyword to get a Studio-ready plain-text draft in seconds."
+      answerFirst="YouTube (YT) Toolkit's Description Generator drafts SEO-ready YouTube descriptions with summary, chapters, hashtags, and CTAs from a topic and keyword. Free and no login - copy a Studio-ready plain-text draft in seconds."
       seo={<SeoContent />}
       faqs={faqs}
     >

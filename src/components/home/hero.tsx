@@ -18,7 +18,7 @@ export function HeroSection() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="text-display text-sm font-semibold tracking-[0.08em] uppercase text-primary mb-6"
         >
-          YT Toolkit
+          YouTube (YT) Toolkit
         </motion.p>
 
         <motion.h1
@@ -27,7 +27,7 @@ export function HeroSection() {
           transition={{ duration: 0.55, delay: 0.06, ease: 'easeOut' }}
           className="text-display text-heading-xl mb-5 text-balance"
         >
-          Free YouTube Creator Tools — AI & Analytics Toolkit
+          Free YouTube Creator Tools - AI & Analytics Toolkit
         </motion.h1>
 
         <motion.p

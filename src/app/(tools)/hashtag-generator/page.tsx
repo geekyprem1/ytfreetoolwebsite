@@ -26,6 +26,7 @@ export default function HashtagGeneratorPage() {
       toolSlug="hashtag-generator"
       title="AI YouTube Hashtag Generator"
       description="Generate free AI YouTube hashtags grouped by broad, niche, and trending—not Instagram or TikTok tags. Stay inside YouTube’s 15-hashtag limit and copy a focused set for better discoverability."
+      answerFirst="YouTube (YT) Toolkit's Hashtag Generator builds trending and niche YouTube hashtags grouped by broad, niche, and trending sets. Free, no login - stay inside the 15-hashtag limit and copy a focused set for discoverability."
       seo={<SeoContent />}
       faqs={faqs}
     >
