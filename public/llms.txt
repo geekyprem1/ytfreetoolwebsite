@@ -4,30 +4,31 @@
 
 ## Site
 
-- Home: https://yttoolkit.com/
-- About: https://yttoolkit.com/about
-- Contact: https://yttoolkit.com/contact (hello@yttoolkit.com)
-- Privacy: https://yttoolkit.com/privacy
-- Terms: https://yttoolkit.com/terms
-- Docs: https://yttoolkit.com/docs
+- Home: https://www.yttools.pro/
+- About: https://www.yttools.pro/about
+- Contact: https://www.yttools.pro/contact (hello@yttools.pro)
+- Privacy: https://www.yttools.pro/privacy
+- Terms: https://www.yttools.pro/terms
+- Docs: https://www.yttools.pro/docs
 
 ## Tools
 
-- Thumbnail Downloader: https://yttoolkit.com/thumbnail-downloader
-- Tags Extractor: https://yttoolkit.com/tags-extractor
-- Channel Tags: https://yttoolkit.com/channel-tags
-- Transcript Extractor: https://yttoolkit.com/transcript-extractor
-- AI Title Generator: https://yttoolkit.com/title-generator
-- AI Description Generator: https://yttoolkit.com/description-generator
-- AI Hashtag Generator: https://yttoolkit.com/hashtag-generator
-- Video Statistics: https://yttoolkit.com/video-statistics
-- Channel Statistics: https://yttoolkit.com/channel-statistics
-- Hook Generator: https://yttoolkit.com/hook-generator
-- Keyword Generator: https://yttoolkit.com/keyword-generator
-- SEO Score Checker: https://yttoolkit.com/seo-score-checker
-- Shorts Ideas: https://yttoolkit.com/shorts-ideas
-- Timestamp Generator: https://yttoolkit.com/timestamp-generator
-- Title Analyzer: https://yttoolkit.com/title-analyzer
+- Thumbnail Downloader: https://www.yttools.pro/thumbnail-downloader
+- Tags Extractor: https://www.yttools.pro/tags-extractor
+- Channel Tags: https://www.yttools.pro/channel-tags
+- Transcript Extractor: https://www.yttools.pro/transcript-extractor
+- AI Title Generator: https://www.yttools.pro/title-generator
+- AI Description Generator: https://www.yttools.pro/description-generator
+- AI Hashtag Generator: https://www.yttools.pro/hashtag-generator
+- Video Statistics: https://www.yttools.pro/video-statistics
+- Channel Statistics: https://www.yttools.pro/channel-statistics
+- Hook Generator: https://www.yttools.pro/hook-generator
+- Keyword Generator: https://www.yttools.pro/keyword-generator
+- SEO Score Checker: https://www.yttools.pro/seo-score-checker
+- Shorts Ideas: https://www.yttools.pro/shorts-ideas
+- Timestamp Generator: https://www.yttools.pro/timestamp-generator
+- Title Analyzer: https://www.yttools.pro/title-analyzer
+- Monetization Checker: https://www.yttools.pro/monetization-checker
 
 ## Citation notes
 

@@ -16,7 +16,7 @@ export const site = {
     'YouTube AI title generator',
     'YouTube transcript extractor',
   ],
-  supportEmail: 'hello@yttoolkit.com',
+  supportEmail: 'hello@yttools.pro',
   get url() {
     return process.env.NEXT_PUBLIC_SITE_URL || fallbackUrl;
   },

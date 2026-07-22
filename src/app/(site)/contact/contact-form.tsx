@@ -15,7 +15,7 @@ export function ContactForm() {
     e.preventDefault();
     const subject = encodeURIComponent(`YT Toolkit contact from ${name || 'creator'}`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-    window.location.href = `mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL || 'hello@yttoolkit.com'}?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL || 'hello@yttools.pro'}?subject=${subject}&body=${body}`;
     setSent(true);
   };
 
@@ -70,7 +70,7 @@ export function ContactForm() {
       </Button>
       {sent ? (
         <p className="text-sm text-muted-foreground">
-          Your email app should open. If it doesn&apos;t, write us at hello@yttoolkit.com.
+          Your email app should open. If it doesn&apos;t, write us at hello@yttools.pro.
         </p>
       ) : null}
     </form>
