@@ -3,7 +3,7 @@ export interface ToolMetadata {
   name: string;
   description: string;
   icon: string;
-  category: 'downloader' | 'extractor' | 'ai-generator' | 'analytics' | 'seo';
+  category: 'downloader' | 'extractor' | 'ai-generator' | 'analytics' | 'seo' | 'calculator';
   route: string;
   phase: 1 | 2 | 3;
 }
@@ -153,6 +153,106 @@ export const tools: ToolMetadata[] = [
     category: 'seo',
     route: '/title-analyzer',
     phase: 3,
+  },
+  // Calculator category — SEO gold, simple fast no-login
+  {
+    slug: 'youtube-money-calculator',
+    name: 'YouTube Money Calculator',
+    description: 'Estimate YouTube earnings from views, CPM and monetized play rate. Free, instant.',
+    icon: 'Calculator',
+    category: 'calculator',
+    route: '/youtube-money-calculator',
+    phase: 2,
+  },
+  {
+    slug: 'youtube-rpm-calculator',
+    name: 'YouTube RPM Calculator',
+    description: 'Calculate RPM (revenue per mille) from total revenue and views.',
+    icon: 'TrendingUp',
+    category: 'calculator',
+    route: '/youtube-rpm-calculator',
+    phase: 2,
+  },
+  {
+    slug: 'youtube-cpm-calculator',
+    name: 'YouTube CPM Calculator',
+    description: 'Calculate CPM from ad revenue and monetized views instantly.',
+    icon: 'DollarSign',
+    category: 'calculator',
+    route: '/youtube-cpm-calculator',
+    phase: 2,
+  },
+  {
+    slug: 'youtube-watch-time-calculator',
+    name: 'YouTube Watch Time Calculator',
+    description: 'Convert views and average view duration into total watch hours.',
+    icon: 'Clock',
+    category: 'calculator',
+    route: '/youtube-watch-time-calculator',
+    phase: 2,
+  },
+  {
+    slug: 'youtube-engagement-calculator',
+    name: 'YouTube Engagement Rate Calculator',
+    description: 'Measure engagement rate from likes, comments and views.',
+    icon: 'Heart',
+    category: 'calculator',
+    route: '/youtube-engagement-calculator',
+    phase: 2,
+  },
+  {
+    slug: 'youtube-subscriber-growth-calculator',
+    name: 'YouTube Subscriber Growth Calculator',
+    description: 'Track subscriber growth rate, daily gain and projections.',
+    icon: 'Users',
+    category: 'calculator',
+    route: '/youtube-subscriber-growth-calculator',
+    phase: 2,
+  },
+  {
+    slug: 'youtube-views-to-money-calculator',
+    name: 'YouTube Views to Money Calculator',
+    description: 'Convert any view count to estimated earnings at your RPM.',
+    icon: 'Eye',
+    category: 'calculator',
+    route: '/youtube-views-to-money-calculator',
+    phase: 2,
+  },
+  {
+    slug: 'youtube-shorts-earnings-calculator',
+    name: 'YouTube Shorts Earnings Calculator',
+    description: 'Estimate Shorts revenue from views with Shorts RPM range.',
+    icon: 'Smartphone',
+    category: 'calculator',
+    route: '/youtube-shorts-earnings-calculator',
+    phase: 2,
+  },
+  {
+    slug: 'youtube-live-earnings-calculator',
+    name: 'YouTube Live Earnings Calculator',
+    description: 'Estimate Live stream earnings from Super Chats, ads and views.',
+    icon: 'Radio',
+    category: 'calculator',
+    route: '/youtube-live-earnings-calculator',
+    phase: 2,
+  },
+  {
+    slug: 'youtube-upload-frequency-calculator',
+    name: 'YouTube Upload Frequency Calculator',
+    description: 'Plan upload schedule — videos per week, month and consistency score.',
+    icon: 'Calendar',
+    category: 'calculator',
+    route: '/youtube-upload-frequency-calculator',
+    phase: 2,
+  },
+  {
+    slug: 'youtube-average-view-duration-calculator',
+    name: 'YouTube Average View Duration Calculator',
+    description: 'Calculate average view duration from watch time and views.',
+    icon: 'Timer',
+    category: 'calculator',
+    route: '/youtube-average-view-duration-calculator',
+    phase: 2,
   },
 ];
 

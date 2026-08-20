@@ -9,7 +9,7 @@ export const homeFaqs = [
   },
   {
     q: 'How many tools are available?',
-    a: 'We offer 15+ tools: Thumbnail Downloader, Tags Extractor, Transcript, AI Title & Description Generator, SEO Score Checker, Analytics, and more.',
+    a: 'We offer 27 tools: Thumbnail Downloader, Tags Extractor, Transcript, AI Title & Description Generator, SEO Score Checker, Analytics, 11 Calculators and more.',
   },
   {
     q: 'Are AI results SEO-optimized?',

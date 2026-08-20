@@ -5,7 +5,7 @@ import { site } from '@/content/site';
 
 export const metadata: Metadata = {
   title: 'About',
-  description: `Learn about ${site.legalName} — a free YouTube creator toolkit with 15+ tools. No login required. Independent and not affiliated with YouTube.`,
+  description: `Learn about ${site.legalName} — a free YouTube creator toolkit with 27 tools. No login required. Independent and not affiliated with YouTube.`,
   alternates: { canonical: '/about' },
   openGraph: {
     title: `About ${site.legalName}`,

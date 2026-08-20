@@ -7,11 +7,14 @@ import { tools, type ToolMetadata } from '@/content/tools-metadata';
 import {
   Image, Tags, Hash, FileText, Sparkles, PenLine,
   BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, ArrowRight, BadgeDollarSign,
+  Calculator, TrendingUp, DollarSign, Heart, Eye, Smartphone, Radio, Calendar, Timer,
 } from 'lucide-react';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Image, Tags, Hash, FileText, Sparkles, PenLine,
   BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, BadgeDollarSign,
+  Calculator, TrendingUp, DollarSign, Heart, Eye, Smartphone, Radio, Calendar, Timer,
+  HashIcon: Hash,
 };
 
 const categoryLabels: Record<string, string> = {
@@ -20,6 +23,7 @@ const categoryLabels: Record<string, string> = {
   'ai-generator': 'AI Generators',
   analytics: 'Analytics',
   seo: 'SEO Tools',
+  calculator: 'YouTube Calculators',
 };
 
 const categoryDesc: Record<string, string> = {
@@ -28,6 +32,7 @@ const categoryDesc: Record<string, string> = {
   'ai-generator': 'AI-powered titles, descriptions, hooks, and more',
   analytics: 'Detailed video and channel analytics',
   seo: 'Optimize your content for YouTube search',
+  calculator: 'Estimate earnings, RPM, CPM, watch time and growth — instant',
 };
 
 function ToolRow({ tool, index }: { tool: ToolMetadata; index: number }) {
@@ -76,10 +81,10 @@ export function ToolsGrid() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-14 md:mb-16 max-w-xl">
           <h2 className="text-display text-heading-lg mb-3">
-            All 15+ tools, free forever
+            All 27 tools, free forever
           </h2>
           <p className="text-lead">
-            Everything a YouTube creator needs — thumbs, tags, AI, analytics, and SEO — in one place.
+            Everything a YouTube creator needs — thumbs, tags, AI, analytics, SEO and calculators — in one place.
           </p>
         </div>
 

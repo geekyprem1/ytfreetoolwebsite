@@ -5,9 +5,9 @@ const fallbackUrl = 'https://yttoolkit.com';
 export const site = {
   name: 'YT Toolkit',
   legalName: 'YouTube Toolkit AI',
-  tagline: '15+ free YouTube creator tools. No login required.',
+  tagline: '27 free YouTube creator tools. No login required.',
   description:
-    '15+ free YouTube creator tools. Download thumbnails, extract tags, generate AI titles & descriptions, extract transcripts & stats. No login required.',
+    '27 free YouTube creator tools. Download thumbnails, extract tags, generate AI titles & descriptions, extract transcripts & stats, plus 11 YouTube calculators (earnings, RPM, CPM, watch time). No login required.',
   keywords: [
     'YouTube creator tools',
     'free YouTube tools',

@@ -9,6 +9,7 @@ const categoryLabels: Record<string, string> = {
   'ai-generator': 'AI Generators',
   analytics: 'Analytics',
   seo: 'SEO Tools',
+  calculator: 'Calculators',
 };
 
 const company = [

@@ -2,11 +2,14 @@ import Link from 'next/link';
 import { getRelatedTools } from '@/content/tools-metadata';
 import {
   Image, Tags, Hash, FileText, Sparkles, PenLine, BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, ArrowRight, BadgeDollarSign,
+  Calculator, TrendingUp, DollarSign, Heart, Eye, Smartphone, Radio, Calendar, Timer,
 } from 'lucide-react';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Image, Tags, Hash, FileText, Sparkles, PenLine,
   BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, BadgeDollarSign,
+  Calculator, TrendingUp, DollarSign, Heart, Eye, Smartphone, Radio, Calendar, Timer,
+  HashIcon: Hash,
 };
 
 export function RelatedTools({ currentSlug }: { currentSlug: string }) {

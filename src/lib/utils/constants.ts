@@ -3,7 +3,7 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://yttoolkit.com';
 export const SITE_DESCRIPTION =
   process.env.NEXT_PUBLIC_SITE_DESCRIPTION ||
-  'Free YouTube creator toolkit with 15+ tools. No login required.';
+  'Free YouTube creator toolkit with 27 tools. No login required.';
 
 export const TOOL_PHASES: Record<number, string> = {
   1: 'MVP',

@@ -50,7 +50,7 @@ export function homepageGraph(faqs: readonly FaqItem[]) {
       '@type': 'WebPage',
       '@id': `${site.url}/#webpage`,
       url: site.url,
-      name: 'Free YouTube Creator Tools - YT Toolkit | 15+ AI Video Tools',
+      name: 'Free YouTube Creator Tools - YT Toolkit | 27 Tools Including 11 Calculators',
       description: site.description,
       isPartOf: { '@id': `${site.url}/#website` },
       about: { '@id': `${site.url}/#webapp` },

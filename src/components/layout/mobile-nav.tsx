@@ -6,20 +6,41 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { tools } from '@/content/tools-metadata';
 import { Separator } from '@/components/ui/separator';
-import { Play, Image, Tags, Hash, FileText, Sparkles, PenLine, BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, BadgeDollarSign } from 'lucide-react';
+import { Image, Tags, Hash, FileText, Sparkles, PenLine, BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, BadgeDollarSign, Calculator, TrendingUp, DollarSign, Heart, Eye, Smartphone, Radio, Calendar, Timer } from 'lucide-react';
 
 interface NavLink {
   href: string;
   label: string;
 }
 
+const categoryLabels: Record<string, string> = {
+  downloader: 'Downloaders',
+  extractor: 'Extractors',
+  'ai-generator': 'AI Generators',
+  analytics: 'Analytics',
+  seo: 'SEO Tools',
+  calculator: 'Calculators',
+};
+
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Image, Tags, Hash, FileText, Sparkles, PenLine,
   BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, BadgeDollarSign,
+  Calculator, TrendingUp, DollarSign, Heart, Eye, Smartphone, Radio, Calendar, Timer,
+  HashIcon: Hash,
 };
 
 export function MobileNav({ links }: { links: NavLink[] }) {
   const [open, setOpen] = useState(false);
+
+  const categorized = tools.reduce(
+    (acc, tool) => {
+      const cat = tool.category;
+      if (!acc[cat]) acc[cat] = [];
+      acc[cat]!.push(tool);
+      return acc;
+    },
+    {} as Record<string, typeof tools>,
+  );
 
   return (
     <div className="md:hidden">
@@ -61,23 +82,30 @@ export function MobileNav({ links }: { links: NavLink[] }) {
               <Separator className="my-3" />
 
               <p className="px-3 py-1 text-caption font-semibold text-muted-foreground uppercase tracking-wider">
-                All Tools
+                All Tools — {tools.length} free
               </p>
 
-              {tools.map((tool) => {
-                const Icon = iconMap[tool.icon] || Sparkles;
-                return (
-                  <Link
-                    key={tool.slug}
-                    href={tool.route}
-                    className="flex items-center gap-3 px-3 py-2.5 text-base rounded-lg hover:bg-secondary transition-colors font-medium"
-                    onClick={() => setOpen(false)}
-                  >
-                    <Icon className="size-4 text-muted-foreground" />
-                    {tool.name}
-                  </Link>
-                );
-              })}
+              {Object.entries(categorized).map(([category, categoryTools]) => (
+                <div key={category} className="mt-3">
+                  <p className="px-3 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    {categoryLabels[category] || category} · {categoryTools.length}
+                  </p>
+                  {categoryTools.map((tool) => {
+                    const Icon = iconMap[tool.icon] || Sparkles;
+                    return (
+                      <Link
+                        key={tool.slug}
+                        href={tool.route}
+                        className="flex items-center gap-3 px-3 py-2.5 text-base rounded-lg hover:bg-secondary transition-colors font-medium"
+                        onClick={() => setOpen(false)}
+                      >
+                        <Icon className="size-4 text-muted-foreground shrink-0" />
+                        {tool.name}
+                      </Link>
+                    );
+                  })}
+                </div>
+              ))}
             </nav>
           </motion.div>
         )}

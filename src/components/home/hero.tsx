@@ -36,7 +36,7 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.14 }}
           className="text-lead mb-10 max-w-xl mx-auto"
         >
-          Download thumbnails, extract tags, generate AI titles, analyze stats — 15+ free tools, zero signup.
+          Download thumbnails, extract tags, generate AI titles, analyze stats — 27 free tools, zero signup.
         </motion.p>
 
         <motion.div

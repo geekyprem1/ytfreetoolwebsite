@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: 'Free YouTube Creator Tools - YT Toolkit | 15+ AI Video Tools',
+    default: 'Free YouTube Creator Tools - YT Toolkit | 27 Tools Including 11 Calculators',
     template: '%s | YouTube Toolkit AI',
   },
   description: site.description,
@@ -31,12 +31,12 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: site.legalName,
-    title: 'Free YouTube Creator Tools - YT Toolkit | 15+ AI Video Tools',
+    title: 'Free YouTube Creator Tools - YT Toolkit | 27 Tools Including 11 Calculators',
     description: site.description,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free YouTube Creator Tools - YT Toolkit | 15+ AI Video Tools',
+    title: 'Free YouTube Creator Tools - YT Toolkit | 27 Tools Including 11 Calculators',
     description: site.description,
   },
 };

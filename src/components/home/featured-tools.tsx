@@ -67,7 +67,7 @@ export function FeaturedTools() {
             href="#tools"
             className="inline-flex items-center gap-2 text-base font-medium text-primary hover:underline underline-offset-4"
           >
-            View all 15+ tools <ArrowRight className="size-4" />
+            View all 27 tools <ArrowRight className="size-4" />
           </Link>
         </div>
       </div>
