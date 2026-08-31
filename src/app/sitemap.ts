@@ -2,12 +2,19 @@ import type { MetadataRoute } from 'next';
 import { tools } from '@/content/tools-metadata';
 import { blogPosts } from '@/content/blog/posts';
 import { site } from '@/content/site';
+import { geoPages } from '@/content/geo-pages';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const toolPages = tools.map((tool) => ({
     url: `${site.url}${tool.route}`,
     changeFrequency: 'monthly' as const,
     priority: 0.9,
+  }));
+
+  const geo: MetadataRoute.Sitemap = geoPages().map((p) => ({
+    url: `${site.url}${p.path}`,
+    changeFrequency: p.changeFrequency,
+    priority: p.priority,
   }));
 
   const blogIndex = {
@@ -34,5 +41,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/roadmap`, changeFrequency: 'monthly', priority: 0.4 },
   ];
 
-  return [...staticPages, blogIndex, ...blogPages, ...toolPages];
+  return [...staticPages, blogIndex, ...blogPages, ...toolPages, ...geo];
 }

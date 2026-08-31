@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { UrlSearchBox } from '@/components/home/url-search-box';
+import { toolCount } from '@/content/tools-metadata';
 
 export function HeroSection() {
   return (
@@ -36,7 +37,8 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.14 }}
           className="text-lead mb-10 max-w-xl mx-auto"
         >
-          Download thumbnails, extract tags, generate AI titles, analyze stats — 27 free tools, zero signup.
+          Download thumbnails, extract tags, generate AI titles, analyze stats — {toolCount} free
+          tools, zero signup.
         </motion.p>
 
         <motion.div

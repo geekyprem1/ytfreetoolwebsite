@@ -19,6 +19,10 @@ export interface YouTubeChannel {
   title: string;
   description: string;
   thumbnail: string;
+  /** Highest-resolution avatar URL available (may equal `thumbnail`). */
+  thumbnailHigh: string;
+  /** Channel banner (brandingSettings.image.bannerExternalUrl), or '' when none is set. */
+  bannerUrl: string;
   customUrl: string;
   publishedAt: string;
   country: string;
@@ -27,6 +31,20 @@ export interface YouTubeChannel {
   viewCount: number;
   madeForKids: boolean | null;
   uploadsPlaylistId?: string | null;
+}
+
+export interface YouTubePlaylistSummary {
+  id: string;
+  title: string;
+  channelTitle: string;
+  thumbnail: string;
+  videoCount: number;
+  /** Total runtime of all fetched videos, in seconds. */
+  totalSeconds: number;
+  /** Number of videos actually measured (private/deleted items are skipped). */
+  countedVideos: number;
+  /** True when the playlist was longer than the fetch cap and results are partial. */
+  truncated: boolean;
 }
 
 export interface YouTubeChannelVideo {
@@ -85,4 +103,62 @@ export interface ResolveResult {
   type: 'video' | 'channel';
   id: string;
   title?: string;
+}
+
+export interface LiveChannelCount {
+  id: string;
+  title: string;
+  thumbnail: string;
+  customUrl: string;
+  subscriberCount: number;
+  /** YouTube hides exact subs above 1000; this is the public (rounded) figure. */
+  hiddenSubscriberCount: boolean;
+  videoCount: number;
+  viewCount: number;
+  fetchedAt: number;
+}
+
+export interface LiveVideoCount {
+  id: string;
+  title: string;
+  thumbnail: string;
+  channelTitle: string;
+  viewCount: number;
+  likeCount: number;
+  commentCount: number;
+  fetchedAt: number;
+}
+
+export interface YouTubeComment {
+  id: string;
+  author: string;
+  authorChannelUrl: string;
+  text: string;
+  likeCount: number;
+  publishedAt: string;
+}
+
+export interface YouTubeCommentsResult {
+  videoId: string;
+  videoTitle: string;
+  totalFetched: number;
+  truncated: boolean;
+  comments: YouTubeComment[];
+}
+
+export interface TrendingVideo {
+  id: string;
+  title: string;
+  channelTitle: string;
+  thumbnail: string;
+  publishedAt: string;
+  viewCount: number;
+  likeCount: number;
+  duration: string;
+}
+
+export interface TrendingResult {
+  region: string;
+  category: string;
+  videos: TrendingVideo[];
 }

@@ -1,13 +1,12 @@
-import { tools } from '@/content/tools-metadata';
+import { tools, toolCount, calculatorCount } from '@/content/tools-metadata';
 
 const fallbackUrl = 'https://yttoolkit.com';
 
 export const site = {
   name: 'YT Toolkit',
   legalName: 'YouTube Toolkit AI',
-  tagline: '27 free YouTube creator tools. No login required.',
-  description:
-    '27 free YouTube creator tools. Download thumbnails, extract tags, generate AI titles & descriptions, extract transcripts & stats, plus 11 YouTube calculators (earnings, RPM, CPM, watch time). No login required.',
+  tagline: `${toolCount} free YouTube creator tools. No login required.`,
+  description: `${toolCount} free YouTube creator tools. Download thumbnails, extract tags, generate AI titles & descriptions, extract transcripts & stats, plus ${calculatorCount} YouTube calculators (earnings, RPM, CPM, watch time). No login required.`,
   keywords: [
     'YouTube creator tools',
     'free YouTube tools',

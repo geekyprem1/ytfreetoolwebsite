@@ -227,6 +227,104 @@ Categories can be: tutorial, lifehack, storytelling, challenge, reaction, behind
 Respond ONLY with the JSON object, no other text.`,
 });
 
+export const scriptGenerationPrompt = ({
+  topic,
+  targetLength,
+  tone,
+  audience,
+}: {
+  topic: string;
+  targetLength: string;
+  tone: string;
+  audience: string;
+}) => ({
+  systemInstruction: `${SYSTEM_ROLE} You write engaging, well-paced YouTube video scripts with a strong hook, clear structure, and a natural call-to-action. Write spoken-style prose, not stage directions. Plain text only.`,
+  prompt: `Write a YouTube video script.
+Topic: "${topic}"
+Target length: ${targetLength}
+Tone: ${tone}
+Target audience: ${audience}
+
+Structure the script into sections. The first section MUST be a strong 3-5 second hook. Include an intro, 2-5 body sections with clear headings, and a closing call-to-action.
+Write what the creator actually says (spoken lines), not camera directions. Keep it paced for the target length.
+PLAIN TEXT ONLY: no markdown symbols.
+
+Return as a valid JSON object with this EXACT shape:
+{
+  "title": "suggested video title",
+  "estimatedDuration": "e.g. 8 minutes",
+  "sections": [
+    { "heading": "Hook", "content": "spoken lines..." },
+    { "heading": "Intro", "content": "..." },
+    { "heading": "...", "content": "..." },
+    { "heading": "Call to Action", "content": "..." }
+  ]
+}
+Respond ONLY with the JSON object, no other text.`,
+});
+
+export const channelNamePrompt = ({
+  niche,
+  keywords,
+  style,
+  count,
+}: {
+  niche: string;
+  keywords: string;
+  style: string;
+  count: number;
+}) => ({
+  systemInstruction: `${SYSTEM_ROLE} You brainstorm memorable, brandable YouTube channel names. Names should be easy to say, spell, and remember, and should hint at the channel's niche without being generic.`,
+  prompt: `Generate ${count} YouTube channel name ideas.
+Niche: "${niche}"
+Keywords to consider: "${keywords}"
+Style: ${style}
+
+For each name provide a suggested @handle (lowercase, no spaces, letters/numbers/underscores only, 3-30 chars) and a one-line reason it works.
+Avoid names that are obviously trademarked brands.
+
+Return as a valid JSON object:
+{
+  "names": [
+    { "name": "Display Name", "handle": "suggestedhandle", "reason": "why it works" }
+  ]
+}
+Respond ONLY with the JSON object, no other text.`,
+});
+
+export const videoIdeasPrompt = ({
+  niche,
+  audience,
+  format,
+  count,
+}: {
+  niche: string;
+  audience: string;
+  format: string;
+  count: number;
+}) => ({
+  systemInstruction: `${SYSTEM_ROLE} You generate specific, searchable YouTube video ideas with clear angles that a creator can actually film.`,
+  prompt: `Generate ${count} YouTube video ideas.
+Niche: "${niche}"
+Target audience: ${audience}
+Preferred format: ${format}
+
+For each idea provide a suggested title, the search intent it satisfies ("informational", "how-to", "entertainment", "commercial"), a difficulty to rank ("easy", "medium", "hard"), and a one-line angle/description.
+
+Return as a valid JSON object:
+{
+  "ideas": [
+    {
+      "title": "suggested video title",
+      "intent": "how-to",
+      "difficulty": "medium",
+      "angle": "what makes this idea work"
+    }
+  ]
+}
+Respond ONLY with the JSON object, no other text.`,
+});
+
 export const transcriptSummaryPrompt = ({ transcript }: { transcript: string }) => ({
   systemInstruction: `${SYSTEM_ROLE} You create concise, well-structured summaries of video transcripts.`,
   prompt: `Summarize the following video transcript in 5-10 bullet points. Each bullet should capture a key point or takeaway.

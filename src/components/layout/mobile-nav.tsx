@@ -4,30 +4,14 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { tools } from '@/content/tools-metadata';
+import { tools, type ToolCategory } from '@/content/tools-metadata';
 import { Separator } from '@/components/ui/separator';
-import { Image, Tags, Hash, FileText, Sparkles, PenLine, BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, BadgeDollarSign, Calculator, TrendingUp, DollarSign, Heart, Eye, Smartphone, Radio, Calendar, Timer } from 'lucide-react';
+import { iconMap, FallbackToolIcon, categoryLabels } from '@/lib/utils/tool-icons';
 
 interface NavLink {
   href: string;
   label: string;
 }
-
-const categoryLabels: Record<string, string> = {
-  downloader: 'Downloaders',
-  extractor: 'Extractors',
-  'ai-generator': 'AI Generators',
-  analytics: 'Analytics',
-  seo: 'SEO Tools',
-  calculator: 'Calculators',
-};
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Image, Tags, Hash, FileText, Sparkles, PenLine,
-  BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, BadgeDollarSign,
-  Calculator, TrendingUp, DollarSign, Heart, Eye, Smartphone, Radio, Calendar, Timer,
-  HashIcon: Hash,
-};
 
 export function MobileNav({ links }: { links: NavLink[] }) {
   const [open, setOpen] = useState(false);
@@ -39,7 +23,7 @@ export function MobileNav({ links }: { links: NavLink[] }) {
       acc[cat]!.push(tool);
       return acc;
     },
-    {} as Record<string, typeof tools>,
+    {} as Record<ToolCategory, typeof tools>,
   );
 
   return (
@@ -85,13 +69,13 @@ export function MobileNav({ links }: { links: NavLink[] }) {
                 All Tools — {tools.length} free
               </p>
 
-              {Object.entries(categorized).map(([category, categoryTools]) => (
+              {(Object.entries(categorized) as [ToolCategory, typeof tools][]).map(([category, categoryTools]) => (
                 <div key={category} className="mt-3">
                   <p className="px-3 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     {categoryLabels[category] || category} · {categoryTools.length}
                   </p>
                   {categoryTools.map((tool) => {
-                    const Icon = iconMap[tool.icon] || Sparkles;
+                    const Icon = iconMap[tool.icon] ?? FallbackToolIcon;
                     return (
                       <Link
                         key={tool.slug}

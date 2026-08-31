@@ -39,6 +39,19 @@ export function isValidYouTubeUrl(url: string): boolean {
   return parseYouTubeUrl(url) !== null;
 }
 
+/** Extract a playlist ID from a URL or accept a bare playlist ID. */
+export function parseYouTubePlaylistId(input: string): string | null {
+  const trimmed = input.trim();
+
+  // Bare playlist ID (PL…, UU…, FL…, LL…, OL…, RD…).
+  if (/^(PL|UU|FL|LL|OL|RD)[a-zA-Z0-9_-]{10,}$/.test(trimmed)) {
+    return trimmed;
+  }
+
+  const match = trimmed.match(/[?&]list=([a-zA-Z0-9_-]+)/);
+  return match?.[1] ?? null;
+}
+
 /** Normalize channel URL, @handle, or channel ID to an API-ready identifier. */
 export function normalizeChannelInput(input: string): string | null {
   const parsed = parseYouTubeUrl(input.trim());

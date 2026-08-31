@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { ContentPageShell } from '@/components/layout/content-page-shell';
+import { toolCount, calculatorCount } from '@/content/tools-metadata';
 
 export const metadata: Metadata = {
   title: 'Changelog',
@@ -32,7 +33,10 @@ export default function ChangelogPage() {
 
       <h2>Earlier</h2>
       <ul>
-        <li>Launch of 27 free creator tools (thumbnails, tags, transcripts, AI, analytics, SEO, 11 calculators).</li>
+        <li>
+          Launch of {toolCount} free creator tools (thumbnails, tags, transcripts, AI, analytics,
+          SEO, {calculatorCount} calculators).
+        </li>
         <li>No-login workflow with URL paste across tools.</li>
       </ul>
     </ContentPageShell>

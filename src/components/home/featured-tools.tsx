@@ -3,15 +3,12 @@
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { ArrowRight, Sparkles, Image, FileText, Tags, Search, PenLine, BarChart3 } from 'lucide-react';
-import { tools } from '@/content/tools-metadata';
+import { ArrowRight } from 'lucide-react';
+import { iconMap, FallbackToolIcon } from '@/lib/utils/tool-icons';
+import { tools, toolCount } from '@/content/tools-metadata';
 
 const featuredSlugs = ['thumbnail-downloader', 'title-generator', 'transcript-extractor', 'tags-extractor', 'video-statistics', 'description-generator'];
 const featuredTools = featuredSlugs.map(s => tools.find(t => t.slug === s)).filter(Boolean);
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Image, FileText, Tags, Search, Sparkles, PenLine, BarChart3,
-};
 
 export function FeaturedTools() {
   const ref = useRef(null);
@@ -32,7 +29,7 @@ export function FeaturedTools() {
         <div ref={ref} className="divide-y divide-border/60 border-y border-border/60">
           {featuredTools.map((tool, i) => {
             if (!tool) return null;
-            const Icon = iconMap[tool.icon] || Sparkles;
+            const Icon = iconMap[tool.icon] ?? FallbackToolIcon;
             return (
               <motion.div
                 key={tool.slug}
@@ -67,7 +64,7 @@ export function FeaturedTools() {
             href="#tools"
             className="inline-flex items-center gap-2 text-base font-medium text-primary hover:underline underline-offset-4"
           >
-            View all 27 tools <ArrowRight className="size-4" />
+            View all {toolCount} tools <ArrowRight className="size-4" />
           </Link>
         </div>
       </div>

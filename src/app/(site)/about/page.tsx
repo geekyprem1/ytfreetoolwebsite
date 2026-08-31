@@ -2,10 +2,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ContentPageShell } from '@/components/layout/content-page-shell';
 import { site } from '@/content/site';
+import { toolCount } from '@/content/tools-metadata';
 
 export const metadata: Metadata = {
   title: 'About',
-  description: `Learn about ${site.legalName} — a free YouTube creator toolkit with 27 tools. No login required. Independent and not affiliated with YouTube.`,
+  description: `Learn about ${site.legalName} — a free YouTube creator toolkit with ${toolCount} tools. No login required. Independent and not affiliated with YouTube.`,
   alternates: { canonical: '/about' },
   openGraph: {
     title: `About ${site.legalName}`,

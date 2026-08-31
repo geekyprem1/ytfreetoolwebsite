@@ -1,5 +1,5 @@
 import { site } from '@/content/site';
-import { tools } from '@/content/tools-metadata';
+import { tools, toolCount, calculatorCount } from '@/content/tools-metadata';
 
 export type FaqItem = { q: string; a: string };
 
@@ -50,7 +50,7 @@ export function homepageGraph(faqs: readonly FaqItem[]) {
       '@type': 'WebPage',
       '@id': `${site.url}/#webpage`,
       url: site.url,
-      name: 'Free YouTube Creator Tools - YT Toolkit | 27 Tools Including 11 Calculators',
+      name: `Free YouTube Creator Tools - YT Toolkit | ${toolCount} Tools Including ${calculatorCount} Calculators`,
       description: site.description,
       isPartOf: { '@id': `${site.url}/#website` },
       about: { '@id': `${site.url}/#webapp` },
@@ -109,6 +109,7 @@ export function toolPageGraph(opts: {
   description: string;
   slug: string;
   faqs?: readonly FaqItem[];
+  howToSteps?: { name: string; text: string }[];
 }) {
   const url = `${site.url}/${opts.slug}`;
   const nodes: Record<string, unknown>[] = [
@@ -183,5 +184,102 @@ export function toolPageGraph(opts: {
     });
   }
 
+  if (opts.howToSteps && opts.howToSteps.length > 0) {
+    nodes.push({
+      '@type': 'HowTo',
+      '@id': `${url}#howto`,
+      name: `How to use ${opts.name}`,
+      step: opts.howToSteps.map((step, i) => ({
+        '@type': 'HowToStep',
+        position: i + 1,
+        name: step.name,
+        text: step.text,
+      })),
+    });
+  }
+
   return graphJsonLd(nodes);
+}
+
+/** Breadcrumb node for content pages outside the /#tools group (data, glossary, vs, etc.). */
+export function breadcrumbNode(items: { name: string; path: string }[]) {
+  return {
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      item: `${site.url}${item.path}`,
+    })),
+  };
+}
+
+/** Dataset node for /data pages — the schema AI engines look for on statistics pages. */
+export function datasetNode(opts: {
+  name: string;
+  description: string;
+  path: string;
+  keywords?: string[];
+  dateModified?: string;
+}) {
+  return {
+    '@type': 'Dataset',
+    '@id': `${site.url}${opts.path}#dataset`,
+    name: opts.name,
+    description: opts.description,
+    url: `${site.url}${opts.path}`,
+    ...(opts.keywords ? { keywords: opts.keywords } : {}),
+    ...(opts.dateModified ? { dateModified: opts.dateModified } : {}),
+    isAccessibleForFree: true,
+    creator: { '@id': `${site.url}/#organization` },
+    license: `${site.url}/terms`,
+  };
+}
+
+/** DefinedTermSet + DefinedTerm nodes for the glossary. */
+export function definedTermNode(opts: {
+  term: string;
+  definition: string;
+  slug: string;
+}) {
+  return {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}/glossary/${opts.slug}#term`,
+    name: opts.term,
+    description: opts.definition,
+    inDefinedTermSet: `${site.url}/glossary#set`,
+    url: `${site.url}/glossary/${opts.slug}`,
+  };
+}
+
+export function definedTermSetNode(terms: { term: string; slug: string }[]) {
+  return {
+    '@type': 'DefinedTermSet',
+    '@id': `${site.url}/glossary#set`,
+    name: 'YouTube Creator Glossary',
+    url: `${site.url}/glossary`,
+    hasDefinedTerm: terms.map((t) => ({
+      '@type': 'DefinedTerm',
+      name: t.term,
+      url: `${site.url}/glossary/${t.slug}`,
+    })),
+  };
+}
+
+/** ItemList node for hub/index pages (data index, glossary index, programmatic sets). */
+export function itemListNode(opts: {
+  id: string;
+  items: { name: string; path: string }[];
+}) {
+  return {
+    '@type': 'ItemList',
+    '@id': `${site.url}${opts.id}`,
+    numberOfItems: opts.items.length,
+    itemListElement: opts.items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      url: `${site.url}${item.path}`,
+    })),
+  };
 }

@@ -1,11 +1,20 @@
+export type ToolCategory =
+  | 'downloader'
+  | 'extractor'
+  | 'ai-generator'
+  | 'analytics'
+  | 'seo'
+  | 'calculator';
+
 export interface ToolMetadata {
   slug: string;
   name: string;
   description: string;
   icon: string;
-  category: 'downloader' | 'extractor' | 'ai-generator' | 'analytics' | 'seo' | 'calculator';
+  category: ToolCategory;
   route: string;
-  phase: 1 | 2 | 3;
+  /** Release phase. See TOOL_PHASES in @/lib/utils/constants. */
+  phase: number;
 }
 
 export const tools: ToolMetadata[] = [
@@ -254,13 +263,175 @@ export const tools: ToolMetadata[] = [
     route: '/youtube-average-view-duration-calculator',
     phase: 2,
   },
+  {
+    slug: 'channel-id-finder',
+    name: 'Channel ID Finder',
+    description: 'Find any YouTube channel ID (UC…) from a URL, @handle, or custom URL.',
+    icon: 'Fingerprint',
+    category: 'extractor',
+    route: '/channel-id-finder',
+    phase: 4,
+  },
+  {
+    slug: 'youtube-profile-picture-downloader',
+    name: 'Profile Picture Downloader',
+    description: 'Download any YouTube channel profile picture (avatar) in full resolution.',
+    icon: 'UserCircle',
+    category: 'downloader',
+    route: '/youtube-profile-picture-downloader',
+    phase: 4,
+  },
+  {
+    slug: 'youtube-banner-downloader',
+    name: 'Banner Downloader',
+    description: 'Download any YouTube channel banner (channel art) in full resolution.',
+    icon: 'GalleryHorizontal',
+    category: 'downloader',
+    route: '/youtube-banner-downloader',
+    phase: 4,
+  },
+  {
+    slug: 'subtitle-downloader',
+    name: 'Subtitle Downloader',
+    description: 'Download YouTube subtitles as SRT, VTT, or plain TXT with timestamps.',
+    icon: 'Captions',
+    category: 'downloader',
+    route: '/subtitle-downloader',
+    phase: 4,
+  },
+  {
+    slug: 'playlist-length-calculator',
+    name: 'Playlist Length Calculator',
+    description: 'Total duration, video count, and watch time at 1.25x–2x for any playlist.',
+    icon: 'ListVideo',
+    category: 'calculator',
+    route: '/playlist-length-calculator',
+    phase: 4,
+  },
+  {
+    slug: 'youtube-embed-code-generator',
+    name: 'Embed Code Generator',
+    description: 'Generate responsive YouTube embed code with privacy and playback options.',
+    icon: 'Code2',
+    category: 'seo',
+    route: '/youtube-embed-code-generator',
+    phase: 4,
+  },
+  {
+    slug: 'youtube-timestamp-link-generator',
+    name: 'Timestamp Link Generator',
+    description: 'Create a YouTube link that starts playing at a specific time.',
+    icon: 'Clock',
+    category: 'seo',
+    route: '/youtube-timestamp-link-generator',
+    phase: 4,
+  },
+  {
+    slug: 'live-subscriber-count',
+    name: 'Live Subscriber Count',
+    description: 'Track any YouTube channel’s subscriber count in real time.',
+    icon: 'Radio',
+    category: 'analytics',
+    route: '/live-subscriber-count',
+    phase: 5,
+  },
+  {
+    slug: 'live-view-count',
+    name: 'Live View Count',
+    description: 'Track a YouTube video’s view count in real time.',
+    icon: 'Eye',
+    category: 'analytics',
+    route: '/live-view-count',
+    phase: 5,
+  },
+  {
+    slug: 'youtube-comment-picker',
+    name: 'Comment Picker',
+    description: 'Pick a random giveaway winner from a YouTube video’s comments.',
+    icon: 'Gift',
+    category: 'analytics',
+    route: '/youtube-comment-picker',
+    phase: 5,
+  },
+  {
+    slug: 'youtube-comment-exporter',
+    name: 'Comment Exporter',
+    description: 'Export a YouTube video’s comments to CSV or JSON.',
+    icon: 'MessageSquare',
+    category: 'extractor',
+    route: '/youtube-comment-exporter',
+    phase: 5,
+  },
+  {
+    slug: 'channel-comparison',
+    name: 'Channel Comparison',
+    description: 'Compare up to three YouTube channels side by side.',
+    icon: 'GitCompare',
+    category: 'analytics',
+    route: '/channel-comparison',
+    phase: 5,
+  },
+  {
+    slug: 'youtube-trending',
+    name: 'Trending Videos',
+    description: 'See today’s trending YouTube videos by country.',
+    icon: 'TrendingUp',
+    category: 'analytics',
+    route: '/youtube-trending',
+    phase: 5,
+  },
+  {
+    slug: 'youtube-video-summarizer',
+    name: 'Video Summarizer',
+    description: 'Summarize any YouTube video with AI — TL;DR and key takeaways.',
+    icon: 'ScrollText',
+    category: 'ai-generator',
+    route: '/youtube-video-summarizer',
+    phase: 5,
+  },
+  {
+    slug: 'youtube-script-generator',
+    name: 'Script Generator',
+    description: 'Generate a full YouTube video script with AI — hook, body, and CTA.',
+    icon: 'FileEdit',
+    category: 'ai-generator',
+    route: '/youtube-script-generator',
+    phase: 5,
+  },
+  {
+    slug: 'youtube-channel-name-generator',
+    name: 'Channel Name Generator',
+    description: 'Generate channel name ideas with AI and check @handle availability.',
+    icon: 'Signature',
+    category: 'ai-generator',
+    route: '/youtube-channel-name-generator',
+    phase: 5,
+  },
+  {
+    slug: 'youtube-video-ideas-generator',
+    name: 'Video Ideas Generator',
+    description: 'Generate searchable YouTube video ideas with titles and intent.',
+    icon: 'Lightbulb',
+    category: 'ai-generator',
+    route: '/youtube-video-ideas-generator',
+    phase: 5,
+  },
+  {
+    slug: 'thumbnail-preview-tester',
+    name: 'Thumbnail Preview Tester',
+    description: 'Preview a thumbnail in real YouTube layouts and A/B compare two.',
+    icon: 'ImagePlay',
+    category: 'seo',
+    route: '/thumbnail-preview-tester',
+    phase: 5,
+  },
 ];
 
 export function getToolBySlug(slug: string): ToolMetadata | undefined {
   return tools.find((t) => t.slug === slug);
 }
 
-export function getToolsByPhase(phase: 1 | 2 | 3): ToolMetadata[] {
+export function getToolsByPhase(phase: number): ToolMetadata[] {
   return tools.filter((t) => t.phase === phase);
 }
 
@@ -276,4 +447,16 @@ export function getRelatedTools(currentSlug: string, count = 4): ToolMetadata[] 
 
 export function getPopularTools(count = 8): ToolMetadata[] {
   return tools.slice(0, count);
+}
+
+/**
+ * Derived counts — never hardcode tool numbers in copy, metadata, or schema.
+ * Import these instead so every surface stays correct when a tool is added.
+ */
+export const toolCount = tools.length;
+
+export const calculatorCount = tools.filter((t) => t.category === 'calculator').length;
+
+export function getToolsByCategory(category: ToolCategory): ToolMetadata[] {
+  return tools.filter((t) => t.category === category);
 }

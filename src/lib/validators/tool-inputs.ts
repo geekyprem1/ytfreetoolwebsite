@@ -79,6 +79,27 @@ export const shortsIdeasSchema = z.object({
   count: z.number().int().min(5).max(50).default(50),
 });
 
+export const scriptGeneratorSchema = z.object({
+  topic: z.string().min(3).max(500),
+  targetLength: z.enum(['short', '5min', '8min', '15min', 'long']).default('8min'),
+  tone: z.enum(['casual', 'professional', 'energetic', 'educational', 'storytelling']).default('casual'),
+  audience: z.string().min(1).max(200).default('general'),
+});
+
+export const channelNameSchema = z.object({
+  niche: z.string().min(2).max(200),
+  keywords: z.string().max(200).default(''),
+  style: z.enum(['brandable', 'descriptive', 'fun', 'personal', 'one-word']).default('brandable'),
+  count: z.number().int().min(4).max(20).default(12),
+});
+
+export const videoIdeasSchema = z.object({
+  niche: z.string().min(2).max(200),
+  audience: z.string().min(1).max(200).default('general'),
+  format: z.enum(['any', 'long-form', 'shorts', 'tutorial', 'listicle']).default('any'),
+  count: z.number().int().min(5).max(40).default(20),
+});
+
 export const transcriptSummarySchema = z.object({
   transcript: z.string().min(20).max(20000),
 });

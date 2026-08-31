@@ -1,16 +1,8 @@
 import Link from 'next/link';
-import { tools } from '@/content/tools-metadata';
+import { tools, type ToolCategory } from '@/content/tools-metadata';
 import { site } from '@/content/site';
+import { categoryLabels } from '@/lib/utils/tool-icons';
 import { Play } from 'lucide-react';
-
-const categoryLabels: Record<string, string> = {
-  downloader: 'Downloaders',
-  extractor: 'Extractors',
-  'ai-generator': 'AI Generators',
-  analytics: 'Analytics',
-  seo: 'SEO Tools',
-  calculator: 'Calculators',
-};
 
 const company = [
   { href: '/', label: 'Home' },
@@ -37,7 +29,7 @@ export function Footer() {
       acc[tool.category]!.push(tool);
       return acc;
     },
-    {} as Record<string, typeof tools>,
+    {} as Record<ToolCategory, typeof tools>,
   );
 
   return (
@@ -62,7 +54,7 @@ export function Footer() {
           </div>
 
           <div className="md:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {Object.entries(categorized).map(([category, categoryTools]) => (
+            {(Object.entries(categorized) as [ToolCategory, typeof tools][]).map(([category, categoryTools]) => (
               <div key={category}>
                 <h3 className="text-caption font-semibold text-muted-foreground uppercase tracking-[0.08em] mb-4">
                   {categoryLabels[category] || category}

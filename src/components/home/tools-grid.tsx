@@ -3,42 +3,14 @@
 import { useRef } from 'react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
-import { tools, type ToolMetadata } from '@/content/tools-metadata';
-import {
-  Image, Tags, Hash, FileText, Sparkles, PenLine,
-  BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, ArrowRight, BadgeDollarSign,
-  Calculator, TrendingUp, DollarSign, Heart, Eye, Smartphone, Radio, Calendar, Timer,
-} from 'lucide-react';
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Image, Tags, Hash, FileText, Sparkles, PenLine,
-  BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, BadgeDollarSign,
-  Calculator, TrendingUp, DollarSign, Heart, Eye, Smartphone, Radio, Calendar, Timer,
-  HashIcon: Hash,
-};
-
-const categoryLabels: Record<string, string> = {
-  downloader: 'Downloaders',
-  extractor: 'Extractors',
-  'ai-generator': 'AI Generators',
-  analytics: 'Analytics',
-  seo: 'SEO Tools',
-  calculator: 'YouTube Calculators',
-};
-
-const categoryDesc: Record<string, string> = {
-  downloader: 'Download YouTube assets in any resolution',
-  extractor: 'Pull tags, transcripts, and channel keywords',
-  'ai-generator': 'AI-powered titles, descriptions, hooks, and more',
-  analytics: 'Detailed video and channel analytics',
-  seo: 'Optimize your content for YouTube search',
-  calculator: 'Estimate earnings, RPM, CPM, watch time and growth — instant',
-};
+import { tools, toolCount, type ToolCategory, type ToolMetadata } from '@/content/tools-metadata';
+import { iconMap, FallbackToolIcon, categoryLabelsLong, categoryDesc } from '@/lib/utils/tool-icons';
+import { ArrowRight } from 'lucide-react';
 
 function ToolRow({ tool, index }: { tool: ToolMetadata; index: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-20px' });
-  const Icon = iconMap[tool.icon] || Sparkles;
+  const Icon = iconMap[tool.icon] ?? FallbackToolIcon;
 
   return (
     <motion.div
@@ -71,17 +43,17 @@ export function ToolsGrid() {
       acc[cat]!.push(tool);
       return acc;
     },
-    {} as Record<string, ToolMetadata[]>,
+    {} as Record<ToolCategory, ToolMetadata[]>,
   );
 
-  const categories = Object.entries(categorized);
+  const categories = Object.entries(categorized) as [ToolCategory, ToolMetadata[]][];
 
   return (
     <section id="tools" className="section-pad border-t hairline bg-secondary/30">
       <div className="max-w-7xl mx-auto">
         <div className="mb-14 md:mb-16 max-w-xl">
           <h2 className="text-display text-heading-lg mb-3">
-            All 27 tools, free forever
+            All {toolCount} tools, free forever
           </h2>
           <p className="text-lead">
             Everything a YouTube creator needs — thumbs, tags, AI, analytics, SEO and calculators — in one place.
@@ -93,7 +65,7 @@ export function ToolsGrid() {
             <div key={category}>
               <div className="mb-4 pb-3 border-b border-border/60">
                 <h3 className="text-display text-xl font-semibold tracking-tight">
-                  {categoryLabels[category] || category}
+                  {categoryLabelsLong[category] || category}
                 </h3>
                 <p className="text-sm text-muted-foreground mt-1">
                   {categoryDesc[category]} · {categoryTools.length} tool{categoryTools.length > 1 ? 's' : ''}

@@ -1,16 +1,7 @@
 import Link from 'next/link';
 import { getRelatedTools } from '@/content/tools-metadata';
-import {
-  Image, Tags, Hash, FileText, Sparkles, PenLine, BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, ArrowRight, BadgeDollarSign,
-  Calculator, TrendingUp, DollarSign, Heart, Eye, Smartphone, Radio, Calendar, Timer,
-} from 'lucide-react';
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Image, Tags, Hash, FileText, Sparkles, PenLine,
-  BarChart3, Users, Search, Zap, Clock, Lightbulb, Target, GitCompare, BadgeDollarSign,
-  Calculator, TrendingUp, DollarSign, Heart, Eye, Smartphone, Radio, Calendar, Timer,
-  HashIcon: Hash,
-};
+import { iconMap, FallbackToolIcon } from '@/lib/utils/tool-icons';
+import { ArrowRight } from 'lucide-react';
 
 export function RelatedTools({ currentSlug }: { currentSlug: string }) {
   const related = getRelatedTools(currentSlug);
@@ -28,7 +19,7 @@ export function RelatedTools({ currentSlug }: { currentSlug: string }) {
       </div>
       <ul className="divide-y divide-border/60">
         {related.map((tool) => {
-          const Icon = iconMap[tool.icon] || Sparkles;
+          const Icon = iconMap[tool.icon] ?? FallbackToolIcon;
           return (
             <li key={tool.slug}>
               <Link

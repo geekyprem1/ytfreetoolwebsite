@@ -5,7 +5,10 @@ import { ToastProvider } from '@/contexts/toast-provider';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { ClientProviders } from '@/components/layout/client-providers';
 import { site } from '@/content/site';
+import { toolCount, calculatorCount } from '@/content/tools-metadata';
 import '@/styles/globals.css';
+
+const siteTitle = `Free YouTube Creator Tools - YT Toolkit | ${toolCount} Tools Including ${calculatorCount} Calculators`;
 
 const instrumentSans = Instrument_Sans({
   variable: '--font-instrument',
@@ -22,7 +25,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: 'Free YouTube Creator Tools - YT Toolkit | 27 Tools Including 11 Calculators',
+    default: siteTitle,
     template: '%s | YouTube Toolkit AI',
   },
   description: site.description,
@@ -31,12 +34,12 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: site.legalName,
-    title: 'Free YouTube Creator Tools - YT Toolkit | 27 Tools Including 11 Calculators',
+    title: siteTitle,
     description: site.description,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free YouTube Creator Tools - YT Toolkit | 27 Tools Including 11 Calculators',
+    title: siteTitle,
     description: site.description,
   },
 };
