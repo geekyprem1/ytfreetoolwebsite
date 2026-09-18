@@ -8,7 +8,7 @@ export const faqs: ToolFaq[] = [
   },
   {
     q: 'How many watch hours do I need for monetization?',
-    a: 'YouTube Partner Program requires 4,000 public watch hours in the last 12 months plus 1,000 subscribers (or 10M Shorts views in 90 days as alternative). Watch hours must be public — private, unlisted drafts and Shorts below the threshold don’t count the same way.',
+    a: 'Through 31 January 2027, full YouTube Partner Program entry requires 4,000 qualified long-form watch hours in the last 365 days plus 1,000 subscribers (or 10M qualified Shorts views in 90 days). For new applicants from 1 February 2027, the watch-hour and Shorts-view targets rise to 8,000 and 20M. Meeting a threshold does not guarantee approval.',
   },
   {
     q: 'Where do I find my watch hours?',
@@ -19,12 +19,12 @@ export const faqs: ToolFaq[] = [
     a: 'Depends on length: 40–50% retention is strong (e.g., 4 min AVD on a 10-min video). Under 30% signals hook or pacing problems. Use the Average View Duration Calculator to derive AVD from hours and views.',
   },
   {
-    q: 'How many views do I need for 4,000 hours?',
-    a: 'Views = 4,000 × 60 ÷ AVD. At 3.5 min AVD you need ~68,571 views; at 6 min AVD only 40,000 views. Longer AVD collapses the view requirement.',
+    q: 'How many views do I need for 4,000 or 8,000 hours?',
+    a: 'Views = target watch hours × 60 ÷ average view duration. At a 3.5-minute AVD, 4,000 hours needs about 68,571 views and 8,000 hours needs about 137,143. Longer average view duration reduces the view requirement.',
   },
   {
     q: 'Do Shorts watch hours count?',
-    a: 'Shorts views count toward 10M Shorts pathway, not the 4,000-hour long-form pathway. Studio separates them. The Watch Time Calculator here is for long-form watch hours.',
+    a: 'Shorts Feed watch time does not count toward the long-form watch-hour pathway. Through 31 January 2027, qualified Shorts views can satisfy the separate 10M-in-90-days pathway; the announced target for new applicants becomes 20M from 1 February 2027. This calculator is for long-form watch hours.',
   },
 ];
 
@@ -57,18 +57,18 @@ export function SeoContent() {
       <ol>
         <li><strong>Enter views</strong> — total for period or per video.</li>
         <li><strong>Enter AVD</strong> — average view duration in minutes + seconds (from Analytics → Engagement).</li>
-        <li><strong>Calculate</strong> — read hours, days continuous, YPP % and views needed for 4K hours.</li>
+        <li><strong>Calculate</strong> — read hours, days continuous, current YPP % and the upcoming target side by side.</li>
       </ol>
 
       <h2>Features</h2>
       <ul>
         <li>Minutes + seconds precision for accurate AVD</li>
-        <li>Hours → days and YPP 4,000-hour progress bar</li>
-        <li>Reverse math: views needed for 4K hours</li>
+        <li>Hours → days plus current 4,000-hour and upcoming 8,000-hour YPP progress</li>
+        <li>Reverse math: views needed for both watch-hour targets</li>
         <li>Zero login, instant recalculation</li>
       </ul>
 
-      <h2>How to reach 4,000 hours faster</h2>
+      <h2>How to reach your YPP watch-hour target faster</h2>
       <p>
         Lift AVD, not just publish more. Strengthen hooks with the{' '}
         <Link href="/hook-generator">Hook Generator</Link>, chapter with the{' '}
@@ -81,7 +81,7 @@ export function SeoContent() {
       <h2>Benchmarks</h2>
       <ul>
         <li><strong>New channel</strong> — 0–500 hours/month is normal; focus on AVD over volume.</li>
-        <li><strong>Approaching YPP</strong> — 300–500 hours/month closes 4K in 8–12 months with weekly uploads.</li>
+        <li><strong>Approaching YPP</strong> — 300–500 hours/month closes the current 4K target in roughly 8–12 months; new applicants should also plan against the 8K threshold effective 1 February 2027.</li>
         <li><strong>Post-YPP</strong> — track hours per video to forecast inventory for mid-rolls.</li>
       </ul>
 
@@ -90,7 +90,9 @@ export function SeoContent() {
         Derive AVD with the <Link href="/youtube-average-view-duration-calculator">Average View Duration Calculator</Link>,
         plan cadence with the <Link href="/youtube-upload-frequency-calculator">Upload Frequency Calculator</Link>,
         measure stickiness with the <Link href="/youtube-engagement-calculator">Engagement Calculator</Link>, and forecast
-        revenue from those hours via the <Link href="/youtube-money-calculator">Money Calculator</Link>.
+        revenue from those hours via the <Link href="/youtube-money-calculator">Money Calculator</Link>. For a
+        full subscriber, watch-hour and Shorts-view plan, use the{' '}
+        <Link href="/youtube-monetization-progress-calculator">Monetization Progress Calculator</Link>.
       </p>
     </>
   );

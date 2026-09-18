@@ -6,6 +6,12 @@ import { ToolOutput } from '@/components/tools/tool-output';
 import { RelatedTools } from '@/components/tools/related-tools';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import {
+  CURRENT_YPP_REQUIREMENTS,
+  YPP_2027_REQUIREMENTS,
+  formatYppEffectiveDate,
+  getYppWatchHoursProgress,
+} from '@/lib/youtube/ypp-requirements';
 
 export function YoutubeWatchTimeCalculatorClient() {
   const [views, setViews] = useState('50000');
@@ -20,8 +26,9 @@ export function YoutubeWatchTimeCalculatorClient() {
     const totalMinutes = v * (m + s / 60);
     const hours = totalMinutes / 60;
     const days = hours / 24;
-    const yppProgress = (hours / 4000) * 100;
-    return { totalMinutes, hours, days, yppProgress };
+    const currentYppProgress = getYppWatchHoursProgress(hours, CURRENT_YPP_REQUIREMENTS);
+    const upcomingYppProgress = getYppWatchHoursProgress(hours, YPP_2027_REQUIREMENTS);
+    return { totalMinutes, hours, days, currentYppProgress, upcomingYppProgress };
   }, [views, avgMinutes, avgSeconds]);
 
   const isValid = parseFloat(views) > 0 && (parseFloat(avgMinutes) > 0 || parseFloat(avgSeconds) > 0);
@@ -54,20 +61,43 @@ export function YoutubeWatchTimeCalculatorClient() {
                 {Math.round(result.totalMinutes).toLocaleString()} minutes • {result.days.toFixed(2)} days continuous
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-3 text-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-center">
               <div className="rounded-lg border p-3">
-                <p className="text-xs text-muted-foreground">YPP 4,000h progress</p>
-                <p className="font-semibold">{result.yppProgress.toFixed(1)}%</p>
+                <p className="text-xs text-muted-foreground">
+                  Current YPP {CURRENT_YPP_REQUIREMENTS.fullProgram.qualifiedWatchHours.toLocaleString()}h progress
+                </p>
+                <p className="font-semibold">{result.currentYppProgress.toFixed(1)}%</p>
                 <div className="w-full h-2 bg-muted rounded-full overflow-hidden mt-1">
-                  <div className="h-full bg-primary" style={{ width: `${Math.min(result.yppProgress, 100)}%` }} />
+                  <div className="h-full bg-primary" style={{ width: `${Math.min(result.currentYppProgress, 100)}%` }} />
                 </div>
               </div>
               <div className="rounded-lg border p-3">
-                <p className="text-xs text-muted-foreground">Views needed for 4K hrs</p>
-                <p className="font-semibold">{(() => { const avd = (parseFloat(avgMinutes) || 0) + (parseFloat(avgSeconds) || 0)/60; return avd>0 ? Math.ceil((4000*60)/avd).toLocaleString() : '-'; })()}</p>
+                <p className="text-xs text-muted-foreground">
+                  {YPP_2027_REQUIREMENTS.fullProgram.qualifiedWatchHours.toLocaleString()}h progress from {formatYppEffectiveDate()}
+                </p>
+                <p className="font-semibold">{result.upcomingYppProgress.toFixed(1)}%</p>
+                <div className="w-full h-2 bg-muted rounded-full overflow-hidden mt-1">
+                  <div className="h-full bg-primary/60" style={{ width: `${Math.min(result.upcomingYppProgress, 100)}%` }} />
+                </div>
               </div>
             </div>
-            <p className="text-xs text-muted-foreground">Watch Hours = Views × AVD. YouTube Partner Program requires 4,000 public watch hours in 12 months.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-center">
+              <div className="rounded-lg border p-3">
+                <p className="text-xs text-muted-foreground">
+                  Views needed for {CURRENT_YPP_REQUIREMENTS.fullProgram.qualifiedWatchHours.toLocaleString()}h
+                </p>
+                <p className="font-semibold">{(() => { const avd = (parseFloat(avgMinutes) || 0) + (parseFloat(avgSeconds) || 0) / 60; return avd > 0 ? Math.ceil((CURRENT_YPP_REQUIREMENTS.fullProgram.qualifiedWatchHours * 60) / avd).toLocaleString() : '-'; })()}</p>
+              </div>
+              <div className="rounded-lg border p-3">
+                <p className="text-xs text-muted-foreground">
+                  Views needed for {YPP_2027_REQUIREMENTS.fullProgram.qualifiedWatchHours.toLocaleString()}h
+                </p>
+                <p className="font-semibold">{(() => { const avd = (parseFloat(avgMinutes) || 0) + (parseFloat(avgSeconds) || 0) / 60; return avd > 0 ? Math.ceil((YPP_2027_REQUIREMENTS.fullProgram.qualifiedWatchHours * 60) / avd).toLocaleString() : '-'; })()}</p>
+              </div>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Watch Hours = Views × AVD. Through 31 January 2027, full YPP entry requires {CURRENT_YPP_REQUIREMENTS.fullProgram.qualifiedWatchHours.toLocaleString()} qualified watch hours or {CURRENT_YPP_REQUIREMENTS.fullProgram.qualifiedShortsViews.toLocaleString()} qualified Shorts views, plus {CURRENT_YPP_REQUIREMENTS.fullProgram.subscribers.toLocaleString()} subscribers. New applicants face the {YPP_2027_REQUIREMENTS.fullProgram.qualifiedWatchHours.toLocaleString()}h / {YPP_2027_REQUIREMENTS.fullProgram.qualifiedShortsViews.toLocaleString()}-view thresholds from {formatYppEffectiveDate()}.
+            </p>
           </div>
         </ToolOutput>
       )}

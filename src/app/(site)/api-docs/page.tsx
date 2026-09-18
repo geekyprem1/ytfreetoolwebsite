@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ContentPageShell } from '@/components/layout/content-page-shell';
+import { site } from '@/content/site';
 
 export const metadata: Metadata = {
   title: 'API Docs',
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default function ApiDocsPage() {
+  const apiBaseUrl = `${site.url}/api`;
+
   return (
     <ContentPageShell
       breadcrumbLabel="API Docs"
@@ -38,7 +41,7 @@ export default function ApiDocsPage() {
 
       <h2>Base URL and response shape</h2>
       <p>
-        All endpoints are under <code>https://yttoolkit.com/api</code> and respond with JSON in a
+        All endpoints are under <code>{apiBaseUrl}</code> and respond with JSON in a
         consistent envelope:
       </p>
       <pre>{`// success
@@ -59,24 +62,24 @@ export default function ApiDocsPage() {
 
       <h3>GET /api/youtube/thumbnail</h3>
       <p>Returns thumbnail URLs in every available quality for a video.</p>
-      <pre>{`curl "https://yttoolkit.com/api/youtube/thumbnail?v=VIDEO_ID"`}</pre>
+      <pre>{`curl "${apiBaseUrl}/youtube/thumbnail?v=VIDEO_ID"`}</pre>
 
       <h3>GET /api/youtube/video-stats</h3>
       <p>Public statistics for a video: views, likes, comments, duration, publish date.</p>
-      <pre>{`curl "https://yttoolkit.com/api/youtube/video-stats?v=VIDEO_ID"`}</pre>
+      <pre>{`curl "${apiBaseUrl}/youtube/video-stats?v=VIDEO_ID"`}</pre>
 
       <h3>GET /api/youtube/channel-stats</h3>
       <p>Public channel statistics: subscribers, total views, video count, recent uploads.</p>
-      <pre>{`curl "https://yttoolkit.com/api/youtube/channel-stats?c=UC_CHANNEL_ID"`}</pre>
+      <pre>{`curl "${apiBaseUrl}/youtube/channel-stats?c=UC_CHANNEL_ID"`}</pre>
 
       <h3>GET /api/youtube/playlist</h3>
       <p>Total duration, video count, and average length for a playlist.</p>
-      <pre>{`curl "https://yttoolkit.com/api/youtube/playlist?list=PLAYLIST_ID"`}</pre>
+      <pre>{`curl "${apiBaseUrl}/youtube/playlist?list=PLAYLIST_ID"`}</pre>
 
       <h2>Examples</h2>
       <h3>JavaScript (fetch)</h3>
       <pre>{`const res = await fetch(
-  "https://yttoolkit.com/api/youtube/video-stats?v=VIDEO_ID"
+  "${apiBaseUrl}/youtube/video-stats?v=VIDEO_ID"
 );
 const json = await res.json();
 if (json.success) console.log(json.data);`}</pre>
@@ -85,7 +88,7 @@ if (json.success) console.log(json.data);`}</pre>
       <pre>{`import requests
 
 r = requests.get(
-    "https://yttoolkit.com/api/youtube/video-stats",
+    "${apiBaseUrl}/youtube/video-stats",
     params={"v": "VIDEO_ID"},
 )
 data = r.json()

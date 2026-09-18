@@ -1,6 +1,7 @@
 import { tools, toolCount, calculatorCount } from '@/content/tools-metadata';
 
-const fallbackUrl = 'https://yttoolkit.com';
+/** Canonical production origin. Keep Vercel's production env in sync with this value. */
+const fallbackUrl = 'https://yttools.pro';
 
 export const site = {
   name: 'YT Toolkit',

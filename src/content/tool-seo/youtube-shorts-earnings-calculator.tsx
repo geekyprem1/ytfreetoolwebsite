@@ -85,7 +85,8 @@ export function SeoContent() {
         Compare to long-form with the <Link href="/youtube-views-to-money-calculator">Views to Money Calculator</Link> and{' '}
         <Link href="/youtube-money-calculator">Money Calculator</Link>, audit cadence with the{' '}
         <Link href="/youtube-upload-frequency-calculator">Upload Frequency Calculator</Link>, and grow intent traffic via the{' '}
-        <Link href="/keyword-generator">Keyword Generator</Link>.
+        <Link href="/keyword-generator">Keyword Generator</Link>. To track qualified Shorts views against YPP
+        entry targets, use the <Link href="/youtube-monetization-progress-calculator">Monetization Progress Calculator</Link>.
       </p>
     </>
   );

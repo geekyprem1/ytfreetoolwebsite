@@ -92,7 +92,9 @@ export function SeoContent() {
         Cross-check with <Link href="/channel-statistics">Channel Statistics</Link> and{' '}
         <Link href="/video-statistics">Video Statistics</Link>, plan cadence with the{' '}
         <Link href="/youtube-upload-frequency-calculator">Upload Frequency Calculator</Link>, and model revenue per new subscriber via the{' '}
-        <Link href="/youtube-money-calculator">Money Calculator</Link>.
+        <Link href="/youtube-money-calculator">Money Calculator</Link>. To combine subscriber growth with
+        qualified watch hours and Shorts views, use the{' '}
+        <Link href="/youtube-monetization-progress-calculator">Monetization Progress Calculator</Link>.
       </p>
     </>
   );

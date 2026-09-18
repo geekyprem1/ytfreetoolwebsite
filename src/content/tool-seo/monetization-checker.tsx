@@ -52,6 +52,12 @@ export function SeoContent() {
         signals (subscriber count, reach, activity, Made for Kids when exposed). It cannot see private Studio
         revenue, application status, or full watch-time - so treat every result as research, not confirmation.
       </p>
+      <p>
+        Checking another channel&apos;s public signals is different from planning your own eligibility. If you have
+        access to your private Studio totals, use the{' '}
+        <Link href="/youtube-monetization-progress-calculator">Monetization Progress Calculator</Link> to compare
+        qualified subscribers, watch hours and Shorts views against the current and announced 2027 thresholds.
+      </p>
 
       <h2>How to check estimated monetization status</h2>
       <ol>
@@ -133,7 +139,9 @@ export function SeoContent() {
       <p>
         Explore public scale with <Link href="/channel-statistics">YouTube Channel Statistics</Link>, dig into
         uploads with <Link href="/video-statistics">Video Statistics</Link>, or research topics with{' '}
-        <Link href="/channel-tags">Channel Tags</Link>.
+        <Link href="/channel-tags">Channel Tags</Link>. Use the{' '}
+        <Link href="/youtube-monetization-progress-calculator">Monetization Progress Calculator</Link> for your
+        own private eligibility planning.
       </p>
     </>
   );

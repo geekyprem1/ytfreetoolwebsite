@@ -5,6 +5,7 @@ import { ContentPageShell } from '@/components/layout/content-page-shell';
 import { JsonLd } from '@/components/seo/json-ld';
 import { graphJsonLd, breadcrumbNode } from '@/lib/seo/schema-graph';
 import { comparisons, getComparisonBySlug } from '@/content/comparisons';
+import { site } from '@/content/site';
 
 export function generateStaticParams() {
   return comparisons.map((c) => ({ slug: c.slug }));
@@ -42,7 +43,7 @@ export default async function ComparisonPage({ params }: PageProps) {
           ]),
           {
             '@type': 'FAQPage',
-            '@id': `https://yttoolkit.com/vs/${c.slug}#faq`,
+            '@id': `${site.url}/vs/${c.slug}#faq`,
             mainEntity: c.faqs.map((f) => ({
               '@type': 'Question',
               name: f.q,

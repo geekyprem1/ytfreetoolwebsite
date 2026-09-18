@@ -425,6 +425,15 @@ export const tools: ToolMetadata[] = [
     route: '/thumbnail-preview-tester',
     phase: 5,
   },
+  {
+    slug: 'youtube-monetization-progress-calculator',
+    name: 'Monetization Progress Calculator',
+    description: 'Track current and 2027 YouTube Partner Program progress with a clear daily plan.',
+    icon: 'Target',
+    category: 'calculator',
+    route: '/youtube-monetization-progress-calculator',
+    phase: 6,
+  },
 ];
 
 export function getToolBySlug(slug: string): ToolMetadata | undefined {
