@@ -1,4 +1,20 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# YT Toolkit
+
+[YT Toolkit](https://www.yttools.pro) is a free YouTube creator toolkit with extractors, AI generators, SEO helpers,
+analytics, download utilities, and earnings calculators. The live site works without a login or browser extension.
+
+## What is included
+
+- YouTube transcript, caption, tags, thumbnail, channel-keyword, and metadata extractors
+- AI title, description, hashtag, keyword, hook, script, Shorts-ideas, and timestamp generators
+- Channel/video statistics, monetization estimates, live counters, and SEO analysis tools
+- RPM, CPM, watch-time, engagement, subscriber-growth, and other creator calculators
+
+Visit the production site at **https://www.yttools.pro**.
+
+## Local development
+
+This is a [Next.js](https://nextjs.org) project. Install dependencies and start the development server:
 
 ## Getting Started
 
