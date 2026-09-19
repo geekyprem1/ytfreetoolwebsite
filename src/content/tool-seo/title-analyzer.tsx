@@ -33,6 +33,10 @@ export function SeoContent() {
     <>
       <h2>What the YouTube Title Analyzer compares</h2>
       <p>
+        Use this as a YouTube SEO title checker or headline analyzer: compare one search-led option with one
+        browse-led option, then choose the version that is accurate, specific, and easy to understand.
+      </p>
+      <p>
         This free YouTube Title Analyzer compares two candidate headlines side by side with
         CTR-oriented guidance, SEO and emotion scores—not a live Studio A/B test. Prefer titles near
         40–60 characters, where about 21% higher CTR is common versus extremes.
