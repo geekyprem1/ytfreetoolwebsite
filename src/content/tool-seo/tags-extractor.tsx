@@ -33,6 +33,11 @@ export function SeoContent() {
     <>
       <h2>Key specs for YouTube Video SEO Tags extraction</h2>
       <p>
+        Use this free YouTube tag extractor when you need to copy tags from a YouTube video, download the list,
+        or compare public metadata without installing an extension. It is for research and organization; tags are
+        only one part of a video&apos;s overall search and recommendation signals.
+      </p>
+      <p>
         This free YouTube Video Tags Extractor shows the YouTube Video SEO Tags attached to any public video -
         keyword metadata for search and recommendations, not HTML markup tags or RFID tracking tags. Paste
         a URL into YouTube (YT) Toolkit to extract the full visible list in under 1.2 seconds, then copy or
