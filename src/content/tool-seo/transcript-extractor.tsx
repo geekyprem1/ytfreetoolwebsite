@@ -53,6 +53,11 @@ export function SeoContent() {
         </li>
       </ul>
       <p>
+        Use it as a free YouTube transcript extractor, transcript downloader, or online caption extractor
+        when you need the spoken text without a browser extension. It only retrieves captions that the
+        public video makes available; it does not create subtitles for a video with no caption track.
+      </p>
+      <p>
         Caption and localization concepts are covered in the{' '}
         <a
           href="https://developers.google.com/youtube/v3/docs/captions"
