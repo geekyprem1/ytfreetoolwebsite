@@ -38,6 +38,11 @@ export function SeoContent() {
         least 3 timestamps for chapters to activate.
       </p>
       <p>
+        Use it as a free YouTube timestamp generator, video timestamp generator, or timestamp maker for
+        YouTube when you need chapters quickly. The result is a draft: compare every time and title with
+        the final video before publishing.
+      </p>
+      <p>
         YouTube chapters are more than cosmetic. On eligible videos they add labeled markers on the progress bar,
         let viewers skip to the section they care about, and can surface key moments in search. For tutorials,
         podcasts, interviews, and any upload past roughly eight to ten minutes, chapters are one of the highest
