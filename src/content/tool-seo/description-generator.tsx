@@ -38,6 +38,11 @@ export function SeoContent() {
         roughly 150–350 words so the first lines stay scannable before Show more.
       </p>
       <p>
+        Use it as a free YouTube description generator or short description generator when you need a
+        structured first draft quickly. The output is a starting point: verify every link, claim, and
+        timestamp against the finished video before publishing.
+      </p>
+      <p>
         Descriptions rarely create a viral spike alone, but they clarify topical relevance, house
         chapters, and give returning viewers a scannable outline. The first lines also appear in
         search snippets and suggested expansions.
