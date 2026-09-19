@@ -17,10 +17,25 @@ export function organizationNode() {
     name: site.legalName,
     alternateName: site.name,
     url: site.url,
-    logo: `${site.url}/icon`,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${site.url}/logo`,
+      width: 512,
+      height: 512,
+    },
     description: site.description,
     email: site.supportEmail,
     ...(site.sameAs.length > 0 ? { sameAs: site.sameAs } : {}),
+  };
+}
+
+export function editorialPersonNode() {
+  return {
+    '@type': 'Person',
+    '@id': `${site.url}/about#person`,
+    name: 'YT Toolkit Editorial Team',
+    url: `${site.url}/about`,
+    worksFor: { '@id': `${site.url}/#organization` },
   };
 }
 
@@ -113,6 +128,19 @@ export function toolPageGraph(opts: {
 }) {
   const url = `${site.url}/${opts.slug}`;
   const nodes: Record<string, unknown>[] = [
+    {
+      '@type': 'WebPage',
+      '@id': `${url}#webpage`,
+      url,
+      name: opts.name,
+      description: opts.description,
+      isPartOf: { '@id': `${site.url}/#website` },
+      about: { '@id': `${url}#webapp` },
+      speakable: {
+        '@type': 'SpeakableSpecification',
+        cssSelector: ['.answer-first'],
+      },
+    },
     {
       '@type': 'WebApplication',
       '@id': `${url}#webapp`,

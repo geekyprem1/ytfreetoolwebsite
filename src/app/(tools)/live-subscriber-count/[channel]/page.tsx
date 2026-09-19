@@ -23,6 +23,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description,
     alternates: { canonical: `/live-subscriber-count/${channel}` },
     openGraph: { title, description },
+    robots: { index: false, follow: true },
   };
 }
 

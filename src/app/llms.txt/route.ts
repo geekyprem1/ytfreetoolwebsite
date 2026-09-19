@@ -16,7 +16,7 @@ const CATEGORY_ORDER: ToolCategory[] = [
 
 const STATIC_PAGES = [
   ['Home', '/'],
-  ['All tools', '/#tools'],
+  ['All tools', '/'],
   ['About', '/about'],
   ['Contact', '/contact'],
   ['Blog & guides', '/blog'],

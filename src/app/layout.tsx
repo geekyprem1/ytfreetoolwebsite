@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Instrument_Sans, Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/contexts/theme-provider';
 import { ToastProvider } from '@/contexts/toast-provider';
@@ -51,6 +51,14 @@ export const metadata: Metadata = {
     description: site.description,
     images: ['/opengraph-image'],
   },
+};
+
+export const viewport: Viewport = {
+  colorScheme: 'light dark',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#111111' },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

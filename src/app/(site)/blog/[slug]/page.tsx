@@ -51,7 +51,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       datePublished: post.publishedAt,
       dateModified: post.dateModified ?? post.publishedAt,
       image: [`${site.url}/opengraph-image`],
-      author: { '@type': 'Person', name: 'YT Toolkit Editorial Team', url: `${site.url}/about` },
+      author: { '@id': `${site.url}/about#person` },
       publisher: {
         '@type': 'Organization',
         '@id': `${site.url}/#organization`,

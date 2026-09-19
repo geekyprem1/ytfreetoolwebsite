@@ -3,13 +3,14 @@ import { tools } from '@/content/tools-metadata';
 import { blogPosts } from '@/content/blog/posts';
 import { site } from '@/content/site';
 import { geoPages } from '@/content/geo-pages';
+import { getToolLastModified } from '@/content/tool-last-modified';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const toolPages = tools.map((tool) => ({
     url: `${site.url}${tool.route}`,
     changeFrequency: 'monthly' as const,
     priority: 0.9,
-    ...(tool.lastModified ? { lastModified: tool.lastModified } : {}),
+    lastModified: getToolLastModified(tool.route),
   }));
 
   const geo: MetadataRoute.Sitemap = geoPages().map((p) => ({

@@ -335,8 +335,12 @@ Each article must answer the query directly, cite official YouTube documentation
 - [ ] Add category-specific OG images after the default works
 - [x] Wire `HowTo` steps into tool-page schema where the page genuinely contains a procedure
 - [x] Improve BlogPosting schema with image, author, organization, breadcrumb and `dateModified`
+- [x] Add a 512px Organization logo and explicit editorial Person entity
 - [x] Add `DataDownload` distribution schema to downloadable datasets
-- [ ] Add accurate `lastModified` dates to tool/GEO sitemap entries
+- [x] Add accurate `lastModified` dates to tool/GEO sitemap entries
+- [x] Add Speakable metadata to answer-first tool summaries
+- [x] Add viewport theme-color metadata for light/dark previews
+- [x] Keep unbounded live-counter child URLs `noindex, follow`
 - [x] Remove or dynamically update stale years in titles and datasets
 - [ ] Decide whether live counter child URLs should be `noindex, follow` or curated/indexable
 - [ ] Expand glossary only from real query evidence, not arbitrary page-count targets

@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { ContentPageShell } from '@/components/layout/content-page-shell';
 import { site } from '@/content/site';
 import { toolCount } from '@/content/tools-metadata';
+import { JsonLd } from '@/components/seo/json-ld';
+import { breadcrumbNode, editorialPersonNode, graphJsonLd, organizationNode } from '@/lib/seo/schema-graph';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -16,7 +18,15 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <ContentPageShell
+    <>
+      <JsonLd
+        data={graphJsonLd([
+          organizationNode(),
+          editorialPersonNode(),
+          breadcrumbNode([{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }]),
+        ])}
+      />
+      <ContentPageShell
       breadcrumbLabel="About"
       title="About YT Toolkit"
       description="A free toolkit built for YouTube creators — simple tools, no signup, no fluff."
@@ -82,6 +92,7 @@ export default function AboutPage() {
         Feedback and partnerships: <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a> ·{' '}
         <Link href="/contact">Contact form</Link> · <Link href="/docs">Documentation</Link>
       </p>
-    </ContentPageShell>
+      </ContentPageShell>
+    </>
   );
 }

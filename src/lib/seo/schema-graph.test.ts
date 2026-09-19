@@ -1,7 +1,21 @@
 import { describe, expect, it } from 'vitest';
-import { datasetNode, toolPageGraph } from './schema-graph';
+import { datasetNode, editorialPersonNode, organizationNode, toolPageGraph } from './schema-graph';
 
 describe('SEO schema graph helpers', () => {
+  it('uses a crawlable large logo and a linked editorial person entity', () => {
+    expect(organizationNode().logo).toEqual({
+      '@type': 'ImageObject',
+      url: 'https://yttools.pro/logo',
+      width: 512,
+      height: 512,
+    });
+    expect(editorialPersonNode()).toMatchObject({
+      '@type': 'Person',
+      '@id': 'https://yttools.pro/about#person',
+      worksFor: { '@id': 'https://yttools.pro/#organization' },
+    });
+  });
+
   it('exposes a real CSV DataDownload distribution for datasets', () => {
     const node = datasetNode({
       name: 'Example dataset',
@@ -28,6 +42,10 @@ describe('SEO schema graph helpers', () => {
     });
 
     expect(graph['@graph']).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        '@type': 'WebPage',
+        speakable: expect.objectContaining({ cssSelector: ['.answer-first'] }),
+      }),
       expect.objectContaining({
         '@type': 'HowTo',
         step: [expect.objectContaining({ '@type': 'HowToStep', position: 1 })],

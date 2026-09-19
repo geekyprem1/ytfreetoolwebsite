@@ -56,7 +56,7 @@ export default async function DatasetPage({ params }: PageProps) {
       />
 
       <aside
-        className="mb-4 rounded-xl border border-border/70 bg-muted/40 px-4 py-3 text-sm leading-relaxed not-prose"
+        className="answer-first mb-4 rounded-xl border border-border/70 bg-muted/40 px-4 py-3 text-sm leading-relaxed not-prose"
         aria-label="Answer-First Summary"
       >
         <p className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-1.5">

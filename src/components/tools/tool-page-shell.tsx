@@ -65,7 +65,7 @@ export function ToolPageShell({
         <h1 className="text-display text-heading-md mb-3 text-balance">{title}</h1>
         {answerFirst ? (
           <aside
-            className="mb-4 rounded-xl border border-border/70 bg-muted/40 px-4 py-3 text-sm leading-relaxed"
+            className="answer-first mb-4 rounded-xl border border-border/70 bg-muted/40 px-4 py-3 text-sm leading-relaxed"
             aria-label="Answer-First Summary"
           >
             <p className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-1.5">
