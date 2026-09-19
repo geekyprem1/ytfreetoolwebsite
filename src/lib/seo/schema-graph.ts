@@ -221,6 +221,7 @@ export function datasetNode(opts: {
   path: string;
   keywords?: string[];
   dateModified?: string;
+  downloadPath?: string;
 }) {
   return {
     '@type': 'Dataset',
@@ -230,6 +231,15 @@ export function datasetNode(opts: {
     url: `${site.url}${opts.path}`,
     ...(opts.keywords ? { keywords: opts.keywords } : {}),
     ...(opts.dateModified ? { dateModified: opts.dateModified } : {}),
+    ...(opts.downloadPath
+      ? {
+          distribution: {
+            '@type': 'DataDownload',
+            encodingFormat: 'text/csv',
+            contentUrl: `${site.url}${opts.downloadPath}`,
+          },
+        }
+      : {}),
     isAccessibleForFree: true,
     creator: { '@id': `${site.url}/#organization` },
     license: `${site.url}/terms`,

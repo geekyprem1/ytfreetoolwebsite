@@ -8,7 +8,7 @@ export const faqs: ToolFaq[] = [
   },
   {
     q: 'What CPM should I enter for an accurate estimate?',
-    a: 'Use your real CPM/RPM from YouTube Analytics → Revenue. If you are pre-monetization, start with $2–$4 for entertainment/gaming, $6–$12 for finance/tech/education, and $0.5–$2 for memes/kids. Search “YouTube CPM by niche 2025” for benchmarks.',
+    a: 'Use your real CPM/RPM from YouTube Analytics → Revenue. If you are pre-monetization, start with $2–$4 for entertainment/gaming, $6–$12 for finance/tech/education, and $0.5–$2 for memes/kids. Search “YouTube CPM by niche 2026” for benchmarks.',
   },
   {
     q: 'Why does the tool ask for monetized play rate?',
@@ -17,6 +17,10 @@ export const faqs: ToolFaq[] = [
   {
     q: 'Is this the same as YouTube Studio estimated revenue?',
     a: 'No. Studio shows exact attributed revenue after YouTube’s 45% cut and valid-play filters. This is a planning estimate before upload. Plug Studio RPM to forecast future videos.',
+  },
+  {
+    q: 'Can I calculate views needed for a target amount?',
+    a: 'Yes. Switch to reverse mode, enter a target such as $1,000, then provide CPM and monetized play rate. At a $4 CPM and 50% monetized rate, the simple model returns about 500,000 views. Actual revenue varies by audience, geography, season, ad inventory, and content type.',
   },
   {
     q: 'How many views do I need to earn $1,000?',
@@ -85,6 +89,11 @@ export function SeoContent() {
           audience is heavily mobile or Shorts-driven. Click Calculate.
         </li>
       </ol>
+      <p>
+        Reverse mode answers the planning question directly: enter a target amount such as $1,000 and the
+        calculator estimates the views needed from your CPM and monetized play rate. Treat it as scenario
+        math, not a promise of future income.
+      </p>
 
       <h2>CPM benchmarks by niche (planning defaults)</h2>
       <table>

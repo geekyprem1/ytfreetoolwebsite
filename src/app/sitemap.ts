@@ -9,12 +9,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${site.url}${tool.route}`,
     changeFrequency: 'monthly' as const,
     priority: 0.9,
+    ...(tool.lastModified ? { lastModified: tool.lastModified } : {}),
   }));
 
   const geo: MetadataRoute.Sitemap = geoPages().map((p) => ({
     url: `${site.url}${p.path}`,
     changeFrequency: p.changeFrequency,
     priority: p.priority,
+    ...(p.lastModified ? { lastModified: p.lastModified } : {}),
   }));
 
   const blogIndex = {

@@ -6,6 +6,7 @@ interface ToolPageSchemaProps {
   toolDescription: string;
   toolSlug: string;
   faqs?: FaqItem[];
+  howToSteps?: { name: string; text: string }[];
   children: React.ReactNode;
 }
 
@@ -14,6 +15,7 @@ export function ToolPageSchema({
   toolDescription,
   toolSlug,
   faqs = [],
+  howToSteps,
   children,
 }: ToolPageSchemaProps) {
   return (
@@ -24,6 +26,7 @@ export function ToolPageSchema({
           description: toolDescription,
           slug: toolSlug,
           faqs,
+          howToSteps,
         })}
       />
       {children}

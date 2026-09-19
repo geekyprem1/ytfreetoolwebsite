@@ -43,6 +43,16 @@ export const titleGeneratorSchema = z.object({
   count: z.number().int().min(1).max(20).default(10),
 });
 
+export const playlistGeneratorSchema = z.object({
+  topic: z.string().min(3, 'Topic must be at least 3 characters').max(500),
+  audience: z.string().min(2).max(200).default('general YouTube viewers'),
+  keyword: z.string().max(200).default(''),
+  videoThemes: z.string().max(3000).default(''),
+  tone: z.enum(['professional', 'casual', 'educational', 'enthusiastic', 'storytelling']).default('educational'),
+  language: z.string().min(2).max(10).default('en'),
+  count: z.number().int().min(3).max(10).default(5),
+});
+
 export const descriptionGeneratorSchema = z.object({
   topic: z.string().min(3).max(500),
   keyword: z.string().min(1).max(200),

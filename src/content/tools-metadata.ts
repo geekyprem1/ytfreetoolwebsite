@@ -15,6 +15,8 @@ export interface ToolMetadata {
   route: string;
   /** Release phase. See TOOL_PHASES in @/lib/utils/constants. */
   phase: number;
+  /** ISO date for the last meaningful content/tool update, used by the sitemap. */
+  lastModified?: string;
 }
 
 export const tools: ToolMetadata[] = [
@@ -71,6 +73,16 @@ export const tools: ToolMetadata[] = [
     category: 'ai-generator',
     route: '/description-generator',
     phase: 1,
+  },
+  {
+    slug: 'youtube-playlist-title-description-generator',
+    name: 'Playlist Title & Description Generator',
+    description: 'Generate YouTube playlist title and description pairs with transparent keyword coverage checks.',
+    icon: 'ListVideo',
+    category: 'ai-generator',
+    route: '/youtube-playlist-title-description-generator',
+    phase: 8,
+    lastModified: '2026-09-19',
   },
   {
     slug: 'hashtag-generator',
@@ -442,6 +454,7 @@ export const tools: ToolMetadata[] = [
     category: 'seo',
     route: '/youtube-shorts-eligibility-checker',
     phase: 6,
+    lastModified: '2026-09-18',
   },
   {
     slug: 'youtube-end-screen-planner',
@@ -451,6 +464,37 @@ export const tools: ToolMetadata[] = [
     category: 'seo',
     route: '/youtube-end-screen-planner',
     phase: 6,
+    lastModified: '2026-09-18',
+  },
+  {
+    slug: 'youtube-upload-time-calculator',
+    name: 'Upload Time Calculator',
+    description: 'Estimate YouTube upload time from file size, upload Mbps, and connection efficiency.',
+    icon: 'Clock',
+    category: 'calculator',
+    route: '/youtube-upload-time-calculator',
+    phase: 6,
+    lastModified: '2026-09-19',
+  },
+  {
+    slug: 'youtube-banner-safe-area-checker',
+    name: 'Banner Safe-Area Checker',
+    description: 'Preview channel art on TV, desktop, tablet, and mobile crops with the safe-area guide.',
+    icon: 'GalleryHorizontal',
+    category: 'seo',
+    route: '/youtube-banner-safe-area-checker',
+    phase: 6,
+    lastModified: '2026-09-19',
+  },
+  {
+    slug: 'youtube-chapter-validator',
+    name: 'Chapter Timestamp Validator',
+    description: 'Check YouTube chapter timestamps, spacing, order, titles, and copy a cleaned block.',
+    icon: 'FileText',
+    category: 'seo',
+    route: '/youtube-chapter-validator',
+    phase: 7,
+    lastModified: '2026-09-19',
   },
 ];
 

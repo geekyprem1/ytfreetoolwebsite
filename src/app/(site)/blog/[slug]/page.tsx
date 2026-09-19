@@ -5,6 +5,7 @@ import { ContentPageShell } from '@/components/layout/content-page-shell';
 import { blogPosts, getPostBySlug } from '@/content/blog/posts';
 import { JsonLd } from '@/components/seo/json-ld';
 import { site } from '@/content/site';
+import { graphJsonLd, breadcrumbNode } from '@/lib/seo/schema-graph';
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
@@ -22,12 +23,17 @@ export async function generateMetadata({
     title: { absolute: `${post.title} | yttools.pro` },
     description: post.description,
     alternates: { canonical: `/blog/${post.slug}` },
+    authors: [{ name: 'YT Toolkit Editorial Team', url: `${site.url}/about` }],
     openGraph: {
       title: post.title,
       description: post.description,
       type: 'article',
       publishedTime: post.publishedAt,
+      modifiedTime: post.dateModified ?? post.publishedAt,
+      authors: [`${site.url}/about`],
+      images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: post.title }],
     },
+    twitter: { card: 'summary_large_image', images: ['/opengraph-image'] },
   };
 }
 
@@ -36,17 +42,28 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
-  const articleSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: post.title,
-    description: post.description,
-    datePublished: post.publishedAt,
-    dateModified: post.publishedAt,
-    author: { '@type': 'Organization', name: site.legalName, url: site.url },
-    publisher: { '@type': 'Organization', name: site.legalName, url: site.url },
-    mainEntityOfPage: `${site.url}/blog/${post.slug}`,
-  };
+  const articleSchema = graphJsonLd([
+    {
+      '@type': 'BlogPosting',
+      '@id': `${site.url}/blog/${post.slug}#article`,
+      headline: post.title,
+      description: post.description,
+      datePublished: post.publishedAt,
+      dateModified: post.dateModified ?? post.publishedAt,
+      image: [`${site.url}/opengraph-image`],
+      author: { '@type': 'Person', name: 'YT Toolkit Editorial Team', url: `${site.url}/about` },
+      publisher: {
+        '@type': 'Organization',
+        '@id': `${site.url}/#organization`,
+        name: site.legalName,
+        url: site.url,
+        logo: { '@type': 'ImageObject', url: `${site.url}/icon` },
+      },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': `${site.url}/blog/${post.slug}` },
+      isPartOf: { '@id': `${site.url}/#website` },
+    },
+    { ...breadcrumbNode([{ name: 'Home', path: '/' }, { name: 'Blog', path: '/blog' }, { name: post.title, path: `/blog/${post.slug}` }]), '@id': `${site.url}/blog/${post.slug}#breadcrumb` },
+  ]);
 
   return (
     <>

@@ -76,6 +76,11 @@ export function SeoContent() {
 
       <h2>Designing thumbnails that work small</h2>
       <p>
+        The built-in readability checks count the words you plan to show, estimate contrast from the uploaded
+        image&apos;s average brightness, and remind you to test the result at a mobile size. They do not read baked-in
+        text from the image or pretend to predict click-through rate.
+      </p>
+      <p>
         Since most viewing happens on mobile, design for the smallest size first: big subject, minimal
         text (three or four words max), strong contrast, and a single focal point. Preview here, tweak,
         and only commit once it reads clearly in the mobile layout. The A/B view helps you choose between

@@ -6,11 +6,15 @@ import { ToolOutput } from '@/components/tools/tool-output';
 import { RelatedTools } from '@/components/tools/related-tools';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Select } from '@/components/ui/select';
+import { calculateViewsForTargetEarnings } from '@/lib/youtube/money-calculator';
 
 export function YoutubeMoneyCalculatorClient() {
   const [views, setViews] = useState('100000');
   const [cpm, setCpm] = useState('4');
   const [monetizedRate, setMonetizedRate] = useState('55');
+  const [mode, setMode] = useState<'earnings' | 'target'>('earnings');
+  const [targetEarnings, setTargetEarnings] = useState('1000');
   const [showResult, setShowResult] = useState(false);
 
   const result = useMemo(() => {
@@ -21,15 +25,23 @@ export function YoutubeMoneyCalculatorClient() {
     const earnings = (monetizedViews / 1000) * c;
     const low = earnings * 0.7;
     const high = earnings * 1.3;
-    return { monetizedViews, earnings, low, high };
-  }, [views, cpm, monetizedRate]);
+    const requiredViews = calculateViewsForTargetEarnings({ targetEarnings: parseFloat(targetEarnings) || 0, cpm: c, monetizedRate: m });
+    return { monetizedViews, earnings, low, high, requiredViews };
+  }, [views, cpm, monetizedRate, targetEarnings]);
 
-  const isValid = parseFloat(views) > 0 && parseFloat(cpm) > 0;
+  const isValid = parseFloat(cpm) > 0 && (mode === 'target' ? parseFloat(targetEarnings) > 0 : parseFloat(views) > 0);
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <ToolInput label="Total Views" required description="Total video / channel views">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <ToolInput label="Calculator mode">
+          <Select
+            value={mode}
+            onChange={(e) => setMode(e.target.value as 'earnings' | 'target')}
+            options={[{ value: 'earnings', label: 'Views → earnings' }, { value: 'target', label: 'Target earnings → views' }]}
+          />
+        </ToolInput>
+        <ToolInput label="Total Views" required={mode === 'earnings'} description={mode === 'target' ? 'Optional example view count' : 'Total video / channel views'}>
           <Input type="number" value={views} onChange={(e) => setViews(e.target.value)} placeholder="100000" min="0" />
         </ToolInput>
         <ToolInput label="CPM ($)" required description="Cost per 1000 monetized views">
@@ -38,17 +50,29 @@ export function YoutubeMoneyCalculatorClient() {
         <ToolInput label="Monetized Play Rate (%)" description="Typically 45-65% for long-form">
           <Input type="number" value={monetizedRate} onChange={(e) => setMonetizedRate(e.target.value)} placeholder="55" min="0" max="100" step="1" />
         </ToolInput>
+        {mode === 'target' && (
+          <ToolInput label="Target Earnings ($)" required description="How much revenue you want to model">
+            <Input type="number" value={targetEarnings} onChange={(e) => setTargetEarnings(e.target.value)} placeholder="1000" min="0" step="10" />
+          </ToolInput>
+        )}
       </div>
 
-      <Button onClick={() => setShowResult(true)} disabled={!isValid} className="w-full">
-        Calculate Earnings
+      <Button onClick={() => setShowResult(true)} disabled={!isValid || (mode === 'target' && parseFloat(targetEarnings) <= 0)} className="w-full">
+        {mode === 'target' ? 'Calculate Views Needed' : 'Calculate Earnings'}
       </Button>
 
       {showResult && isValid && (
-        <ToolOutput title="Estimated Earnings">
+        <ToolOutput title={mode === 'target' ? 'Views Needed for Target Earnings' : 'Estimated Earnings'}>
           <div className="space-y-4">
+            {mode === 'target' && (
+              <div className="rounded-xl border border-primary/30 bg-primary/5 p-6 text-center">
+                <p className="text-sm text-muted-foreground mb-1">Estimated views for ${parseFloat(targetEarnings).toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>
+                <p className="text-3xl font-bold tracking-tight">{result.requiredViews.toLocaleString()}</p>
+                <p className="text-xs text-muted-foreground mt-2">At ${parseFloat(cpm).toFixed(2)} CPM and {parseFloat(monetizedRate)}% monetized play rate</p>
+              </div>
+            )}
             <div className="rounded-xl border bg-muted/20 p-6 text-center">
-              <p className="text-sm text-muted-foreground mb-1">Estimated Revenue</p>
+              <p className="text-sm text-muted-foreground mb-1">{mode === 'target' ? 'Example revenue from entered views' : 'Estimated Revenue'}</p>
               <p className="text-3xl font-bold tracking-tight">${result.earnings.toLocaleString('en-US', { maximumFractionDigits: 2 })}</p>
               <p className="text-xs text-muted-foreground mt-2">
                 Range: ${result.low.toLocaleString('en-US', { maximumFractionDigits: 2 })} – ${result.high.toLocaleString('en-US', { maximumFractionDigits: 2 })} (±30% variance)

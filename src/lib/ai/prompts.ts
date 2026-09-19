@@ -79,6 +79,47 @@ Return as a valid JSON object with this EXACT shape:
 Respond ONLY with the JSON object, no other text.`,
 });
 
+export const playlistGenerationPrompt = ({
+  topic,
+  audience,
+  keyword,
+  videoThemes,
+  tone,
+  language,
+  count,
+}: {
+  topic: string;
+  audience: string;
+  keyword: string;
+  videoThemes: string;
+  tone: string;
+  language: string;
+  count: number;
+}) => ({
+  systemInstruction: `${SYSTEM_ROLE} You generate useful YouTube playlist names and descriptions. Be accurate and specific. Never invent search volume, ranking, CTR, or competition claims.`,
+  prompt: `Create ${count} distinct YouTube playlist title and description pairs.
+Playlist topic: "${topic}"
+Target audience: "${audience}"
+Target keyword (optional): "${keyword || 'none provided'}"
+Video themes or episode topics: "${videoThemes || 'infer sensible subtopics from the playlist topic'}"
+Tone: ${tone}
+Language: ${language}
+
+Requirements:
+- Titles should be clear, natural, and easy to scan; include the target keyword only when it fits naturally.
+- Descriptions should explain who the playlist is for, what viewers will learn or watch, and how the videos progress.
+- Write plain text descriptions with short paragraphs. Do not use markdown headings, hashtags, fake statistics, ranking promises, or search-volume claims.
+- Make every option meaningfully different in angle (beginner path, practical series, quick wins, deep dive, or checklist when appropriate).
+
+Return only this valid JSON object:
+{
+  "playlists": [
+    { "title": "...", "description": "..." }
+  ]
+}
+Respond ONLY with the JSON object, no other text.`,
+});
+
 export const hashtagGenerationPrompt = ({
   topic,
   count,

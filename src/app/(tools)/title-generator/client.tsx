@@ -94,7 +94,7 @@ export function TitleGeneratorClient() {
           <Textarea
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
-            placeholder="e.g., How to grow on YouTube in 2025"
+            placeholder="e.g., How to grow on YouTube in 2026"
             rows={3}
             disabled={isLoading}
           />

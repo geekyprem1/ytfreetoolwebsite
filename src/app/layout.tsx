@@ -36,11 +36,20 @@ export const metadata: Metadata = {
     siteName: site.legalName,
     title: siteTitle,
     description: site.description,
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'YT Toolkit - Free YouTube creator tools',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: siteTitle,
     description: site.description,
+    images: ['/opengraph-image'],
   },
 };
 

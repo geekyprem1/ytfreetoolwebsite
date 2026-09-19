@@ -45,6 +45,7 @@ export default async function DatasetPage({ params }: PageProps) {
             path: `/data/${dataset.slug}`,
             keywords: dataset.keywords,
             dateModified: dataset.lastUpdated,
+            downloadPath: `/api/data/${dataset.slug}`,
           }),
           breadcrumbNode([
             { name: 'Home', path: '/' },

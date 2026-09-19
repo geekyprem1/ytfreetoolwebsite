@@ -8,6 +8,7 @@ export interface GeoPage {
   path: string;
   changeFrequency: 'weekly' | 'monthly' | 'yearly';
   priority: number;
+  lastModified?: string;
 }
 
 import { datasets } from '@/content/data/datasets';
@@ -25,7 +26,7 @@ export function geoPages(): GeoPage[] {
     { path: '/best-time-to-post', changeFrequency: 'monthly', priority: 0.6 },
   ];
 
-  for (const d of datasets) pages.push({ path: `/data/${d.slug}`, changeFrequency: 'monthly', priority: 0.7 });
+  for (const d of datasets) pages.push({ path: `/data/${d.slug}`, changeFrequency: 'monthly', priority: 0.7, lastModified: d.lastUpdated });
   for (const c of comparisons) pages.push({ path: `/vs/${c.slug}`, changeFrequency: 'monthly', priority: 0.6 });
   for (const t of glossaryTerms) pages.push({ path: `/glossary/${t.slug}`, changeFrequency: 'yearly', priority: 0.4 });
   for (const n of tagNiches) pages.push({ path: `/tags-for/${n.slug}`, changeFrequency: 'monthly', priority: 0.5 });

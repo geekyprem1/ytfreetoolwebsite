@@ -213,21 +213,21 @@ Each article must answer the query directly, cite official YouTube documentation
 **Proposed route:** `/youtube-upload-time-calculator`  
 **Primary keyword:** `youtube video upload time calculator`
 
-- [ ] Inputs: file size, size unit, upload Mbps and connection-efficiency percentage
-- [ ] Reverse mode: calculate speed needed to finish by a target time
-- [ ] Show ideal transfer time and practical estimated range
-- [ ] Explain upload speed vs download speed
-- [ ] Add presets for 5, 10, 25, 50, 100 and 500 Mbps
-- [ ] Optional local-file picker to read size without uploading the file
-- [ ] Add unit tests for bits/bytes and unit conversion
+- [x] Inputs: file size, size unit, upload Mbps and connection-efficiency percentage
+- [x] Reverse mode: calculate speed needed to finish by a target time
+- [x] Show ideal transfer time and practical estimated range
+- [x] Explain upload speed vs download speed
+- [x] Add presets for 5, 10, 25, 50, 100 and 500 Mbps
+- [x] Optional local-file picker to read size without uploading the file
+- [x] Add unit tests for bits/bytes and unit conversion
 
 ### Target keywords
 
-- [ ] `youtube video upload time calculator`
-- [ ] `how long to upload 10gb video to youtube`
-- [ ] `youtube upload speed calculator for 4k video`
-- [ ] `how much upload speed needed for youtube`
-- [ ] `how long does a 4k video take to upload`
+- [x] `youtube video upload time calculator`
+- [x] `how long to upload 10gb video to youtube`
+- [x] `youtube upload speed calculator for 4k video`
+- [x] `how much upload speed needed for youtube`
+- [x] `how long does a 4k video take to upload`
 
 ---
 
@@ -236,20 +236,20 @@ Each article must answer the query directly, cite official YouTube documentation
 **Proposed route:** `/youtube-banner-safe-area-checker`  
 **Primary keyword:** `youtube banner safe area checker mobile desktop`
 
-- [ ] Upload a banner locally
-- [ ] Show TV, desktop, tablet and mobile crops side by side
-- [ ] Overlay the all-device safe area
-- [ ] Flag text/logo regions outside the safe area where possible
-- [ ] Export a guide image without permanently drawing guides over the user's source
-- [ ] Cross-link with Banner Downloader and Profile Picture Downloader
-- [ ] Verify current dimensions against official YouTube documentation before launch
+- [x] Upload a banner locally
+- [x] Show TV, desktop, tablet and mobile crops side by side
+- [x] Overlay the all-device safe area
+- [x] Flag text/logo regions outside the safe area where possible
+- [x] Export a guide image without permanently drawing guides over the user's source
+- [x] Cross-link with Banner Downloader and Profile Picture Downloader
+- [x] Verify current dimensions against official YouTube documentation before launch
 
 ### Target keywords
 
-- [ ] `youtube banner safe area checker mobile desktop`
-- [ ] `youtube channel art crop preview online`
-- [ ] `youtube banner safe zone template`
-- [ ] `preview youtube banner on all devices`
+- [x] `youtube banner safe area checker mobile desktop`
+- [x] `youtube channel art crop preview online`
+- [x] `youtube banner safe zone template`
+- [x] `preview youtube banner on all devices`
 
 ---
 
@@ -258,24 +258,24 @@ Each article must answer the query directly, cite official YouTube documentation
 **Proposed route:** `/youtube-chapter-validator`  
 **Primary keyword:** `youtube chapters not showing checker`
 
-- [ ] Paste timestamps or upload a TXT file
-- [ ] Parse `MM:SS` and `HH:MM:SS`
-- [ ] Check first timestamp starts at `00:00`
-- [ ] Require at least three timestamps
-- [ ] Check ascending order, duplicates, missing titles and malformed lines
-- [ ] Check minimum 10-second chapter length
-- [ ] Accept video length to validate the final chapter
-- [ ] Produce a cleaned, normalized chapter block
-- [ ] Copy and download corrected output
-- [ ] Cross-link with Timestamp Generator and Description Generator
-- [ ] Cite: https://support.google.com/youtube/answer/9884579?hl=en
+- [x] Paste timestamps or upload a TXT file
+- [x] Parse `MM:SS` and `HH:MM:SS`
+- [x] Check first timestamp starts at `00:00`
+- [x] Require at least three timestamps
+- [x] Check ascending order, duplicates, missing titles and malformed lines
+- [x] Check minimum 10-second chapter length
+- [x] Accept video length to validate the final chapter
+- [x] Produce a cleaned, normalized chapter block
+- [x] Copy and download corrected output
+- [x] Cross-link with Timestamp Generator and Description Generator
+- [x] Cite: https://support.google.com/youtube/answer/9884579?hl=en
 
 ### Target keywords
 
-- [ ] `youtube chapters not showing checker`
-- [ ] `youtube chapter timestamp validator`
-- [ ] `fix youtube chapters not working`
-- [ ] `check youtube timestamp format`
+- [x] `youtube chapters not showing checker`
+- [x] `youtube chapter timestamp validator`
+- [x] `fix youtube chapters not working`
+- [x] `check youtube timestamp format`
 
 ---
 
@@ -284,20 +284,20 @@ Each article must answer the query directly, cite official YouTube documentation
 **Proposed route:** `/youtube-playlist-title-description-generator`  
 **Primary keyword:** `youtube playlist title and description generator`
 
-- [ ] Inputs: topic, audience, target keyword, video themes, tone and language
-- [ ] Generate multiple title/description pairs
-- [ ] Show character count and exact keyword coverage
-- [ ] Avoid invented ranking, CTR or search-volume claims
-- [ ] Copy individual result, copy all and download TXT
-- [ ] Link to Playlist Length Calculator, Keyword Generator and Description Generator
-- [ ] Reuse the existing AI provider/error/rate-limit pattern
+- [x] Inputs: topic, audience, target keyword, video themes, tone and language
+- [x] Generate multiple title/description pairs
+- [x] Show character count and exact keyword coverage
+- [x] Avoid invented ranking, CTR or search-volume claims
+- [x] Copy individual result, copy all and download TXT
+- [x] Link to Playlist Length Calculator, Keyword Generator and Description Generator
+- [x] Reuse the existing AI provider/error/rate-limit pattern
 
 ### Target keywords
 
-- [ ] `youtube playlist title and description generator`
-- [ ] `youtube playlist description generator free`
-- [ ] `seo description for youtube playlist`
-- [ ] `youtube playlist name ideas generator`
+- [x] `youtube playlist title and description generator`
+- [x] `youtube playlist description generator free`
+- [x] `seo description for youtube playlist`
+- [x] `youtube playlist name ideas generator`
 
 ---
 
@@ -305,21 +305,21 @@ Each article must answer the query directly, cite official YouTube documentation
 
 ### Thumbnail Preview Tester
 
-- [ ] Add text/contrast/readability checks as a module inside the existing tester
+- [x] Add text/contrast/readability checks as a module inside the existing tester
 - [ ] Do not make a second generic thumbnail preview page
-- [ ] Add mobile-legibility and 1–4 word guidance without pretending to predict CTR
+- [x] Add mobile-legibility and 1–4 word guidance without pretending to predict CTR
 
 ### YouTube Money Calculator
 
-- [ ] Add reverse “views needed to earn target amount” mode
-- [ ] Target `how many youtube views to earn $1000` and country/niche examples in supporting content
+- [x] Add reverse “views needed to earn target amount” mode
+- [x] Target `how many youtube views to earn $1000` and country/niche examples in supporting content
 - [ ] Avoid a separate Revenue Goal Calculator unless Search Console proves distinct demand
 
 ### Watch Time Calculator
 
-- [ ] Add current/2027 target selector backed by shared YPP constants
-- [ ] Add remaining views and estimated completion date
-- [ ] Keep generic watch-time intent separate from the full Monetization Progress Calculator
+- [x] Add current/2027 target selector backed by shared YPP constants
+- [x] Add remaining views and estimated completion date
+- [x] Keep generic watch-time intent separate from the full Monetization Progress Calculator
 
 ### Tools to defer
 
@@ -331,16 +331,16 @@ Each article must answer the query directly, cite official YouTube documentation
 
 ## Phase 10 — Technical SEO and GEO cleanup
 
-- [ ] Add default OG/Twitter image inheritance for every route
+- [x] Add default OG/Twitter image inheritance for every route
 - [ ] Add category-specific OG images after the default works
-- [ ] Wire `HowTo` steps into tool-page schema where the page genuinely contains a procedure
-- [ ] Improve BlogPosting schema with image, author, organization, breadcrumb and `dateModified`
-- [ ] Add `DataDownload` distribution schema to downloadable datasets
+- [x] Wire `HowTo` steps into tool-page schema where the page genuinely contains a procedure
+- [x] Improve BlogPosting schema with image, author, organization, breadcrumb and `dateModified`
+- [x] Add `DataDownload` distribution schema to downloadable datasets
 - [ ] Add accurate `lastModified` dates to tool/GEO sitemap entries
-- [ ] Remove or dynamically update stale years in titles and datasets
+- [x] Remove or dynamically update stale years in titles and datasets
 - [ ] Decide whether live counter child URLs should be `noindex, follow` or curated/indexable
 - [ ] Expand glossary only from real query evidence, not arbitrary page-count targets
-- [ ] Keep AI crawlers allowed in `robots.txt`
+- [x] Keep AI crawlers allowed in `robots.txt`
 - [ ] Validate representative pages with Google Rich Results Test and Schema.org Validator
 
 ---

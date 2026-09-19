@@ -14,6 +14,7 @@ interface ToolPageShellProps {
   children: React.ReactNode;
   seo?: React.ReactNode;
   faqs?: ToolFaq[];
+  howToSteps?: { name: string; text: string }[];
 }
 
 export function ToolPageShell({
@@ -26,6 +27,7 @@ export function ToolPageShell({
   children,
   seo,
   faqs = [],
+  howToSteps,
 }: ToolPageShellProps) {
   return (
     <ToolPageSchema
@@ -33,6 +35,7 @@ export function ToolPageShell({
       toolDescription={toolDescription}
       toolSlug={toolSlug}
       faqs={faqs}
+      howToSteps={howToSteps}
     >
       <nav aria-label="Breadcrumb" className="mb-8">
         <ol className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
