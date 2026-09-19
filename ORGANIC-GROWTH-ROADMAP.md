@@ -102,7 +102,7 @@ Official sources:
 - [x] Clearly explain that numerical eligibility does not guarantee YPP approval
 - [x] Explain which watch hours/views do and do not qualify
 - [x] Keep all entered data local; no account or API call
-- [ ] Add share/copy summary without exposing user data in the URL by default
+- [x] Add share/copy summary without exposing user data in the URL by default
 
 ### Implementation files
 

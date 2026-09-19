@@ -6,6 +6,8 @@ import { Input } from '@/components/ui/input';
 import { RelatedTools } from '@/components/tools/related-tools';
 import { ToolInput } from '@/components/tools/tool-input';
 import { ToolOutput } from '@/components/tools/tool-output';
+import { OutputActions } from '@/components/tools/output-actions';
+import { site } from '@/content/site';
 import {
   calculateEligibilityProgress,
   calculateMonetizationForecast,
@@ -133,6 +135,25 @@ export function YoutubeMonetizationProgressCalculatorClient() {
 
   const hasForecastRates = input.monthlySubscriberGain > 0 && (input.monthlyQualifiedWatchHours > 0 || input.dailyQualifiedShortsViews > 0);
 
+  const shareSummary = useMemo(() => {
+    const currentRoute = result.current.qualifiesForFullProgram
+      ? 'threshold met'
+      : `subscribers remaining: ${formatNumber(result.current.subscribers.remaining)}; watch hours remaining: ${formatNumber(result.current.qualifiedWatchHours.remaining)}; Shorts views remaining: ${formatNumber(result.current.qualifiedShortsViews.remaining)}`;
+    const upcomingRoute = result.upcoming.qualifiesForFullProgram ? 'threshold met' : 'still in progress';
+
+    return [
+      'YouTube Monetization Progress',
+      `Subscribers: ${formatNumber(input.subscribers)}`,
+      `Qualified watch hours: ${formatNumber(input.qualifiedWatchHours)}`,
+      `Qualified Shorts views: ${formatNumber(input.qualifiedShortsViews)}`,
+      `Current YPP route: ${currentRoute}`,
+      `2027 YPP route: ${upcomingRoute}`,
+      `Current long-form completion estimate: ${formatDate(result.currentForecast.fullProgramViaLongForm) ?? 'not enough pace data'}`,
+      `2027 long-form completion estimate: ${formatDate(result.upcomingForecast.fullProgramViaLongForm) ?? 'not enough pace data'}`,
+      `Check your numbers: ${site.url}/youtube-monetization-progress-calculator`,
+    ].join('\n');
+  }, [input.qualifiedShortsViews, input.qualifiedWatchHours, input.subscribers, result]);
+
   return (
     <div className="space-y-6">
       <section>
@@ -179,6 +200,18 @@ export function YoutubeMonetizationProgressCalculatorClient() {
       {showResult && (
         <ToolOutput title="YouTube Monetization Progress">
           <div className="space-y-5">
+            <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border bg-muted/20 p-3">
+              <p className="text-sm text-muted-foreground">Save or share this progress snapshot. Your numbers stay out of the URL.</p>
+              <OutputActions
+                copyText={shareSummary}
+                copyLabel="Progress summary"
+                shareData={{
+                  title: 'YouTube Monetization Progress',
+                  text: shareSummary,
+                  url: `${site.url}/youtube-monetization-progress-calculator`,
+                }}
+              />
+            </div>
             <ProgramSummary
               title="Full YPP entry — through 31 January 2027"
               requirementsLabel={`${CURRENT_YPP_REQUIREMENTS.fullProgram.subscribers.toLocaleString()} subscribers + either ${CURRENT_YPP_REQUIREMENTS.fullProgram.qualifiedWatchHours.toLocaleString()} qualified watch hours in ${CURRENT_YPP_REQUIREMENTS.fullProgram.watchHoursWindowDays} days or ${CURRENT_YPP_REQUIREMENTS.fullProgram.qualifiedShortsViews.toLocaleString()} qualified Shorts views in ${CURRENT_YPP_REQUIREMENTS.fullProgram.shortsViewsWindowDays} days.`}
