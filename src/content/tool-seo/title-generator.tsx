@@ -38,6 +38,11 @@ export function SeoContent() {
         language, then copy your best options.
       </p>
       <p>
+        Use it as an AI title generator for YouTube when you need several searchable, readable options quickly.
+        Treat every result as a draft: keep the promise accurate, make the thumbnail tell the same story, and
+        choose the version a real viewer would understand at a glance.
+      </p>
+      <p>
         Good titles do two jobs at once. They tell the algorithm what the video is about, and they tell
         a tired thumb-scroller why this result deserves the click over five similar alternatives.
       </p>
