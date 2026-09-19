@@ -51,8 +51,8 @@
 - [x] Make `site.url`, canonical URLs, sitemap URLs, OG URLs and API examples use the chosen domain
 - [x] Align the support email and visible brand suffix with the chosen domain
 - [x] Remove hardcoded runtime production URLs outside `src/content/site.ts`
-- [ ] Confirm Vercel `NEXT_PUBLIC_SITE_URL` is the production URL, not localhost
-- [ ] Verify one canonical domain redirects to the other with a permanent redirect
+- [x] Confirm Vercel `NEXT_PUBLIC_SITE_URL` is the production URL, not localhost (verified from the live canonical URL)
+- [x] Verify one canonical domain redirects to the other with a permanent redirect (non-www → `www.yttools.pro`, HTTP 308)
 
 **Acceptance:** Page source, sitemap, structured data and social metadata all expose one domain and one brand name.
 
