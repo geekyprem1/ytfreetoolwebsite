@@ -44,19 +44,24 @@ export function SeoContent() {
         confidence - always an estimate.
       </p>
 
-      <h2>YouTube monetization requirements eligibility checker 2026</h2>
+      <h2>Monetization status check vs YPP eligibility planning</h2>
       <p>
-        Looking for a YouTube monetization requirements eligibility checker for 2026? Official YPP thresholds
-        commonly discussed for long-form include 1,000 subscribers plus watch-time or Shorts-view targets, plus
-        policy compliance and an approved application. YouTube (YT) Toolkit can only estimate from public
-        signals (subscriber count, reach, activity, Made for Kids when exposed). It cannot see private Studio
-        revenue, application status, or full watch-time - so treat every result as research, not confirmation.
+        This page answers a public-status question: does another channel show signals that it may be earning?
+        It is not an eligibility calculator. Official YPP requirements include subscriber, qualified watch-hour
+        or Shorts-view thresholds, policy compliance, and an approved application; YouTube documents the current
+        rules in its{' '}
+        <a href="https://support.google.com/youtube/answer/72857?hl=en" target="_blank" rel="noopener noreferrer">
+          YPP eligibility guidance
+        </a>
+        .
       </p>
       <p>
-        Checking another channel&apos;s public signals is different from planning your own eligibility. If you have
-        access to your private Studio totals, use the{' '}
+        Checking another channel&apos;s public signals is different from planning your own eligibility. This tool
+        cannot see private Studio revenue, application status, or complete qualified watch-time totals. If you have
+        access to your own Studio numbers, use the{' '}
         <Link href="/youtube-monetization-progress-calculator">Monetization Progress Calculator</Link> to compare
-        qualified subscribers, watch hours and Shorts views against the current and announced 2027 thresholds.
+        qualified subscribers, watch hours, and Shorts views against the current rules and the announced 2027
+        thresholds for new applicants.
       </p>
 
       <h2>How to check estimated monetization status</h2>

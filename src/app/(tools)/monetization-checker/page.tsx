@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { MonetizationCheckerClient } from './client';
 import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/monetization-checker';
+import { toolOgImages } from '@/lib/seo/tool-og';
 
 export const metadata: Metadata = {
   title: {
@@ -22,12 +23,14 @@ export const metadata: Metadata = {
     description:
       'Free YouTube monetization checker: estimate Partner Program status from public signals + confidence score. Paste URL or @handle. Estimate only - not official.',
     type: 'website',
+    images: toolOgImages('analytics', 'YouTube Monetization Checker'),
   },
   twitter: {
     card: 'summary_large_image',
     title: 'YouTube Monetization Checker (Free Estimate) | yttools.pro',
     description:
       'Estimate YouTube channel monetization from public Data API signals with a confidence score. Estimate only - not official.',
+    images: ['/og/tool/analytics'],
   },
 };
 

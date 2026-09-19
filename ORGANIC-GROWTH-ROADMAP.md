@@ -64,7 +64,7 @@
 - [x] Include the unchanged early-access/fan-funding tier where relevant
 - [x] Add source URLs and `lastVerified` date in code comments/data
 - [x] Replace hardcoded `4000` and `10M` copy in the Watch Time Calculator
-- [ ] Update Monetization Checker SEO content so it distinguishes status checking from progress planning
+- [x] Update Monetization Checker SEO content so it distinguishes status checking from progress planning
 
 **Current full ads/Premium path:** 1,000 subscribers + 4,000 qualified long-form watch hours in 365 days, or 10M qualified Shorts views in 90 days.  
 **From 1 February 2027 for new applicants:** 1,000 subscribers + 8,000 qualified watch hours, or 20M qualified Shorts views.
@@ -342,7 +342,7 @@ Each article must answer the query directly, cite official YouTube documentation
 - [x] Add viewport theme-color metadata for light/dark previews
 - [x] Keep unbounded live-counter child URLs `noindex, follow`
 - [x] Remove or dynamically update stale years in titles and datasets
-- [ ] Decide whether live counter child URLs should be `noindex, follow` or curated/indexable
+- [x] Decide whether live counter child URLs should be `noindex, follow` or curated/indexable (use `noindex, follow` for unbounded user-entered IDs)
 - [ ] Expand glossary only from real query evidence, not arbitrary page-count targets
 - [x] Keep AI crawlers allowed in `robots.txt`
 - [ ] Validate representative pages with Google Rich Results Test and Schema.org Validator
