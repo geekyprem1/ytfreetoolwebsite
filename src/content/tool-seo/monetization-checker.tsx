@@ -38,6 +38,11 @@ export function SeoContent() {
         official YouTube Partner Program confirmation. Paste a channel URL, @handle, or UC ID for an estimate.
       </p>
       <p>
+        If you want to check whether a YouTube channel is monetized, use this page for a quick public-status
+        estimate. It can flag supporting signals, but it cannot reveal private Studio revenue, application
+        approval, or guaranteed YPP enrollment.
+      </p>
+      <p>
         This free checker pulls channel metadata through the official YouTube Data API, then reads public
         channel and watch pages for signals such as video ad placements (including pre-roll / mid-roll), Join
         / Memberships, and Super Thanks when visible. Results are shown as Monetization ON or OFF with
