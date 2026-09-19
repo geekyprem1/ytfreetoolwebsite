@@ -163,23 +163,23 @@ Each article must answer the query directly, cite official YouTube documentation
 **Proposed route:** `/youtube-shorts-eligibility-checker`  
 **Primary keyword:** `is my video eligible for youtube shorts`
 
-- [ ] Accept a local video file without uploading it to the server
-- [ ] Read duration, width, height, aspect ratio, size and format in-browser
-- [ ] Decide whether the video is square/vertical and up to 3 minutes
-- [ ] Explain why a file will likely become a Short or remain long-form
-- [ ] Flag files over 3 minutes
-- [ ] Add an informational warning for music/copyright limitations without claiming to scan copyright
-- [ ] Add privacy text: file never leaves the browser
-- [ ] Test boundary durations and common ratios: 9:16, 1:1, 4:5, 16:9
-- [ ] Cite: https://support.google.com/youtube/answer/15424877?hl=en
+- [x] Accept a local video file without uploading it to the server
+- [x] Read duration, width, height, aspect ratio, size and format in-browser
+- [x] Decide whether the video is square/vertical and up to 3 minutes
+- [x] Explain why a file will likely become a Short or remain long-form
+- [x] Flag files over 3 minutes
+- [x] Add an informational warning for music/copyright limitations without claiming to scan copyright
+- [x] Add privacy text: file never leaves the browser
+- [x] Test boundary durations and common ratios: 9:16, 1:1, 4:5, 16:9
+- [x] Cite: https://support.google.com/youtube/answer/15424877?hl=en
 
 ### Target keywords
 
-- [ ] `is my video eligible for youtube shorts`
-- [ ] `youtube shorts eligibility checker 3 minutes`
-- [ ] `youtube shorts aspect ratio checker online`
-- [ ] `will youtube make my video a short`
-- [ ] `check if video is short or long form youtube`
+- [x] `is my video eligible for youtube shorts`
+- [x] `youtube shorts eligibility checker 3 minutes`
+- [x] `youtube shorts aspect ratio checker online`
+- [x] `will youtube make my video a short`
+- [x] `check if video is short or long form youtube`
 
 ---
 
@@ -188,23 +188,23 @@ Each article must answer the query directly, cite official YouTube documentation
 **Proposed route:** `/youtube-end-screen-planner`  
 **Primary keyword:** `youtube end screen safe zone template 1280x720`
 
-- [ ] Allow upload of a video's final frame or use a blank 16:9 canvas
-- [ ] Add draggable placeholders for video, playlist, subscribe, channel and link elements
-- [ ] Enforce or warn about the maximum of four elements on standard 16:9 videos
-- [ ] Show the official last 5–20 second timing window
-- [ ] Warn when video duration is under 25 seconds
-- [ ] Add grid/snap controls and a reset layout action
-- [ ] Export a reference PNG with guides, not misleading fake YouTube UI
-- [ ] Keep uploaded image local
-- [ ] Cite: https://support.google.com/youtube/answer/6388789?hl=en
+- [x] Allow upload of a video's final frame or use a blank 16:9 canvas
+- [x] Add draggable placeholders for video, playlist, subscribe, channel and link elements
+- [x] Enforce or warn about the maximum of four elements on standard 16:9 videos
+- [x] Show the official last 5–20 second timing window
+- [x] Warn when video duration is under 25 seconds
+- [x] Add grid/snap controls and a reset layout action
+- [x] Export a reference PNG with guides, not misleading fake YouTube UI
+- [x] Keep uploaded image local
+- [x] Cite: https://support.google.com/youtube/answer/6388789?hl=en
 
 ### Target keywords
 
-- [ ] `youtube end screen safe zone template 1280x720`
-- [ ] `youtube end screen planner last 20 seconds`
-- [ ] `youtube end screen size calculator`
-- [ ] `youtube end screen layout preview`
-- [ ] `where to place youtube end screen elements`
+- [x] `youtube end screen safe zone template 1280x720`
+- [x] `youtube end screen planner last 20 seconds`
+- [x] `youtube end screen size calculator`
+- [x] `youtube end screen layout preview`
+- [x] `where to place youtube end screen elements`
 
 ---
 

@@ -434,6 +434,24 @@ export const tools: ToolMetadata[] = [
     route: '/youtube-monetization-progress-calculator',
     phase: 6,
   },
+  {
+    slug: 'youtube-shorts-eligibility-checker',
+    name: 'Shorts Eligibility Checker',
+    description: 'Check a local video\'s duration and aspect ratio against YouTube Shorts format rules.',
+    icon: 'Smartphone',
+    category: 'seo',
+    route: '/youtube-shorts-eligibility-checker',
+    phase: 6,
+  },
+  {
+    slug: 'youtube-end-screen-planner',
+    name: 'End Screen Layout Planner',
+    description: 'Plan up to four end-screen elements on a local 16:9 frame and export a PNG guide.',
+    icon: 'LayoutTemplate',
+    category: 'seo',
+    route: '/youtube-end-screen-planner',
+    phase: 6,
+  },
 ];
 
 export function getToolBySlug(slug: string): ToolMetadata | undefined {
