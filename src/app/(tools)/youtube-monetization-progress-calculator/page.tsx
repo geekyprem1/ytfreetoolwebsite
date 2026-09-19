@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/youtube-monetization-progress-calculator';
 import { YoutubeMonetizationProgressCalculatorClient } from './client';
+import { toolOgImages } from '@/lib/seo/tool-og';
 
 export const metadata: Metadata = {
   title: {
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'YouTube Monetization Progress Calculator 2027 | yttools.pro',
     description: 'Compare current and 2027 YPP thresholds, calculate what remains, and plan a daily pace.',
+    images: toolOgImages('calculator', 'YouTube Monetization Progress Calculator'),
   },
 };
 

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/youtube-chapter-validator';
 import { YouTubeChapterValidatorClient } from './client';
+import { toolOgImages } from '@/lib/seo/tool-og';
 
 export const metadata: Metadata = {
   title: {
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'YouTube Chapter Timestamp Validator | yttools.pro',
     description: 'Find chapter formatting problems and copy a cleaned YouTube-ready timestamp block.',
+    images: toolOgImages('seo', 'YouTube Chapter Timestamp Validator'),
   },
 };
 

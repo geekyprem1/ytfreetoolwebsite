@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/youtube-end-screen-planner';
 import { YouTubeEndScreenPlannerClient } from './client';
+import { toolOgImages } from '@/lib/seo/tool-og';
 
 export const metadata: Metadata = {
   title: {
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'YouTube End Screen Layout Planner | yttools.pro',
     description: 'Place end-screen elements on a 16:9 frame, check timing, and export a reference PNG.',
+    images: toolOgImages('seo', 'YouTube End Screen Layout Planner'),
   },
 };
 

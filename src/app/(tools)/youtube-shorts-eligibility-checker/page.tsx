@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/youtube-shorts-eligibility-checker';
 import { YouTubeShortsEligibilityCheckerClient } from './client';
+import { toolOgImages } from '@/lib/seo/tool-og';
 
 export const metadata: Metadata = {
   title: {
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'YouTube Shorts Eligibility Checker | yttools.pro',
     description: 'Check a local video against YouTube\'s square-or-vertical, up-to-three-minute Shorts rule.',
+    images: toolOgImages('seo', 'YouTube Shorts Eligibility Checker'),
   },
 };
 

@@ -332,7 +332,7 @@ Each article must answer the query directly, cite official YouTube documentation
 ## Phase 10 — Technical SEO and GEO cleanup
 
 - [x] Add default OG/Twitter image inheritance for every route
-- [ ] Add category-specific OG images after the default works
+- [~] Add category-specific OG images after the default works (latest SEO/content cluster wired; legacy pages remain on the default until their metadata is touched)
 - [x] Wire `HowTo` steps into tool-page schema where the page genuinely contains a procedure
 - [x] Improve BlogPosting schema with image, author, organization, breadcrumb and `dateModified`
 - [x] Add a 512px Organization logo and explicit editorial Person entity

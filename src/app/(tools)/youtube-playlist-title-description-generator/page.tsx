@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { PlaylistGeneratorClient } from './client';
 import { SeoContent, faqs } from '@/content/tool-seo/youtube-playlist-title-description-generator';
+import { toolOgImages } from '@/lib/seo/tool-og';
 
 export const metadata: Metadata = {
   title: { absolute: 'YouTube Playlist Title & Description Generator | yttools.pro' },
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'YouTube Playlist Title & Description Generator | yttools.pro',
     description: 'Generate and compare playlist title and description pairs with transparent keyword coverage checks.',
+    images: toolOgImages('ai-generator', 'YouTube Playlist Title & Description Generator'),
   },
 };
 

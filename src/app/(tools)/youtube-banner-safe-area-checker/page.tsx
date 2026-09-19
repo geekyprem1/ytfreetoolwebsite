@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/youtube-banner-safe-area-checker';
 import { YouTubeBannerSafeAreaCheckerClient } from './client';
+import { toolOgImages } from '@/lib/seo/tool-og';
 
 export const metadata: Metadata = {
   title: {
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'YouTube Banner Safe Area Checker | yttools.pro',
     description: 'Preview local channel art across device crops and check the official safe area.',
+    images: toolOgImages('seo', 'YouTube Banner Safe-Area Checker'),
   },
 };
 

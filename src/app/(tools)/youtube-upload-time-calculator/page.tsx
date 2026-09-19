@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ToolPageShell } from '@/components/tools/tool-page-shell';
 import { SeoContent, faqs } from '@/content/tool-seo/youtube-upload-time-calculator';
 import { YouTubeUploadTimeCalculatorClient } from './client';
+import { toolOgImages } from '@/lib/seo/tool-og';
 
 export const metadata: Metadata = {
   title: {
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'YouTube Video Upload Time Calculator | yttools.pro',
     description: 'Estimate YouTube upload time from file size and upload speed, or calculate the speed needed by a deadline.',
+    images: toolOgImages('calculator', 'YouTube Video Upload Time Calculator'),
   },
 };
 
