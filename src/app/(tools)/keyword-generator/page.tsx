@@ -6,22 +6,25 @@ import { toolOgImages } from '@/lib/seo/tool-og';
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Free YouTube Keyword Tool & Generator | yttools.pro',
+    absolute: 'Free YouTube Keyword Research Tool & Generator | yttools.pro',
   },
   description:
-    'Free YouTube keyword tool and generator for video titles, tags, and topics. Get related phrases, search intent, and difficulty signals with no login.',
+    'Free YouTube keyword research tool and generator for titles, tags, and topics. Find related phrases, intent, and difficulty signals with no login.',
   keywords: [
     'free youtube keyword tool',
+    'free keyword tool for youtube',
+    'free youtube keyword research tool',
     'keyword tool for youtube',
     'youtube keyword generator',
-    'youtube keyword research tool',
+    'keyword generator for youtube',
+    'youtube keyword search tool',
     'keyword tools for youtube',
   ],
   alternates: { canonical: '/keyword-generator' },
   openGraph: {
-    title: 'Free YouTube Keyword Tool & Generator | yttools.pro',
+    title: 'Free YouTube Keyword Research Tool & Generator | yttools.pro',
     description:
-      'Generate YouTube keyword ideas for titles, tags, and topics with intent and difficulty signals. Free and no login.',
+      'Research YouTube keywords for titles, tags, and topics with related phrases, intent, and difficulty signals. Free and no login.',
     images: toolOgImages('ai-generator', 'Free YouTube Keyword Tool'),
   },
 };
@@ -32,7 +35,7 @@ export default function KeywordGeneratorPage() {
       toolName="Keyword Generator"
       toolDescription="Find high-ranking YouTube keywords with search intent and difficulty analysis."
       toolSlug="keyword-generator"
-      title="Free YouTube Keyword Tool & Generator"
+      title="Free YouTube Keyword Research Tool & Generator"
       description="Generate free YouTube keyword ideas with difficulty, popularity, and search intent—not generic Google SEO lists. Enter a seed topic to expand into title and tag phrases you can actually publish."
       answerFirst="This free YouTube keyword tool expands a seed topic into keyword ideas for videos, titles, and tags. Review related phrases, search intent, and relative difficulty, then validate the shortlist in YouTube search. No login required."
       seo={<SeoContent />}

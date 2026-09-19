@@ -48,6 +48,11 @@ export function SeoContent() {
         YouTube autocomplete and the current results before you publish.
       </p>
       <p>
+        If you are looking for a free keyword tool for YouTube or a keyword generator for a YouTube channel, start
+        with one specific seed and filter by intent. Longer phrases such as a problem, audience, or format often give
+        smaller channels a more realistic starting point than broad one-word topics.
+      </p>
+      <p>
         Unlike a generic blog keyword tool, a YouTube-oriented generator should respect how people talk when they want
         video answers—problem statements, “vs” comparisons, year-stamped updates, and skill levels (beginner,
         advanced). Those modifiers often decide whether a title feels searchable or merely clever.
