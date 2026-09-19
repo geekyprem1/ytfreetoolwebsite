@@ -19,14 +19,28 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return {};
+  const description =
+    slug === 'youtube-thumbnail-dimensions-guide'
+      ? 'Learn the recommended YouTube thumbnail size, dimensions, resolution, and 1280x720 canvas for clear video packaging.'
+      : post.description;
   return {
     title: { absolute: `${post.title} | yttools.pro` },
-    description: post.description,
+    description,
+    keywords:
+      slug === 'youtube-thumbnail-dimensions-guide'
+        ? [
+            'youtube thumbnail size',
+            'youtube thumbnail dimensions',
+            'youtube thumbnail resolution',
+            'youtube thumbnail 1280x720',
+            'youtube thumbnail size pixels',
+          ]
+        : undefined,
     alternates: { canonical: `/blog/${post.slug}` },
     authors: [{ name: 'YT Toolkit Editorial Team', url: `${site.url}/about` }],
     openGraph: {
       title: post.title,
-      description: post.description,
+      description,
       type: 'article',
       publishedTime: post.publishedAt,
       modifiedTime: post.dateModified ?? post.publishedAt,
@@ -143,6 +157,11 @@ function TagRankingArticle() {
 function ThumbnailGuideArticle() {
   return (
     <>
+      <p>
+        <strong>Short answer:</strong> use a 1280x720 YouTube thumbnail at a 16:9 aspect ratio. This is the
+        recommended full-size canvas for a video thumbnail; keep important text and faces away from the edges so
+        mobile and compact previews can crop safely.
+      </p>
       <p>
         A YouTube Video Thumbnail Downloader (HD maxresdefault) targets the cover image YouTube hosts on
         its CDN — not Windows <code>thumbs.db</code> system files. Use these exact public sizes when

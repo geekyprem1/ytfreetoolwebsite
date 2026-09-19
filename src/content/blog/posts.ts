@@ -58,7 +58,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'youtube-thumbnail-dimensions-guide',
-    title: 'Optimal YouTube Thumbnail Dimensions & Resolution Guide',
+    title: 'YouTube Thumbnail Size & Dimensions: 1280x720 Guide',
     description:
       'Exact YouTube video thumbnail sizes from maxresdefault 1280×720 down to 120×90, plus packaging tips from Creator Academy principles.',
     publishedAt: '2026-07-22',
