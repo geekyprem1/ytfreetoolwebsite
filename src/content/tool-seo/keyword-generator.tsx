@@ -31,7 +31,7 @@ export const faqs: ToolFaq[] = [
 export function SeoContent() {
   return (
     <>
-      <h2>What is a YouTube keyword generator?</h2>
+      <h2>What is a free YouTube keyword tool?</h2>
       <p>
         This free YouTube Keyword Generator expands a seed topic into related phrases scored for
         difficulty, popularity, and intent—tuned for video search, not Google blogs. Enter a seed to
@@ -41,6 +41,11 @@ export function SeoContent() {
         Keyword tools do not control the algorithm. YouTube ranks uploads using a mix of relevance, quality signals,
         and personalized viewer history. What research does is reduce guesswork: you stop publishing into empty
         demand and start packaging videos around language people already use.
+      </p>
+      <p>
+        Use this free YouTube keyword tool when you need phrases for a video title, tags, or a repeatable content
+        series. It is a planning aid rather than a promise of search volume or ranking, so compare the shortlist with
+        YouTube autocomplete and the current results before you publish.
       </p>
       <p>
         Unlike a generic blog keyword tool, a YouTube-oriented generator should respect how people talk when they want
