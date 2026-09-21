@@ -31,9 +31,9 @@ export const faqs: ToolFaq[] = [
 export function SeoContent() {
   return (
     <>
-      <h2>What the AI Description Generator creates</h2>
+      <h2>What this AI YouTube description generator creates</h2>
       <p>
-        This free AI YouTube Description Generator builds a paste-ready description from your topic and
+        This free AI YouTube description generator builds a paste-ready description from your topic and
         keyword—summary, optional chapters starting at 0:00, hashtags, and CTAs in plain text. Aim for
         roughly 150–350 words so the first lines stay scannable before Show more.
       </p>

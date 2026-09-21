@@ -122,7 +122,7 @@ export function TagsExtractorClient({ initialUrl }: { initialUrl?: string }) {
             ) : (
               <p className="text-sm text-muted-foreground">
                 {shortsOnly
-                  ? 'No Shorts-related tags found in this list. Turn off the Shorts filter to see all YouTube Video SEO Tags.'
+                  ? 'No Shorts-related tags found in this list. Turn off the Shorts filter to see all video tags.'
                   : 'This video has no tags.'}
               </p>
             )}

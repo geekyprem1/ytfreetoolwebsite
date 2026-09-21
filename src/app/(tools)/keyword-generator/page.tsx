@@ -6,10 +6,10 @@ import { toolOgImages } from '@/lib/seo/tool-og';
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Free YouTube Keyword Research Tool & Generator | yttools.pro',
+    absolute: 'Free YouTube Keyword Tool & Generator | yttools.pro',
   },
   description:
-    'Free YouTube keyword research tool and generator for titles, tags, and topics. Find related phrases, intent, and difficulty signals with no login.',
+    'Find keyword ideas for YouTube videos, Shorts, and channels. Get related phrases, search intent, and relative difficulty—free, no login.',
   keywords: [
     'free youtube keyword tool',
     'free keyword tool for youtube',
@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: '/keyword-generator' },
   openGraph: {
-    title: 'Free YouTube Keyword Research Tool & Generator | yttools.pro',
+    title: 'Free YouTube Keyword Tool & Generator | yttools.pro',
     description:
-      'Research YouTube keywords for titles, tags, and topics with related phrases, intent, and difficulty signals. Free and no login.',
+      'Find YouTube keyword ideas for videos, Shorts, and channels with related phrases, intent, and relative difficulty. Free and no login.',
     images: toolOgImages('ai-generator', 'Free YouTube Keyword Tool'),
   },
 };
@@ -35,9 +35,9 @@ export default function KeywordGeneratorPage() {
       toolName="Keyword Generator"
       toolDescription="Find high-ranking YouTube keywords with search intent and difficulty analysis."
       toolSlug="keyword-generator"
-      title="Free YouTube Keyword Research Tool & Generator"
-      description="Generate free YouTube keyword ideas with difficulty, popularity, and search intent—not generic Google SEO lists. Enter a seed topic to expand into title and tag phrases you can actually publish."
-      answerFirst="This free YouTube keyword tool expands a seed topic into keyword ideas for videos, titles, and tags. Review related phrases, search intent, and relative difficulty, then validate the shortlist in YouTube search. No login required."
+      title="Free YouTube Keyword Tool & Generator"
+      description="Find keyword ideas for YouTube videos, Shorts, and channels. Review related phrases, search intent, and relative difficulty—not official search volume."
+      answerFirst="This free YouTube keyword tool generates ideas for videos, Shorts, and channels from one seed topic. Review related phrases, search intent, and relative difficulty, then validate the shortlist in YouTube search. No login required."
       seo={<SeoContent />}
       faqs={faqs}
       howToSteps={[

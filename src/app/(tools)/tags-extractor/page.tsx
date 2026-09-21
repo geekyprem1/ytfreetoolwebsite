@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     absolute: 'Free YouTube Tag Extractor & Video Tags Tool | yttools.pro',
   },
   description:
-    'Extract and copy tags from any public YouTube video. View SEO keywords, filter Shorts-related tags, and download TXT or CSV—free, no extension.',
+    'Extract tags from any public YouTube video, then copy or export them as TXT or CSV. Free, fast, and no browser extension required.',
   keywords: [
     'youtube tag extractor',
     'extract youtube tags',
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Free YouTube Tag Extractor & Video Tags Tool | yttools.pro',
     description:
-      'Extract, copy, filter, and download tags from any public YouTube video. Free TXT/CSV export with no browser extension.',
+      'Extract, copy, filter, and export tags from any public YouTube video. Free TXT/CSV downloads with no browser extension.',
     images: toolOgImages('extractor', 'Free YouTube Tag Extractor'),
   },
 };
@@ -36,11 +36,11 @@ export default async function TagsExtractorPage({
   return (
     <ToolPageShell
       toolName="Tags Extractor"
-      toolDescription="Extract all tags from any YouTube video instantly. Copy or download as TXT."
+      toolDescription="Extract tags from any public YouTube video. Copy or export the list as TXT or CSV."
       toolSlug="tags-extractor"
       title="Free YouTube Tag Extractor"
-      description="Extract YouTube Video SEO Tags from any public video in under 1.2 seconds - see competitor keyword metadata without a browser extension, then copy all or export TXT/CSV."
-      answerFirst="YouTube (YT) Toolkit's YouTube Video Tags Extractor shows the YouTube Video SEO Tags attached to any public video - keyword metadata for search, not HTML or RFID tags. Paste a URL to extract the full visible list without an extension, then copy all or export CSV."
+      description="Extract tags from any public YouTube video, then copy or export the list as TXT or CSV. Review competitor metadata without a browser extension."
+      answerFirst="This free YouTube video tag extractor shows the public tags attached to a video. Paste a URL to review, copy, or export the list as TXT or CSV—no browser extension required."
       seo={<SeoContent />}
       faqs={faqs}
       howToSteps={[

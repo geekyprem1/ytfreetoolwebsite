@@ -53,6 +53,9 @@ export function KeywordGeneratorClient() {
       <Button onClick={handleGenerate} disabled={!seedKeyword || isLoading} className="w-full">
         {isLoading ? 'Generating...' : 'Generate Keywords'}
       </Button>
+      <p className="text-xs text-muted-foreground">
+        Results are planning signals—not official YouTube Search volume. Validate promising phrases in YouTube before publishing.
+      </p>
 
       {isLoading && <ToolLoading variant="list" />}
       {error && <ToolError message={error} onRetry={reset} />}

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { YouTubeUrlInput } from '@/components/tools/youtube-url-input';
 import { ToolOutput } from '@/components/tools/tool-output';
 import { ToolLoading } from '@/components/tools/tool-loading';
@@ -115,6 +116,16 @@ export function MonetizationCheckerClient({ initialUrl }: { initialUrl?: string 
         autoSubmit
         submitLabel="Check"
       />
+      <p className="text-sm text-muted-foreground">
+        Checking your own YPP progress?{' '}
+        <Link
+          href="/youtube-monetization-progress-calculator"
+          className="font-medium text-foreground underline underline-offset-4"
+        >
+          Use the Monetization Progress Calculator
+        </Link>
+        .
+      </p>
 
       {isLoading && <ToolLoading variant="card" />}
       {error && <ToolError message={error} onRetry={() => reset()} />}

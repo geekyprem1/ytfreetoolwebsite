@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     absolute: 'Free AI YouTube Description Generator | yttools.pro',
   },
   description:
-    'Generate a free AI YouTube description for videos, chapters, hashtags, and CTAs. Enter a topic, keyword, and summary for a Studio-ready plain-text draft—no login.',
+    'Generate an AI YouTube description with chapters, hashtags, and CTAs. Get a Studio-ready draft from your topic and keyword—free, no login.',
   keywords: [
     'youtube description generator',
     'free youtube description generator',
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Free AI YouTube Description Generator | yttools.pro',
     description:
-      'Generate a free AI YouTube description with chapters, hashtags, and CTAs from a topic, keyword, and summary. Copy a Studio-ready draft with no login.',
+      'Generate an AI YouTube description with chapters, hashtags, and CTAs from a topic and keyword. Copy a Studio-ready draft with no login.',
     images: toolOgImages('ai-generator', 'Free AI YouTube Description Generator'),
   },
 };
@@ -35,7 +35,7 @@ export default function DescriptionGeneratorPage() {
       toolSlug="description-generator"
       title="Free AI YouTube Description Generator"
       description="Create a free AI YouTube description with summary, chapters, hashtags, and CTAs—not a product listing blurb. Paste a topic and keyword to get a Studio-ready plain-text draft in seconds."
-      answerFirst="YouTube (YT) Toolkit's Description Generator drafts SEO-ready YouTube descriptions with summary, chapters, hashtags, and CTAs from a topic and keyword. Free and no login - copy a Studio-ready plain-text draft in seconds."
+      answerFirst="This free AI YouTube description generator turns a topic, keyword, and summary into a Studio-ready plain-text draft with chapters, hashtags, and CTAs. Edit links and timestamps before publishing."
       seo={<SeoContent />}
       faqs={faqs}
       howToSteps={[

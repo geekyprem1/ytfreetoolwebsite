@@ -7,16 +7,16 @@ export const faqs: ToolFaq[] = [
     a: 'According to YouTube Creator Help guidance, titles and thumbnails drive most initial click-through (often cited as the majority of packaging CTR). YouTube Video SEO Tags still supply contextual metadata for misspellings, synonyms, and long-tail matching that help related-video and search disambiguation - useful, but secondary to strong packaging.',
   },
   {
-    q: 'What are YouTube Video SEO Tags?',
-    a: 'YouTube Video SEO Tags are metadata keywords attached to a video in YouTube Studio - not HTML tags or RFID tracking tags. They help YouTube understand topical relevance alongside the title, description, and spoken content.',
+    q: 'What are YouTube video tags?',
+    a: 'YouTube video tags are metadata keywords attached to a video in YouTube Studio. They help clarify topical relevance, synonyms, and misspellings alongside the title, description, and spoken content.',
   },
   {
-    q: 'How many YouTube Video SEO Tags should a video use?',
-    a: 'YouTube limits tags by total character budget: 500 characters total across all tags. In practice, many SEO workflows target roughly 15-30 relevant tags. Our SEO Score Checker rewards the 15-30 range when scoring tag hygiene.',
+    q: 'How many YouTube tags should a video use?',
+    a: 'YouTube limits tags by total character budget: 500 characters total across all tags. In practice, use a focused set of relevant tags rather than filling the field with unrelated phrases. Our SEO Score Checker can help review tag hygiene.',
   },
   {
     q: 'How can I see competitor tags on YouTube without an extension?',
-    a: "Paste any public competitor video URL into YouTube (YT) Toolkit's YouTube Video Tags Extractor. It returns the visible YouTube Video SEO Tags list in plain text - no browser extension, login, or desktop app required (unlike VidIQ/TubeBuddy extensions). Typical extraction completes in under 1.2 seconds.",
+    a: "Paste any public competitor video URL into YouTube (YT) Toolkit's Video Tag Extractor. It returns the visible tag list in plain text—no browser extension, login, or desktop app required. You can copy or export the results for research.",
   },
   {
     q: 'Are tags more important than the title?',
@@ -31,24 +31,23 @@ export const faqs: ToolFaq[] = [
 export function SeoContent() {
   return (
     <>
-      <h2>Key specs for YouTube Video SEO Tags extraction</h2>
+      <h2>What is a YouTube video tag extractor?</h2>
       <p>
         Use this free YouTube tag extractor when you need to copy tags from a YouTube video, download the list,
         or compare public metadata without installing an extension. It is for research and organization; tags are
         only one part of a video&apos;s overall search and recommendation signals.
       </p>
       <p>
-        This free YouTube Video Tags Extractor shows the YouTube Video SEO Tags attached to any public video -
-        keyword metadata for search and recommendations, not HTML markup tags or RFID tracking tags. Paste
-        a URL into YouTube (YT) Toolkit to extract the full visible list in under 1.2 seconds, then copy or
-        export without a browser extension.
+        This free YouTube video tag extractor shows the public tags attached to any video. Paste a URL to review
+        the visible keyword metadata, then copy or export it without a browser extension. Tags support search
+        disambiguation, but titles, thumbnails, and viewer satisfaction matter more for overall performance.
       </p>
       <ul>
         <li>
           <strong>Tag capacity:</strong> 500 characters total across all tags
         </li>
         <li>
-          <strong>Practical range:</strong> about 15–30 relevant YouTube Video SEO Tags
+          <strong>Practical range:</strong> a focused set of relevant YouTube tags
         </li>
         <li>
           <strong>Extraction speed:</strong> typically under 1.2 seconds for public videos
@@ -73,7 +72,7 @@ export function SeoContent() {
         still prioritizes title and thumbnail first; tags support disambiguation.
       </p>
 
-      <h2>How to extract YouTube Video SEO Tags</h2>
+      <h2>How to extract tags from a YouTube video</h2>
       <ol>
         <li>
           <strong>Copy a video URL</strong> — Use any public watch or Shorts link.

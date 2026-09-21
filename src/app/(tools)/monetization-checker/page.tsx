@@ -6,7 +6,7 @@ import { toolOgImages } from '@/lib/seo/tool-og';
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'YouTube Monetization Status Checker | Free Estimate',
+    absolute: 'YouTube Monetization Checker | Free Public Estimate',
   },
   description:
     'Check if a YouTube channel is monetized with a free public-signal estimate and confidence score. Paste a channel URL or @handle—never official YPP confirmation.',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: '/monetization-checker' },
   openGraph: {
-    title: 'YouTube Monetization Status Checker | Free Estimate',
+    title: 'YouTube Monetization Checker | Free Public Estimate',
     description:
       'Check if a YouTube channel is monetized using public signals and a confidence score. Free estimate for a channel URL or @handle—not official YPP status.',
     type: 'website',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'YouTube Monetization Status Checker | Free Estimate',
+    title: 'YouTube Monetization Checker | Free Public Estimate',
     description:
       'Estimate YouTube channel monetization from public Data API signals with a confidence score. Estimate only - not official.',
     images: ['/og/tool/analytics'],
@@ -48,11 +48,11 @@ export default async function MonetizationCheckerPage({
   return (
     <ToolPageShell
       toolName="YouTube Monetization Checker"
-      toolDescription="Estimate whether a YouTube channel is monetized using public signals and a confidence score."
+      toolDescription="Estimate whether another YouTube channel is monetized using public signals and a confidence score."
       toolSlug="monetization-checker"
       title="YouTube Monetization Status Checker"
       description="Estimate YouTube channel monetization from public signals and a 0–100 confidence score—not official YouTube Partner Program status. Paste a channel URL or @handle for a free estimate."
-      answerFirst="YouTube (YT) Toolkit's Monetization Checker estimates channel monetization from public signals and a 0-100 confidence score - not official YouTube Partner Program status. Free and no login - paste a channel URL or @handle for a quick estimate."
+      answerFirst="This free YouTube monetization checker estimates whether another channel may be monetized from public signals and a 0–100 confidence score. It is not official YouTube Partner Program status. For your own YPP progress, use the Monetization Progress Calculator."
       seo={<SeoContent />}
       faqs={faqs}
       howToSteps={[
