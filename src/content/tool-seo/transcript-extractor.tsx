@@ -11,8 +11,16 @@ export const faqs: ToolFaq[] = [
     a: 'Yes. Segments typically include time offsets so you can jump to moments, quote accurately, or export a timestamped text file for chapters and show notes.',
   },
   {
-    q: 'Can I convert a YouTube transcript to a text file with timestamps?',
-    a: "Yes. YouTube (YT) Toolkit extracts the caption track, then lets you copy or download a TXT file that preserves timestamped segments for editing, translation, or repurposing into blogs and show notes - no extension required.",
+    q: 'Which download formats are available?',
+    a: 'TXT (with or without timestamps), SRT and WebVTT subtitle files, and JSON. Use SRT for video editors such as Premiere Pro, DaVinci Resolve and Final Cut, VTT for HTML5 web players, TXT for reading and repurposing, and JSON when you need start, end and duration for every line in code.',
+  },
+  {
+    q: 'Can I get the transcript without timestamps?',
+    a: 'Yes. Switch off “Show timestamps” and the preview, Copy text and TXT download become clean flowing text, split into paragraphs at natural pauses — ready to paste into a blog post or document.',
+  },
+  {
+    q: 'Can I extract a transcript in another language?',
+    a: 'Yes, if the video has captions in that language. The extractor lists every caption language the video offers — manual or auto-generated — and loads English by default when available, otherwise the first track. Pick another language from the menu to switch.',
   },
   {
     q: 'Does the tool create captions if none exist?',
@@ -43,10 +51,14 @@ export function SeoContent() {
           <strong>Source:</strong> existing automatic or manual caption tracks
         </li>
         <li>
-          <strong>Output:</strong> timestamped segments plus full text
+          <strong>Output:</strong> timestamped segments or clean text, plus word count, character count and
+          reading time
         </li>
         <li>
-          <strong>Export:</strong> copy or download TXT with timestamps
+          <strong>Languages:</strong> every caption language the video offers, switchable in one click
+        </li>
+        <li>
+          <strong>Export:</strong> copy text, or download TXT, SRT, VTT or JSON
         </li>
         <li>
           <strong>Optional:</strong> AI summary for long videos
@@ -85,15 +97,40 @@ export function SeoContent() {
           <strong>Review timestamped segments</strong> — Skim for chapters, quotes, and keyword density.
         </li>
         <li>
-          <strong>Copy, download, or summarize</strong> — Export TXT for editing, or use AI summary for a
+          <strong>Copy, download, or summarize</strong> — Export TXT, SRT, VTT or JSON, or use AI summary for a
           fast overview.
         </li>
       </ol>
 
+      <h2>Which transcript format should you download?</h2>
+      <ul>
+        <li>
+          <strong>TXT</strong> — plain text for reading, notes, blog drafts and AI tools. Keep timestamps for
+          quoting and chapters, or switch them off for clean paragraphs.
+        </li>
+        <li>
+          <strong>SRT</strong> — the standard subtitle file for video editors (Premiere Pro, DaVinci Resolve,
+          Final Cut, CapCut) and most media players.
+        </li>
+        <li>
+          <strong>VTT (WebVTT)</strong> — the web subtitle format for HTML5 <code>&lt;video&gt;</code> players and
+          many course platforms.
+        </li>
+        <li>
+          <strong>JSON</strong> — structured data with start, end and duration for every line, for developers,
+          search indexes and data analysis.
+        </li>
+      </ul>
+      <p>
+        For caption files only, the <Link href="/subtitle-downloader">Subtitle Downloader</Link> gives the same
+        SRT, VTT, TXT and JSON exports in one click.
+      </p>
+
       <h2>Convert YouTube transcript to a text file with timestamps</h2>
       <p>
         To convert a YouTube transcript to a text file with timestamps, extract the caption track above,
-        then use Download TXT. The file preserves time offsets with each segment so you can quote
+        keep “Show timestamps” on, then download TXT. Each line starts with its time, like{' '}
+        <code>[4:05]</code>, so you can quote
         accurately, draft chapters, or paste into a blog outline without scrubbing the player. Prefer
         uploader-edited captions when available — automatic speech recognition often mangles brands,
         URLs, and statistics.

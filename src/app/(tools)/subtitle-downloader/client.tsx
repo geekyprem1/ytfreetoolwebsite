@@ -8,59 +8,25 @@ import { RelatedTools } from '@/components/tools/related-tools';
 import { Button } from '@/components/ui/button';
 import { useToolApi } from '@/hooks/use-tool-api';
 import { downloadFile } from '@/lib/utils/download';
+import {
+  clockTime,
+  formatMeta,
+  formatTranscript,
+  languageName,
+  type TranscriptFormat,
+  type TranscriptSegment,
+} from '@/lib/youtube/transcript-format';
 import { Download } from 'lucide-react';
-
-interface Segment {
-  text: string;
-  duration: number;
-  offset: number;
-}
 
 interface TranscriptResponse {
   videoId: string;
   language: string;
-  segments: Segment[];
+  availableLanguages?: string[];
+  segments: TranscriptSegment[];
   fullText: string;
 }
 
-/** Seconds -> SRT time "HH:MM:SS,mmm". */
-function srtTime(totalSeconds: number): string {
-  const ms = Math.round(totalSeconds * 1000);
-  const h = Math.floor(ms / 3_600_000);
-  const m = Math.floor((ms % 3_600_000) / 60_000);
-  const s = Math.floor((ms % 60_000) / 1000);
-  const millis = ms % 1000;
-  const pad = (n: number, w = 2) => String(n).padStart(w, '0');
-  return `${pad(h)}:${pad(m)}:${pad(s)},${pad(millis, 3)}`;
-}
-
-/** Seconds -> WebVTT time "HH:MM:SS.mmm". */
-function vttTime(totalSeconds: number): string {
-  return srtTime(totalSeconds).replace(',', '.');
-}
-
-function toSrt(segments: Segment[]): string {
-  return segments
-    .map((seg, i) => {
-      const end = seg.offset + (seg.duration || 2);
-      return `${i + 1}\n${srtTime(seg.offset)} --> ${srtTime(end)}\n${seg.text}\n`;
-    })
-    .join('\n');
-}
-
-function toVtt(segments: Segment[]): string {
-  const body = segments
-    .map((seg) => {
-      const end = seg.offset + (seg.duration || 2);
-      return `${vttTime(seg.offset)} --> ${vttTime(end)}\n${seg.text}\n`;
-    })
-    .join('\n');
-  return `WEBVTT\n\n${body}`;
-}
-
-function toTxt(segments: Segment[]): string {
-  return segments.map((s) => s.text).join('\n');
-}
+const FORMATS: TranscriptFormat[] = ['srt', 'vtt', 'txt', 'json'];
 
 export function SubtitleDownloaderClient({ initialUrl }: { initialUrl?: string }) {
   const { data, isLoading, error, execute, reset } = useToolApi<TranscriptResponse>();
@@ -69,15 +35,11 @@ export function SubtitleDownloaderClient({ initialUrl }: { initialUrl?: string }
     execute(`/api/youtube/transcript?v=${videoId}`);
   };
 
-  const download = (format: 'srt' | 'vtt' | 'txt') => {
+  const download = (format: TranscriptFormat) => {
     if (!data) return;
-    const map = {
-      srt: { content: toSrt(data.segments), mime: 'text/plain', ext: 'srt' },
-      vtt: { content: toVtt(data.segments), mime: 'text/vtt', ext: 'vtt' },
-      txt: { content: toTxt(data.segments), mime: 'text/plain', ext: 'txt' },
-    } as const;
-    const { content, mime, ext } = map[format];
-    downloadFile(content, `${data.videoId}-subtitles.${ext}`, mime);
+    const { ext, mime } = formatMeta[format];
+    const content = formatTranscript(format, data.segments, { videoId: data.videoId, language: data.language });
+    downloadFile(content, `${data.videoId}-subtitles-${data.language}.${ext}`, mime);
   };
 
   return (
@@ -97,16 +59,37 @@ export function SubtitleDownloaderClient({ initialUrl }: { initialUrl?: string }
       {data && !isLoading && (
         <ToolOutput title="Subtitles ready">
           <div className="space-y-4">
-            <p className="text-sm text-muted-foreground">
-              {data.segments.length} caption line{data.segments.length !== 1 ? 's' : ''} · language:{' '}
-              {data.language.toUpperCase()}
-            </p>
+            <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+              <span>
+                {data.segments.length} caption line{data.segments.length !== 1 ? 's' : ''} ·{' '}
+                {languageName(data.language)}
+              </span>
+              {data.availableLanguages && data.availableLanguages.length > 1 ? (
+                <label className="inline-flex items-center gap-2">
+                  <span className="sr-only">Caption language</span>
+                  <select
+                    value={data.language}
+                    onChange={(e) =>
+                      execute(`/api/youtube/transcript?v=${data.videoId}&lang=${encodeURIComponent(e.target.value)}`)
+                    }
+                    className="h-8 rounded-lg border bg-background px-2 text-sm text-foreground"
+                  >
+                    {data.availableLanguages.map((code) => (
+                      <option key={code} value={code}>
+                        {languageName(code)}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              ) : null}
+            </div>
 
-            <div className="grid grid-cols-3 gap-2">
-              {(['srt', 'vtt', 'txt'] as const).map((fmt) => (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {FORMATS.map((fmt) => (
                 <Button key={fmt} variant="outline" onClick={() => download(fmt)} className="flex-col h-auto py-3">
-                  <Download className="size-4 mb-1" />
-                  <span className="text-xs uppercase">.{fmt}</span>
+                  <Download aria-hidden className="size-4 mb-1" />
+                  <span className="text-xs">.{formatMeta[fmt].ext}</span>
+                  <span className="sr-only"> download</span>
                 </Button>
               ))}
             </div>
@@ -115,7 +98,7 @@ export function SubtitleDownloaderClient({ initialUrl }: { initialUrl?: string }
               {data.segments.slice(0, 200).map((seg, i) => (
                 <div key={i} className="flex gap-3">
                   <span className="text-xs text-muted-foreground shrink-0 pt-0.5 tabular-nums w-16 text-right font-mono">
-                    {srtTime(seg.offset).slice(0, 8)}
+                    {clockTime(seg.offset)}
                   </span>
                   <p className="text-sm leading-relaxed">{seg.text}</p>
                 </div>
