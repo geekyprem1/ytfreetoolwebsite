@@ -398,3 +398,70 @@
 .animate-scale-in {
   animation: scale-in 0.4s ease-out;
 }
+
+/* Ranking tables (/youtube-rankings). Styles live here instead of per-cell
+   utility classes so a 100-row table stays small in HTML + RSC payload
+   (ISR writes are billed per 8 KB on Vercel). */
+@layer components {
+  .rk-wrap {
+    @apply overflow-x-auto rounded-xl border border-border;
+  }
+  .rk {
+    @apply w-full text-sm border-collapse;
+  }
+  .rk thead {
+    @apply bg-muted/50 text-xs uppercase tracking-wider text-muted-foreground;
+  }
+  .rk th {
+    @apply px-3 py-3 font-semibold text-right whitespace-nowrap;
+  }
+  .rk th:nth-child(2) {
+    @apply text-left;
+  }
+  .rk th:first-child {
+    @apply w-12;
+  }
+  .rk tbody tr {
+    @apply border-t border-border/60 hover:bg-muted/30;
+  }
+  .rk td {
+    @apply px-3 py-2.5 align-middle text-right tabular-nums text-muted-foreground whitespace-nowrap;
+  }
+  .rk td:first-child {
+    @apply font-semibold;
+  }
+  .rk td:nth-child(2) {
+    @apply text-left whitespace-normal;
+  }
+  .rk td:nth-child(3) {
+    @apply font-semibold text-foreground;
+  }
+  .rk td.rk-up {
+    @apply text-emerald-600 dark:text-emerald-400;
+  }
+  .rk .rk-ch {
+    @apply flex items-center gap-3 min-w-0;
+  }
+  .rk .rk-ch img,
+  .rk .rk-ch .rk-av {
+    @apply size-9 shrink-0 rounded-full bg-muted object-cover;
+  }
+  .rk .rk-ch > div {
+    @apply min-w-0;
+  }
+  .rk .rk-ch a:first-child {
+    @apply block font-medium text-foreground hover:text-primary truncate max-w-[16rem] sm:max-w-xs;
+  }
+  .rk .rk-ch p {
+    @apply text-xs truncate max-w-[16rem] sm:max-w-xs;
+  }
+  .rk .rk-ch p a {
+    @apply underline-offset-2 hover:underline hover:text-foreground;
+  }
+  .rk .rk-sm {
+    @apply hidden sm:table-cell;
+  }
+  .rk .rk-md {
+    @apply hidden md:table-cell;
+  }
+}
