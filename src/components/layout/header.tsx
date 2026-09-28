@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils';
 
 const navLinks = [
   { href: '/', label: 'Home' },
+  { href: '/youtube-rankings', label: 'Rankings' },
   { href: '/blog', label: 'Blog' },
 ];
 

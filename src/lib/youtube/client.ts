@@ -143,6 +143,54 @@ export async function getChannelDetails(channelIdOrHandle: string): Promise<YouT
   };
 }
 
+export interface ChannelBatchStats {
+  id: string;
+  title: string;
+  customUrl: string;
+  thumbnail: string;
+  subscriberCount: number;
+  hiddenSubscriberCount: boolean;
+  viewCount: number;
+  videoCount: number;
+}
+
+/**
+ * Public stats for many channels at once — 1 quota unit per 50 IDs.
+ * Used by the rankings pages. Missing/terminated channels are simply absent
+ * from the result.
+ */
+export async function getChannelsBatch(channelIds: string[]): Promise<ChannelBatchStats[]> {
+  const yt = getClient();
+  const out: ChannelBatchStats[] = [];
+
+  for (let i = 0; i < channelIds.length; i += 50) {
+    const batch = channelIds.slice(i, i + 50);
+    const res = await yt.channels.list({
+      part: ['snippet', 'statistics'],
+      id: batch,
+      maxResults: 50,
+    });
+    await trackQuota(1);
+
+    for (const item of res.data.items ?? []) {
+      if (!item.id) continue;
+      const thumbs = item.snippet?.thumbnails;
+      out.push({
+        id: item.id,
+        title: item.snippet?.title ?? 'Unknown',
+        customUrl: item.snippet?.customUrl ?? '',
+        thumbnail: thumbs?.default?.url ?? thumbs?.medium?.url ?? '',
+        subscriberCount: parseInt(item.statistics?.subscriberCount ?? '0', 10),
+        hiddenSubscriberCount: Boolean(item.statistics?.hiddenSubscriberCount),
+        viewCount: parseInt(item.statistics?.viewCount ?? '0', 10),
+        videoCount: parseInt(item.statistics?.videoCount ?? '0', 10),
+      });
+    }
+  }
+
+  return out;
+}
+
 export async function getChannelVideos(channelId: string, maxResults = 5): Promise<YouTubeChannelVideo[]> {
   const yt = getClient();
   const res = await yt.search.list({

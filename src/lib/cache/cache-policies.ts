@@ -12,6 +12,9 @@ export const TTL = {
   liveCount: 60,                   // 60s — smooth client interpolation between fetches
   comments: 60 * 30,               // 30 minutes
   trending: 60 * 60 * 3,           // 3 hours (refreshed a few times daily)
+  rankingsPool: 60 * 60 * 6,       // 6 hours — subscriber counts are rounded; matches page revalidate
+  rankingsLastGood: 60 * 60 * 24 * 7, // 7 days fallback copy if the API fails
+  rankingsSnapshot: 60 * 60 * 24 * 29, // 29 days — stay inside YouTube's 30-day storage rule
   resolve: 60 * 60 * 24,           // 24 hours
   rateLimit: 60,                   // 1 minute window
 } as const;

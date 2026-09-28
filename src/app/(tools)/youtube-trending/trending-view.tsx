@@ -88,6 +88,10 @@ export function TrendingView({
         <Link href="/youtube-trending" className="text-primary hover:underline">
           all regions
         </Link>
+        . For channel leaderboards, see{' '}
+        <Link href="/youtube-rankings" className="text-primary hover:underline">
+          YouTube rankings
+        </Link>
         .
       </p>
 

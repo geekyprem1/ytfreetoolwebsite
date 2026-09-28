@@ -17,6 +17,12 @@
       ]
     }
   ],
+  "crons": [
+    {
+      "path": "/api/internal/rankings-snapshot",
+      "schedule": "15 0 * * *"
+    }
+  ],
   "redirects": [
     {
       "source": "/tools",

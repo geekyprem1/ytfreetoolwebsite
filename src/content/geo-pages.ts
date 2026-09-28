@@ -6,7 +6,7 @@
 
 export interface GeoPage {
   path: string;
-  changeFrequency: 'weekly' | 'monthly' | 'yearly';
+  changeFrequency: 'daily' | 'weekly' | 'monthly' | 'yearly';
   priority: number;
   lastModified?: string;
 }
@@ -16,6 +16,7 @@ import { comparisons } from '@/content/comparisons';
 import { glossaryTerms } from '@/content/glossary';
 import { tagNiches } from '@/content/tags-for';
 import { postingRegions } from '@/content/best-time-to-post';
+import { rankingFilters, filterPath } from '@/content/rankings/filters';
 
 export function geoPages(): GeoPage[] {
   const pages: GeoPage[] = [
@@ -24,7 +25,13 @@ export function geoPages(): GeoPage[] {
     { path: '/api-docs', changeFrequency: 'monthly', priority: 0.6 },
     { path: '/tags-for', changeFrequency: 'monthly', priority: 0.6 },
     { path: '/best-time-to-post', changeFrequency: 'monthly', priority: 0.6 },
+    // Live rankings — data changes daily, so advertise it.
+    { path: '/youtube-rankings', changeFrequency: 'daily', priority: 0.8 },
+    { path: '/youtube-rankings/most-subscribed', changeFrequency: 'daily', priority: 0.8 },
+    { path: '/youtube-rankings/fastest-growing', changeFrequency: 'daily', priority: 0.7 },
   ];
+
+  for (const f of rankingFilters) pages.push({ path: filterPath(f), changeFrequency: 'daily', priority: 0.6 });
 
   for (const d of datasets) pages.push({ path: `/data/${d.slug}`, changeFrequency: 'monthly', priority: 0.7, lastModified: d.lastUpdated });
   for (const c of comparisons) pages.push({ path: `/vs/${c.slug}`, changeFrequency: 'monthly', priority: 0.6 });

@@ -321,3 +321,58 @@ export function itemListNode(opts: {
     })),
   };
 }
+
+/** WebPage + ranked ItemList for /youtube-rankings pages (full list, not an empty shell). */
+export function rankingPageNodes(opts: {
+  path: string;
+  name: string;
+  description: string;
+  dateModified?: string;
+  items: { name: string; url: string; description?: string }[];
+}) {
+  const url = `${site.url}${opts.path}`;
+  const hasItems = opts.items.length > 0;
+  const page = {
+    '@type': 'WebPage',
+    '@id': `${url}#webpage`,
+    url,
+    name: opts.name,
+    description: opts.description,
+    isPartOf: { '@id': `${site.url}/#website` },
+    ...(hasItems ? { mainEntity: { '@id': `${url}#list` } } : {}),
+    ...(opts.dateModified ? { dateModified: opts.dateModified } : {}),
+    speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.answer-first'] },
+  };
+  // No empty ItemList (e.g. while growth history is still being collected).
+  if (!hasItems) return [page];
+  return [
+    page,
+    {
+      '@type': 'ItemList',
+      '@id': `${url}#list`,
+      name: opts.name,
+      description: opts.description,
+      itemListOrder: 'https://schema.org/ItemListOrderDescending',
+      numberOfItems: opts.items.length,
+      itemListElement: opts.items.map((item, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: item.name,
+        url: item.url,
+        ...(item.description ? { description: item.description } : {}),
+      })),
+    },
+  ];
+}
+
+export function faqPageNode(path: string, faqs: readonly FaqItem[]) {
+  return {
+    '@type': 'FAQPage',
+    '@id': `${site.url}${path}#faq`,
+    mainEntity: faqs.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  };
+}

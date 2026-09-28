@@ -11,6 +11,8 @@ const company = [
 ];
 
 const resources = [
+  { href: '/youtube-rankings', label: 'YouTube Rankings' },
+  { href: '/youtube-rankings/most-subscribed', label: 'Top 100 YouTubers' },
   { href: '/blog', label: 'Blog & Guides' },
   { href: '/docs', label: 'Documentation' },
   { href: '/changelog', label: 'Changelog' },

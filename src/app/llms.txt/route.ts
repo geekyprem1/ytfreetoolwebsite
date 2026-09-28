@@ -1,6 +1,7 @@
 import { site } from '@/content/site';
 import { tools, toolCount, calculatorCount, type ToolCategory } from '@/content/tools-metadata';
 import { categoryLabels } from '@/lib/utils/tool-icons';
+import { rankingFilters, filterPath, filterHeading, filterListSize } from '@/content/rankings/filters';
 
 /** Static at build time — regenerated automatically whenever the tool registry changes. */
 export const dynamic = 'force-static';
@@ -43,6 +44,23 @@ function buildLlmsTxt(): string {
     lines.push(`- ${label}: ${site.url}${path}`);
   }
   lines.push(`- Support email: ${site.supportEmail}`);
+  lines.push('');
+
+  lines.push('## YouTube rankings (live data)');
+  lines.push('');
+  lines.push(
+    `- [YouTube Rankings hub](${site.url}/youtube-rankings): All leaderboards in one place, built from public YouTube Data API counts refreshed every few hours.`,
+  );
+  lines.push(
+    `- [Top 100 most subscribed YouTube channels](${site.url}/youtube-rankings/most-subscribed): Channels ranked by public subscriber count, with views and video counts.`,
+  );
+  lines.push(
+    `- [Fastest growing YouTube channels](${site.url}/youtube-rankings/fastest-growing): Channels ranked by subscribers gained over a rolling window of up to 28 days, from daily snapshots.`,
+  );
+  for (const f of rankingFilters) {
+    lines.push(`- [${filterHeading(f, filterListSize(f))}](${site.url}${filterPath(f)})`);
+  }
+  lines.push(`- [Trending YouTube videos by country](${site.url}/youtube-trending): YouTube's most-popular chart for 30 countries.`);
   lines.push('');
 
   lines.push(`## Tools (${toolCount})`);
