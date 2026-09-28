@@ -147,6 +147,45 @@ Return as a valid JSON object:
 Respond ONLY with the JSON object, no other text.`,
 });
 
+export const tagGenerationPrompt = ({
+  topic,
+  keywords,
+  language,
+  count,
+}: {
+  topic: string;
+  keywords: string;
+  language: string;
+  count: number;
+}) => ({
+  systemInstruction: `${SYSTEM_ROLE} You generate YouTube Studio video tags (the metadata "Tags" field, not hashtags).`,
+  prompt: `Generate ${count} YouTube video tags for this video.
+
+Video topic or title: "${topic}"
+Focus keywords (optional): "${keywords || 'none provided'}"
+Language: ${language}
+
+Rules:
+- Tags are plain phrases for the YouTube Studio "Tags" field. No "#" symbols, no emojis, no quotes, no "<" or ">".
+- Split them into three groups:
+  - "primary": the exact main topic and its closest variations (about 20%)
+  - "related": broader or adjacent topics a viewer of this video also searches (about 40%)
+  - "longTail": specific 3–6 word search phrases (about 40%)
+- Each tag 1–6 words and at most 40 characters. Write them the way people type searches.
+- Common misspellings are allowed only if they are genuinely common for this topic.
+- Do not include channel names, brand names, or people unless they appear in the topic or focus keywords.
+- No duplicates or near-duplicates (e.g. singular and plural of the same phrase count as one).
+- Order by relevance, most relevant first.
+
+Return only this valid JSON object (plain strings, no extra fields):
+{
+  "primary": ["...", "..."],
+  "related": ["...", "..."],
+  "longTail": ["...", "..."]
+}
+Respond ONLY with the JSON object, no other text.`,
+});
+
 export const hookGenerationPrompt = ({
   topic,
   audience,

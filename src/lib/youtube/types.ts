@@ -162,3 +162,16 @@ export interface TrendingResult {
   category: string;
   videos: TrendingVideo[];
 }
+
+/** Raw public channel numbers + creation date (GET /api/youtube/channel-overview). */
+export interface ChannelOverview {
+  id: string;
+  title: string;
+  customUrl: string;
+  thumbnail: string;
+  publishedAt: string;
+  country: string;
+  subscriberCount: number;
+  viewCount: number;
+  videoCount: number;
+}

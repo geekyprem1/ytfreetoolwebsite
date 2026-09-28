@@ -55,6 +55,14 @@ export const toolLastModified: Record<string, string> = {
   '/youtube-upload-time-calculator': '2026-09-19',
   '/youtube-banner-safe-area-checker': '2026-09-19',
   '/youtube-chapter-validator': '2026-09-19',
+  '/youtube-tag-generator': '2026-09-28',
+  '/youtube-channel-age-checker': '2026-09-28',
+  '/youtube-views-ratio-calculator': '2026-09-28',
+  '/youtube-subscribe-link-generator': '2026-09-28',
+  '/youtube-title-length-checker': '2026-09-28',
+  '/youtube-title-capitalizer': '2026-09-28',
+  '/youtube-description-extractor': '2026-09-28',
+  '/youtube-title-extractor': '2026-09-28',
 };
 
 export function getToolLastModified(route: string): string | undefined {

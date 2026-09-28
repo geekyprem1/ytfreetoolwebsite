@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { toast } from 'sonner';
 
 interface UseToolApiOptions<T> {
@@ -21,6 +21,14 @@ export function useToolApi<T = unknown>(options: UseToolApiOptions<T> = {}): Use
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
+  // Keep the latest callbacks in a ref so `execute` stays referentially stable.
+  // Callers usually pass an inline object (or nothing, which defaults to `{}`),
+  // and depending on it directly made `execute` change every render — which
+  // reset any effect/interval that lists it as a dependency.
+  const optionsRef = useRef(options);
+  useEffect(() => {
+    optionsRef.current = options;
+  });
 
   const execute = useCallback(
     async (url: string | URL, init?: RequestInit): Promise<T | null> => {
@@ -42,13 +50,13 @@ export function useToolApi<T = unknown>(options: UseToolApiOptions<T> = {}): Use
         if (!res.ok || !json.success) {
           const message = json.error?.message || 'Something went wrong. Please try again.';
           setError(message);
-          options.onError?.(message);
+          optionsRef.current.onError?.(message);
           toast.error(message);
           return null;
         }
 
         setData(json.data);
-        options.onSuccess?.(json.data);
+        optionsRef.current.onSuccess?.(json.data);
         return json.data;
       } catch (err) {
         if (err instanceof DOMException && err.name === 'AbortError') {
@@ -56,14 +64,14 @@ export function useToolApi<T = unknown>(options: UseToolApiOptions<T> = {}): Use
         }
         const message = err instanceof Error ? err.message : 'Network error. Please try again.';
         setError(message);
-        options.onError?.(message);
+        optionsRef.current.onError?.(message);
         toast.error(message);
         return null;
       } finally {
         setIsLoading(false);
       }
     },
-    [options],
+    [],
   );
 
   const reset = useCallback(() => {

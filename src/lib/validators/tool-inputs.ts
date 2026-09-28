@@ -68,6 +68,14 @@ export const hashtagGeneratorSchema = z.object({
   count: z.number().int().min(5).max(50).default(30),
 });
 
+export const tagGeneratorSchema = z.object({
+  topic: z.string().trim().min(2, 'Enter a video topic or title').max(200),
+  /** Optional focus keywords the creator wants covered. */
+  keywords: z.string().trim().max(200).optional().default(''),
+  language: z.string().min(2).max(10).default('en'),
+  count: z.number().int().min(10).max(40).default(30),
+});
+
 export const hookGeneratorSchema = z.object({
   topic: z.string().min(3).max(500),
   audience: z.string().min(1).max(200).default('general'),
