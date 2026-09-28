@@ -8,12 +8,12 @@ export const metadata: Metadata = {
     absolute: 'YouTube Creator Guides & Blog | yttools.pro',
   },
   description:
-    'Educational guides on YouTube Video SEO Tags, thumbnail dimensions (HD maxresdefault), and converting YouTube Video Transcript & Subtitles into blog posts.',
+    'Practical guides on YouTube SEO, keyword research, thumbnails, transcripts, and creator workflows, with links to official YouTube guidance.',
   alternates: { canonical: '/blog' },
   openGraph: {
     title: 'YouTube Creator Guides & Blog | yttools.pro',
     description:
-      'Guides on YouTube tags, thumbnails, and transcripts for creators — free toolkit companion content.',
+      'Guides on YouTube SEO, keyword research, thumbnails, and transcripts for creators.',
   },
 };
 
@@ -22,7 +22,7 @@ export default function BlogIndexPage() {
     <ContentPageShell
       breadcrumbLabel="Blog"
       title="Creator guides"
-      description="Practical SEO and packaging guides for YouTube creators — tags, thumbnails, and transcripts."
+      description="Practical guides for YouTube creators — from topic research and video packaging to transcripts and channel planning."
       wide
     >
       <ul className="not-prose space-y-6 list-none p-0 m-0">

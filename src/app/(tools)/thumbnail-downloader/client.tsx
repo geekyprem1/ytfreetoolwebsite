@@ -42,6 +42,7 @@ export function ThumbnailDownloaderClient({ initialUrl }: { initialUrl?: string 
       {data && !isLoading && thumbnailUrls && (
         <ToolOutput title={data.videoTitle}>
           <ThumbnailPreview
+            key={data.videoId}
             thumbnails={thumbnailUrls}
             videoTitle={data.videoTitle}
             videoId={data.videoId}

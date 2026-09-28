@@ -8,6 +8,15 @@ const nextConfig: NextConfig = {
     root: path.join(__dirname),
   },
   serverExternalPackages: ['@googleapis/youtube'],
+  async redirects() {
+    return [
+      {
+        source: '/blog/youtube-seo-tips-2026',
+        destination: '/blog/youtube-seo-tips-2027',
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'i.ytimg.com', pathname: '/**' },

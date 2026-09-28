@@ -20,7 +20,7 @@ export const faqs: ToolFaq[] = [
   },
   {
     q: 'Are tags more important than the title?',
-    a: 'No. Title, thumbnail, and content match usually outweigh tags. Tags still help disambiguate synonyms, brand names, and secondary topics. Titles in the 40-60 character range often achieve about 21% higher CTR than much longer or shorter headlines.',
+    a: 'No. YouTube says the title, thumbnail, and description matter more for discovery. Tags mainly help with common misspellings; use accurate wording that matches the video instead of relying on tags.',
   },
   {
     q: 'Can I export extracted tags?',

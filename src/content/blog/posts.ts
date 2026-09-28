@@ -9,6 +9,62 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'how-to-get-youtube-transcript',
+    title: 'How to Get the Transcript of a YouTube Video (YouTube to Text)',
+    description:
+      'Find the transcript inside YouTube or export a captioned video as text with optional timestamps. Includes language, accuracy, and no-caption troubleshooting.',
+    publishedAt: '2026-09-28',
+    readingMinutes: 6,
+  },
+  {
+    slug: 'srt-vs-vtt-vs-txt',
+    title: 'SRT vs VTT vs TXT: Which Transcript Format Should You Download?',
+    description:
+      'Compare SRT, VTT, and plain TXT transcripts with real cue examples, timing syntax, and a quick guide to choosing the right export.',
+    publishedAt: '2026-09-28',
+    readingMinutes: 6,
+  },
+  {
+    slug: 'how-to-download-youtube-thumbnails-all-sizes',
+    title: 'How to Download YouTube Thumbnails in Available Sizes',
+    description:
+      'Save a YouTube video thumbnail, understand common CDN sizes from 120×90 to 1280×720, and know when higher-resolution API variants exist.',
+    publishedAt: '2026-09-28',
+    readingMinutes: 6,
+  },
+  {
+    slug: 'youtube-seo-tips-2027',
+    title: 'YouTube SEO Tips for 2027: A Practical Video Checklist',
+    description:
+      'Plan your YouTube SEO for 2027: choose a specific topic, write an accurate title and description, test packaging, and learn from search traffic.',
+    publishedAt: '2026-09-28',
+    readingMinutes: 7,
+  },
+  {
+    slug: 'youtube-keyword-research-guide',
+    title: 'YouTube Keyword Research: Find Topics Viewers Actually Search',
+    description:
+      'Research YouTube keywords without invented volume numbers. Use Studio Trends, real search results, viewer intent, and your own search terms to plan a video.',
+    publishedAt: '2026-09-28',
+    readingMinutes: 7,
+  },
+  {
+    slug: 'how-to-grow-a-youtube-channel-2027',
+    title: 'How to Grow a YouTube Channel in 2027: A Practical Plan',
+    description:
+      'Plan your YouTube channel growth in 2027 around viewer problems, clear packaging, retention, and repeat viewers—without upload-frequency myths.',
+    publishedAt: '2026-09-28',
+    readingMinutes: 7,
+  },
+  {
+    slug: 'best-free-youtube-tools-2027',
+    title: 'Best Free YouTube Tools for 2027: An Honest Creator Toolkit',
+    description:
+      'A task-based guide to free YouTube tools for research, editing, packaging, transcripts, and analytics, including what each free tool cannot do.',
+    publishedAt: '2026-09-28',
+    readingMinutes: 7,
+  },
+  {
     slug: 'youtube-monetization-requirements-2027',
     title: 'YouTube Monetization Requirements in 2027: 8,000 Hours or 20M Shorts Views',
     description:

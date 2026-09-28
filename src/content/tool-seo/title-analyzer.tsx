@@ -38,8 +38,8 @@ export function SeoContent() {
       </p>
       <p>
         This free YouTube Title Analyzer compares two candidate headlines side by side with
-        CTR-oriented guidance, SEO and emotion scores—not a live Studio A/B test. Prefer titles near
-        40–60 characters, where about 21% higher CTR is common versus extremes.
+        CTR-oriented guidance, SEO and emotion scores—not a live Studio A/B test. Prefer a clear,
+        accurate title with the most useful words near the beginning.
       </p>
       <p>
         This is not a live YouTube experiment. Platform-native title A/B testing is not universally

@@ -5,22 +5,22 @@ import { SeoContent, faqs } from '@/content/tool-seo/thumbnail-downloader';
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'YouTube Thumbnail Downloader 4K HD - YT Toolkit | Save Images',
+    absolute: 'YouTube Thumbnail Downloader — Available Sizes | YT Toolkit',
   },
   description:
-    'Download 4K & HD YouTube video thumbnails instantly in full 1080p resolution. Free online YouTube thumbnail saver with no account or login required.',
+    'Save YouTube video thumbnails in common CDN sizes up to 1280×720 when available. Free online thumbnail downloader with no login required.',
   keywords: [
     'YouTube Video Thumbnail Downloader',
     'HD maxresdefault',
-    'download youtube thumbnail 4k',
+    'download youtube thumbnail sizes',
     'youtube thumbnail grabber',
     'free youtube thumbnail download',
   ],
   alternates: { canonical: '/thumbnail-downloader' },
   openGraph: {
-    title: 'YouTube Thumbnail Downloader 4K HD - YT Toolkit | Save Images',
+    title: 'YouTube Thumbnail Downloader — Available Sizes | YT Toolkit',
     description:
-      'Download 4K & HD YouTube video thumbnails instantly. Free online YouTube thumbnail saver with no account or login required.',
+      'Save common YouTube thumbnail sizes up to 1280×720 when available, with no login required.',
   },
 };
 
@@ -33,11 +33,11 @@ export default async function ThumbnailDownloaderPage({
   return (
     <ToolPageShell
       toolName="Thumbnail Downloader"
-      toolDescription="Download YouTube thumbnails in HD, SD, HQ quality. Free and no login required."
+      toolDescription="Save common YouTube thumbnail sizes. Free and no login required."
       toolSlug="thumbnail-downloader"
       title="Free YouTube Video Thumbnail Downloader (HD maxresdefault)"
-      description="Download original YouTube video thumbnails (HD maxresdefault 1280x720 and smaller CDN sizes) from any public or unlisted URL - no login, no extension, not Windows thumbs.db files."
-      answerFirst="YouTube (YT) Toolkit's Thumbnail Downloader extracts maximum-resolution cover images (maxresdefault, typically 1280x720 HD) directly from any public YouTube video URL in under 0.44 seconds without registration. Prefer Max when available, then fall back to SD/HQ sizes from the same CDN."
+      description="Save YouTube video thumbnails in common CDN sizes from 120×90 to Max 1280×720, when those versions are available. Paste a public or unlisted video URL; no login or extension required."
+      answerFirst="Paste a YouTube video URL to preview and save common thumbnail sizes. Max is typically 1280×720 when available; SD, HQ, MQ, and Default offer smaller versions. This tool does not promise 1080p or 4K thumbnail files."
       seo={<SeoContent />}
       faqs={faqs}
     >

@@ -6,6 +6,13 @@ import { blogPosts, getPostBySlug } from '@/content/blog/posts';
 import { JsonLd } from '@/components/seo/json-ld';
 import { site } from '@/content/site';
 import { graphJsonLd, breadcrumbNode } from '@/lib/seo/schema-graph';
+import { SeoTips2027Article } from '@/content/blog/articles/seo-tips-2027';
+import { KeywordResearchArticle } from '@/content/blog/articles/keyword-research';
+import { GrowChannel2027Article } from '@/content/blog/articles/grow-channel-2027';
+import { FreeTools2027Article } from '@/content/blog/articles/free-tools-2027';
+import { GetTranscriptArticle } from '@/content/blog/articles/get-transcript';
+import { TranscriptFormatsArticle } from '@/content/blog/articles/transcript-formats';
+import { DownloadThumbnailsArticle } from '@/content/blog/articles/download-thumbnails';
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
@@ -21,7 +28,7 @@ export async function generateMetadata({
   if (!post) return {};
   const description =
     slug === 'youtube-thumbnail-dimensions-guide'
-      ? 'Learn the recommended YouTube thumbnail size, dimensions, resolution, and 1280x720 canvas for clear video packaging.'
+      ? 'Understand common YouTube thumbnail CDN dimensions, including maxresdefault at 1280×720 when available, and current upload recommendations.'
       : post.description;
   return {
     title: { absolute: `${post.title} | yttools.pro` },
@@ -90,6 +97,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <p>
           <Link href="/blog">← All guides</Link>
         </p>
+        {slug === 'how-to-get-youtube-transcript' && <GetTranscriptArticle />}
+        {slug === 'srt-vs-vtt-vs-txt' && <TranscriptFormatsArticle />}
+        {slug === 'how-to-download-youtube-thumbnails-all-sizes' && <DownloadThumbnailsArticle />}
+        {slug === 'youtube-seo-tips-2027' && <SeoTips2027Article />}
+        {slug === 'youtube-keyword-research-guide' && <KeywordResearchArticle />}
+        {slug === 'how-to-grow-a-youtube-channel-2027' && <GrowChannel2027Article />}
+        {slug === 'best-free-youtube-tools-2027' && <FreeTools2027Article />}
         {slug === 'youtube-tag-ranking-2026' && <TagRankingArticle />}
         {slug === 'youtube-thumbnail-dimensions-guide' && <ThumbnailGuideArticle />}
         {slug === 'youtube-transcript-to-blog-post' && <TranscriptBlogArticle />}
@@ -158,9 +172,10 @@ function ThumbnailGuideArticle() {
   return (
     <>
       <p>
-        <strong>Short answer:</strong> use a 1280x720 YouTube thumbnail at a 16:9 aspect ratio. This is the
-        recommended full-size canvas for a video thumbnail; keep important text and faces away from the edges so
-        mobile and compact previews can crop safely.
+        <strong>Short answer:</strong> 1280×720 is the common Max CDN thumbnail size, when that
+        version exists. It is not the only possible upload or API size. YouTube&apos;s current upload
+        guidance recommends 3840×2160 for custom video thumbnails; the public copy you retrieve may
+        be smaller. Keep important text readable in compact previews.
       </p>
       <p>
         A YouTube Video Thumbnail Downloader (HD maxresdefault) targets the cover image YouTube hosts on

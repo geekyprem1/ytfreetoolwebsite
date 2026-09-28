@@ -7,10 +7,10 @@ import { cn } from '@/lib/utils';
 
 const QUALITIES = [
   { value: 'max', label: 'Max', detail: '1280×720' },
-  { value: 'hd', label: 'HD', detail: '1280×720' },
   { value: 'sd', label: 'SD', detail: '640×480' },
   { value: 'hq', label: 'HQ', detail: '480×360' },
   { value: 'mq', label: 'MQ', detail: '320×180' },
+  { value: 'default', label: 'Default', detail: '120×90' },
 ];
 
 interface ThumbnailPreviewProps {
@@ -20,9 +20,15 @@ interface ThumbnailPreviewProps {
 }
 
 export function ThumbnailPreview({ thumbnails, videoTitle, videoId }: ThumbnailPreviewProps) {
-  const [selected, setSelected] = useState('max');
-  const currentUrl = thumbnails[selected] || Object.values(thumbnails)[0] || '';
+  const [selected, setSelected] = useState<string | null>('max');
+  const currentUrl = selected ? thumbnails[selected] || '' : '';
   const currentQuality = QUALITIES.find((q) => q.value === selected);
+
+  const handleImageError = () => {
+    const currentIndex = QUALITIES.findIndex((q) => q.value === selected);
+    const next = QUALITIES.slice(currentIndex + 1).find((q) => thumbnails[q.value]);
+    setSelected(next?.value ?? null);
+  };
 
   const handleDownload = async () => {
     if (!currentUrl) return;
@@ -54,6 +60,7 @@ export function ThumbnailPreview({ thumbnails, videoTitle, videoId }: ThumbnailP
               className="object-contain"
               unoptimized
               priority
+              onError={handleImageError}
             />
           </div>
         ) : (
@@ -70,6 +77,7 @@ export function ThumbnailPreview({ thumbnails, videoTitle, videoId }: ThumbnailP
             type="button"
             onClick={() => setSelected(q.value)}
             disabled={!thumbnails[q.value]}
+            aria-pressed={selected === q.value}
             className={cn(
               'px-3.5 py-2.5 rounded-xl text-sm font-medium transition-colors border',
               selected === q.value
@@ -94,7 +102,7 @@ export function ThumbnailPreview({ thumbnails, videoTitle, videoId }: ThumbnailP
         disabled={!currentUrl}
         className="h-11 px-6 rounded-xl bg-[#FF3B30] hover:bg-[#E0352B] text-white"
       >
-        Download {selected.toUpperCase()}
+        Download {selected?.toUpperCase() ?? 'thumbnail'}
       </Button>
     </div>
   );

@@ -32,7 +32,7 @@ export const faqs: ToolFaq[] = [
   },
   {
     q: 'Can YouTube Video Transcript & Subtitles help SEO?',
-    a: 'Indirectly. Transcripts reveal spoken keywords, chapter candidates, and quote hooks. You still need strong titles, thumbnails, and descriptions - but transcript research makes those assets more accurate. Titles in the 40-60 character range are often associated with about 21% higher CTR.',
+    a: 'Indirectly. Transcripts reveal spoken keywords, chapter candidates, and quote hooks. Use those details to make your title, thumbnail, and description more accurate, then check actual video performance in YouTube Studio.',
   },
 ];
 

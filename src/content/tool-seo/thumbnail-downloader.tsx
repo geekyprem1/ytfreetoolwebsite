@@ -3,8 +3,8 @@ import type { ToolFaq } from '@/components/tools/tool-faq-section';
 
 export const faqs: ToolFaq[] = [
   {
-    q: 'How does the YouTube Thumbnail Downloader extract HD / 4K-ready images?',
-    a: 'According to YouTube Data API v3 thumbnail documentation, YouTube stores uploaded covers in multiple CDN tiers on i.ytimg.com. YouTube (YT) Toolkit fetches the original public maxresdefault.jpg when available (typically 1280x720), plus sddefault (640x480), hqdefault (480x360), mqdefault (320x180), and default (120x90) - loss-free JPEG recovery without registration.',
+    q: 'Which YouTube thumbnail sizes does this downloader offer?',
+    a: 'The tool offers common CDN versions: Max (typically 1280x720), SD (640x480), HQ (480x360), MQ (320x180), and Default (120x90). Not every size exists for every video, and this tool does not provide 4K thumbnails.',
   },
   {
     q: 'What thumbnail resolutions can I download with this YouTube Video Thumbnail Downloader (HD maxresdefault)?',
@@ -12,11 +12,11 @@ export const faqs: ToolFaq[] = [
   },
   {
     q: 'Why is Max (1280x720) sometimes missing?',
-    a: 'Not every upload has a maxresdefault.jpg file. Older videos, some Shorts, and certain custom uploads only publish smaller frames such as hqdefault (480x360). When Max is unavailable, choose HD/HQ or SD instead.',
+    a: 'Not every upload has a maxresdefault.jpg file. If the Max image does not load, try SD, HQ, MQ, or Default. A temporary network failure can also prevent a preview from loading.',
   },
   {
     q: 'Do I need to log in to download a YouTube video thumbnail?',
-    a: 'No. Paste a public video URL or ID and download directly. Typical fetches complete in under 0.44-0.8 seconds. No Google account, browser extension, or signup is required - unlike VidIQ or TubeBuddy browser add-ons.',
+    a: 'No. Paste a public video URL or ID and download an available public thumbnail. No Google account, browser extension, or signup is required.',
   },
   {
     q: 'Is downloading YouTube thumbnails legal under US Fair Use?',
@@ -35,7 +35,7 @@ export function SeoContent() {
       <p>
         This free YouTube Video Thumbnail Downloader (HD maxresdefault) pulls original cover images from
         YouTube’s CDN — not browser screenshots or Windows <code>thumbs.db</code> files. Paste any public
-        or accessible unlisted video URL to preview and save JPEG frames in under 0.8 seconds.
+        or accessible unlisted video URL to preview and save a JPEG thumbnail.
       </p>
       <table>
         <thead>
@@ -103,11 +103,11 @@ export function SeoContent() {
           the video ID works.
         </li>
         <li>
-          <strong>Paste it above</strong> — Submit the URL to load available qualities.
+          <strong>Paste it above</strong> — Submit the URL to see common thumbnail sizes.
         </li>
         <li>
           <strong>Preview each size</strong> — Compare Max (1280×720), SD (640×480), HQ (480×360), and MQ
-          (320×180) before saving.
+          (320×180) and Default (120×90) before saving.
         </li>
         <li>
           <strong>Download the quality you need</strong> — Prefer Max for decks and print; HQ or MQ for
@@ -115,13 +115,12 @@ export function SeoContent() {
         </li>
       </ol>
 
-      <h2>Download YouTube thumbnail 4K maxresdefault</h2>
+      <h2>Does Max mean a 4K thumbnail?</h2>
       <p>
-        Searching for &ldquo;download youtube thumbnail 4k maxresdefault&rdquo;? YouTube (YT) Toolkit
-        requests the public <code>maxresdefault.jpg</code> asset (typically 1280x720 HD - the largest
-        common CDN frame YouTube publishes). Some creators call this 4K-ready packaging research because
-        it is the sharpest original cover YouTube hosts publicly; true 3840x2160 player frames are not
-        exposed as separate thumbnail endpoints. Always prefer Max when present, then SD/HQ fallbacks.
+        No. This tool requests <code>maxresdefault.jpg</code>, typically 1280×720 when available.
+        YouTube&apos;s video API also documents optional 1080p, 2K, and 4K thumbnail resources for
+        some videos, but this downloader does not offer those API variants. A 4K video does not
+        guarantee that its Max thumbnail is 4K. Try SD or HQ if Max is unavailable.
       </p>
 
       <h2>Download maxresdefault HD thumbnail from an unlisted YouTube video</h2>
@@ -135,8 +134,8 @@ export function SeoContent() {
 
       <h3>Max / maxresdefault (1280×720)</h3>
       <p>
-        Largest common public thumbnail. Use it when you need readable text overlays or want to inspect
-        composition at near-player scale. If Max fails to load, the video never received a maxres asset.
+        Largest common CDN size offered by this tool. Use it to inspect composition and text at a
+        larger scale. If Max fails to load, try a smaller option; Max may be unavailable for that video.
       </p>
       <h3>Why original CDN thumbnails beat screenshots</h3>
       <p>
@@ -148,7 +147,7 @@ export function SeoContent() {
       <h2>Features</h2>
       <ul>
         <li>Multiple quality endpoints from YouTube’s public thumbnail CDN</li>
-        <li>Instant preview before you save a file (typically under 0.8 seconds)</li>
+        <li>Preview the chosen size before saving a file</li>
         <li>Works without login or browser extensions</li>
         <li>Accepts standard watch URLs, Shorts URLs, unlisted links, and bare video IDs</li>
         <li>Mobile-friendly workflow for saving references on the go</li>

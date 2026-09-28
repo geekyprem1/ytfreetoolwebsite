@@ -20,6 +20,7 @@ import { rankingFilters, filterPath } from '@/content/rankings/filters';
 
 export function geoPages(): GeoPage[] {
   const pages: GeoPage[] = [
+    { path: '/for-students', changeFrequency: 'monthly', priority: 0.7 },
     { path: '/data', changeFrequency: 'monthly', priority: 0.7 },
     { path: '/glossary', changeFrequency: 'monthly', priority: 0.6 },
     { path: '/api-docs', changeFrequency: 'monthly', priority: 0.6 },

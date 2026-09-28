@@ -33,7 +33,7 @@ export const datasets: Dataset[] = [
   {
     slug: 'youtube-cpm-by-country',
     title: 'YouTube CPM by Country (2026 Estimates)',
-    metaTitle: 'YouTube CPM by Country 2026 — Estimated Ranges | yttools.pro',
+    metaTitle: 'YouTube CPM Rates by Country 2026 (Estimates) | yttools.pro',
     metaDescription:
       'Estimated YouTube CPM ranges by country for 2026, compiled from publicly reported creator figures. Tier 1 markets like the US and Norway pay the most. Estimates, not payouts.',
     answerFirst:
@@ -72,13 +72,13 @@ export const datasets: Dataset[] = [
     ],
     methodology:
       'Ranges are aggregated from publicly shared creator earnings reports, ad-industry commentary, and commonly cited figures across niches, then rounded to broad bands. Actual CPM varies by niche, season (Q4 is highest), ad format, and audience. These are directional estimates, not guaranteed rates, and do not represent private YouTube data.',
-    keywords: ['youtube cpm by country', 'youtube cpm 2026', 'highest cpm countries youtube'],
+    keywords: ['youtube cpm rates by country 2026', 'youtube cpm by country', 'highest cpm countries youtube'],
     lastUpdated: LAST_UPDATED,
   },
   {
     slug: 'youtube-rpm-by-niche',
     title: 'YouTube RPM by Niche (2026 Estimates)',
-    metaTitle: 'YouTube RPM by Niche 2026 — Estimated Ranges | yttools.pro',
+    metaTitle: 'Highest Paying YouTube Niches 2026 (RPM Estimates) | yttools.pro',
     metaDescription:
       'Estimated YouTube RPM ranges by niche for 2026. Finance, tech, and business channels earn the most per 1,000 views; entertainment and gaming earn less. Estimates, not payouts.',
     answerFirst:
@@ -109,7 +109,7 @@ export const datasets: Dataset[] = [
     ],
     methodology:
       'RPM ranges are compiled from publicly reported creator figures across niches and rounded to bands. Real RPM depends on audience country, watch time, ad formats, and the share of monetizable views. Finance and business skew high; kids and music skew low due to advertiser and policy factors. Estimates only — not payouts or private data.',
-    keywords: ['youtube rpm by niche', 'highest paying youtube niches', 'youtube rpm 2026'],
+    keywords: ['highest paying youtube niches 2026', 'youtube rpm by niche', 'youtube rpm 2026'],
     lastUpdated: LAST_UPDATED,
   },
   {
