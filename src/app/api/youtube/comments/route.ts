@@ -1,9 +1,6 @@
 import { NextRequest } from 'next/server';
-import { getComments, getVideoDetails } from '@/lib/youtube/client';
 import { parseYouTubeUrl } from '@/lib/youtube/url-parser';
-import { getCachedOrFetch } from '@/lib/cache/get-cached';
-import { cacheKeys } from '@/lib/cache/cache-keys';
-import { TTL } from '@/lib/cache/cache-policies';
+import { getCachedComments } from '@/lib/youtube/comments';
 import { apiSuccessResponse, apiErrorResponse, handleApiError, AppError, ErrorCodes } from '@/lib/errors';
 
 const MAX_COMMENTS = 2000;
@@ -25,22 +22,19 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    const vid = videoId;
-    const result = await getCachedOrFetch(cacheKeys.comments(vid, MAX_COMMENTS), TTL.comments, async () => {
-      const comments = await getComments(vid, MAX_COMMENTS);
-      // Attach the video title (cheap 1-unit call, best-effort).
-      let videoTitle = comments.videoTitle;
-      if (!videoTitle) {
-        try {
-          const detail = await getVideoDetails(vid);
-          videoTitle = detail.title;
-        } catch {
-          videoTitle = '';
-        }
+    const rawLimit = request.nextUrl.searchParams.get('limit');
+    let limit = MAX_COMMENTS;
+    if (rawLimit !== null) {
+      if (!/^\d+$/.test(rawLimit)) {
+        return apiErrorResponse(new AppError('INVALID_TOOL_INPUT', 'Comment limit must be a whole number from 1 to 2,000.', 400));
       }
-      return { ...comments, videoTitle };
-    });
+      limit = Number(rawLimit);
+      if (limit < 1 || limit > MAX_COMMENTS) {
+        return apiErrorResponse(new AppError('INVALID_TOOL_INPUT', 'Comment limit must be a whole number from 1 to 2,000.', 400));
+      }
+    }
 
+    const result = await getCachedComments(videoId, limit);
     return apiSuccessResponse(result);
   } catch (err) {
     return apiErrorResponse(handleApiError(err));

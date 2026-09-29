@@ -151,7 +151,8 @@ export function SeoContent() {
         </li>
         <li>
           <strong>Verify the exact channel.</strong> Topic channels, fan accounts, and similarly named creators are
-          easy to mix up. Confirm the @handle and avatar before you cite numbers in a report.
+          easy to mix up. Confirm the @handle and avatar before you cite numbers in a report. If you need a machine
+          identifier, read the <Link href="/blog/youtube-channel-id-vs-handle">channel ID vs handle guide</Link>.
         </li>
         <li>
           <strong>Combine channel and tag research.</strong> After you size a competitor, use{' '}

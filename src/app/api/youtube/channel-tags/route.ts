@@ -7,7 +7,7 @@ import { apiSuccessResponse, apiErrorResponse, handleApiError } from '@/lib/erro
 
 async function fetchChannelTags(input: string) {
   const channel = await getChannelDetails(input);
-  const videos = await getChannelVideos(channel.id, 10);
+  const videos = await getChannelVideos(channel.id, 10, channel.uploadsPlaylistId);
 
   const allTags = new Set<string>();
   for (const video of videos) {

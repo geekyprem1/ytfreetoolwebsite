@@ -1,18 +1,18 @@
 import { describe, expect, it } from 'vitest';
-import { datasetNode, editorialPersonNode, organizationNode, toolPageGraph } from './schema-graph';
+import { datasetNode, editorialTeamNode, organizationNode, toolPageGraph } from './schema-graph';
 
 describe('SEO schema graph helpers', () => {
-  it('uses a crawlable large logo and a linked editorial person entity', () => {
+  it('uses a crawlable large logo and identifies the editorial team as an organization', () => {
     expect(organizationNode().logo).toEqual({
       '@type': 'ImageObject',
       url: 'https://yttools.pro/logo',
       width: 512,
       height: 512,
     });
-    expect(editorialPersonNode()).toMatchObject({
-      '@type': 'Person',
-      '@id': 'https://yttools.pro/about#person',
-      worksFor: { '@id': 'https://yttools.pro/#organization' },
+    expect(editorialTeamNode()).toMatchObject({
+      '@type': 'Organization',
+      '@id': 'https://yttools.pro/about#editorial-team',
+      parentOrganization: { '@id': 'https://yttools.pro/#organization' },
     });
   });
 

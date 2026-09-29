@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ContentPageShell } from '@/components/layout/content-page-shell';
-import { blogPosts, getPostBySlug } from '@/content/blog/posts';
+import { blogPosts, editorialTeamName, getPostBySlug } from '@/content/blog/posts';
 import { JsonLd } from '@/components/seo/json-ld';
 import { site } from '@/content/site';
 import { graphJsonLd, breadcrumbNode } from '@/lib/seo/schema-graph';
@@ -13,6 +13,19 @@ import { FreeTools2027Article } from '@/content/blog/articles/free-tools-2027';
 import { GetTranscriptArticle } from '@/content/blog/articles/get-transcript';
 import { TranscriptFormatsArticle } from '@/content/blog/articles/transcript-formats';
 import { DownloadThumbnailsArticle } from '@/content/blog/articles/download-thumbnails';
+import { CommentExportTroubleshootingArticle } from '@/content/blog/articles/comment-export-troubleshooting';
+import { ChannelIdVsHandleArticle } from '@/content/blog/articles/channel-id-vs-handle';
+import { YouTubePublicationTimeArticle } from '@/content/blog/articles/youtube-publication-time-vs-upload-time';
+import { ReadingYouTubeCommentSentimentArticle } from '@/content/blog/articles/reading-youtube-comment-sentiment';
+import { YouTubeCreatorIncomeStreamsArticle } from '@/content/blog/articles/youtube-creator-income-streams';
+
+const articleKeywords: Record<string, string[] | undefined> = {
+  'youtube-comment-export-troubleshooting': ['youtube comment exporter not working', 'youtube comments export csv', 'search youtube comments'],
+  'youtube-channel-id-vs-handle': ['youtube channel id vs handle', 'find youtube channel id', 'youtube @handle id'],
+  'youtube-publication-time-vs-upload-time': ['youtube published date vs upload date', 'youtube publishedAt', 'youtube video publication timestamp'],
+  'reading-youtube-comment-sentiment': ['youtube comment sentiment meaning', 'interpret comment sentiment analysis', 'youtube comment themes'],
+  'youtube-creator-income-streams': ['youtube creator income calculator', 'youtube rpm sponsorship affiliate income', 'youtube creator revenue streams'],
+};
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
@@ -42,16 +55,16 @@ export async function generateMetadata({
             'youtube thumbnail 1280x720',
             'youtube thumbnail size pixels',
           ]
-        : undefined,
+        : articleKeywords[slug],
     alternates: { canonical: `/blog/${post.slug}` },
-    authors: [{ name: 'YT Toolkit Editorial Team', url: `${site.url}/about` }],
+    authors: [{ name: editorialTeamName, url: `${site.url}/about#editorial-team` }],
     openGraph: {
       title: post.title,
       description,
       type: 'article',
       publishedTime: post.publishedAt,
       modifiedTime: post.dateModified ?? post.publishedAt,
-      authors: [`${site.url}/about`],
+      authors: [`${site.url}/about#editorial-team`],
       images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: post.title }],
     },
     twitter: { card: 'summary_large_image', images: ['/opengraph-image'] },
@@ -69,10 +82,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       '@id': `${site.url}/blog/${post.slug}#article`,
       headline: post.title,
       description: post.description,
+      articleSection: post.category,
       datePublished: post.publishedAt,
       dateModified: post.dateModified ?? post.publishedAt,
       image: [`${site.url}/opengraph-image`],
-      author: { '@id': `${site.url}/about#person` },
+      author: { '@id': `${site.url}/about#editorial-team` },
       publisher: {
         '@type': 'Organization',
         '@id': `${site.url}/#organization`,
@@ -83,6 +97,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       mainEntityOfPage: { '@type': 'WebPage', '@id': `${site.url}/blog/${post.slug}` },
       isPartOf: { '@id': `${site.url}/#website` },
     },
+    {
+      '@type': 'Organization',
+      '@id': `${site.url}/about#editorial-team`,
+      name: editorialTeamName,
+      url: `${site.url}/about#editorial-team`,
+      parentOrganization: { '@id': `${site.url}/#organization` },
+    },
     { ...breadcrumbNode([{ name: 'Home', path: '/' }, { name: 'Blog', path: '/blog' }, { name: post.title, path: `/blog/${post.slug}` }]), '@id': `${site.url}/blog/${post.slug}#breadcrumb` },
   ]);
 
@@ -92,8 +113,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <ContentPageShell
         breadcrumbLabel="Blog"
         title={post.title}
-        description={`${post.publishedAt} · ${post.readingMinutes} min read`}
+        description={`${post.category} · ${post.readingMinutes} min read`}
       >
+        <div className="not-prose mb-8 border-y border-border/70 py-3 text-sm text-muted-foreground">
+          <p>
+            By <Link href="/about#editorial-team" className="font-medium text-foreground hover:text-primary">{editorialTeamName}</Link>
+            {' · '}Published <time dateTime={post.publishedAt}>{post.publishedAt}</time>
+            {post.dateModified && post.dateModified !== post.publishedAt && (
+              <> · Updated <time dateTime={post.dateModified}>{post.dateModified}</time></>
+            )}
+          </p>
+          <p className="mt-1 text-xs">Read <Link href="/about#editorial-team" className="underline underline-offset-2 hover:text-foreground">how our guides are prepared</Link>.</p>
+        </div>
         <p>
           <Link href="/blog">← All guides</Link>
         </p>
@@ -104,6 +135,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {slug === 'youtube-keyword-research-guide' && <KeywordResearchArticle />}
         {slug === 'how-to-grow-a-youtube-channel-2027' && <GrowChannel2027Article />}
         {slug === 'best-free-youtube-tools-2027' && <FreeTools2027Article />}
+        {slug === 'youtube-comment-export-troubleshooting' && <CommentExportTroubleshootingArticle />}
+        {slug === 'youtube-channel-id-vs-handle' && <ChannelIdVsHandleArticle />}
+        {slug === 'youtube-publication-time-vs-upload-time' && <YouTubePublicationTimeArticle />}
+        {slug === 'reading-youtube-comment-sentiment' && <ReadingYouTubeCommentSentimentArticle />}
+        {slug === 'youtube-creator-income-streams' && <YouTubeCreatorIncomeStreamsArticle />}
         {slug === 'youtube-tag-ranking-2026' && <TagRankingArticle />}
         {slug === 'youtube-thumbnail-dimensions-guide' && <ThumbnailGuideArticle />}
         {slug === 'youtube-transcript-to-blog-post' && <TranscriptBlogArticle />}
@@ -112,6 +148,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {slug === '20-million-shorts-views-in-90-days' && <TwentyMillionShortsViewsArticle />}
         {slug === 'qualified-youtube-watch-hours-what-counts' && <QualifiedWatchHoursArticle />}
         {slug === 'youtube-monetization-current-vs-2027' && <CurrentVs2027Article />}
+        <aside className="not-prose mt-12 border-t border-border/70 pt-5 text-sm text-muted-foreground">
+          <strong className="text-foreground">About the author:</strong> {editorialTeamName} maintains the creator tools and guides on this site.{' '}
+          <Link href="/about#editorial-team" className="font-medium text-primary hover:underline">Editorial process and contact</Link>
+        </aside>
       </ContentPageShell>
     </>
   );

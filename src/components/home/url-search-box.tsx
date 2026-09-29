@@ -17,6 +17,11 @@ import {
   Captions,
   Fingerprint,
   UserCircle,
+  FileText,
+  MessageSquare,
+  ScrollText,
+  CalendarDays,
+  Radio,
 } from 'lucide-react';
 
 const toolSuggestions: Record<string, { name: string; slug: string; icon: React.ComponentType<{ className?: string }> }[]> = {
@@ -26,6 +31,10 @@ const toolSuggestions: Record<string, { name: string; slug: string; icon: React.
     { name: 'Transcript Extractor', slug: 'transcript-extractor', icon: Search },
     { name: 'Subtitle Downloader', slug: 'subtitle-downloader', icon: Captions },
     { name: 'Video Statistics', slug: 'video-statistics', icon: BarChart3 },
+    { name: 'Description Extractor', slug: 'youtube-description-extractor', icon: FileText },
+    { name: 'Comment Exporter', slug: 'youtube-comment-exporter', icon: MessageSquare },
+    { name: 'Comment Sentiment Analyzer', slug: 'youtube-comment-sentiment-analyzer', icon: MessageSquare },
+    { name: 'Video Summarizer', slug: 'youtube-video-summarizer', icon: ScrollText },
   ],
   channel: [
     { name: 'Channel Statistics', slug: 'channel-statistics', icon: Users },
@@ -33,6 +42,8 @@ const toolSuggestions: Record<string, { name: string; slug: string; icon: React.
     { name: 'Profile Picture Downloader', slug: 'youtube-profile-picture-downloader', icon: UserCircle },
     { name: 'Channel Tags', slug: 'channel-tags', icon: Hash },
     { name: 'Monetization Checker', slug: 'monetization-checker', icon: BadgeDollarSign },
+    { name: 'Channel Age Checker', slug: 'youtube-channel-age-checker', icon: CalendarDays },
+    { name: 'Live Subscriber Count', slug: 'live-subscriber-count', icon: Radio },
   ],
 };
 
@@ -82,7 +93,7 @@ export function UrlSearchBox() {
             <p className="text-caption text-muted-foreground mb-2.5 px-1 font-medium tracking-[0.06em] uppercase">
               {parsed.type === 'video' ? 'Detected video' : 'Detected channel'}
             </p>
-            <div className="flex flex-col divide-y divide-border/60 border-t border-border/60">
+            <div className="flex max-h-80 flex-col divide-y divide-border/60 overflow-y-auto border-t border-border/60">
               {toolSuggestions[parsed.type]?.map((tool) => {
                 const Icon = tool.icon;
                 return (
@@ -97,6 +108,9 @@ export function UrlSearchBox() {
                 );
               })}
             </div>
+            <Link href="/tools" className="mt-3 inline-block px-1 text-sm font-medium text-primary hover:underline">
+              Browse all tools
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>

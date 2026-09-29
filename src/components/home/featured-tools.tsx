@@ -61,7 +61,7 @@ export function FeaturedTools() {
 
         <div className="mt-10">
           <Link
-            href="#tools"
+            href="/tools"
             className="inline-flex items-center gap-2 text-base font-medium text-primary hover:underline underline-offset-4"
           >
             View all {toolCount} tools <ArrowRight className="size-4" />

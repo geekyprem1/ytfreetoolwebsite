@@ -8,7 +8,7 @@ import { apiSuccessResponse, apiErrorResponse, handleApiError } from '@/lib/erro
 
 async function fetchChannelStats(input: string) {
   const channel = await getChannelDetails(input);
-  const recentUploads = await getChannelVideos(channel.id);
+  const recentUploads = await getChannelVideos(channel.id, 5, channel.uploadsPlaylistId);
 
   return {
     ...channel,

@@ -13,6 +13,7 @@
 import { getRedis } from '@/lib/cache/redis';
 import { cacheKeys } from '@/lib/cache/cache-keys';
 import { TTL } from '@/lib/cache/cache-policies';
+import { logSafeError } from '@/lib/errors';
 
 export const GROWTH_WINDOW_DAYS = 28;
 
@@ -42,7 +43,7 @@ export async function recordDailySnapshot(
     await redis.expire(key, TTL.rankingsSnapshot);
     return true;
   } catch (err) {
-    console.error('[rankings] snapshot write failed', err);
+    logSafeError('[rankings] snapshot write failed', err);
     return false;
   }
 }
@@ -92,7 +93,7 @@ export async function loadGrowthHistory(now: Date = new Date()): Promise<GrowthH
     }
     return { baseline: subscribers.size ? { date, days, subscribers } : null, since };
   } catch (err) {
-    console.error('[rankings] growth history read failed', err);
+    logSafeError('[rankings] growth history read failed', err);
     return { baseline: null, since: null };
   }
 }

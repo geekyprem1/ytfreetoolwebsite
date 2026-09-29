@@ -11,6 +11,7 @@ export const TTL = {
   playlist: 60 * 60 * 6,           // 6 hours
   liveCount: 60,                   // 60s — smooth client interpolation between fetches
   comments: 60 * 30,               // 30 minutes
+  returnDislikeEstimate: 60 * 60 * 6, // 6 hours; provider estimate itself may be older
   trending: 60 * 60 * 3,           // 3 hours (refreshed a few times daily)
   rankingsPool: 60 * 60 * 6,       // 6 hours — subscriber counts are rounded; matches page revalidate
   rankingsLastGood: 60 * 60 * 24 * 7, // 7 days fallback copy if the API fails

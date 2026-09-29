@@ -24,7 +24,7 @@ export const faqs: ToolFaq[] = [
   },
   {
     q: 'Should I include dislikes?',
-    a: 'No — YouTube hides public dislikes and the classic formula excludes them. Track like-to-view as a quality proxy instead.',
+    a: 'No — YouTube does not provide a public dislike count through its Data API, and this engagement formula excludes dislikes. If you want another rough signal, the Dislike Checker links to a third-party estimate; it is not an official or exact count.',
   },
 ];
 
@@ -86,7 +86,9 @@ export function SeoContent() {
 
       <h2>Related tools</h2>
       <p>
-        Check stickiness with the <Link href="/youtube-average-view-duration-calculator">Average View Duration Calculator</Link>,
+        For a clearly labeled third-party estimate when one is available, use the{' '}
+        <Link href="/youtube-dislike-checker">YouTube Dislike Checker</Link>. Check stickiness with the{' '}
+        <Link href="/youtube-average-view-duration-calculator">Average View Duration Calculator</Link>,
         watch-hours impact with the <Link href="/youtube-watch-time-calculator">Watch Time Calculator</Link>, growth with the{' '}
         <Link href="/youtube-subscriber-growth-calculator">Subscriber Growth Calculator</Link>, and revenue per engaged viewer via the{' '}
         <Link href="/youtube-money-calculator">Money Calculator</Link>.

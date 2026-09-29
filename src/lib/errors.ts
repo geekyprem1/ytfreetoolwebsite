@@ -61,6 +61,16 @@ export function apiSuccessResponse<T>(data: T, meta?: Record<string, unknown>) {
   return NextResponse.json({ success: true, data, meta: meta || {} });
 }
 
+/** Upstream Error objects can contain request URLs with API keys. Log only safe fields. */
+export function logSafeError(context: string, err: unknown): void {
+  const details = err && typeof err === 'object' ? err as Record<string, unknown> : {};
+  const code = typeof details.code === 'string' && /^[A-Z][A-Z0-9_]{0,39}$/.test(details.code)
+    ? details.code : 'UNKNOWN';
+  const status = typeof details.status === 'number' && Number.isInteger(details.status)
+    && details.status >= 100 && details.status <= 599 ? details.status : undefined;
+  console.error(context, { code, ...(status ? { status } : {}) });
+}
+
 export function handleApiError(err: unknown): AppError {
   if (err instanceof AppError) return err;
 
@@ -80,6 +90,6 @@ export function handleApiError(err: unknown): AppError {
     return new AppError('VIDEO_NOT_FOUND', ErrorCodes.VIDEO_NOT_FOUND.message, 404);
   }
 
-  console.error('Unhandled API error:', err);
+  logSafeError('Unhandled API error', err);
   return new AppError('INTERNAL_ERROR', ErrorCodes.INTERNAL_ERROR.message, 500);
 }

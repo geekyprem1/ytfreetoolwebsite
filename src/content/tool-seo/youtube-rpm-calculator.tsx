@@ -94,6 +94,11 @@ export function SeoContent() {
         <Link href="/youtube-watch-time-calculator">Watch Time Calculator</Link> and{' '}
         <Link href="/youtube-average-view-duration-calculator">Average View Duration Calculator</Link>.
       </p>
+      <p>
+        Planning several income streams? Read the{' '}
+        <Link href="/blog/youtube-creator-income-streams">guide to RPM, sponsorships and affiliate revenue</Link>;
+        it explains which sources standard YouTube Analytics RPM already includes.
+      </p>
     </>
   );
 }

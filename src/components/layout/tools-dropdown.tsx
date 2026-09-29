@@ -68,7 +68,7 @@ export function ToolsDropdown() {
             </div>
             <div className="mt-4 pt-4 border-t border-border/50 flex justify-between items-center">
               <span className="text-xs text-muted-foreground">{toolCount} tools — all free, no login</span>
-              <Link href="/#tools" onClick={() => setOpen(false)} className="text-xs font-medium text-primary hover:underline">
+              <Link href="/tools" onClick={() => setOpen(false)} className="text-xs font-medium text-primary hover:underline">
                 View all →
               </Link>
             </div>

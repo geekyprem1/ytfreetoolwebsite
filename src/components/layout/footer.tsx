@@ -11,6 +11,7 @@ const company = [
 ];
 
 const resources = [
+  { href: '/tools', label: 'All YouTube Tools' },
   { href: '/for-students', label: 'Tools for Students' },
   { href: '/youtube-rankings', label: 'YouTube Rankings' },
   { href: '/youtube-rankings/most-subscribed', label: 'Top 100 YouTubers' },

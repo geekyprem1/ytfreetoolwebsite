@@ -13,6 +13,7 @@ import { getRedis } from '@/lib/cache/redis';
 import { cacheKeys } from '@/lib/cache/cache-keys';
 import { TTL } from '@/lib/cache/cache-policies';
 import { getChannelsBatch } from '@/lib/youtube/client';
+import { logSafeError } from '@/lib/errors';
 import {
   recordDailySnapshot,
   loadGrowthHistory,
@@ -96,7 +97,7 @@ async function loadPool(): Promise<RankingPool> {
     }
     return pool;
   } catch (err) {
-    console.error('[rankings] pool fetch failed', err);
+    logSafeError('[rankings] pool fetch failed', err);
     if (redis) {
       try {
         const lastGood = await redis.get<RankingPool>(cacheKeys.rankingsPoolLastGood());

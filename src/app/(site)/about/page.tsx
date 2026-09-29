@@ -4,7 +4,8 @@ import { ContentPageShell } from '@/components/layout/content-page-shell';
 import { site } from '@/content/site';
 import { toolCount } from '@/content/tools-metadata';
 import { JsonLd } from '@/components/seo/json-ld';
-import { breadcrumbNode, editorialPersonNode, graphJsonLd, organizationNode } from '@/lib/seo/schema-graph';
+import { breadcrumbNode, editorialTeamNode, graphJsonLd, organizationNode } from '@/lib/seo/schema-graph';
+import { editorialTeamName } from '@/content/blog/posts';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -22,7 +23,7 @@ export default function AboutPage() {
       <JsonLd
         data={graphJsonLd([
           organizationNode(),
-          editorialPersonNode(),
+          editorialTeamNode(),
           breadcrumbNode([{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }]),
         ])}
       />
@@ -53,7 +54,7 @@ export default function AboutPage() {
         and descriptions, hashtags, hooks, Shorts ideas, and SEO scoring helpers.
       </p>
       <p>
-        Explore the full list on the <Link href="/#tools">home page tools section</Link> or start with
+        Explore the full list in the <Link href="/tools">tools directory</Link> or start with
         the <Link href="/thumbnail-downloader">Thumbnail Downloader</Link>.
       </p>
 
@@ -76,6 +77,18 @@ export default function AboutPage() {
           affiliation with YouTube.
         </li>
       </ul>
+
+      <h2 id="editorial-team" className="scroll-mt-24">{editorialTeamName}</h2>
+      <p>
+        Our editorial team writes and maintains the creator guides and tool explanations on this site.
+        Guides explain the steps a creator can take, link to the relevant tool, and cite official YouTube
+        documentation when they discuss platform rules or API behavior. Examples and calculator results
+        are described as estimates when they cannot be verified for an individual channel.
+      </p>
+      <p>
+        We show an updated date when a guide has been substantively revised. For a correction or a
+        question about a guide, <Link href="/contact">contact the team</Link>.
+      </p>
 
       <h2>Independence</h2>
       <p>{site.notAffiliated} “YouTube” is a trademark of Google LLC.</p>

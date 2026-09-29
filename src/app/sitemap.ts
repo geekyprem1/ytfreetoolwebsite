@@ -30,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${site.url}/blog/${post.slug}`,
     changeFrequency: 'monthly' as const,
     priority: 0.6,
-    lastModified: post.publishedAt,
+    lastModified: post.dateModified ?? post.publishedAt,
   }));
 
   const staticPages: MetadataRoute.Sitemap = [

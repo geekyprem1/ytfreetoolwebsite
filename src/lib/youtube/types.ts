@@ -12,6 +12,10 @@ export interface YouTubeVideo {
   likeCount: number;
   commentCount: number;
   tags: string[];
+  /** Whether YouTube returned this public counter; zero can otherwise mean unavailable. */
+  viewCountAvailable: boolean;
+  likeCountAvailable: boolean;
+  commentCountAvailable: boolean;
 }
 
 export interface YouTubeChannel {
@@ -125,7 +129,9 @@ export interface LiveVideoCount {
   channelTitle: string;
   viewCount: number;
   likeCount: number;
+  likeCountAvailable: boolean;
   commentCount: number;
+  commentCountAvailable: boolean;
   fetchedAt: number;
 }
 

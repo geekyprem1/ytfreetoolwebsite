@@ -11,7 +11,7 @@ export function RelatedTools({ currentSlug }: { currentSlug: string }) {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-display text-xl font-semibold tracking-tight">Related tools</h2>
         <Link
-          href="/#tools"
+          href="/tools"
           className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
         >
           View all <ArrowRight className="size-3.5" />

@@ -82,10 +82,14 @@ export function SeoContent() {
 
       <h2>Channel ID vs handle vs custom URL</h2>
       <p>
-        A single channel can have three public references. The <strong>channel ID</strong> (
-        <code>UC…</code>) is permanent and machine-facing. The <strong>@handle</strong> is a chosen name
-        that can change. The <strong>custom URL</strong> is a legacy vanity path. Only the channel ID is
-        guaranteed stable, so store it whenever you need a reference that will not break later.
+        A single channel can have several public references. The <strong>channel ID</strong> (
+        <code>UC…</code>) is YouTube’s machine-facing identifier. The <strong>@handle</strong> is a readable
+        public name that YouTube may change, reclaim, or remove; a <strong>custom URL</strong> is a legacy
+        path. Resolve the current reference when a tool asks for an ID instead of guessing it from a name.
+      </p>
+      <p>
+        See the detailed <Link href="/blog/youtube-channel-id-vs-handle">channel ID vs handle guide</Link> for
+        API lookup examples and a quick way to choose the right identifier.
       </p>
 
       <h2>Related tools</h2>

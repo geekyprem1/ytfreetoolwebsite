@@ -80,7 +80,8 @@ export async function generateContent(
       return await generateWithGemini(prompt, options);
     } catch (err) {
       if (hasOpenRouter) {
-        console.warn('Gemini failed, falling back to OpenRouter:', (err as Error).message);
+        // SDK errors may include credential-bearing request URLs.
+        console.warn('Gemini failed; falling back to OpenRouter. Details omitted from logs.');
         return await generateWithOpenRouter(prompt, options);
       }
       throw err;

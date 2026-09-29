@@ -19,7 +19,9 @@ interface LiveViewsResponse {
   channelTitle: string;
   viewCount: number;
   likeCount: number;
+  likeCountAvailable: boolean;
   commentCount: number;
+  commentCountAvailable: boolean;
   fetchedAt: number;
   livePaused?: boolean;
 }
@@ -123,12 +125,12 @@ export function LiveViewCountClient({ initialVideo }: { initialVideo?: string })
               <div className="rounded-lg border p-3">
                 <ThumbsUp className="size-4 mx-auto text-muted-foreground mb-1" />
                 <p className="text-xs text-muted-foreground">Likes</p>
-                <p className="font-semibold">{formatNumber(data.likeCount)}</p>
+                <p className="font-semibold">{data.likeCountAvailable ? formatNumber(data.likeCount) : 'Unavailable'}</p>
               </div>
               <div className="rounded-lg border p-3">
                 <MessageCircle className="size-4 mx-auto text-muted-foreground mb-1" />
                 <p className="text-xs text-muted-foreground">Comments</p>
-                <p className="font-semibold">{formatNumber(data.commentCount)}</p>
+                <p className="font-semibold">{data.commentCountAvailable ? formatNumber(data.commentCount) : 'Unavailable'}</p>
               </div>
             </div>
 

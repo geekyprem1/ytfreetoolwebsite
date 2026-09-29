@@ -65,7 +65,35 @@ export default function ApiDocsPage() {
       <pre>{`curl "${apiBaseUrl}/youtube/thumbnail?v=VIDEO_ID"`}</pre>
 
       <h3>GET /api/youtube/video-stats</h3>
-      <p>Public statistics for a video: views, likes, comments, duration, publish date.</p>
+      <p>
+        Public video metadata and statistics. The JSON data includes <code>id</code>, <code>title</code>,{' '}
+        <code>description</code>, <code>thumbnail</code>, <code>channelId</code>, <code>channelTitle</code>,{' '}
+        <code>publishedAt</code> (ISO 8601), formatted <code>duration</code>, <code>category</code> (YouTube
+        category ID), numeric view/like/comment counts, availability flags for those counters, and <code>tags</code>.
+        An unavailable counter has a false availability flag; it is not the same as a returned count of zero.
+      </p>
+      <pre>{`{
+  "success": true,
+  "data": {
+    "id": "VIDEO_ID",
+    "title": "Video title",
+    "description": "Public video description",
+    "thumbnail": "https://...",
+    "channelId": "UC...",
+    "channelTitle": "Channel name",
+    "publishedAt": "2026-09-29T12:34:56Z",
+    "duration": "12:34",
+    "category": "27",
+    "viewCount": 12345,
+    "likeCount": 321,
+    "commentCount": 45,
+    "tags": ["example"],
+    "viewCountAvailable": true,
+    "likeCountAvailable": true,
+    "commentCountAvailable": true
+  },
+  "meta": {}
+}`}</pre>
       <pre>{`curl "${apiBaseUrl}/youtube/video-stats?v=VIDEO_ID"`}</pre>
 
       <h3>GET /api/youtube/channel-stats</h3>

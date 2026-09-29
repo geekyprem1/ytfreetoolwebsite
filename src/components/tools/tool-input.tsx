@@ -5,6 +5,7 @@ import { AlertCircle } from 'lucide-react';
 
 interface ToolInputProps {
   label: string;
+  inputId?: string;
   description?: string;
   error?: string | null;
   required?: boolean;
@@ -12,11 +13,11 @@ interface ToolInputProps {
   className?: string;
 }
 
-export function ToolInput({ label, description, error, required, children, className }: ToolInputProps) {
+export function ToolInput({ label, inputId, description, error, required, children, className }: ToolInputProps) {
   return (
     <div className={cn('space-y-2', className)}>
       <div>
-        <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+        <label htmlFor={inputId} className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
           {label}
           {required && <span className="text-red-500 ml-0.5">*</span>}
         </label>

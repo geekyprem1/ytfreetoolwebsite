@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/youtube-live-earnings-calculator' },
   openGraph: {
     title: 'YouTube Live Earnings Calculator (Super Chats + Ads) | yttools.pro',
-    description: 'Free Live Earnings Calculator — ads (55%) + Super Chats (70%) + memberships. Instant.',
+    description: 'Free Live Earnings Calculator — ads (55%) + gross Super Chats (70%) + an assumed $3.50 per new member. Instant.',
   },
 };
 
@@ -21,11 +21,11 @@ export default function YoutubeLiveEarningsCalculatorPage() {
   return (
     <ToolPageShell
       toolName="YouTube Live Earnings Calculator"
-      toolDescription="Estimate Live stream earnings from Super Chats, ads and views."
+      toolDescription="Estimate Live stream earnings from ads, gross Super Chats and new memberships."
       toolSlug="youtube-live-earnings-calculator"
       title="YouTube Live Earnings Calculator"
-      description="Estimate YouTube Live earnings from ad impressions, Super Chats and new memberships — see creator cuts (55% ads, 70% chats). Free, instant."
-      answerFirst="YouTube (YT) Toolkit's Live Earnings Calculator sums Ads (Views÷1000×CPM×55%) + Super Chats×70% + Memberships×70% for total Live revenue. Free, instant — plan streams before you go live."
+      description="Estimate YouTube Live earnings from monetized playbacks, gross Super Chats and new memberships — see each revenue component. Free, instant."
+      answerFirst="YouTube (YT) Toolkit's Live Earnings Calculator estimates creator revenue as monetized playbacks ÷ 1,000 × CPM × 55%, plus 70% of gross Super Chats and an assumed $3.50 per new member. Enter your own figures to plan a Live stream."
       seo={<SeoContent />}
       faqs={faqs}
     >

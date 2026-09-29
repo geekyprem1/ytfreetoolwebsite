@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils';
 
 const navLinks = [
   { href: '/', label: 'Home' },
+  { href: '/tools', label: 'All tools' },
   { href: '/youtube-rankings', label: 'Rankings' },
   { href: '/blog', label: 'Blog' },
 ];
@@ -58,7 +59,7 @@ export function Header() {
         </div>
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <Link href="/#tools" className="hidden sm:inline-flex">
+          <Link href="/tools" className="hidden sm:inline-flex">
             <Button
               size="sm"
               className="bg-[#FF3B30] hover:bg-[#E0352B] text-white h-9 text-sm rounded-xl px-4"

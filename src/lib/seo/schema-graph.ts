@@ -1,5 +1,6 @@
 import { site } from '@/content/site';
 import { tools, toolCount, calculatorCount } from '@/content/tools-metadata';
+import { editorialTeamName } from '@/content/blog/posts';
 
 export type FaqItem = { q: string; a: string };
 
@@ -29,13 +30,13 @@ export function organizationNode() {
   };
 }
 
-export function editorialPersonNode() {
+export function editorialTeamNode() {
   return {
-    '@type': 'Person',
-    '@id': `${site.url}/about#person`,
-    name: 'YT Toolkit Editorial Team',
-    url: `${site.url}/about`,
-    worksFor: { '@id': `${site.url}/#organization` },
+    '@type': 'Organization',
+    '@id': `${site.url}/about#editorial-team`,
+    name: editorialTeamName,
+    url: `${site.url}/about#editorial-team`,
+    parentOrganization: { '@id': `${site.url}/#organization` },
   };
 }
 
@@ -185,7 +186,7 @@ export function toolPageGraph(opts: {
           '@type': 'ListItem',
           position: 2,
           name: 'Tools',
-          item: `${site.url}/#tools`,
+          item: `${site.url}/tools`,
         },
         {
           '@type': 'ListItem',

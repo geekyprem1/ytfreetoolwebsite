@@ -48,7 +48,7 @@ export function ToolPageShell({
             <ChevronRight className="size-3.5 opacity-50" />
           </li>
           <li>
-            <Link href="/#tools" className="hover:text-foreground transition-colors">
+            <Link href="/tools" className="hover:text-foreground transition-colors">
               Tools
             </Link>
           </li>

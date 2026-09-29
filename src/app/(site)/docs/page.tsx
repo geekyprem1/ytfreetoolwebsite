@@ -36,7 +36,7 @@ export default function DocsPage() {
       <h2>Quick start</h2>
       <ol>
         <li>
-          <strong>Open a tool</strong> - from the <Link href="/#tools">tools list</Link> or by pasting a URL on the
+          <strong>Open a tool</strong> - from the <Link href="/tools">tools directory</Link> or by pasting a URL on the
           home page.
         </li>
         <li>

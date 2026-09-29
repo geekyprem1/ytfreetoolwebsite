@@ -18,7 +18,7 @@ export default function PrivacyPage() {
     <ContentPageShell
       breadcrumbLabel="Privacy Policy"
       title="Privacy Policy"
-      description={`Last updated: July 15, 2026. How ${site.legalName} handles your information.`}
+      description={`Last updated: September 29, 2026. How ${site.legalName} handles your information.`}
     >
       <h2>Overview</h2>
       <p>
@@ -92,6 +92,16 @@ export default function PrivacyPage() {
         Tools may call third-party APIs (for example YouTube Data API and AI providers) to fulfill
         your request. Those providers process data needed to respond under their own terms and privacy
         policies. We are not responsible for third-party practices.
+      </p>
+      <p>
+        If you use the Dislike Checker, our server sends the submitted video ID to the Return YouTube Dislike API
+        to request its third-party estimate. Return YouTube Dislike states that its API receives request metadata,
+        including the request&apos;s network address, and that the service may cache and archive video data. Because
+        this request is made by our server, the provider can receive server network metadata. Review its{' '}
+        <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md" rel="noopener noreferrer" target="_blank">
+          security and privacy FAQ
+        </a>{' '}
+        and <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md" rel="noopener noreferrer" target="_blank">data-source FAQ</a>.
       </p>
 
       <h2>Data retention</h2>

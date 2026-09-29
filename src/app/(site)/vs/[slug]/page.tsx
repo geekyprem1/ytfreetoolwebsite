@@ -112,7 +112,7 @@ export default async function ComparisonPage({ params }: PageProps) {
         Start with the <Link href="/tags-extractor">Tags Extractor</Link>,{' '}
         <Link href="/title-generator">AI Title Generator</Link>,{' '}
         <Link href="/channel-statistics">Channel Statistics</Link>, or browse{' '}
-        <Link href="/#tools">all tools</Link>.
+        <Link href="/tools">all tools</Link>.
       </p>
 
       <h2>Other comparisons</h2>

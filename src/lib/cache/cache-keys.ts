@@ -1,5 +1,6 @@
 export const cacheKeys = {
-  videoStats: (videoId: string) => `yt:video:stats:${videoId}`,
+  // v2 adds explicit availability flags for public statistic counters.
+  videoStats: (videoId: string) => `yt:video:stats:v2:${videoId}`,
   videoTags: (videoId: string) => `yt:video:tags:${videoId}`,
   channelStats: (channelId: string) => `yt:channel:stats:${channelId}`,
   channelTags: (channelId: string) => `yt:channel:tags:${channelId}`,
@@ -10,8 +11,11 @@ export const cacheKeys = {
   playlist: (playlistId: string) => `yt:playlist:${playlistId}`,
   channelBranding: (channelId: string) => `yt:channel:branding:${channelId}`,
   liveSubs: (channelId: string) => `yt:live:subs:${channelId}`,
-  liveViews: (videoId: string) => `yt:live:views:${videoId}`,
+  liveViews: (videoId: string) => `yt:live:views:v2:${videoId}`,
   comments: (videoId: string, max: number) => `yt:comments:${videoId}:${max}`,
+  commentSentiment: (videoId: string, sampleSize: number, classifierVersion: string) =>
+    `yt:comments:sentiment:${videoId}:${sampleSize}:${classifierVersion}`,
+  returnDislikeEstimate: (videoId: string) => `provider:ryd:estimate:${videoId}`,
   channelCompare: (channelId: string) => `yt:channel:compare:${channelId}`,
   channelOverview: (channelId: string) => `yt:channel:overview:${channelId}`,
   trending: (region: string, category: string) => `yt:trending:${region}:${category}`,
@@ -20,6 +24,8 @@ export const cacheKeys = {
   rankingsSnapshot: (date: string) => `yt:rankings:snap:${date}`,
   resolve: (url: string) => `yt:resolve:${url}`,
   quotaDay: (date: string) => `yt:quota:daily:${date}`,
+  searchQuotaDay: (date: string) => `yt:quota:search:${date}`,
+  returnDislikeQuotaDay: (date: string) => `provider:ryd:daily:${date}`,
   rateLimit: (tier: string, identifier: string) => `rl:${tier}:${identifier}`,
   aiDaily: (date: string) => `ai:daily:${date}`,
 };

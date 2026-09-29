@@ -4,15 +4,15 @@ import type { ToolFaq } from '@/components/tools/tool-faq-section';
 export const faqs: ToolFaq[] = [
   {
     q: 'How are YouTube Live earnings calculated?',
-    a: 'Live Earnings ≈ Ad Revenue (Views ÷ 1000 × CPM × 55%) + Super Chats × 70% + Memberships × 70%. Add sponsorships separately. The calculator models all three with creator cuts built in.',
+    a: 'Estimate = monetized playbacks ÷ 1,000 × CPM × 55% + gross Super Chats × 70% + new memberships × an assumed $3.50 creator share. Enter Super Chats before the estimated platform share. Add sponsorships separately.',
   },
   {
     q: 'What CPM do Live streams get?',
-    a: 'Often $3–$10 CPM but with fewer ad breaks and smaller concurrent audience than VOD. Don’t expect VOD monetized rate — Live has longer AVD but less mid-roll density.',
+    a: 'Live CPM varies by audience, ad inventory, season and content. Use a comparable playback-based CPM from your YouTube Studio Analytics when available. The $6 starting value here is only an editable example, not a benchmark.',
   },
   {
     q: 'How much does YouTube take from Super Chats and memberships?',
-    a: 'YouTube keeps ~30% of Super Chats, Super Thanks and memberships; creators keep ~70%. That split is baked into the Live result cards.',
+    a: 'This calculator models a 70% creator share of gross Super Chats and assumes $3.50 per new member. Actual payouts can differ by transaction, product price, taxes and fees; confirm them in YouTube Studio.',
   },
   {
     q: 'Do I need monetization for Super Chats?',
@@ -35,8 +35,9 @@ export function SeoContent() {
       <p>
         Unlike a premiered VOD, a <strong>YouTube Live</strong> earns from parallel lines: mid-roll
         ads on concurrent viewers, Super Chats/Thanks in the moment, and membership joins driven by
-        Live exclusives. Total revenue is additive — creators who only forecast “views × CPM” miss 30–70%
-        of Live income that comes from fan funding. This calculator sums all three with platform cuts.
+        Live exclusives. This calculator adds estimated creator revenue from all three sources. Use
+        monetized playbacks for the ad scenario; total Live views can be higher because not every view
+        receives an ad.
       </p>
       <table>
         <thead>
@@ -47,25 +48,25 @@ export function SeoContent() {
           </tr>
         </thead>
         <tbody>
-          <tr><td>Ad revenue</td><td>55%</td><td>Concurrent views × CPM</td></tr>
+          <tr><td>Ad revenue</td><td>55%</td><td>Monetized playbacks ÷ 1,000 × CPM</td></tr>
           <tr><td>Super Chats / Thanks</td><td>70%</td><td>Engaged call-to-action moments</td></tr>
-          <tr><td>Memberships</td><td>70%</td><td>Exclusive perks + continuity</td></tr>
+          <tr><td>Memberships</td><td>$3.50 assumed per new member</td><td>Exclusive perks + continuity</td></tr>
           <tr><td>Sponsorship (off-platform)</td><td>100% (minus fees)</td><td>Separate deal sheet</td></tr>
         </tbody>
       </table>
 
       <h2>How to estimate Live earnings</h2>
       <ol>
-        <li><strong>Enter Live views</strong> — peak concurrent or total VOD-after.</li>
-        <li><strong>Enter Live CPM</strong> — $6 default is reasonable for long-form Live; adjust by niche.</li>
-        <li><strong>Add Super Chats ($) and new members</strong> — gross before cut; tool nets to 70%.</li>
+        <li><strong>Enter monetized Live playbacks</strong> — an estimate of playbacks with ads, not peak concurrent viewers or all views.</li>
+        <li><strong>Enter Live CPM</strong> — the $6 starting value is an editable scenario assumption; use your own Analytics figure when available.</li>
+        <li><strong>Add gross Super Chats ($) and new members</strong> — the tool models 70% of chat revenue and $3.50 per new member.</li>
         <li><strong>Calculate</strong> — read ad vs chats vs members vs total.</li>
       </ol>
 
       <h2>Features</h2>
       <ul>
         <li>Ad + Super Chats + memberships composite</li>
-        <li>Creator cuts baked in (55% ads, 70% fans)</li>
+        <li>Scenario shares built in: 55% ads, 70% gross Super Chats and $3.50 per new member</li>
         <li>Per-source breakdown cards</li>
         <li>Instant, client-only</li>
       </ul>

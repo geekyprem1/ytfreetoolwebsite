@@ -16,7 +16,7 @@ export const faqs: ToolFaq[] = [
   },
   {
     q: 'How many comments can I export?',
-    a: 'The tool pulls a large batch and caps very high-comment videos to stay within YouTube’s API limits. When results are capped it tells you, so you know the export is a sample rather than every single comment.',
+    a: 'The tool loads up to 2,000 top-level comments per lookup. Search and sorting work only within those loaded comments; replies and comments outside the loaded sample are not searched. When the cap is reached, the result says so. The export contains all comments matching your current filter, not every comment on the video.',
   },
   {
     q: 'Can I sort and search before exporting?',
@@ -34,8 +34,9 @@ export function SeoContent() {
       <h2>What is a YouTube comment exporter?</h2>
       <p>
         A comment exporter pulls the comments from a public YouTube video and lets you download them as a{' '}
-        <strong>CSV</strong> or <strong>JSON</strong> file. Paste a video URL, optionally sort and search,
-        then export the data for analysis, sentiment review, or backup.
+        <strong>CSV</strong> or <strong>JSON</strong> file. Paste a video URL, then search or sort the loaded
+        sample before export. Each lookup loads up to 2,000 top-level comments; this is not a search across
+        every comment or any replies on the video.
       </p>
 
       <h2>How to export YouTube comments</h2>
@@ -44,7 +45,7 @@ export function SeoContent() {
           <strong>Paste the video URL</strong> — The tool loads that video’s top-level comments.
         </li>
         <li>
-          <strong>Sort or search</strong> — Order by likes or date, or filter by keyword and author.
+          <strong>Sort or search the loaded sample</strong> — Order by likes or date, or filter the loaded top-level comments by keyword and author. A lookup loads up to 2,000 comments.
         </li>
         <li>
           <strong>Download</strong> — Export the current view as CSV or JSON.
@@ -60,7 +61,7 @@ export function SeoContent() {
           <strong>Likes</strong> — The like count on each comment.
         </li>
         <li>
-          <strong>Published date</strong> — When the comment was posted.
+          <strong>Published date</strong> — The timestamp returned for the comment.
         </li>
         <li>
           <strong>Text</strong> — The full comment content.
@@ -71,13 +72,18 @@ export function SeoContent() {
       <p>
         Creators export comments to analyze feedback and spot recurring requests. Researchers study
         audience sentiment and language. Teams back up comments before a video is edited or removed.
-        Because JSON preserves structure, it drops cleanly into data tools and scripts.
+        Because JSON preserves structure, it drops cleanly into data tools and scripts. Search filters
+        only comments already loaded for this lookup, so an export is a filtered sample—not a complete
+        archive of every comment and reply on the video. If results seem empty or incomplete, follow the{' '}
+        <Link href="/blog/youtube-comment-export-troubleshooting">comment export troubleshooting guide</Link>.
       </p>
 
       <h2>Related tools</h2>
       <p>
         Running a giveaway from these comments? Use the{' '}
         <Link href="/youtube-comment-picker">Comment Picker</Link> to draw a fair winner. To analyze the
+        tone and recurring topics in a small comment sample, try the{' '}
+        <Link href="/youtube-comment-sentiment-analyzer">Comment Sentiment Analyzer</Link>. To analyze the
         video itself, see <Link href="/video-statistics">Video Statistics</Link>, and for the transcript
         try the <Link href="/transcript-extractor">Transcript Extractor</Link>.
       </p>

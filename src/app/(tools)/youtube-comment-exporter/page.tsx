@@ -35,8 +35,8 @@ export default async function CommentExporterPage({
       toolDescription="Export a YouTube video’s comments to CSV or JSON."
       toolSlug="youtube-comment-exporter"
       title="YouTube Comment Exporter"
-      description="Export the comments from any public YouTube video to CSV or JSON. Sort by likes or date, search the text, and download the data for analysis, research, or backup."
-      answerFirst="Paste a YouTube video URL and this free tool loads its comments so you can export them to CSV or JSON. Sort by likes or date and search the text before downloading. Top-level comments only, no login."
+      description="Load up to 2,000 top-level comments from a YouTube video, search and sort that sample, then export filtered matches to CSV or JSON."
+      answerFirst="Paste a YouTube video URL to load up to 2,000 top-level comments. Search and sort only within the loaded sample, then export every matching row to CSV or JSON; replies and comments outside the sample are not included."
       seo={<SeoContent />}
       faqs={faqs}
     >

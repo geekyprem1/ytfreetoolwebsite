@@ -11,6 +11,7 @@ const FREE_TIER: Record<string, RateLimitConfig> = {
   ai: { windowMs: 60_000, maxRequests: 20 },
   compute: { windowMs: 60_000, maxRequests: 120 },
   resolve: { windowMs: 60_000, maxRequests: 60 },
+  external: { windowMs: 60_000, maxRequests: 80 },
 };
 
 type RateLimitTier = keyof typeof FREE_TIER;

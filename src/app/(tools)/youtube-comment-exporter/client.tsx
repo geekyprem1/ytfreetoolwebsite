@@ -82,8 +82,8 @@ export function CommentExporterClient({ initialUrl }: { initialUrl?: string }) {
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <span className="text-sm text-muted-foreground">
-                {data.totalFetched.toLocaleString()} comments
-                {data.truncated ? ' (capped)' : ''} · {rows.length} shown
+                {data.totalFetched.toLocaleString()} top-level comments loaded · {rows.length.toLocaleString()} match the current filter
+                {data.truncated ? ' · sample cap reached' : ''}
               </span>
               <div className="flex flex-wrap gap-2">
                 <Button
@@ -109,14 +109,22 @@ export function CommentExporterClient({ initialUrl }: { initialUrl?: string }) {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-2">
-              <Input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search comments or authors..."
-                className="flex-1"
-              />
-              <div className="flex gap-1">
+            <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+              <div className="space-y-1.5">
+                <label htmlFor="comment-export-search" className="text-sm font-medium">Search loaded comments</label>
+                <Input
+                  id="comment-export-search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Filter by comment text or author..."
+                  className="w-full"
+                  aria-describedby="comment-export-search-limit"
+                />
+                <p id="comment-export-search-limit" className="text-xs leading-relaxed text-muted-foreground">
+                  Searches only this loaded sample, up to 2,000 top-level comments per lookup. {data.truncated ? 'The sample reached its cap, so other comments may not appear.' : 'It does not search replies or comments outside the loaded results.'}
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-1">
                 {(['likes', 'newest', 'oldest'] as const).map((k) => (
                   <Button
                     key={k}
@@ -143,8 +151,14 @@ export function CommentExporterClient({ initialUrl }: { initialUrl?: string }) {
               ))}
               {rows.length > 300 && (
                 <p className="p-3 text-xs text-muted-foreground">
-                  Preview shows 300 rows. Exports include all {rows.length}.
+                  Preview shows the first 300 of {rows.length} filtered matches. CSV and JSON exports include all {rows.length} matches.
                 </p>
+              )}
+              {rows.length > 0 && rows.length <= 300 && (
+                <p className="p-3 text-xs text-muted-foreground">Preview and export include {rows.length} filtered matches.</p>
+              )}
+              {rows.length === 0 && (
+                <p className="p-3 text-sm text-muted-foreground">No loaded comments match this search.</p>
               )}
             </div>
           </div>

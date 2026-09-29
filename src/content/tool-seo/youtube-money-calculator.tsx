@@ -153,6 +153,12 @@ export function SeoContent() {
         <Link href="/youtube-watch-time-calculator">Watch Time Calculator</Link> and{' '}
         <Link href="/monetization-checker">Monetization Checker</Link>.
       </p>
+      <p>
+        Add outside brand and affiliate income with the{' '}
+        <Link href="/youtube-creator-income-calculator">Creator Income Calculator</Link>. The{' '}
+        <Link href="/blog/youtube-creator-income-streams">creator income planning guide</Link> explains how RPM,
+        sponsorship fees and affiliate commissions fit together without double counting.
+      </p>
     </>
   );
 }

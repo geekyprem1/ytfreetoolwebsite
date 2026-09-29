@@ -12,7 +12,7 @@ export const faqs: ToolFaq[] = [
   },
   {
     q: 'Why are likes or comments missing on some videos?',
-    a: 'Creators can disable likes display or turn off comments. When those controls are off, public APIs may return zero, omit the field, or show limited engagement data even though the video still has views.',
+    a: 'Creators can hide like counts or disable comments. If YouTube does not return a counter, this tool labels it unavailable instead of presenting a missing value as zero. A returned value of zero is still shown as zero.',
   },
   {
     q: 'Are video tags always included in the statistics result?',
@@ -26,6 +26,14 @@ export const faqs: ToolFaq[] = [
     q: 'What URL formats work for video statistics?',
     a: 'Standard watch URLs (youtube.com/watch?v=…), short links (youtu.be/…), and Shorts URLs usually work when the video is public. The tool extracts the video ID and fetches the public snippet and statistics for that ID.',
   },
+  {
+    q: 'Can I export the video metadata as JSON?',
+    a: 'Yes. Export JSON downloads the exact public lookup fields shown by the service, including video and channel IDs, title, description, thumbnail URL, category ID, duration, counts and availability flags, tags, and the raw ISO 8601 public publication timestamp.',
+  },
+  {
+    q: 'Does the published timestamp show when the video was first uploaded?',
+    a: 'Not always. YouTube’s public publishedAt value can show when a video became public; for example, a video uploaded privately and made public later can have a later public publication timestamp. This tool labels that field as public publication time.',
+  },
 ];
 
 export function SeoContent() {
@@ -33,9 +41,10 @@ export function SeoContent() {
     <>
       <h2>What is a YouTube video statistics lookup?</h2>
       <p>
-        This free YouTube Video Statistics Analyzer shows public views, likes, comments, duration, and
-        publish date for any public video—not private Studio CTR or retention. Paste a URL to pull
-        structured stats typically in under 2 seconds.
+        This free YouTube Video Statistics Analyzer shows public counters and video metadata, with a
+        JSON export for the exact fields returned by the lookup. Missing public counts appear as
+        unavailable rather than being mistaken for zero. It does not expose private Studio CTR or
+        retention data.
       </p>
       <p>
         That public layer is enough for competitive breakdowns, thumbnail studies, and “why did this upload work?”
@@ -84,7 +93,7 @@ export function SeoContent() {
           <strong>Likes and comments</strong> — Engagement totals when the creator has not disabled those surfaces.
         </li>
         <li>
-          <strong>Publish date</strong> — Upload timestamp for aging and “velocity” comparisons.
+          <strong>Public publication timestamp</strong> — The exact ISO 8601 time YouTube returns, shown in your local timezone and UTC with a copy action. This can differ from the original upload time, such as when a private video is later made public.
         </li>
         <li>
           <strong>Duration</strong> — Length of the video, useful when normalizing performance across formats.
@@ -131,6 +140,13 @@ export function SeoContent() {
         end screen clicks. If a decision needs CTR or retention, you need Studio (or an authorized API connection).
         If the decision is “is this competitor video actually big?” public statistics are enough.
       </p>
+      <p>
+        YouTube defines <code>snippet.publishedAt</code> as the date and time a video was published, and notes it
+        may differ from upload time—for example, when an upload first stayed private and was made public later.
+        See the <a href="https://developers.google.com/youtube/v3/docs/videos" target="_blank" rel="noopener noreferrer">YouTube Data API Videos reference</a>.
+        The <Link href="/blog/youtube-publication-time-vs-upload-time">published date vs upload date guide</Link> shows
+        how to use the exact value in a comparison.
+      </p>
 
       <h2>Tips and mistakes when reading video statistics</h2>
       <ul>
@@ -162,7 +178,9 @@ export function SeoContent() {
 
       <h2>Related tools</h2>
       <p>
-        Expand from one video to channel context with{' '}
+        YouTube does not return a public dislike count through its Data API. For a rough third-party estimate, try the{' '}
+        <Link href="/youtube-dislike-checker">YouTube Dislike Checker</Link>; its number is not an official or exact
+        count. Expand from one video to channel context with{' '}
         <Link href="/channel-statistics">Channel Statistics</Link>, pull tag lists with the{' '}
         <Link href="/tags-extractor">Tags Extractor</Link>, or download the artwork via the{' '}
         <Link href="/thumbnail-downloader">Thumbnail Downloader</Link>.

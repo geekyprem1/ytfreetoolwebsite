@@ -15,9 +15,15 @@ import type {
   ResolveResult,
 } from '@/lib/youtube/types';
 import { parseYouTubeUrl } from '@/lib/youtube/url-parser';
-import { trackQuota } from '@/lib/youtube/quota';
+import { reserveSearchListCall, trackQuota } from '@/lib/youtube/quota';
 
 const apiKey = process.env.YOUTUBE_API_KEY;
+
+async function requireSearchListQuota() {
+  if (!(await reserveSearchListCall())) {
+    throw new AppError('YOUTUBE_QUOTA_EXCEEDED', 'The daily YouTube search request limit has been reached.', 503);
+  }
+}
 
 function getClient() {
   if (!apiKey) {
@@ -52,6 +58,9 @@ export async function getVideoDetails(videoId: string): Promise<YouTubeVideo> {
     likeCount: parseInt(item.statistics?.likeCount ?? '0', 10),
     commentCount: parseInt(item.statistics?.commentCount ?? '0', 10),
     tags: item.snippet?.tags ?? [],
+    viewCountAvailable: item.statistics?.viewCount != null,
+    likeCountAvailable: item.statistics?.likeCount != null,
+    commentCountAvailable: item.statistics?.commentCount != null,
   };
 }
 
@@ -103,13 +112,14 @@ export async function getChannelDetails(channelIdOrHandle: string): Promise<YouT
     part: ['snippet', 'statistics', 'brandingSettings', 'status', 'contentDetails'],
   };
 
-  if (channelIdOrHandle.startsWith('UC')) {
+  if (!channelIdOrHandle.startsWith('@') && /^UC[a-zA-Z0-9_-]{22}$/.test(channelIdOrHandle)) {
     params.id = [channelIdOrHandle];
   } else {
     params.forHandle = channelIdOrHandle.replace(/^@/, '');
   }
 
   const res = await yt.channels.list(params as never);
+  await trackQuota(1);
 
   const item = res.data.items?.[0];
   if (!item) {
@@ -191,8 +201,34 @@ export async function getChannelsBatch(channelIds: string[]): Promise<ChannelBat
   return out;
 }
 
-export async function getChannelVideos(channelId: string, maxResults = 5): Promise<YouTubeChannelVideo[]> {
+export async function getChannelVideos(
+  channelId: string,
+  maxResults = 5,
+  uploadsPlaylistId?: string | null,
+): Promise<YouTubeChannelVideo[]> {
   const yt = getClient();
+
+  if (uploadsPlaylistId) {
+    const playlist = await yt.playlistItems.list({
+      playlistId: uploadsPlaylistId,
+      maxResults: Math.min(50, Math.max(1, maxResults)),
+      part: ['contentDetails', 'snippet'],
+    });
+    await trackQuota(1);
+    return (playlist.data.items ?? []).flatMap((item) => {
+      const videoId = item.contentDetails?.videoId ?? item.snippet?.resourceId?.videoId;
+      if (!videoId) return [];
+      return [{
+        videoId,
+        title: item.snippet?.title ?? 'Unknown',
+        thumbnail: item.snippet?.thumbnails?.default?.url ?? '',
+        publishedAt: item.contentDetails?.videoPublishedAt ?? item.snippet?.publishedAt ?? '',
+        viewCount: 0,
+      }];
+    });
+  }
+
+  await requireSearchListQuota();
   const res = await yt.search.list({
     channelId,
     type: ['video'],
@@ -208,6 +244,31 @@ export async function getChannelVideos(channelId: string, maxResults = 5): Promi
     publishedAt: item.snippet?.publishedAt ?? '',
     viewCount: 0,
   }));
+}
+
+/** One uploads-playlist page; callers decide how many pages to expose. */
+export async function getChannelUploadsPage(playlistId: string, pageToken?: string) {
+  const yt = getClient();
+  const response = await yt.playlistItems.list({
+    playlistId,
+    pageToken,
+    maxResults: 25,
+    part: ['contentDetails', 'snippet'],
+  });
+  await trackQuota(1);
+  return {
+    videos: (response.data.items ?? []).flatMap((item) => {
+      const videoId = item.contentDetails?.videoId ?? item.snippet?.resourceId?.videoId;
+      if (!videoId) return [];
+      return [{
+        videoId,
+        title: item.snippet?.title ?? 'Unavailable video',
+        thumbnail: item.snippet?.thumbnails?.medium?.url ?? item.snippet?.thumbnails?.default?.url ?? '',
+        publishedAt: item.contentDetails?.videoPublishedAt ?? item.snippet?.publishedAt ?? '',
+      }];
+    }),
+    nextPageToken: response.data.nextPageToken ?? null,
+  };
 }
 
 /** Recent uploads with public fields useful for monetization heuristics (official Data API only). */
@@ -237,6 +298,7 @@ export async function getRecentVideosMonetizationProbe(
   }
 
   if (ids.length === 0) {
+    await requireSearchListQuota();
     const search = await yt.search.list({
       channelId,
       type: ['video'],
@@ -434,7 +496,9 @@ export async function getLiveVideoCount(videoId: string): Promise<LiveVideoCount
     channelTitle: item.snippet?.channelTitle ?? '',
     viewCount: parseInt(item.statistics?.viewCount ?? '0', 10),
     likeCount: parseInt(item.statistics?.likeCount ?? '0', 10),
+    likeCountAvailable: item.statistics?.likeCount != null,
     commentCount: parseInt(item.statistics?.commentCount ?? '0', 10),
+    commentCountAvailable: item.statistics?.commentCount != null,
     fetchedAt: Date.now(),
   };
 }
@@ -454,7 +518,7 @@ export async function getComments(videoId: string, maxComments = 500): Promise<Y
       const res = await yt.commentThreads.list({
         videoId,
         part: ['snippet'],
-        maxResults: 100,
+        maxResults: Math.min(100, maxComments - comments.length),
         order: 'relevance',
         textFormat: 'plainText',
         pageToken,
@@ -479,7 +543,7 @@ export async function getComments(videoId: string, maxComments = 500): Promise<Y
   } catch (e) {
     const msg = e instanceof Error ? e.message : '';
     if (msg.includes('disabled') || msg.includes('commentsDisabled')) {
-      throw new AppError('TAGS_NOT_AVAILABLE', 'Comments are disabled for this video.', 404);
+      throw new AppError('COMMENTS_NOT_AVAILABLE', 'Comments are disabled for this video.', 404);
     }
     if (comments.length === 0) throw e;
   }
