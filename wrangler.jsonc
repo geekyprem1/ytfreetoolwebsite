@@ -40,10 +40,6 @@
   "triggers": {
     "crons": ["15 0 * * *"]
   },
-  "routes": [
-    {
-      "pattern": "yttools.pro",
-      "custom_domain": true
-    }
-  ]
+  "workers_dev": true,
+  "preview_urls": true
 }
