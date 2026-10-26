@@ -40,8 +40,12 @@ export async function generateWithOpenRouter(
   });
 
   if (!res.ok) {
-    const error = await res.json().catch(() => ({}));
-    throw new Error(`OPENROUTER_ERROR: ${res.status} ${JSON.stringify(error)}`);
+    const errorBody = await res.text().catch(() => '');
+    console.error('[openrouter] request failed', {
+      status: res.status,
+      body: errorBody.slice(0, 300),
+    });
+    throw new Error(`OPENROUTER_ERROR: ${res.status}`);
   }
 
   const data = (await res.json()) as {
@@ -50,11 +54,15 @@ export async function generateWithOpenRouter(
   };
 
   if (data.error) {
-    throw new Error(`OPENROUTER_ERROR: ${data.error.message}`);
+    console.error('[openrouter] response error', { message: data.error.message });
+    throw new Error('OPENROUTER_ERROR: response error');
   }
 
   const text = data.choices?.[0]?.message?.content;
   if (!text) {
+    console.error('[openrouter] empty response', {
+      hasChoices: Boolean(data.choices?.length),
+    });
     throw new Error('AI_GENERATION_FAILED: empty response from OpenRouter');
   }
 
