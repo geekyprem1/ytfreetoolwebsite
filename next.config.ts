@@ -30,11 +30,6 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/tools',
-        destination: '/',
-        permanent: true,
-      },
-      {
         source: '/blog/youtube-seo-tips-2026',
         destination: '/blog/youtube-seo-tips-2027',
         permanent: true,
