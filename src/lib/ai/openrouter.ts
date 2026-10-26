@@ -23,21 +23,32 @@ export async function generateWithOpenRouter(
   }
   messages.push({ role: 'user', content: prompt });
 
-  const res = await fetch(OPENROUTER_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
-      'HTTP-Referer': process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-      'X-Title': 'YouTube Toolkit AI',
-    },
-    body: JSON.stringify({
+  console.log('[openrouter] calling', { model, promptLength: prompt.length });
+
+  let res: Response;
+  try {
+    res = await fetch(OPENROUTER_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+        'HTTP-Referer': process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+        'X-Title': 'YouTube Toolkit AI',
+      },
+      body: JSON.stringify({
+        model,
+        messages,
+        temperature: options.temperature ?? 0.7,
+        max_tokens: options.maxTokens ?? 2048,
+      }),
+    });
+  } catch (error) {
+    console.error('[openrouter] fetch failed', {
+      message: error instanceof Error ? error.message : 'unknown',
       model,
-      messages,
-      temperature: options.temperature ?? 0.7,
-      max_tokens: options.maxTokens ?? 2048,
-    }),
-  });
+    });
+    throw error;
+  }
 
   if (!res.ok) {
     const errorBody = await res.text().catch(() => '');
