@@ -33,6 +33,24 @@
 
 ---
 
+## Progress (2026-10-26)
+
+- [x] `cloudflare-opennext` branch created locally + pushed to GitHub
+- [x] Phase 1 adapter skeleton committed (`f80852a`)
+- [x] Linux CI OpenNext build green
+- [x] Phase 2 custom worker + cron committed (`835ec9c`)
+- [x] Linux CI build + `wrangler deploy --dry-run` green
+- [ ] R2 enabled on Cloudflare account + `yt-toolkit-cache` bucket created
+- [ ] Workers Builds project connected to `cloudflare-opennext`
+- [ ] Build vars + runtime secrets set in Cloudflare
+- [ ] Phase 3 runtime tests on preview URL
+- [ ] Phase 4 ISR + cron verification
+- [ ] Phase 5 DNS cutover
+
+> Local Windows build OpenNext ke bundling step pe `Access is denied` deta hai (known Windows/pnpm symlink issue). Isliye validation Linux CI (GitHub Actions) se ho rahi hai. Production build Workers Builds (Linux) pe hi hoga.
+
+---
+
 ## Branch Strategy
 
 | Branch | Purpose | Deploy target |
