@@ -40,14 +40,17 @@
 - [x] Linux CI OpenNext build green
 - [x] Phase 2 custom worker + cron committed (`835ec9c`)
 - [x] Linux CI build + `wrangler deploy --dry-run` green
-- [ ] R2 enabled on Cloudflare account + `yt-toolkit-cache` bucket created
-- [ ] Workers Builds project connected to `cloudflare-opennext`
-- [ ] Build vars + runtime secrets set in Cloudflare
-- [ ] Phase 3 runtime tests on preview URL
-- [ ] Phase 4 ISR + cron verification
-- [ ] Phase 5 DNS cutover
+- [x] R2 enabled + `yt-toolkit-cache` bucket created (APAC)
+- [x] GitHub Actions build + deploy pipeline (same Linux job)
+- [x] Build-time data secrets + runtime secrets set in Cloudflare
+- [x] **Live preview:** https://yt-toolkit.geekyprem4.workers.dev
+- [x] Phase 3 runtime tests (home, YouTube APIs, transcript, AI, OG, ISR)
+- [x] Phase 4 ISR cache populated (172 entries) + cron endpoint verified
+- [ ] Phase 5 custom domain + DNS cutover
 
-> Local Windows build OpenNext ke bundling step pe `Access is denied` deta hai (known Windows/pnpm symlink issue). Isliye validation Linux CI (GitHub Actions) se ho rahi hai. Production build Workers Builds (Linux) pe hi hoga.
+> **Domain status:** `yttools.pro` abhi Hostinger DNS pe hai (`orbit.dns-parking.com`, `horizon.dns-parking.com`) aur `www` CNAME Vercel ko point karta hai. Custom domain ke liye nameservers Cloudflare pe move karne padenge. Tab tak `workers.dev` preview URL use hoga.
+
+> Local Windows build OpenNext ke bundling step pe `Access is denied` deta hai (known Windows/pnpm symlink issue). Isliye build + deploy Linux GitHub Actions job me ho raha hai. Workers Builds ki zaroorat nahi.
 
 ---
 
