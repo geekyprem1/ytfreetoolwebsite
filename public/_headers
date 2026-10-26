@@ -1,0 +1,12 @@
+# Cloudflare Workers Static Assets headers.
+# next.config.ts headers do not apply to public files or _next/static.
+
+/_next/static/*
+  Cache-Control: public,max-age=31536000,immutable
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload

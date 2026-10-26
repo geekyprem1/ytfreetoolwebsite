@@ -1,7 +1,5 @@
 import { ImageResponse } from 'next/og';
 
-export const runtime = 'edge';
-
 const categoryStyles: Record<string, { label: string; accent: string; background: string; tagline: string }> = {
   calculator: { label: 'YouTube Calculators', accent: '#f97316', background: '#fff7ed', tagline: 'Plan, estimate, and measure creator growth.' },
   seo: { label: 'YouTube SEO Tools', accent: '#2563eb', background: '#eff6ff', tagline: 'Make every upload clearer and easier to discover.' },

@@ -33,6 +33,25 @@
 
 ---
 
+## Branch Strategy
+
+| Branch | Purpose | Deploy target |
+|---|---|---|
+| `master` | Current production | **Vercel (live, untouched)** |
+| `cloudflare-opennext` | Migration work | Cloudflare Workers Builds **preview** |
+| `master` (after merge) | New production | Cloudflare Workers |
+
+**Rules:**
+
+- `master` pe Cloudflare changes merge se pehle **nahi** jaate
+- `master` me `middleware.ts`, `vercel.json`, Vercel config sab as-is rahenge
+- Cloudflare branch push → Workers Builds preview URL (production domain nahi)
+- Vercel production sirf `master` se deploy hota hai — branch se production unaffected
+- Cutover ke baad `master` merge + DNS Cloudflare pe; Vercel ka previous deployment rollback ke liye preserved
+- Vercel branch preview fail ho sakta hai (Cloudflare-specific files); production pe koi asar nahi — chaho toh us branch ko Vercel me ignore kar do
+
+---
+
 ## Current Repo Audit — kya Vercel-specific hai
 
 | File / Area | Vercel dependency | Cloudflare impact |
@@ -63,7 +82,7 @@
 ### 0.1 Git clean
 
 - [ ] Working tree ke 20+ modified files commit ya stash karo
-- [ ] `main` branch Vercel-deployable rahe
+- [ ] `master` branch Vercel-deployable rahe
 - [ ] Migration branch: `cloudflare-opennext`
 
 ```bash
@@ -182,7 +201,7 @@ Latest version use karo — `next/og` ke security fixes include hain.
 }
 ```
 
-> Phase 2 ke baad `main` ko `./worker.ts` kar denge (custom worker).
+> Phase 2 ke baad `wrangler.jsonc` ka `main` field `./worker.ts` kar denge (custom worker).
 
 ### 1.3 `open-next.config.ts` (draft)
 
@@ -575,7 +594,7 @@ Plus:
 
 ## What NOT To Do
 
-- `main` branch pe direct migration mat karo — alag branch
+- `master` branch pe direct migration mat karo — alag branch
 - DNS cutover se pehle `vercel.json` / `middleware.ts` delete mat karo
 - `NEXT_PUBLIC_*` vars sirf runtime secrets me mat daalo — build vars me bhi chahiye
 - Cloudflare "Cache Everything" page rule mat lagao

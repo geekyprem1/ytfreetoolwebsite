@@ -8,8 +8,33 @@ const nextConfig: NextConfig = {
     root: path.join(__dirname),
   },
   serverExternalPackages: ['@googleapis/youtube'],
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
+      {
+        source: '/tools',
+        destination: '/',
+        permanent: true,
+      },
       {
         source: '/blog/youtube-seo-tips-2026',
         destination: '/blog/youtube-seo-tips-2027',
@@ -18,6 +43,10 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    // Cloudflare Workers has no built-in Next image optimizer. The app only
+    // uses next/image in one place with `unoptimized`, so disable it globally
+    // until Cloudflare Images is configured.
+    unoptimized: true,
     remotePatterns: [
       { protocol: 'https', hostname: 'i.ytimg.com', pathname: '/**' },
       { protocol: 'https', hostname: 'img.youtube.com', pathname: '/**' },
