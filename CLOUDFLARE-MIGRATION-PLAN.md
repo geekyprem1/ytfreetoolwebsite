@@ -33,6 +33,50 @@
 
 ---
 
+## Progress (2026-10-26)
+
+- [x] `cloudflare-opennext` branch created locally + pushed to GitHub
+- [x] Phase 1 adapter skeleton committed (`f80852a`)
+- [x] Linux CI OpenNext build green
+- [x] Phase 2 custom worker + cron committed (`835ec9c`)
+- [x] Linux CI build + `wrangler deploy --dry-run` green
+- [x] R2 enabled + `yt-toolkit-cache` bucket created (APAC)
+- [x] GitHub Actions build + deploy pipeline (same Linux job)
+- [x] Auto-deploy on every push to `cloudflare-opennext` (workers.dev preview)
+- [x] Build-time data secrets + runtime secrets set in Cloudflare
+- [x] **Live preview:** https://yt-toolkit.geekyprem4.workers.dev
+- [x] Phase 3 runtime tests (home, YouTube APIs, transcript, AI, OG, ISR)
+- [x] Phase 4 ISR cache populated (172 entries) + cron endpoint verified
+- [x] Phase 5 custom domain + DNS cutover
+- [x] **Production:** https://yttools.pro (Cloudflare Worker)
+- [x] `www.yttools.pro` → `https://yttools.pro` 301 redirect (path preserved)
+- [x] Google Search Console verification TXT preserved
+
+> **DNS note:** `yttools.pro` ab Cloudflare nameservers pe hai. Agar kisi local machine pe purana Vercel IP dikhe, `ipconfig /flushdns` karo ya DNS `1.1.1.1` / `8.8.8.8` set karo. Authoritative Cloudflare DNS aur edge routing correct hain.
+
+> Local Windows build OpenNext ke bundling step pe `Access is denied` deta hai (known Windows/pnpm symlink issue). Isliye build + deploy Linux GitHub Actions job me ho raha hai. Workers Builds ki zaroorat nahi.
+
+---
+
+## Branch Strategy
+
+| Branch | Purpose | Deploy target |
+|---|---|---|
+| `master` | Current production | **Vercel (live, untouched)** |
+| `cloudflare-opennext` | Migration work | Cloudflare Workers Builds **preview** |
+| `master` (after merge) | New production | Cloudflare Workers |
+
+**Rules:**
+
+- `master` pe Cloudflare changes merge se pehle **nahi** jaate
+- `master` me `middleware.ts`, `vercel.json`, Vercel config sab as-is rahenge
+- Cloudflare branch push → Workers Builds preview URL (production domain nahi)
+- Vercel production sirf `master` se deploy hota hai — branch se production unaffected
+- Cutover ke baad `master` merge + DNS Cloudflare pe; Vercel ka previous deployment rollback ke liye preserved
+- Vercel branch preview fail ho sakta hai (Cloudflare-specific files); production pe koi asar nahi — chaho toh us branch ko Vercel me ignore kar do
+
+---
+
 ## Current Repo Audit — kya Vercel-specific hai
 
 | File / Area | Vercel dependency | Cloudflare impact |
@@ -63,7 +107,7 @@
 ### 0.1 Git clean
 
 - [ ] Working tree ke 20+ modified files commit ya stash karo
-- [ ] `main` branch Vercel-deployable rahe
+- [ ] `master` branch Vercel-deployable rahe
 - [ ] Migration branch: `cloudflare-opennext`
 
 ```bash
@@ -182,7 +226,7 @@ Latest version use karo — `next/og` ke security fixes include hain.
 }
 ```
 
-> Phase 2 ke baad `main` ko `./worker.ts` kar denge (custom worker).
+> Phase 2 ke baad `wrangler.jsonc` ka `main` field `./worker.ts` kar denge (custom worker).
 
 ### 1.3 `open-next.config.ts` (draft)
 
@@ -575,7 +619,7 @@ Plus:
 
 ## What NOT To Do
 
-- `main` branch pe direct migration mat karo — alag branch
+- `master` branch pe direct migration mat karo — alag branch
 - DNS cutover se pehle `vercel.json` / `middleware.ts` delete mat karo
 - `NEXT_PUBLIC_*` vars sirf runtime secrets me mat daalo — build vars me bhi chahiye
 - Cloudflare "Cache Everything" page rule mat lagao

@@ -23,25 +23,40 @@ export async function generateWithOpenRouter(
   }
   messages.push({ role: 'user', content: prompt });
 
-  const res = await fetch(OPENROUTER_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
-      'HTTP-Referer': process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-      'X-Title': 'YouTube Toolkit AI',
-    },
-    body: JSON.stringify({
+  console.log('[openrouter] calling', { model, promptLength: prompt.length });
+
+  let res: Response;
+  try {
+    res = await fetch(OPENROUTER_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+        'HTTP-Referer': process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+        'X-Title': 'YouTube Toolkit AI',
+      },
+      body: JSON.stringify({
+        model,
+        messages,
+        temperature: options.temperature ?? 0.7,
+        max_tokens: options.maxTokens ?? 2048,
+      }),
+    });
+  } catch (error) {
+    console.error('[openrouter] fetch failed', {
+      message: error instanceof Error ? error.message : 'unknown',
       model,
-      messages,
-      temperature: options.temperature ?? 0.7,
-      max_tokens: options.maxTokens ?? 2048,
-    }),
-  });
+    });
+    throw error;
+  }
 
   if (!res.ok) {
-    const error = await res.json().catch(() => ({}));
-    throw new Error(`OPENROUTER_ERROR: ${res.status} ${JSON.stringify(error)}`);
+    const errorBody = await res.text().catch(() => '');
+    console.error('[openrouter] request failed', {
+      status: res.status,
+      body: errorBody.slice(0, 300),
+    });
+    throw new Error(`OPENROUTER_ERROR: ${res.status}`);
   }
 
   const data = (await res.json()) as {
@@ -50,11 +65,15 @@ export async function generateWithOpenRouter(
   };
 
   if (data.error) {
-    throw new Error(`OPENROUTER_ERROR: ${data.error.message}`);
+    console.error('[openrouter] response error', { message: data.error.message });
+    throw new Error('OPENROUTER_ERROR: response error');
   }
 
   const text = data.choices?.[0]?.message?.content;
   if (!text) {
+    console.error('[openrouter] empty response', {
+      hasChoices: Boolean(data.choices?.length),
+    });
     throw new Error('AI_GENERATION_FAILED: empty response from OpenRouter');
   }
 

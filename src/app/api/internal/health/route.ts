@@ -49,12 +49,7 @@ export async function GET() {
   }
 
   // 3. Required env vars presence (without exposing values)
-  const requiredEnvVars = [
-    'YOUTUBE_API_KEY',
-    'GEMINI_API_KEY',
-    'NEXT_PUBLIC_SUPABASE_URL',
-    'SUPABASE_SERVICE_ROLE_KEY',
-  ];
+  const requiredEnvVars = ['YOUTUBE_API_KEY'];
   const missing = requiredEnvVars.filter((v) => !process.env[v]);
   checks.push({
     name: 'env',
@@ -63,6 +58,18 @@ export async function GET() {
       missing.length === 0
         ? 'All required env vars present'
         : `Missing: ${missing.join(', ')}`,
+  });
+
+  // 4. AI provider — Gemini primary, OpenRouter fallback.
+  const aiConfigured = Boolean(
+    process.env.GEMINI_API_KEY || process.env.OPENROUTER_API_KEY,
+  );
+  checks.push({
+    name: 'ai',
+    status: aiConfigured ? 'ok' : 'degraded',
+    message: aiConfigured
+      ? undefined
+      : 'GEMINI_API_KEY / OPENROUTER_API_KEY not set',
   });
 
   const hasDown = checks.some((c) => c.status === 'down');

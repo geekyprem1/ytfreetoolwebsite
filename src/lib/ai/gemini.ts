@@ -1,35 +1,4 @@
-import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold, type GenerativeModel } from '@google/generative-ai';
 import { generateWithOpenRouter } from '@/lib/ai/openrouter';
-
-const apiKey = process.env.GEMINI_API_KEY;
-
-let genAI: GoogleGenerativeAI | null = null;
-let model: GenerativeModel | null = null;
-
-function getModel(): GenerativeModel {
-  if (!apiKey) {
-    throw new Error('GEMINI_API_KEY is not configured');
-  }
-  if (!genAI) {
-    genAI = new GoogleGenerativeAI(apiKey);
-  }
-  if (!model) {
-    model = genAI.getGenerativeModel({
-      model: 'gemini-2.0-flash',
-      generationConfig: {
-        maxOutputTokens: 2048,
-        temperature: 0.7,
-      },
-      safetySettings: [
-        { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
-        { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
-        { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
-        { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
-      ],
-    });
-  }
-  return model;
-}
 
 interface GenerateOptions {
   temperature?: number;
@@ -44,9 +13,37 @@ export function safeJsonParse(text: string): unknown {
   return JSON.parse(raw);
 }
 
-async function generateWithGemini(prompt: string, options: GenerateOptions = {}): Promise<string> {
-  const m = getModel();
-  const result = await m.generateContent({
+async function generateWithGemini(
+  prompt: string,
+  options: GenerateOptions = {},
+): Promise<string> {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    throw new Error('GEMINI_API_KEY is not configured');
+  }
+
+  // Lazy import: the Gemini SDK pulls in Node-oriented code that should not be
+  // evaluated in the Cloudflare Workers runtime when OpenRouter is the provider.
+  const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = await import(
+    '@google/generative-ai'
+  );
+
+  const genAI = new GoogleGenerativeAI(apiKey);
+  const model = genAI.getGenerativeModel({
+    model: 'gemini-2.0-flash',
+    generationConfig: {
+      maxOutputTokens: 2048,
+      temperature: 0.7,
+    },
+    safetySettings: [
+      { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
+      { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
+      { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
+      { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE },
+    ],
+  });
+
+  const result = await model.generateContent({
     contents: [{ role: 'user', parts: [{ text: prompt }] }],
     generationConfig: {
       temperature: options.temperature ?? 0.7,
@@ -73,9 +70,10 @@ export async function generateContent(
   prompt: string,
   options: GenerateOptions = {},
 ): Promise<string> {
-  const hasOpenRouter = !!process.env.OPENROUTER_API_KEY;
+  const hasGemini = Boolean(process.env.GEMINI_API_KEY);
+  const hasOpenRouter = Boolean(process.env.OPENROUTER_API_KEY);
 
-  if (apiKey) {
+  if (hasGemini) {
     try {
       return await generateWithGemini(prompt, options);
     } catch (err) {

@@ -1,0 +1,57 @@
+name: Cloudflare build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - cloudflare-opennext
+
+concurrency:
+  group: cloudflare-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: OpenNext build (Linux)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.13.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build for Cloudflare
+        run: pnpm cf:build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://yttools.pro
+          NEXT_PUBLIC_SITE_NAME: YouTube Toolkit AI
+          NEXT_PUBLIC_SITE_DESCRIPTION: Free YouTube creator toolkit with 15+ tools.
+          NEXT_PUBLIC_ENABLE_AI_TOOLS: "true"
+          NEXT_PUBLIC_ENABLE_ADS: "false"
+          NEXT_PUBLIC_ENABLE_CONTACT_FORM: "true"
+          NEXT_PUBLIC_ENABLE_BLOG: "true"
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          UPSTASH_REDIS_URL: ${{ secrets.UPSTASH_REDIS_URL }}
+          UPSTASH_REDIS_TOKEN: ${{ secrets.UPSTASH_REDIS_TOKEN }}
+
+      - name: Bundle Worker (dry run)
+        run: pnpm exec wrangler deploy --dry-run --outdir .wrangler/dry-run
+
+      - name: Deploy to Cloudflare
+        run: pnpm cf:deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

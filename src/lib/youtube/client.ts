@@ -1,4 +1,4 @@
-import { youtube } from '@googleapis/youtube';
+import type { youtube_v3 } from '@googleapis/youtube';
 import { AppError, ErrorCodes } from '@/lib/errors';
 import type {
   YouTubeVideo,
@@ -17,7 +17,7 @@ import type {
 import { parseYouTubeUrl } from '@/lib/youtube/url-parser';
 import { reserveSearchListCall, trackQuota } from '@/lib/youtube/quota';
 
-const apiKey = process.env.YOUTUBE_API_KEY;
+const YOUTUBE_API_BASE = 'https://www.googleapis.com/youtube/v3';
 
 async function requireSearchListQuota() {
   if (!(await reserveSearchListCall())) {
@@ -25,21 +25,81 @@ async function requireSearchListQuota() {
   }
 }
 
-function getClient() {
-  if (!apiKey) {
+function getApiKey(): string {
+  const key = process.env.YOUTUBE_API_KEY;
+  if (!key) {
     throw new AppError('YOUTUBE_API_ERROR', 'YouTube API key is not configured', 500);
   }
-  return youtube({ version: 'v3', auth: apiKey });
+  return key;
+}
+
+type QueryValue = string | number | boolean | undefined | null;
+
+/**
+ * Thin REST wrapper around the YouTube Data API.
+ *
+ * The official `@googleapis/youtube` client does not behave reliably in the
+ * Cloudflare Workers runtime, so only its TypeScript types are used here.
+ */
+async function ytFetch<T>(
+  resource: string,
+  params: Record<string, QueryValue>,
+): Promise<T> {
+  const url = new URL(`${YOUTUBE_API_BASE}/${resource}`);
+  for (const [key, value] of Object.entries(params)) {
+    if (value === undefined || value === null || value === '') continue;
+    url.searchParams.set(key, String(value));
+  }
+  url.searchParams.set('key', getApiKey());
+
+  const response = await fetch(url.toString(), {
+    headers: { accept: 'application/json' },
+  });
+
+  if (!response.ok) {
+    const body = (await response.json().catch(() => null)) as
+      | { error?: { message?: string; errors?: { reason?: string }[] } }
+      | null;
+    const reason = body?.error?.errors?.[0]?.reason ?? '';
+
+    if (reason === 'quotaExceeded' || reason === 'dailyLimitExceeded') {
+      throw new AppError(
+        'YOUTUBE_QUOTA_EXCEEDED',
+        ErrorCodes.YOUTUBE_QUOTA_EXCEEDED.message,
+        503,
+      );
+    }
+    if (reason === 'commentsDisabled') {
+      throw new AppError(
+        'COMMENTS_NOT_AVAILABLE',
+        'Comments are disabled for this video.',
+        404,
+      );
+    }
+    if (reason === 'videoNotFound') {
+      throw new AppError('VIDEO_NOT_FOUND', ErrorCodes.VIDEO_NOT_FOUND.message, 404);
+    }
+    if (reason === 'channelNotFound') {
+      throw new AppError('CHANNEL_NOT_FOUND', ErrorCodes.CHANNEL_NOT_FOUND.message, 404);
+    }
+
+    throw new AppError(
+      'YOUTUBE_API_ERROR',
+      ErrorCodes.YOUTUBE_API_ERROR.message,
+      502,
+    );
+  }
+
+  return (await response.json()) as T;
 }
 
 export async function getVideoDetails(videoId: string): Promise<YouTubeVideo> {
-  const yt = getClient();
-  const res = await yt.videos.list({
-    id: [videoId],
-    part: ['snippet', 'statistics', 'contentDetails'],
+  const res = await ytFetch<youtube_v3.Schema$VideoListResponse>('videos', {
+    id: videoId,
+    part: 'snippet,statistics,contentDetails',
   });
 
-  const item = res.data.items?.[0];
+  const item = res.items?.[0];
   if (!item) {
     throw new AppError('VIDEO_NOT_FOUND', ErrorCodes.VIDEO_NOT_FOUND.message, 404);
   }
@@ -71,13 +131,12 @@ export async function getVideoTags(videoId: string): Promise<{
   duration: string;
   isShorts: boolean;
 }> {
-  const yt = getClient();
-  const res = await yt.videos.list({
-    id: [videoId],
-    part: ['snippet', 'contentDetails'],
+  const res = await ytFetch<youtube_v3.Schema$VideoListResponse>('videos', {
+    id: videoId,
+    part: 'snippet,contentDetails',
   });
 
-  const item = res.data.items?.[0];
+  const item = res.items?.[0];
   if (!item) {
     throw new AppError('VIDEO_NOT_FOUND', ErrorCodes.VIDEO_NOT_FOUND.message, 404);
   }
@@ -106,22 +165,20 @@ function isYouTubeShortsDuration(isoDuration: string): boolean {
 }
 
 export async function getChannelDetails(channelIdOrHandle: string): Promise<YouTubeChannel> {
-  const yt = getClient();
-
-  const params: Record<string, unknown> = {
-    part: ['snippet', 'statistics', 'brandingSettings', 'status', 'contentDetails'],
+  const params: Record<string, string> = {
+    part: 'snippet,statistics,brandingSettings,status,contentDetails',
   };
 
   if (!channelIdOrHandle.startsWith('@') && /^UC[a-zA-Z0-9_-]{22}$/.test(channelIdOrHandle)) {
-    params.id = [channelIdOrHandle];
+    params.id = channelIdOrHandle;
   } else {
     params.forHandle = channelIdOrHandle.replace(/^@/, '');
   }
 
-  const res = await yt.channels.list(params as never);
+  const res = await ytFetch<youtube_v3.Schema$ChannelListResponse>('channels', params);
   await trackQuota(1);
 
-  const item = res.data.items?.[0];
+  const item = res.items?.[0];
   if (!item) {
     throw new AppError('CHANNEL_NOT_FOUND', ErrorCodes.CHANNEL_NOT_FOUND.message, 404);
   }
@@ -170,19 +227,18 @@ export interface ChannelBatchStats {
  * from the result.
  */
 export async function getChannelsBatch(channelIds: string[]): Promise<ChannelBatchStats[]> {
-  const yt = getClient();
   const out: ChannelBatchStats[] = [];
 
   for (let i = 0; i < channelIds.length; i += 50) {
     const batch = channelIds.slice(i, i + 50);
-    const res = await yt.channels.list({
-      part: ['snippet', 'statistics'],
-      id: batch,
+    const res = await ytFetch<youtube_v3.Schema$ChannelListResponse>('channels', {
+      part: 'snippet,statistics',
+      id: batch.join(','),
       maxResults: 50,
     });
     await trackQuota(1);
 
-    for (const item of res.data.items ?? []) {
+    for (const item of res.items ?? []) {
       if (!item.id) continue;
       const thumbs = item.snippet?.thumbnails;
       out.push({
@@ -206,16 +262,14 @@ export async function getChannelVideos(
   maxResults = 5,
   uploadsPlaylistId?: string | null,
 ): Promise<YouTubeChannelVideo[]> {
-  const yt = getClient();
-
   if (uploadsPlaylistId) {
-    const playlist = await yt.playlistItems.list({
+    const playlist = await ytFetch<youtube_v3.Schema$PlaylistItemListResponse>('playlistItems', {
       playlistId: uploadsPlaylistId,
       maxResults: Math.min(50, Math.max(1, maxResults)),
-      part: ['contentDetails', 'snippet'],
+      part: 'contentDetails,snippet',
     });
     await trackQuota(1);
-    return (playlist.data.items ?? []).flatMap((item) => {
+    return (playlist.items ?? []).flatMap((item) => {
       const videoId = item.contentDetails?.videoId ?? item.snippet?.resourceId?.videoId;
       if (!videoId) return [];
       return [{
@@ -229,15 +283,15 @@ export async function getChannelVideos(
   }
 
   await requireSearchListQuota();
-  const res = await yt.search.list({
+  const res = await ytFetch<youtube_v3.Schema$SearchListResponse>('search', {
     channelId,
-    type: ['video'],
+    type: 'video',
     order: 'date',
     maxResults,
-    part: ['snippet'],
+    part: 'snippet',
   });
 
-  return (res.data.items ?? []).map((item) => ({
+  return (res.items ?? []).map((item) => ({
     videoId: item.id?.videoId ?? '',
     title: item.snippet?.title ?? 'Unknown',
     thumbnail: item.snippet?.thumbnails?.default?.url ?? '',
@@ -248,16 +302,15 @@ export async function getChannelVideos(
 
 /** One uploads-playlist page; callers decide how many pages to expose. */
 export async function getChannelUploadsPage(playlistId: string, pageToken?: string) {
-  const yt = getClient();
-  const response = await yt.playlistItems.list({
+  const response = await ytFetch<youtube_v3.Schema$PlaylistItemListResponse>('playlistItems', {
     playlistId,
     pageToken,
     maxResults: 25,
-    part: ['contentDetails', 'snippet'],
+    part: 'contentDetails,snippet',
   });
   await trackQuota(1);
   return {
-    videos: (response.data.items ?? []).flatMap((item) => {
+    videos: (response.items ?? []).flatMap((item) => {
       const videoId = item.contentDetails?.videoId ?? item.snippet?.resourceId?.videoId;
       if (!videoId) return [];
       return [{
@@ -267,7 +320,7 @@ export async function getChannelUploadsPage(playlistId: string, pageToken?: stri
         publishedAt: item.contentDetails?.videoPublishedAt ?? item.snippet?.publishedAt ?? '',
       }];
     }),
-    nextPageToken: response.data.nextPageToken ?? null,
+    nextPageToken: response.nextPageToken ?? null,
   };
 }
 
@@ -277,19 +330,18 @@ export async function getRecentVideosMonetizationProbe(
   maxResults = 10,
   uploadsPlaylistId?: string | null,
 ): Promise<YouTubeVideoMonetizationProbe[]> {
-  const yt = getClient();
   let ids: string[] = [];
 
   // Prefer uploads playlist (cheap + reliable) over search.list
   const playlistId = uploadsPlaylistId ?? null;
   if (playlistId) {
     try {
-      const playlist = await yt.playlistItems.list({
+      const playlist = await ytFetch<youtube_v3.Schema$PlaylistItemListResponse>('playlistItems', {
         playlistId,
         maxResults,
-        part: ['contentDetails', 'snippet'],
+        part: 'contentDetails,snippet',
       });
-      ids = (playlist.data.items ?? [])
+      ids = (playlist.items ?? [])
         .map((item) => item.contentDetails?.videoId)
         .filter((id): id is string => Boolean(id));
     } catch {
@@ -299,14 +351,14 @@ export async function getRecentVideosMonetizationProbe(
 
   if (ids.length === 0) {
     await requireSearchListQuota();
-    const search = await yt.search.list({
+    const search = await ytFetch<youtube_v3.Schema$SearchListResponse>('search', {
       channelId,
-      type: ['video'],
+      type: 'video',
       order: 'date',
       maxResults,
-      part: ['snippet'],
+      part: 'snippet',
     });
-    ids = (search.data.items ?? [])
+    ids = (search.items ?? [])
       .map((item) => item.id?.videoId)
       .filter((id): id is string => Boolean(id));
   }
@@ -314,12 +366,12 @@ export async function getRecentVideosMonetizationProbe(
   if (ids.length === 0) return [];
 
   // Omit paidProductPlacementDetails — owner-only; requesting it is useless for public checks
-  const details = await yt.videos.list({
-    id: ids,
-    part: ['snippet', 'statistics', 'contentDetails', 'status'],
+  const details = await ytFetch<youtube_v3.Schema$VideoListResponse>('videos', {
+    id: ids.join(','),
+    part: 'snippet,statistics,contentDetails,status',
   });
 
-  return (details.data.items ?? []).map((item) => {
+  return (details.items ?? []).map((item) => {
     const madeForKids =
       typeof item.status?.madeForKids === 'boolean'
         ? item.status.madeForKids
@@ -368,8 +420,6 @@ export async function getPlaylistSummary(
   playlistId: string,
   maxVideos = 500,
 ): Promise<YouTubePlaylistSummary> {
-  const yt = getClient();
-
   const videoIds: string[] = [];
   let pageToken: string | undefined;
   let firstTitle = '';
@@ -377,14 +427,14 @@ export async function getPlaylistSummary(
   let firstThumb = '';
 
   do {
-    const page = await yt.playlistItems.list({
+    const page = await ytFetch<youtube_v3.Schema$PlaylistItemListResponse>('playlistItems', {
       playlistId,
       maxResults: 50,
-      part: ['contentDetails', 'snippet'],
+      part: 'contentDetails,snippet',
       pageToken,
     });
 
-    const items = page.data.items ?? [];
+    const items = page.items ?? [];
     if (!firstTitle && items[0]) {
       firstThumb =
         items[0].snippet?.thumbnails?.medium?.url ??
@@ -397,7 +447,7 @@ export async function getPlaylistSummary(
       if (vid) videoIds.push(vid);
     }
 
-    pageToken = page.data.nextPageToken ?? undefined;
+    pageToken = page.nextPageToken ?? undefined;
   } while (pageToken && videoIds.length < maxVideos);
 
   const truncated = Boolean(pageToken) || videoIds.length > maxVideos;
@@ -409,8 +459,11 @@ export async function getPlaylistSummary(
 
   // Fetch the playlist's own metadata (title + owner) in one cheap call.
   try {
-    const meta = await yt.playlists.list({ id: [playlistId], part: ['snippet'] });
-    const pl = meta.data.items?.[0];
+    const meta = await ytFetch<youtube_v3.Schema$PlaylistListResponse>('playlists', {
+      id: playlistId,
+      part: 'snippet',
+    });
+    const pl = meta.items?.[0];
     if (pl) {
       firstTitle = pl.snippet?.title ?? firstTitle;
       firstChannel = pl.snippet?.channelTitle ?? '';
@@ -426,8 +479,11 @@ export async function getPlaylistSummary(
 
   for (let i = 0; i < cappedIds.length; i += 50) {
     const chunk = cappedIds.slice(i, i + 50);
-    const res = await yt.videos.list({ id: chunk, part: ['contentDetails'] });
-    for (const item of res.data.items ?? []) {
+    const res = await ytFetch<youtube_v3.Schema$VideoListResponse>('videos', {
+      id: chunk.join(','),
+      part: 'contentDetails',
+    });
+    for (const item of res.items ?? []) {
       const secs = isoDurationToSeconds(item.contentDetails?.duration ?? '');
       totalSeconds += secs;
       countedVideos += 1;
@@ -448,18 +504,17 @@ export async function getPlaylistSummary(
 
 /** Lightweight channel snapshot for the live subscriber counter (1 quota unit). */
 export async function getLiveChannelCount(channelIdOrHandle: string): Promise<LiveChannelCount> {
-  const yt = getClient();
-  const params: Record<string, unknown> = { part: ['snippet', 'statistics'] };
+  const params: Record<string, string> = { part: 'snippet,statistics' };
   if (channelIdOrHandle.startsWith('UC')) {
-    params.id = [channelIdOrHandle];
+    params.id = channelIdOrHandle;
   } else {
     params.forHandle = channelIdOrHandle.replace(/^@/, '');
   }
 
-  const res = await yt.channels.list(params as never);
+  const res = await ytFetch<youtube_v3.Schema$ChannelListResponse>('channels', params);
   await trackQuota(1);
 
-  const item = res.data.items?.[0];
+  const item = res.items?.[0];
   if (!item) {
     throw new AppError('CHANNEL_NOT_FOUND', ErrorCodes.CHANNEL_NOT_FOUND.message, 404);
   }
@@ -480,11 +535,13 @@ export async function getLiveChannelCount(channelIdOrHandle: string): Promise<Li
 
 /** Lightweight video snapshot for the live view counter (1 quota unit). */
 export async function getLiveVideoCount(videoId: string): Promise<LiveVideoCount> {
-  const yt = getClient();
-  const res = await yt.videos.list({ id: [videoId], part: ['snippet', 'statistics'] });
+  const res = await ytFetch<youtube_v3.Schema$VideoListResponse>('videos', {
+    id: videoId,
+    part: 'snippet,statistics',
+  });
   await trackQuota(1);
 
-  const item = res.data.items?.[0];
+  const item = res.items?.[0];
   if (!item) {
     throw new AppError('VIDEO_NOT_FOUND', ErrorCodes.VIDEO_NOT_FOUND.message, 404);
   }
@@ -508,16 +565,15 @@ export async function getLiveVideoCount(videoId: string): Promise<LiveVideoCount
  * Capped by `maxComments` to protect quota; sets `truncated` when more exist.
  */
 export async function getComments(videoId: string, maxComments = 500): Promise<YouTubeCommentsResult> {
-  const yt = getClient();
   const comments: YouTubeComment[] = [];
   let pageToken: string | undefined;
   const videoTitle = '';
 
   try {
     do {
-      const res = await yt.commentThreads.list({
+      const res = await ytFetch<youtube_v3.Schema$CommentThreadListResponse>('commentThreads', {
         videoId,
-        part: ['snippet'],
+        part: 'snippet',
         maxResults: Math.min(100, maxComments - comments.length),
         order: 'relevance',
         textFormat: 'plainText',
@@ -525,7 +581,7 @@ export async function getComments(videoId: string, maxComments = 500): Promise<Y
       });
       await trackQuota(1);
 
-      for (const item of res.data.items ?? []) {
+      for (const item of res.items ?? []) {
         const top = item.snippet?.topLevelComment?.snippet;
         if (!top) continue;
         comments.push({
@@ -538,7 +594,7 @@ export async function getComments(videoId: string, maxComments = 500): Promise<Y
         });
       }
 
-      pageToken = res.data.nextPageToken ?? undefined;
+      pageToken = res.nextPageToken ?? undefined;
     } while (pageToken && comments.length < maxComments);
   } catch (e) {
     const msg = e instanceof Error ? e.message : '';
@@ -577,17 +633,16 @@ export async function getTrendingVideos(
   categoryId = '0',
   maxResults = 40,
 ): Promise<TrendingResult> {
-  const yt = getClient();
-  const res = await yt.videos.list({
+  const res = await ytFetch<youtube_v3.Schema$VideoListResponse>('videos', {
     chart: 'mostPopular',
     regionCode,
     ...(categoryId !== '0' ? { videoCategoryId: categoryId } : {}),
     maxResults,
-    part: ['snippet', 'statistics', 'contentDetails'],
+    part: 'snippet,statistics,contentDetails',
   });
   await trackQuota(1);
 
-  const videos: TrendingVideo[] = (res.data.items ?? []).map((item) => ({
+  const videos: TrendingVideo[] = (res.items ?? []).map((item) => ({
     id: item.id ?? '',
     title: item.snippet?.title ?? 'Unknown',
     channelTitle: item.snippet?.channelTitle ?? '',
