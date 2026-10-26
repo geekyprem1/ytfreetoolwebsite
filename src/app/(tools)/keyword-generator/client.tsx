@@ -50,7 +50,7 @@ export function KeywordGeneratorClient() {
         </ToolInput>
       </div>
 
-      <Button onClick={handleGenerate} disabled={!seedKeyword || isLoading} className="w-full">
+      <Button onClick={handleGenerate} disabled={!seedKeyword || isLoading} className="w-full" data-ml-goal="tool_action_click">
         {isLoading ? 'Generating...' : 'Generate Keywords'}
       </Button>
       <p className="text-xs text-muted-foreground">

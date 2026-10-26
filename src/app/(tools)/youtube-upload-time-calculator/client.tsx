@@ -158,7 +158,7 @@ export function YouTubeUploadTimeCalculatorClient() {
         </ToolInput>
       </section>
 
-      <Button className="w-full" onClick={calculate}>
+      <Button className="w-full" onClick={calculate} data-ml-goal="tool_action_click">
         {mode === 'time' ? 'Calculate upload time' : 'Calculate required speed'}
       </Button>
 

@@ -246,7 +246,7 @@ export function YouTubeBannerSafeAreaCheckerClient() {
           <section className="mt-6 rounded-xl border bg-muted/20 p-4">
             <div className="flex gap-3"><ImageIcon className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" /><div><h3 className="font-semibold">Keep important artwork centered</h3><p className="mt-1 text-sm text-muted-foreground">The amber guide is a visual safe-area warning, not an automatic text/logo detector. Inspect your channel name, face, logo, and schedule manually inside the box.</p></div></div>
             {exportError && <p className="mt-3 text-sm text-destructive">{exportError}</p>}
-            <Button className="mt-4" onClick={exportGuide} disabled={isExporting}><Download className="size-4" aria-hidden="true" />{isExporting ? 'Preparing guide…' : 'Export PNG guide'}</Button>
+            <Button className="mt-4" onClick={exportGuide} disabled={isExporting} data-ml-goal="tool_action_click"><Download className="size-4" aria-hidden="true" />{isExporting ? 'Preparing guide…' : 'Export PNG guide'}</Button>
           </section>
         </ToolOutput>
       )}

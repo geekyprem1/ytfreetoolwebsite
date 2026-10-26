@@ -62,6 +62,7 @@ export function HowItWorks() {
         <Link
           href="/thumbnail-downloader"
           className="inline-flex items-center gap-2 bg-[#FF3B30] hover:bg-[#E0352B] text-white px-6 py-3.5 rounded-xl text-base font-semibold transition-colors"
+          data-ml-goal="explore_tools_click"
         >
           Try your first tool <ArrowRight className="size-4" />
         </Link>

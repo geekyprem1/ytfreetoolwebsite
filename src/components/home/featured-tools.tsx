@@ -63,6 +63,7 @@ export function FeaturedTools() {
           <Link
             href="/tools"
             className="inline-flex items-center gap-2 text-base font-medium text-primary hover:underline underline-offset-4"
+            data-ml-goal="browse_tools_click"
           >
             View all {toolCount} tools <ArrowRight className="size-4" />
           </Link>

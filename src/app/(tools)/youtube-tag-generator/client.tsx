@@ -105,7 +105,7 @@ export function TagGeneratorClient() {
         <Slider value={count} min={10} max={40} step={5} onChange={setCount} disabled={isLoading} />
       </ToolInput>
 
-      <Button onClick={handleGenerate} disabled={topic.trim().length < 2 || isLoading} className="w-full">
+      <Button onClick={handleGenerate} disabled={topic.trim().length < 2 || isLoading} className="w-full" data-ml-goal="tool_action_click">
         {isLoading ? 'Generating tags…' : 'Generate YouTube Tags'}
       </Button>
 

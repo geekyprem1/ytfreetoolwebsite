@@ -85,7 +85,7 @@ export function PlaylistGeneratorClient() {
         <ToolInput label="Options"><Slider value={count} min={3} max={10} step={1} onChange={setCount} disabled={isLoading} /></ToolInput>
       </div>
 
-      <Button onClick={handleGenerate} disabled={!isValid || isLoading} className="w-full" size="lg">
+      <Button onClick={handleGenerate} disabled={!isValid || isLoading} className="w-full" size="lg" data-ml-goal="tool_action_click">
         {isLoading ? <><Loader2 className="size-4 mr-2 animate-spin" />Generating... (10-30 sec)</> : `Generate ${count} playlist options`}
       </Button>
 

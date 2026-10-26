@@ -38,7 +38,7 @@ export function ChannelUploadHistoryClient() {
     <div className="space-y-4">
       <div className="flex flex-col gap-2 sm:flex-row">
         <Input aria-label="Channel ID or handle" value={input} onChange={(event) => { setInput(event.target.value); setPages([]); }} onKeyDown={(event) => { if (event.key === 'Enter' && validChannel) void load(0); }} placeholder="@handle or UC… channel ID" className="h-12" />
-        <Button onClick={() => void load(0)} disabled={!validChannel || isLoading} className="h-12">Show uploads</Button>
+        <Button onClick={() => void load(0)} disabled={!validChannel || isLoading} className="h-12" data-ml-goal="tool_action_click">Show uploads</Button>
       </div>
       {input.trim() && !validChannel && <p className="text-sm text-muted-foreground">Use a channel ID or @handle. Legacy custom URLs cannot be resolved here.</p>}
       {isLoading && pages.length === 0 && <ToolLoading variant="card" />}

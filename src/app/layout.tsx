@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import { Instrument_Sans, Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/contexts/theme-provider';
 import { ToastProvider } from '@/contexts/toast-provider';
@@ -69,6 +70,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${instrumentSans.variable} ${geistMono.variable}`}
     >
       <body className="font-sans antialiased min-h-screen flex flex-col">
+        <Script
+          defer
+          data-website-id="0k4p0e0f703z6r1y"
+          src="https://minilytics.geekyprem4.workers.dev/js/script.js"
+          strategy="afterInteractive"
+        />
         <ThemeProvider>
           <TooltipProvider>
             <ToastProvider />

@@ -48,7 +48,7 @@ export function YoutubeLiveEarningsCalculatorClient() {
         </ToolInput>
       </div>
 
-      <Button onClick={() => setShowResult(true)} disabled={!isValid} className="w-full">
+      <Button onClick={() => setShowResult(true)} disabled={!isValid} className="w-full" data-ml-goal="tool_action_click">
         Calculate Live Earnings
       </Button>
 

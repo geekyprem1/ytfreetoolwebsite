@@ -52,7 +52,7 @@ export function HashtagGeneratorClient() {
         </ToolInput>
       </div>
 
-      <Button onClick={handleGenerate} disabled={!topic || isLoading} className="w-full">
+      <Button onClick={handleGenerate} disabled={!topic || isLoading} className="w-full" data-ml-goal="tool_action_click">
         {isLoading ? 'Generating...' : 'Generate Hashtags'}
       </Button>
 

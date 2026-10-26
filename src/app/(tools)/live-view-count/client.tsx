@@ -85,6 +85,7 @@ export function LiveViewCountClient({ initialVideo }: { initialVideo?: string })
           onClick={() => start(input)}
           disabled={!input.trim()}
           className="h-12 px-5 rounded-xl bg-[#FF3B30] hover:bg-[#E0352B] text-white shrink-0"
+          data-ml-goal="tool_action_click"
         >
           Track live
         </Button>

@@ -79,7 +79,7 @@ export function YouTubeChapterValidatorClient() {
         </div>
       </section>
 
-      <Button className="w-full" onClick={validate} disabled={!sourceText.trim()}>
+      <Button className="w-full" onClick={validate} disabled={!sourceText.trim()} data-ml-goal="tool_action_click">
         Validate chapter timestamps
       </Button>
 

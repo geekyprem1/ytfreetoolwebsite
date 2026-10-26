@@ -94,7 +94,7 @@ export function ChannelNameGeneratorClient() {
         </ToolInput>
       </div>
 
-      <Button onClick={generate} disabled={!niche.trim() || isLoading} className="w-full">
+      <Button onClick={generate} disabled={!niche.trim() || isLoading} className="w-full" data-ml-goal="tool_action_click">
         {isLoading ? 'Generating…' : 'Generate names'}
       </Button>
 

@@ -165,7 +165,7 @@ export function DescriptionGeneratorClient() {
         </ToolInput>
       </div>
 
-      <Button onClick={handleGenerate} disabled={!isValid || isLoading} className="w-full">
+      <Button onClick={handleGenerate} disabled={!isValid || isLoading} className="w-full" data-ml-goal="tool_action_click">
         {isLoading ? 'Generating...' : 'Generate Description'}
       </Button>
 

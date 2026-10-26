@@ -57,7 +57,7 @@ export function YoutubeMoneyCalculatorClient() {
         )}
       </div>
 
-      <Button onClick={() => setShowResult(true)} disabled={!isValid || (mode === 'target' && parseFloat(targetEarnings) <= 0)} className="w-full">
+      <Button onClick={() => setShowResult(true)} disabled={!isValid || (mode === 'target' && parseFloat(targetEarnings) <= 0)} className="w-full" data-ml-goal="tool_action_click">
         {mode === 'target' ? 'Calculate Views Needed' : 'Calculate Earnings'}
       </Button>
 

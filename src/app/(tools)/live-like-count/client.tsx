@@ -48,7 +48,7 @@ export function LiveLikeCountClient({ initialVideo }: { initialVideo?: string })
     <div className="space-y-4">
       <div className="flex flex-col gap-2 sm:flex-row">
         <Input aria-label="YouTube video URL or ID" value={input} onChange={(event) => setInput(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter') start(input); }} placeholder="Video URL or 11-character ID" className="h-12" />
-        <Button onClick={() => start(input)} disabled={!input.trim()} className="h-12">Track likes</Button>
+        <Button onClick={() => start(input)} disabled={!input.trim()} className="h-12" data-ml-goal="tool_action_click">Track likes</Button>
       </div>
       {isLoading && !data && <ToolLoading variant="card" />}
       {error && !data && <ToolError message={error} onRetry={reset} />}

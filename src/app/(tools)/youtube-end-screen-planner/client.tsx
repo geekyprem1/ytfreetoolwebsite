@@ -480,7 +480,7 @@ export function YouTubeEndScreenPlannerClient() {
               The PNG retains your local background (if added) and draws labeled placeholders, grid guides, and the selected end-screen timing. Recreate the plan manually in YouTube Studio.
             </p>
             {exportError && <p className="mt-2 text-sm text-destructive">{exportError}</p>}
-            <Button className="mt-4" onClick={exportLayout} disabled={isExporting}>
+            <Button className="mt-4" onClick={exportLayout} disabled={isExporting} data-ml-goal="tool_action_click">
               <Download className="size-4" aria-hidden="true" />
               {isExporting ? 'Preparing PNG…' : 'Export 1280×720 PNG guide'}
             </Button>

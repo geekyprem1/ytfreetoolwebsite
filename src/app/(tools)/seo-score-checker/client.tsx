@@ -79,7 +79,7 @@ export function SeoScoreCheckerClient() {
         </ToolInput>
       </div>
 
-      <Button onClick={handleAnalyze} disabled={!isValid || isLoading} className="w-full">
+      <Button onClick={handleAnalyze} disabled={!isValid || isLoading} className="w-full" data-ml-goal="tool_action_click">
         {isLoading ? 'Analyzing...' : 'Check SEO Score'}
       </Button>
 

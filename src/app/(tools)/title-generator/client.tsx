@@ -127,7 +127,7 @@ export function TitleGeneratorClient() {
         </ToolInput>
       </div>
 
-      <Button onClick={handleGenerate} disabled={!isValid || isLoading} className="w-full" size="lg">
+      <Button onClick={handleGenerate} disabled={!isValid || isLoading} className="w-full" size="lg" data-ml-goal="tool_action_click">
         {isLoading ? (
           <>
             <Loader2 className="size-4 mr-2 animate-spin" /> Generating... (10-30 sec)

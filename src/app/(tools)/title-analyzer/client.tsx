@@ -50,7 +50,7 @@ export function TitleAnalyzerClient() {
         <Input value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="e.g., youtube beginners guide" disabled={isLoading} />
       </ToolInput>
 
-      <Button onClick={handleAnalyze} disabled={titleA.length < 5 || titleB.length < 5 || isLoading} className="w-full">
+      <Button onClick={handleAnalyze} disabled={titleA.length < 5 || titleB.length < 5 || isLoading} className="w-full" data-ml-goal="tool_action_click">
         {isLoading ? 'Analyzing...' : 'Compare Titles'}
       </Button>
 

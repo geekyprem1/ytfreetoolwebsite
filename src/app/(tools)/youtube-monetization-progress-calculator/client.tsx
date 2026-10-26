@@ -193,7 +193,7 @@ export function YoutubeMonetizationProgressCalculatorClient() {
         </div>
       </section>
 
-      <Button className="w-full" onClick={() => setShowResult(true)}>
+      <Button className="w-full" onClick={() => setShowResult(true)} data-ml-goal="tool_action_click">
         Calculate YPP Progress
       </Button>
 

@@ -136,6 +136,7 @@ export function ChannelComparisonClient() {
             onClick={compare}
             disabled={loading}
             className="flex-1 bg-[#FF3B30] hover:bg-[#E0352B] text-white"
+            data-ml-goal="tool_action_click"
           >
             {loading ? <Loader2 className="size-4 animate-spin" /> : 'Compare'}
           </Button>

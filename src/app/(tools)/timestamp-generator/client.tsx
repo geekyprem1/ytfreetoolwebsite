@@ -42,7 +42,7 @@ export function TimestampGeneratorClient() {
         </Link>
       </div>
 
-      <Button onClick={handleGenerate} disabled={transcript.length < 20 || isLoading} className="w-full">
+      <Button onClick={handleGenerate} disabled={transcript.length < 20 || isLoading} className="w-full" data-ml-goal="tool_action_click">
         {isLoading ? 'Generating...' : 'Generate Chapters'}
       </Button>
 

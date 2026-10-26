@@ -108,7 +108,7 @@ export function UrlSearchBox() {
                 );
               })}
             </div>
-            <Link href="/tools" className="mt-3 inline-block px-1 text-sm font-medium text-primary hover:underline">
+            <Link href="/tools" className="mt-3 inline-block px-1 text-sm font-medium text-primary hover:underline" data-ml-goal="browse_tools_click">
               Browse all tools
             </Link>
           </motion.div>

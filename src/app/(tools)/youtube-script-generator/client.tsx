@@ -86,7 +86,7 @@ export function ScriptGeneratorClient() {
         </ToolInput>
       </div>
 
-      <Button onClick={generate} disabled={!topic.trim() || isLoading} className="w-full">
+      <Button onClick={generate} disabled={!topic.trim() || isLoading} className="w-full" data-ml-goal="tool_action_click">
         {isLoading ? 'Writing script…' : 'Generate script'}
       </Button>
 
