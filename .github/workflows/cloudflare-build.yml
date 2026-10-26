@@ -55,4 +55,5 @@ jobs:
         with:
           name: open-next-bundle
           path: .open-next
+          include-hidden-files: true
           retention-days: 1
