@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(npx hyperframes skills update product-launch-video)",
+      "Shell(npx hyperframes auth status)",
+      "Shell(npx hyperframes capture \"https://www.yttools.pro\" -o ./capture --json)",
+      "Shell(node \"C:\\Users\\user\\.agents\\skills\\product-launch-video\\scripts\\build-frame.mjs\" --preset broadside --hyperframes .)",
+      "Shell(node \"C:\\Users\\user\\.agents\\skills\\product-launch-video\\scripts\\audio.mjs\" --script ./SCRIPT.md --storyboard ./STORYBOARD.md --hyperframes . --out ./audio_meta.json --provider kokoro --voice af_sky --speed 1.0)",
+      "Shell(node \"C:\\Users\\user\\.agents\\skills\\product-launch-video\\scripts\\stage-assets.mjs\" --storyboard ./STORYBOARD.md --hyperframes .)",
+      "Shell(python -c \"import transformers, torch, soundfile, numpy; from transformers import MusicgenForConditionalGeneration; import sys; print('deps-ok', sys.version)\")",
+      "Shell(node \"C:\\Users\\user\\.agents\\skills\\media-use\\audio\\scripts\\audio.mjs\" --request ./audio_request_bgm.json --hyperframes . --out ./audio_engine_meta.json --only bgm)",
+      "Shell(node \"C:\\Users\\user\\.agents\\skills\\product-launch-video\\scripts\\audio.mjs\" sync-durations --audio-meta ./audio_meta.json --storyboard ./STORYBOARD.md)",
+      "Shell(node \"C:\\Users\\user\\.agents\\skills\\media-use\\audio\\scripts\\wait-bgm.mjs\" --audio-meta ./audio_engine_meta.json --hyperframes . --timeout-ms 1500000 --interval-ms 5000 --out ./bgm_status.json)",
+      "Shell(node \"C:\\Users\\user\\.agents\\skills\\product-launch-video\\scripts\\audio.mjs\" fetch-sfx --storyboard ./STORYBOARD.md --hyperframes .)",
+      "Shell(node \"C:\\Users\\user\\.agents\\skills\\product-launch-video\\scripts\\frame-packets.mjs\" --project \"C:\\Users\\user\\Documents\\Vibe coding\\yt tool kit website\\yt-toolkit\\videos\\yt-toolkit-promo\" --storyboard \"C:\\Users\\user\\Documents\\Vibe coding\\yt tool kit website\\yt-toolkit\\videos\\yt-toolkit-promo\\STORYBOARD.md\")",
+      "Shell(node \"C:\\Users\\user\\AppData\\Local\\Temp\\commandcode\\C--Users-user-Documents-Vibe-coding-yt-tool-kit-website-yt-toolkit\\dacb1bd4-56e9-4247-9917-4decf22fcbb5\\scratchpad\\packet-scan.mjs\")",
+      "Shell(node \"C:\\Users\\user\\.agents\\skills\\product-launch-video\\scripts\\captions.mjs\" build --storyboard ./STORYBOARD.md --audio-meta ./audio_meta.json --hyperframes . --out ./caption_groups.json)",
+      "Shell(python \"C:\\Users\\user\\AppData\\Local\\Temp\\commandcode\\C--Users-user-Documents-Vibe-coding-yt-tool-kit-website-yt-toolkit\\dacb1bd4-56e9-4247-9917-4decf22fcbb5\\scratchpad\\bgm-profile.py\")",
+      "Shell(node -e \"const fs=require('fs'); fs.cpSync('C:/Users/user/.agents/skills/hyperframes-animation/rules','.hyperframes/rules',{recursive:true}); console.log('copied', fs.readdirSync('.hyperframes/rules').length, 'rule files');\")",
+      "Shell(node -e \"const fs=require('fs'); fs.cpSync('C:/Users/user/.agents/skills/product-launch-video/references','.hyperframes/references',{recursive:true}); console.log(fs.readdirSync('.hyperframes/references').join(', '));\")",
+      "Shell(node \"C:\\Users\\user\\.agents\\skills\\product-launch-video\\scripts\\assemble-index.mjs\" --storyboard ./STORYBOARD.md --hyperframes .)",
+      "Shell(npx hyperframes transcribe --help)",
+      "Shell(npx hyperframes transcribe assets/voice/01.wav --json --model small.en)",
+      "Shell(npx hyperframes models --help)",
+      "Shell(npx hyperframes models install parakeet)",
+      "Shell(findstr:*)",
+      "Shell(npx hyperframes transcribe assets/voice/01.wav --json --engine parakeet)",
+      "powershell"
+    ],
+    "deny": [],
+    "defaultMode": "default"
+  }
+}

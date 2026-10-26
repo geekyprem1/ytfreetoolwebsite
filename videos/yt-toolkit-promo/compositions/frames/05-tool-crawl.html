@@ -1,0 +1,610 @@
+<template>
+  <!--
+    05-tool-crawl — camera-journey (Adapt), 3.307s, 1920x1080, captions on (keep-out y <= 900).
+    One continuous world: the approved real homepage plate (assets/full-page.png) rendered
+    1:1 and travelled by a single virtual camera down the All-60-tools region (plate y
+    ~2549-6255 = Downloaders / Analytics / YouTube Calculators). Content animates as
+    overlays INSIDE the world; the camera is the storyteller. All travel <= 1:1 (the 1x
+    plate has no headroom above 1:1), the world is flat, and each leg lands a thin focus
+    outline plus one small response pip rather than a full result panel.
+
+    The world box is 1920 x 3706 at the stage origin, so its transform-origin (50% 50%) is
+    stage point (960, 1853): a measured card centre is mapped to the frame centre with
+    T = -S * (target - worldCentre) plus the constant recentre (540 - 1853)
+    (viewport-change, single-wrapper form). Every leg is a tween on ONE cam {scale,x,y}
+    object written by ONE applyCamera(); the continuous micro-drift composes in the same
+    writer (multi-phase-camera). No CSS transition, no per-frame measuring.
+
+    Measured card centres (world y = plate y - 2549):
+      Thumbnail Downloader      plate 2959 -> 410   (row centre 436)
+      Video Statistics          plate 4415 -> 1866  (row centre 1892)
+      YouTube Money Calculator  plate 5612 -> 3063  (row centre 3089)
+
+    Scene 1 (0.00-0.60): ink field; the real grid plate sits at scale 1.0 showing the
+      Downloaders rows. The focus outline (ai-tracking-box restyled as a plain 3px
+      fire-orange L-bracket reticle + mono group tag) locks on around the "Thumbnail
+      Downloader" card as the VO names it; the response pip settles beside it and ticks
+      MaxRes / HD / SD (mono, factual tier labels only).
+    Scene 2 (0.60-1.50): on "Check the stats." the camera pulls back 1.0 -> 0.94 and pans
+      down the world to the Analytics rows (power2.inOut reposition); the reticle + pip
+      ride the same leg down onto "Video Statistics"; the pip swaps to ViewS / Likes /
+      Comments with power2.out count-up tickers, marked SAMPLE.
+    Scene 3 (1.50-2.80): on "Count the earnings." the pan continues to the YouTube
+      Calculators rows, decelerating (power4.out arrival); the reticle lands on "YouTube
+      Money Calculator"; the pip swaps to an RPM / CPM label column beside a count-up $
+      figure, marked SAMPLE.
+    Scene 4 (2.80-3.307): landing settle — travel stops on the calculators cluster and the
+      micro-drift eases down (multi-phase-camera drift). Held; no exit tween (the root
+      transition is the exit; this is not the final frame).
+  -->
+  <style>
+    @font-face{font-family:Instrument Sans;font-style:normal;font-weight:400 700;font-stretch:100%;font-display:swap;src:url("assets/fonts/captured-c7f47671e39f7787-s.0klc_mi0-5f4_.woff2")format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+    @font-face{font-family:Instrument Sans;font-style:normal;font-weight:400 700;font-stretch:100%;font-display:swap;src:url("assets/fonts/captured-f06bf9da926bae75-s.p.2874ccu1_u7jf.woff2")format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-5ce348bf30bf5439-s.31988l_ccedte.woff2")format("woff2");unicode-range:U+460-52F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-4fa387ec64143e14-s.2tuy5pz7dlieh.woff2")format("woff2");unicode-range:U+301,U+400-45F,U+490-491,U+4B0-4B1,U+2116}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-6306c77e7c8268e4-s.2dbetqa9o8jxf.woff2")format("woff2");unicode-range:U+2000-2001,U+2004-2008,U+200A,U+23B8-23BD,U+2500-259F}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-7d817b4c03b0c5f1-s.1uyisp29ctx0d.woff2")format("woff2");unicode-range:U+102-103,U+110-111,U+128-129,U+168-169,U+1A0-1A1,U+1AF-1B0,U+300-301,U+303-304,U+308-309,U+323,U+329,U+1EA0-1EF9,U+20AB}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-bbc41e54d2fcbd21-s.1rgnod-3esatf.woff2")format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-797e433ab948586e-s.p.0r6juujl39pe6.woff2")format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  </style>
+
+  <style>
+    /* ── Broadside · frame 05-tool-crawl · DARK register, flat plane, 0 radius,
+          1px hairlines, fire-orange the lone accent ── */
+    #root,
+    #root * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      font-family: "Instrument Sans", sans-serif;
+      font-weight: 400;
+      color: #111827;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── ground: the ink field (full-bleed clip on the lowest track, never #root) ── */
+    .f05-ground {
+      position: absolute;
+      inset: 0;
+      background: #111827;
+    }
+
+    .f05-stage {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    /* ── the travelling world (one virtual camera) ──
+       1920 x 3706 box at the stage origin; its centre (50% 50%) is stage point
+       (960, 1853), which is what the counter-translate math pivots on. The approved
+       plate is drawn 1:1 at its natural width and bleeds past the box on both sides
+       so no leg can ever expose an edge. */
+    .f05-world {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 3706px;
+      transform-origin: 50% 50%;
+      will-change: transform;
+    }
+    .f05-plate {
+      position: absolute;
+      left: 0;
+      top: -2549px; /* crop origin: the All-60-tools region of the 1920x9551 plate */
+      width: 1920px;
+      height: auto;
+      max-width: none;
+      display: block;
+    }
+
+    /* ── the HUD rig: reticle + response pip, seeded on the Downloaders card and
+          translated down the world by the same legs the camera runs ── */
+    .f05-track {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 3706px;
+      will-change: transform;
+    }
+
+    /* focus outline — ai-tracking-box restyled: four L-brackets + a mono group tag,
+       no fill, no full border, detection-orange on the light plate */
+    .f05-box {
+      position: absolute;
+      left: 298px;
+      top: 390px; /* centres the 92px box on the Thumbnail Downloader row (world y 436) */
+      width: 660px;
+      height: 92px;
+      pointer-events: none;
+      transform-origin: 50% 50%;
+      will-change: transform;
+    }
+    .f05-corner {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+    }
+    .f05-corner.is-tl { top: -3px; left: -3px; border-top: 3px solid #ff3b30; border-left: 3px solid #ff3b30; }
+    .f05-corner.is-tr { top: -3px; right: -3px; border-top: 3px solid #ff3b30; border-right: 3px solid #ff3b30; }
+    .f05-corner.is-bl { bottom: -3px; left: -3px; border-bottom: 3px solid #ff3b30; border-left: 3px solid #ff3b30; }
+    .f05-corner.is-br { bottom: -3px; right: -3px; border-bottom: 3px solid #ff3b30; border-right: 3px solid #ff3b30; }
+
+    .f05-tag {
+      position: absolute;
+      left: -3px;
+      top: -40px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      padding: 0 13px;
+      background: #111827;
+      border: 1px solid #ff3b30;
+      color: #ff3b30;
+      font-family: "Geist Mono", monospace;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* response pip — flat ink plate on a single fire-orange hairline (the caption
+       pill's language), three swappable states stacked in one footprint */
+    .f05-pip {
+      position: absolute;
+      left: 1002px;
+      top: 347px; /* centres the 178px pip on the same row (world y 436) */
+      width: 360px;
+      height: 178px;
+      background: #111827;
+      border: 1px solid #ff3b30;
+    }
+    .f05-pip-state {
+      position: absolute;
+      inset: 0;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+    }
+    .f05-pip-b,
+    .f05-pip-c {
+      padding-top: 40px;
+      opacity: 0;
+    }
+    .f05-row {
+      flex: 1 1 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .f05-row + .f05-row {
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+    }
+    .f05-row.is-tier {
+      justify-content: flex-start;
+      gap: 16px;
+    }
+
+    .f05-mono {
+      font-family: "Geist Mono", monospace;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .f05-lab {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.58);
+    }
+    .f05-val {
+      font-family: "Geist Mono", monospace;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: #ffffff;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .f05-dollar {
+      color: #ff3b30;
+    }
+    .f05-sample {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      background: #ff3b30;
+      color: #111827;
+      font-family: "Geist Mono", monospace;
+      font-weight: 500;
+      font-size: 11px;
+      line-height: 1;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .f05-tick {
+      width: 13px;
+      height: 13px;
+      background: #ff3b30;
+    }
+
+    /* ── frame chrome: ink chips on a fire-orange hairline (legible on the ink
+          field and on the light plate alike) ── */
+    .f05-chrome {
+      position: absolute;
+      inset: 0;
+    }
+    .f05-chip {
+      position: absolute;
+      top: 52px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      background: #111827;
+      border: 1px solid #ff3b30;
+      color: #ff3b30;
+      font-family: "Geist Mono", monospace;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .f05-chip-l {
+      left: 96px;
+    }
+    .f05-chip-r {
+      right: 96px;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="05-tool-crawl"
+    data-start="0"
+    data-duration="3.307"
+    data-width="1920"
+    data-height="1080"
+  >
+    <div class="clip f05-ground" data-start="0" data-duration="3.307" data-track-index="0"></div>
+
+    <div class="clip f05-stage" data-start="0" data-duration="3.307" data-track-index="1">
+      <div class="f05-world" id="f05-world" data-layout-allow-overflow>
+        <img
+          class="f05-plate"
+          data-layout-allow-overflow
+          src="assets/full-page.png"
+          alt=""
+        />
+
+        <div class="f05-track" id="f05-track" data-layout-allow-overflow>
+          <div class="f05-box" id="f05-box">
+            <span class="f05-corner is-tl"></span>
+            <span class="f05-corner is-tr"></span>
+            <span class="f05-corner is-bl"></span>
+            <span class="f05-corner is-br"></span>
+            <span class="f05-tag" id="f05-tag">Downloaders</span>
+          </div>
+
+          <div class="f05-pip" id="f05-pip">
+            <!-- Scene 1 pip — the thumbnail resolution tiers -->
+            <div class="f05-pip-state f05-pip-a">
+              <div class="f05-row is-tier">
+                <span class="f05-tick" data-t="0"></span>
+                <span class="f05-mono f05-lab">MaxRes</span>
+              </div>
+              <div class="f05-row is-tier">
+                <span class="f05-tick" data-t="1"></span>
+                <span class="f05-mono f05-lab">HD</span>
+              </div>
+              <div class="f05-row is-tier">
+                <span class="f05-tick" data-t="2"></span>
+                <span class="f05-mono f05-lab">SD</span>
+              </div>
+            </div>
+
+            <!-- Scene 2 pip — the video statistics readout -->
+            <div class="f05-pip-state f05-pip-b">
+              <span class="f05-sample">Sample</span>
+              <div class="f05-row">
+                <span class="f05-mono f05-lab">Views</span>
+                <span class="f05-val" id="f05-views">0</span>
+              </div>
+              <div class="f05-row">
+                <span class="f05-mono f05-lab">Likes</span>
+                <span class="f05-val" id="f05-likes">0</span>
+              </div>
+              <div class="f05-row">
+                <span class="f05-mono f05-lab">Comments</span>
+                <span class="f05-val" id="f05-comments">0</span>
+              </div>
+            </div>
+
+            <!-- Scene 3 pip — the money calculator readout -->
+            <div class="f05-pip-state f05-pip-c">
+              <span class="f05-sample">Sample</span>
+              <div class="f05-row">
+                <span class="f05-mono f05-lab">RPM</span>
+                <span class="f05-val">4.20</span>
+              </div>
+              <div class="f05-row">
+                <span class="f05-mono f05-lab">CPM</span>
+                <span class="f05-val">9.80</span>
+              </div>
+              <div class="f05-row">
+                <span class="f05-mono f05-lab">Earnings</span>
+                <span class="f05-val f05-dollar" id="f05-earn">$0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clip f05-chrome" data-start="0" data-duration="3.307" data-track-index="2">
+      <div class="f05-chip f05-chip-l" id="f05-kicker">All 60 tools</div>
+      <div class="f05-chip f05-chip-r" id="f05-counter">01 / 03</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var FRAME_ID = "05-tool-crawl";
+      var DUR = 3.307;
+
+      var world = document.getElementById("f05-world");
+      var track = document.getElementById("f05-track");
+      var counterEl = document.getElementById("f05-counter");
+      var tagEl = document.getElementById("f05-tag");
+
+      /* ------------------------------------------------------------------
+         The camera — viewport-change's single-wrapper form.
+         screen(p) = worldCentre + T + S * (p - worldCentre); solving for the
+         frame centre (960, 540) gives T = -S * (target - worldCentre) plus the
+         constant recentre (540 - 1853). One cam object, one writer.
+         ------------------------------------------------------------------ */
+      var WC_Y = 1853;
+      var BASE_Y = 540 - WC_Y; /* -1313 */
+
+      /* measured card centres in WORLD coords (plate y minus the 2549 crop origin) */
+      var CARD1 = 436; /*  Thumbnail Downloader      · Downloaders    */
+      var CARD2 = 1892; /* Video Statistics          · Analytics      */
+      var CARD3 = 3089; /* YouTube Money Calculator  · Calculators    */
+
+      function poseFor(cardY, s) {
+        return { scale: s, x: 0, y: BASE_Y - s * (cardY - WC_Y) };
+      }
+      var POSE1 = poseFor(CARD1, 1.0);
+      var POSE2 = poseFor(CARD2, 0.94);
+      var POSE3 = poseFor(CARD3, 0.96);
+
+      /* the HUD rig rides the same legs: seeded on card 1, translated to 2 and 3 */
+      var TRACK2 = CARD2 - CARD1; /* 1456 */
+      var TRACK3 = CARD3 - CARD1; /* 2653 */
+
+      var cam = { scale: POSE1.scale, x: POSE1.x, y: POSE1.y };
+
+      /* multi-phase-camera's continuous micro-drift, composed in the same writer.
+         X and Y run at different frequencies (~1.3) so the path is an organic
+         Lissajous, not a mechanical diagonal. */
+      var drift = { p: 0, amp: 1 };
+      var DRIFT_CYCLES = 1.5;
+      var DRIFT_AX = 4;
+      var DRIFT_AY = 2.5;
+      var DRIFT_RATIO = 1.3;
+
+      function applyCamera() {
+        var dx = Math.sin(drift.p) * DRIFT_AX * drift.amp;
+        var dy = Math.sin(drift.p * DRIFT_RATIO) * DRIFT_AY * drift.amp;
+        world.style.transform =
+          "translate(" +
+          (cam.x + dx).toFixed(3) +
+          "px, " +
+          (cam.y + dy).toFixed(3) +
+          "px) scale(" +
+          cam.scale +
+          ")";
+      }
+      applyCamera(); /* seed frame 0 */
+
+      /* ------------------------------------------------------------------
+         Discrete chrome — the section counter and the reticle's group tag step
+         through sparse state arrays with no tween (the hard swap IS the motion),
+         read out of one seek-safe driver.
+         ------------------------------------------------------------------ */
+      var COUNTER = [
+        [0, "01 / 03"],
+        [1.05, "02 / 03"],
+        [1.95, "03 / 03"],
+      ];
+      var TAGS = [
+        [0, "Downloaders"],
+        [1.1, "Analytics"],
+        [2.05, "Calculators"],
+      ];
+      function pick(list, t) {
+        var v = list[0][1];
+        for (var i = 1; i < list.length; i++) if (t >= list[i][0]) v = list[i][1];
+        return v;
+      }
+      function renderHud(t) {
+        var c = pick(COUNTER, t);
+        var g = pick(TAGS, t);
+        if (counterEl.textContent !== c) counterEl.textContent = c;
+        if (tagEl.textContent !== g) tagEl.textContent = g;
+      }
+      renderHud(0);
+
+      var tl = gsap.timeline({ paused: true });
+
+      function countTo(el, to, at, dur, fmt) {
+        var o = { v: 0 };
+        tl.to(
+          o,
+          {
+            v: to,
+            duration: dur,
+            ease: "power2.out",
+            onUpdate: function () {
+              el.textContent = fmt(o.v);
+            },
+          },
+          at,
+        );
+      }
+      function int(v) {
+        return Math.round(v).toLocaleString("en-US");
+      }
+
+      /* full-span drivers */
+      var hud = { t: 0 };
+      tl.to(
+        hud,
+        {
+          t: DUR,
+          duration: DUR,
+          ease: "none",
+          onUpdate: function () {
+            renderHud(hud.t);
+          },
+        },
+        0,
+      );
+      tl.to(drift, { p: Math.PI * 2 * DRIFT_CYCLES, duration: DUR, ease: "none", onUpdate: applyCamera }, 0);
+
+      /* ------------------------------------------------------------------
+         Scene 1 (0.00-0.60) — ink field; the plate at scale 1.0 on the
+         Downloaders rows. The reticle locks on around the Thumbnail Downloader
+         card as the VO names it; the pip settles and ticks MaxRes / HD / SD.
+         ------------------------------------------------------------------ */
+      tl.fromTo(
+        ["#f05-kicker", "#f05-counter"],
+        { opacity: 0, y: -12 },
+        { opacity: 1, y: 0, duration: 0.34, ease: "power2.out" },
+        0.03,
+      );
+
+      tl.fromTo(
+        "#f05-box",
+        { opacity: 0, scale: 0.62 },
+        { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" },
+        0.1,
+      );
+      tl.fromTo(
+        "#f05-tag",
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" },
+        0.24,
+      );
+
+      tl.fromTo(
+        "#f05-pip",
+        { opacity: 0, x: 24 },
+        { opacity: 1, x: 0, duration: 0.42, ease: "power3.out" },
+        0.26,
+      );
+
+      var TIER_AT = [0.34, 0.44, 0.54];
+      var tierRows = document.querySelectorAll(".f05-pip-a .f05-row");
+      var tierTicks = document.querySelectorAll(".f05-pip-a .f05-tick");
+      Array.prototype.forEach.call(tierRows, function (row, i) {
+        var at = TIER_AT[i];
+        tl.fromTo(
+          row.querySelector(".f05-lab"),
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.28, ease: "power3.out" },
+          at,
+        );
+        tl.fromTo(
+          tierTicks[i],
+          { opacity: 0, scale: 0.4 },
+          { opacity: 1, scale: 1, duration: 0.26, ease: "back.out(2)" },
+          at + 0.04,
+        );
+      });
+
+      /* ------------------------------------------------------------------
+         Scene 2 (0.60-1.50) — "Check the stats." The camera pulls back
+         1.0 -> 0.94 and pans down the world to the Analytics rows on one
+         power2.inOut repositioning leg; the reticle + pip ride it down onto
+         Video Statistics; the pip swaps to the stats readout and its
+         count-up tickers run out under the deceleration.
+         ------------------------------------------------------------------ */
+      tl.to(
+        cam,
+        { scale: POSE2.scale, y: POSE2.y, duration: 0.72, ease: "power2.inOut", onUpdate: applyCamera },
+        0.6,
+      );
+      tl.to(track, { y: TRACK2, duration: 0.72, ease: "power2.inOut" }, 0.6);
+
+      tl.to(".f05-pip-a", { opacity: 0, duration: 0.22, ease: "power2.in" }, 1.02);
+      tl.fromTo(
+        ".f05-pip-b",
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.34, ease: "power3.out" },
+        1.16,
+      );
+
+      countTo(document.getElementById("f05-views"), 12480, 1.24, 0.55, int);
+      countTo(document.getElementById("f05-likes"), 962, 1.3, 0.5, int);
+      countTo(document.getElementById("f05-comments"), 214, 1.36, 0.46, int);
+
+      /* ------------------------------------------------------------------
+         Scene 3 (1.50-2.80) — "Count the earnings." The pan continues to the
+         YouTube Calculators rows on a hard power4.out arrival (fast commit,
+         long settle); the reticle lands on YouTube Money Calculator and the
+         pip swaps to the RPM / CPM label column + a count-up $ figure.
+         ------------------------------------------------------------------ */
+      tl.to(
+        cam,
+        { scale: POSE3.scale, y: POSE3.y, duration: 0.85, ease: "power4.out", onUpdate: applyCamera },
+        1.5,
+      );
+      tl.to(track, { y: TRACK3, duration: 0.85, ease: "power4.out" }, 1.5);
+
+      tl.to(".f05-pip-b", { opacity: 0, duration: 0.24, ease: "power2.in" }, 1.92);
+      tl.fromTo(
+        ".f05-pip-c",
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.34, ease: "power3.out" },
+        2.14,
+      );
+
+      countTo(document.getElementById("f05-earn"), 1248, 2.28, 0.58, function (v) {
+        return "$" + int(v);
+      });
+
+      /* ------------------------------------------------------------------
+         Scene 4 (2.80-3.307) — landing settle. Travel has stopped on the
+         calculators cluster; the micro-drift eases down to near-imperceptible
+         and the frame holds. No exit tween.
+         ------------------------------------------------------------------ */
+      tl.to(drift, { amp: 0.42, duration: DUR - 2.8, ease: "power2.out" }, 2.8);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines[FRAME_ID] = tl;
+      tl.seek(0);
+    })();
+  </script>
+</template>

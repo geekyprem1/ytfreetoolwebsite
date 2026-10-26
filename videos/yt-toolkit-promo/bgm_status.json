@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-09-28T19:15:09.102Z",
+  "enabled": true,
+  "provider": "musicgen",
+  "mode": "detached-seed-trim",
+  "path": "assets/bgm/track.wav",
+  "log": "C:\\Users\\user\\Documents\\Vibe coding\\yt tool kit website\\yt-toolkit\\videos\\yt-toolkit-promo\\assets\\bgm\\bgm-1790622729819.log",
+  "pid": 37596,
+  "target_duration_s": 26.901,
+  "seed_duration_s": 28,
+  "loop_count": 1,
+  "timeout_ms": 1500000,
+  "status": "ready",
+  "ready": true,
+  "waited_ms": 150303,
+  "size_bytes": 1721708,
+  "message": "BGM ready at assets/bgm/track.wav."
+}

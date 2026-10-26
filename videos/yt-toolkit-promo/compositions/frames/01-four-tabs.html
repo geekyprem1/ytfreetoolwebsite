@@ -1,0 +1,349 @@
+<template>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+
+  <style>
+@font-face{font-family:Instrument Sans;font-style:normal;font-weight:400 700;font-stretch:100%;font-display:swap;src:url("assets/fonts/captured-c7f47671e39f7787-s.0klc_mi0-5f4_.woff2")format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Instrument Sans;font-style:normal;font-weight:400 700;font-stretch:100%;font-display:swap;src:url("assets/fonts/captured-f06bf9da926bae75-s.p.2874ccu1_u7jf.woff2")format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-5ce348bf30bf5439-s.31988l_ccedte.woff2")format("woff2");unicode-range:U+460-52F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}
+@font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-4fa387ec64143e14-s.2tuy5pz7dlieh.woff2")format("woff2");unicode-range:U+301,U+400-45F,U+490-491,U+4B0-4B1,U+2116}
+@font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-6306c77e7c8268e4-s.2dbetqa9o8jxf.woff2")format("woff2");unicode-range:U+2000-2001,U+2004-2008,U+200A,U+23B8-23BD,U+2500-259F}
+@font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-7d817b4c03b0c5f1-s.1uyisp29ctx0d.woff2")format("woff2");unicode-range:U+102-103,U+110-111,U+128-129,U+168-169,U+1A0-1A1,U+1AF-1B0,U+300-301,U+303-304,U+308-309,U+323,U+329,U+1EA0-1EF9,U+20AB}
+@font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-bbc41e54d2fcbd21-s.1rgnod-3esatf.woff2")format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-797e433ab948586e-s.p.0r6juujl39pe6.woff2")format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  </style>
+
+  <style>
+    /* ─────────────────────────────────────────────────────────────────────────
+       Broadside · frame 01-four-tabs · ORANGE register (ink on fire)
+       flat plane · 0 radius · 1px hairlines · one display moment
+       ───────────────────────────────────────────────────────────────────────── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    #root {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      font-family: "Instrument Sans", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── ground: full-bleed fire-orange field (own clip layer, never #root) ── */
+    .four-tabs-ground {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      background: #ff3b30;
+    }
+
+    /* ── centre channel: one job token, hard-cut in place ── */
+    .four-tabs-type {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 900px;
+    }
+    /* fixed box, dead-centred on the frame (260 + 700 = 960, 316 + 98 = 414) —
+       the centre anchor never jitters as the token length changes */
+    .four-tabs-slot {
+      position: absolute;
+      left: 260px;
+      top: 316px;
+      width: 1400px;
+      height: 196px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+    .four-tabs-word {
+      position: relative;
+      top: -22px; /* optical centre for lowercase mass (descender/ascent balance) */
+      font-family: "Instrument Sans", sans-serif;
+      font-weight: 600;
+      font-size: 218px;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      color: #111827;
+      text-transform: lowercase;
+      text-align: center;
+    }
+
+    /* the system's only ornament — 36×2 ink rule stub, drawn under the word */
+    .four-tabs-rule {
+      position: absolute;
+      left: 942px;
+      top: 596px;
+      width: 36px;
+      height: 2px;
+      background: #111827;
+      transform-origin: 0% 50%;
+    }
+
+    /* ── left rail: the little jobs piling up ── */
+    .four-tabs-rail {
+      position: absolute;
+      left: 105px;
+      top: 180px;
+      width: 220px;
+      height: 700px;
+    }
+    /* a hairline mini "tab" card: sharp, hollow, 1px ink @20% */
+    .four-tabs-card {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 150px;
+      height: 58px;
+      border: 1px solid rgba(17, 17, 17, 0.2);
+      border-top: none;
+      transform-origin: 50% 50%;
+      will-change: transform;
+    }
+    .four-tabs-card::before { /* panel top edge, right of the tab nub */
+      content: "";
+      position: absolute;
+      left: 43px;
+      right: 0;
+      top: 0;
+      height: 1px;
+      background: rgba(17, 17, 17, 0.2);
+    }
+    .four-tabs-card::after { /* the tab nub standing up out of the card */
+      content: "";
+      position: absolute;
+      left: -1px;
+      top: -10px;
+      width: 44px;
+      height: 10px;
+      border: 1px solid rgba(17, 17, 17, 0.2);
+      border-bottom: none;
+    }
+    .four-tabs-card-idx {
+      position: absolute;
+      left: 11px;
+      top: 11px;
+      font-family: "Geist Mono", ui-monospace, monospace;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1;
+      letter-spacing: 0.14em;
+      color: rgba(17, 17, 17, 0.55);
+    }
+    .four-tabs-card-row {
+      position: absolute;
+      left: 11px;
+      height: 1px;
+      background: rgba(17, 17, 17, 0.2);
+    }
+    .four-tabs-card-row.is-a { top: 36px; width: 92px; }
+    .four-tabs-card-row.is-b { top: 46px; width: 64px; }
+
+    /* ── mono chrome: catalogue numeral (broadside-num) ── */
+    .four-tabs-chrome {
+      position: absolute;
+      left: 105px;
+      top: 100px;
+      width: 420px;
+      height: 70px;
+    }
+    .four-tabs-counter {
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-family: "Geist Mono", ui-monospace, monospace;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(17, 17, 17, 0.55);
+    }
+    .four-tabs-counter-sep { color: rgba(17, 17, 17, 0.4); }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="01-four-tabs"
+    data-start="0"
+    data-duration="4.459"
+    data-width="1920"
+    data-height="1080"
+  >
+    <div
+      class="clip four-tabs-ground"
+      data-start="0"
+      data-duration="4.459"
+      data-track-index="0"
+    ></div>
+
+    <div
+      class="clip four-tabs-rail"
+      data-start="0"
+      data-duration="4.459"
+      data-track-index="1"
+    >
+      <div class="four-tabs-card">
+        <span class="four-tabs-card-idx">01</span>
+        <span class="four-tabs-card-row is-a"></span>
+        <span class="four-tabs-card-row is-b"></span>
+      </div>
+      <div class="four-tabs-card">
+        <span class="four-tabs-card-idx">02</span>
+        <span class="four-tabs-card-row is-a"></span>
+        <span class="four-tabs-card-row is-b"></span>
+      </div>
+      <div class="four-tabs-card">
+        <span class="four-tabs-card-idx">03</span>
+        <span class="four-tabs-card-row is-a"></span>
+        <span class="four-tabs-card-row is-b"></span>
+      </div>
+      <div class="four-tabs-card">
+        <span class="four-tabs-card-idx">04</span>
+        <span class="four-tabs-card-row is-a"></span>
+        <span class="four-tabs-card-row is-b"></span>
+      </div>
+    </div>
+
+    <div
+      class="clip four-tabs-type"
+      data-start="0"
+      data-duration="4.459"
+      data-track-index="2"
+    >
+      <div class="four-tabs-slot">
+        <span class="four-tabs-word" id="four-tabs-word">tags.</span>
+      </div>
+      <div class="four-tabs-rule"></div>
+    </div>
+
+    <div
+      class="clip four-tabs-chrome"
+      data-start="0"
+      data-duration="4.459"
+      data-track-index="3"
+    >
+      <div class="four-tabs-counter" id="four-tabs-counter"><span id="four-tabs-num">01</span><span class="four-tabs-counter-sep"> / 04</span></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var FRAME_ID = "01-four-tabs";
+      var DURATION = 4.459;
+
+      // one job per VO cue — the four clause windows of the narration line
+      var TOKENS = ["tags.", "titles.", "thumbnails.", "math."];
+      var CUES = [0, 1.16, 2.26, 3.36];
+
+      var wordEl = document.getElementById("four-tabs-word");
+      var numEl = document.getElementById("four-tabs-num");
+
+      // discrete-text-sequence: reverse-search the sparse state array — the display
+      // jumps at each threshold with NO tween between states (the hard cut IS the
+      // motion; any easing here would smear the cut into a fade).
+      function stateAt(t) {
+        for (var i = CUES.length - 1; i >= 0; i--) {
+          if (t >= CUES[i]) return i;
+        }
+        return -1;
+      }
+      function renderState(t) {
+        var i = stateAt(t);
+        var token = i < 0 ? "" : TOKENS[i];
+        var num = i < 0 ? "" : (i + 1 < 10 ? "0" + (i + 1) : String(i + 1));
+        if (wordEl.textContent !== token) wordEl.textContent = token;
+        if (numEl.textContent !== num) numEl.textContent = num;
+      }
+      renderState(0); // frame 0 is correct before the engine's first seek
+
+      var tl = gsap.timeline({ paused: true });
+
+      // the swap engine — one driver runs the whole shot; both the centred token
+      // and the mono catalogue numeral are read out of the same state array
+      var driver = { t: 0 };
+      tl.to(
+        driver,
+        {
+          t: DURATION,
+          duration: DURATION,
+          ease: "none",
+          onUpdate: function () {
+            renderState(driver.t);
+          },
+        },
+        0,
+      );
+
+      // mono chrome settles in on the opening beat
+      tl.fromTo(
+        "#four-tabs-counter",
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" },
+        0.06,
+      );
+
+      // the ornament draws on beneath the word
+      tl.fromTo(
+        ".four-tabs-rule",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.34, ease: "power3.out" },
+        0.26,
+      );
+
+      // the rail — one hairline tab card lands per job, on its own cue
+      var BASE = 140;
+      var RAIL_LOOSE = 68; // 58px card + a 10px gap that the next card's nub tucks into
+      var RAIL_TIGHT = 64; // the pile huddles: 4px nub tuck, cards visibly crammed
+      var CASCADE_LOOSE = 9;
+      var CASCADE_TIGHT = 2;
+      var ARRIVE = [0.2, 1.22, 2.26, 3.42];
+      var TIGHTEN_AT = 3.46;
+
+      var cards = gsap.utils.toArray(".four-tabs-card");
+      cards.forEach(function (card, i) {
+        var isLast = i === cards.length - 1;
+        var looseY = BASE + RAIL_LOOSE * i;
+        var tightY = BASE + RAIL_TIGHT * i;
+        var looseX = CASCADE_LOOSE * i;
+        var tightX = CASCADE_TIGHT * i;
+        // the last tab lands already inside the tight pile; the earlier three
+        // huddle together beneath it when it arrives
+        var endY = isLast ? tightY : looseY;
+        var endX = isLast ? tightX : looseX;
+
+        tl.fromTo(
+          card,
+          { scale: 0, opacity: 0, x: endX, y: endY - 46 },
+          {
+            scale: 1,
+            opacity: 1,
+            x: endX,
+            y: endY,
+            duration: 0.44,
+            ease: "back.out(1.2)", // low overshoot — the packet's "drops in" settle
+          },
+          ARRIVE[i],
+        );
+
+        if (!isLast) {
+          tl.to(
+            card,
+            { x: tightX, y: tightY, duration: 0.44, ease: "power3.out" },
+            TIGHTEN_AT,
+          );
+        }
+      });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines[FRAME_ID] = tl;
+      tl.seek(0);
+    })();
+  </script>
+</template>

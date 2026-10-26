@@ -1,0 +1,283 @@
+[span] YT Toolkit
+[a] Rankings
+[button] Explore tools
+[p] YouTube (YT) Toolkit
+[h1] Free YouTube Creator Tools - AI & Analytics Toolkit
+[p] Download thumbnails, extract tags, generate AI titles, analyze stats —
+[p] free tools, zero signup.
+[h2] Featured tools
+[p] The tools creators use every day. Start here and explore everything.
+[h3] Thumbnail Downloader
+[p] Download YouTube thumbnails in HD, SD, HQ quality. Free and no login required.
+[h3] AI Title Generator
+[p] Generate SEO-optimized, click-worthy YouTube titles with AI.
+[h3] Transcript Extractor
+[p] Get full video transcripts with timestamps. Copy, download, or AI summarize.
+[h3] Tags Extractor
+[p] Extract all tags from any YouTube video instantly. Copy or download as TXT.
+[h3] Video Statistics
+[p] View detailed analytics for any YouTube video. Views, likes, comments, and more.
+[h3] AI Description Generator
+[p] Generate complete video descriptions with chapters, hashtags, and CTAs.
+[a] View all
+[a] tools
+[h2] Built differently
+[p] Speed, privacy, and intelligence — purpose-built for YouTube creators.
+[h3] Instant results
+[p] Paste any YouTube URL and get results in milliseconds. Every tool is optimized for speed.
+[h3] No signup required
+[p] Privacy-first. We never store your data, require accounts, or track your usage.
+[h3] AI-powered
+[p] Gemini and OpenRouter power titles, descriptions, hooks, and more — tuned for YouTube.
+[h3] Built for creators
+[p] Purpose-designed for YouTubers — not generic SEO tools adapted for video.
+[h2] All
+[h2] tools, free forever
+[p] Everything a YouTube creator needs — thumbs, tags, AI, analytics, SEO and calculators — in one place.
+[h3] Downloaders
+[p] Download YouTube assets in any resolution
+[p] tool
+[h4] Thumbnail Downloader
+[p] Download YouTube thumbnails in HD, SD, HQ quality. Free and no login required.
+[h4] Profile Picture Downloader
+[p] Download any YouTube channel profile picture (avatar) in full resolution.
+[h4] Banner Downloader
+[p] Download any YouTube channel banner (channel art) in full resolution.
+[h4] Subtitle Downloader
+[p] Download YouTube subtitles as SRT, VTT, or plain TXT with timestamps.
+[h3] Extractors
+[p] Pull tags, transcripts, and channel keywords
+[p] tool
+[h4] Tags Extractor
+[p] Extract all tags from any YouTube video instantly. Copy or download as TXT.
+[h4] Channel Tags
+[p] Discover channel keywords by analyzing recent video tags.
+[h4] Transcript Extractor
+[p] Get full video transcripts with timestamps. Copy, download, or AI summarize.
+[h4] Channel ID Finder
+[p] Find any YouTube channel ID (UC…) from a URL, @handle, or custom URL.
+[h4] Comment Exporter
+[p] Export a YouTube video’s comments to CSV or JSON.
+[h4] Description Extractor
+[p] Copy any video description with its links, hashtags and chapter timestamps.
+[h4] Title Extractor
+[p] Get the exact title of any YouTube video from its URL, ready to copy.
+[h3] AI Generators
+[p] AI-powered titles, descriptions, hooks, and more
+[p] tool
+[h4] AI Title Generator
+[p] Generate SEO-optimized, click-worthy YouTube titles with AI.
+[h4] AI Description Generator
+[p] Generate complete video descriptions with chapters, hashtags, and CTAs.
+[h4] Playlist Title & Description Generator
+[p] Generate YouTube playlist title and description pairs with transparent keyword coverage checks.
+[h4] AI Hashtag Generator
+[p] Generate trending, niche, and broad hashtags for your YouTube videos.
+[h4] YouTube Tag Generator
+[p] Generate primary, related and long-tail YouTube tags that fit the 500-character limit.
+[h4] Keyword Generator
+[p] Find high-ranking YouTube keywords with search intent and difficulty analysis.
+[h4] Hook Generator
+[p] Create powerful hooks that capture attention in the first 3 seconds.
+[h4] Timestamp Generator
+[p] Auto-generate video chapters from transcripts with AI precision.
+[h4] Shorts Idea Generator
+[p] Get 50 viral YouTube Shorts ideas with trend and virality scores.
+[h4] Video Summarizer
+[p] Summarize any YouTube video with AI — TL;DR and key takeaways.
+[h4] Script Generator
+[p] Generate a full YouTube video script with AI — hook, body, and CTA.
+[h4] Channel Name Generator
+[p] Generate channel name ideas with AI and check @handle availability.
+[h4] Video Ideas Generator
+[p] Generate searchable YouTube video ideas with titles and intent.
+[h3] Analytics
+[p] Detailed video and channel analytics
+[p] tool
+[h4] Video Statistics
+[p] View detailed analytics for any YouTube video. Views, likes, comments, and more.
+[h4] Channel Statistics
+[p] Analyze any YouTube channel. Subscribers, total views, recent uploads.
+[h4] YouTube Monetization Checker
+[p] Estimate whether a YouTube channel is monetized using public signals and a confidence score.
+[h4] Live Subscriber Count
+[p] Track any YouTube channel’s subscriber count in real time.
+[h4] Live View Count
+[p] Track a YouTube video’s view count in real time.
+[h4] Comment Picker
+[p] Pick a random giveaway winner from a YouTube video’s comments.
+[h4] Channel Comparison
+[p] Compare up to three YouTube channels side by side.
+[h4] Trending Videos
+[p] See today’s trending YouTube videos by country.
+[h4] Channel Age Checker
+[p] Find when any YouTube channel was created and exactly how old it is.
+[h3] SEO Tools
+[p] Optimize your content for YouTube search
+[p] tool
+[h4] SEO Score Checker
+[p] Grade your video SEO with a detailed score breakdown and improvement tips.
+[h4] Title Analyzer
+[p] Compare two titles and predict which will get more clicks and rank better.
+[h4] Embed Code Generator
+[p] Generate responsive YouTube embed code with privacy and playback options.
+[h4] Timestamp Link Generator
+[p] Create a YouTube link that starts playing at a specific time.
+[h4] Thumbnail Preview Tester
+[p] Preview a thumbnail in real YouTube layouts and A/B compare two.
+[h4] Shorts Eligibility Checker
+[p] Check a local video's duration and aspect ratio against YouTube Shorts format rules.
+[h4] End Screen Layout Planner
+[p] Plan up to four end-screen elements on a local 16:9 frame and export a PNG guide.
+[h4] Banner Safe-Area Checker
+[p] Preview channel art on TV, desktop, tablet, and mobile crops with the safe-area guide.
+[h4] Chapter Timestamp Validator
+[p] Check YouTube chapter timestamps, spacing, order, titles, and copy a cleaned block.
+[h4] Subscribe Link Generator
+[p] Create a YouTube link that prompts visitors to subscribe to your channel.
+[h4] Title Length Checker
+[p] Check a title against the 100-character limit with desktop and mobile truncation previews.
+[h4] Title Capitalizer
+[p] Convert a title to Title Case, Sentence case, UPPERCASE or lowercase.
+[h3] YouTube Calculators
+[p] Estimate earnings, RPM, CPM, watch time and growth — instant
+[p] tool
+[h4] YouTube Money Calculator
+[p] Estimate YouTube earnings from views, CPM and monetized play rate. Free, instant.
+[h4] YouTube RPM Calculator
+[p] Calculate RPM (revenue per mille) from total revenue and views.
+[h4] YouTube CPM Calculator
+[p] Calculate CPM from ad revenue and monetized views instantly.
+[h4] YouTube Watch Time Calculator
+[p] Convert views and average view duration into total watch hours.
+[h4] YouTube Engagement Rate Calculator
+[p] Measure engagement rate from likes, comments and views.
+[h4] YouTube Subscriber Growth Calculator
+[p] Track subscriber growth rate, daily gain and projections.
+[h4] YouTube Views to Money Calculator
+[p] Convert any view count to estimated earnings at your RPM.
+[h4] YouTube Shorts Earnings Calculator
+[p] Estimate Shorts revenue from views with Shorts RPM range.
+[h4] YouTube Live Earnings Calculator
+[p] Estimate Live stream earnings from Super Chats, ads and views.
+[h4] YouTube Upload Frequency Calculator
+[p] Plan upload schedule — videos per week, month and consistency score.
+[h4] YouTube Average View Duration Calculator
+[p] Calculate average view duration from watch time and views.
+[h4] Playlist Length Calculator
+[p] Total duration, video count, and watch time at 1.25x–2x for any playlist.
+[h4] Monetization Progress Calculator
+[p] Track current and 2027 YouTube Partner Program progress with a clear daily plan.
+[h4] Upload Time Calculator
+[p] Estimate YouTube upload time from file size, upload Mbps, and connection efficiency.
+[h4] Views-to-Subscribers Ratio
+[p] Views per subscriber, average views per video and audience reach for any channel.
+[h2] How it works
+[p] Three simple steps. No signup needed.
+[h3] Paste any YouTube URL
+[p] Copy a video or channel link. Our parser instantly detects the content type.
+[h3] Pick your tool
+[p] Choose from thumbnails, tags, AI generators, analytics, or SEO tools.
+[h3] Get instant results
+[p] Results appear instantly. Copy, download, or regenerate with one click.
+[a] Try your first tool
+[h2] Frequently asked questions
+[p] Everything you need to know about the toolkit.
+[span] Do I need to create an account?
+[p] No. All tools are free and require no login or account creation. Paste a YouTube URL and get started.
+[span] Is this affiliated with YouTube?
+[p] No. YouTube Toolkit AI is an independent project and is not affiliated with or endorsed by YouTube or Google.
+[span] How many tools are available?
+[p] We offer 60 tools: Thumbnail Downloader, Tags Extractor, Transcript, AI Title & Description Generator, SEO Score Checker, Analytics, 15 Calculators and more.
+[span] Are AI results SEO-optimized?
+[p] Yes. Our AI tools use structured prompts to generate SEO-oriented, click-worthy content ideas for YouTube. Always review output before publishing.
+[span] Are there any usage limits?
+[p] Free tools may have rate limits to ensure fair usage. AI tools may have stricter request limits on the free tier.
+[span] Can I use this on mobile?
+[p] Yes. All tools are responsive and work on mobile, tablet, and desktop.
+[span] Do you store my data?
+[p] We do not require accounts or offer saved tool history as a product feature. See our Privacy Policy for cookies, analytics, and advertising details.
+[span] YT Toolkit
+[p] 60 free YouTube creator tools. No login required.
+[a] hello@yttools.pro
+[h3] Downloaders
+[a] Thumbnail Downloader
+[a] Profile Picture Downloader
+[a] Banner Downloader
+[a] Subtitle Downloader
+[h3] Extractors
+[a] Tags Extractor
+[a] Channel Tags
+[a] Transcript Extractor
+[a] Channel ID Finder
+[a] Comment Exporter
+[a] Description Extractor
+[a] Title Extractor
+[h3] AI Generators
+[a] AI Title Generator
+[a] AI Description Generator
+[a] Playlist Title & Description Generator
+[a] AI Hashtag Generator
+[a] YouTube Tag Generator
+[a] Keyword Generator
+[a] Hook Generator
+[a] Timestamp Generator
+[a] Shorts Idea Generator
+[a] Video Summarizer
+[a] Script Generator
+[a] Channel Name Generator
+[a] Video Ideas Generator
+[h3] Analytics
+[a] Video Statistics
+[a] Channel Statistics
+[a] YouTube Monetization Checker
+[a] Live Subscriber Count
+[a] Live View Count
+[a] Comment Picker
+[a] Channel Comparison
+[a] Trending Videos
+[a] Channel Age Checker
+[h3] SEO Tools
+[a] SEO Score Checker
+[a] Title Analyzer
+[a] Embed Code Generator
+[a] Timestamp Link Generator
+[a] Thumbnail Preview Tester
+[a] Shorts Eligibility Checker
+[a] End Screen Layout Planner
+[a] Banner Safe-Area Checker
+[a] Chapter Timestamp Validator
+[a] Subscribe Link Generator
+[a] Title Length Checker
+[a] Title Capitalizer
+[h3] Calculators
+[a] YouTube Money Calculator
+[a] YouTube RPM Calculator
+[a] YouTube CPM Calculator
+[a] YouTube Watch Time Calculator
+[a] YouTube Engagement Rate Calculator
+[a] YouTube Subscriber Growth Calculator
+[a] YouTube Views to Money Calculator
+[a] YouTube Shorts Earnings Calculator
+[a] YouTube Live Earnings Calculator
+[a] YouTube Upload Frequency Calculator
+[a] YouTube Average View Duration Calculator
+[a] Playlist Length Calculator
+[a] Monetization Progress Calculator
+[a] Upload Time Calculator
+[a] Views-to-Subscribers Ratio
+[h3] Resources
+[a] Tools for Students
+[a] YouTube Rankings
+[a] Top 100 YouTubers
+[a] Blog & Guides
+[a] Documentation
+[a] Changelog
+[a] Privacy Policy
+[a] Terms of Service
+[p] YouTube Toolkit AI
+[p] . Not affiliated with YouTube or Google.
+[p] Made for creators. Free forever.
+[p] We use cookies for essential preferences, analytics, and — where enabled — advertising partners such as Google AdSense. By clicking Accept, you consent to non-essential cookies. See our
+[a] Privacy Policy
+[button] Reject

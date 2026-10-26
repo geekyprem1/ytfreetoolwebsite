@@ -1,0 +1,583 @@
+<template>
+  <style>
+    @font-face{font-family:Instrument Sans;font-style:normal;font-weight:400 700;font-stretch:100%;font-display:swap;src:url("assets/fonts/captured-c7f47671e39f7787-s.0klc_mi0-5f4_.woff2")format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+    @font-face{font-family:Instrument Sans;font-style:normal;font-weight:400 700;font-stretch:100%;font-display:swap;src:url("assets/fonts/captured-f06bf9da926bae75-s.p.2874ccu1_u7jf.woff2")format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-5ce348bf30bf5439-s.31988l_ccedte.woff2")format("woff2");unicode-range:U+460-52F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-4fa387ec64143e14-s.2tuy5pz7dlieh.woff2")format("woff2");unicode-range:U+301,U+400-45F,U+490-491,U+4B0-4B1,U+2116}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-6306c77e7c8268e4-s.2dbetqa9o8jxf.woff2")format("woff2");unicode-range:U+2000-2001,U+2004-2008,U+200A,U+23B8-23BD,U+2500-259F}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-7d817b4c03b0c5f1-s.1uyisp29ctx0d.woff2")format("woff2");unicode-range:U+102-103,U+110-111,U+128-129,U+168-169,U+1A0-1A1,U+1AF-1B0,U+300-301,U+303-304,U+308-309,U+323,U+329,U+1EA0-1EF9,U+20AB}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-bbc41e54d2fcbd21-s.1rgnod-3esatf.woff2")format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-797e433ab948586e-s.p.0r6juujl39pe6.woff2")format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  </style>
+  <style>
+    /* ── frame 07-cta-lockup · cta · the close (risk reversal) ────────────────
+       ink field (dark register) · the real brand lockup holds dead-centre, then
+       CONDENSES at that same centre into the empty paste box from Frame 2 · a
+       human-aimed cursor lands the press · caret blinks out the video.
+       camera-static: the morph and the click are element-space events. */
+    #root {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      font-family: "Instrument Sans", system-ui, sans-serif;
+      color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+    /* contract: timed full-bleed layers stack in the same viewport box */
+    #root .clip {
+      position: absolute;
+      inset: 0;
+    }
+
+    /* ── full-bleed ink ground (lowest content track) ── */
+    .frame-07-cta-lockup-bg {
+      background: #111827;
+    }
+
+    /* ── mono chrome: catalogue numeral + the system's only ornament ── */
+    .frame-07-cta-lockup-chrome {
+      position: absolute;
+      left: 106px;
+      top: 62px;
+      z-index: 4;
+    }
+    .frame-07-cta-lockup-rule {
+      display: block;
+      width: 36px;
+      height: 2px;
+      background: #ff3b30;
+    }
+    .frame-07-cta-lockup-num {
+      display: block;
+      margin-top: 12px;
+      font-family: "Geist Mono", ui-monospace, monospace;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* ── the swap stage: ONE fixed-size box both states sit inside, both
+       centred on (960px, 420px) with transform-origin 50% 50% — the shared
+       origin is what makes the shrink-fade ↔ scale-up read as one element
+       transforming, not a cut. The wrapper never resizes. ── */
+    .frame-07-cta-lockup-swap {
+      position: absolute;
+      left: 50%;
+      margin-left: -310px; /* 620 / 2 — no CSS transform (GSAP owns transform) */
+      top: 356px;
+      width: 620px;
+      height: 128px;
+      z-index: 1;
+    }
+
+    /* glow layer — behind both states, blooms as the box settles (ambient) */
+    .frame-07-cta-lockup-glow {
+      position: absolute;
+      left: -220px;
+      top: -216px;
+      width: 1060px;
+      height: 560px;
+      z-index: 0;
+      opacity: 0;
+      transform-origin: 50% 50%;
+      pointer-events: none;
+      will-change: transform, opacity;
+      background: radial-gradient(
+        ellipse at 50% 50%,
+        rgba(255, 59, 48, 0.72) 0%,
+        rgba(255, 59, 48, 0.38) 24%,
+        rgba(255, 59, 48, 0.12) 46%,
+        rgba(255, 59, 48, 0) 72%
+      );
+    }
+
+    /* ── STATE A — the hero: the real brand mark (red tile + the approved white
+       play glyph) with the "YT Toolkit" wordmark beside it ── */
+    .frame-07-cta-lockup-lockup {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      transform-origin: 50% 50%;
+      will-change: transform, opacity;
+    }
+    .frame-07-cta-lockup-mark {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 128px;
+      height: 128px;
+      background: #ff3b30;
+      border-radius: 28px;
+      will-change: transform;
+    }
+    .frame-07-cta-lockup-glyph {
+      display: block;
+      width: 62px;
+      height: 62px;
+      /* the approved asset is stroked in currentColor; force the mark's white */
+      filter: brightness(0) invert(1);
+    }
+    .frame-07-cta-lockup-word {
+      font-size: 54px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+
+    /* ── STATE B — the REAL paste box from Frame 2, returning EMPTY (white,
+       1px #E5E7EB, 16px radius, link2 icon left, placeholder visible) ── */
+    .frame-07-cta-lockup-box {
+      position: absolute;
+      left: 0;
+      top: 12px; /* 128 − 104, halves the height difference: same centre */
+      width: 620px;
+      height: 104px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 30px;
+      background: #ffffff;
+      border: 1px solid rgba(229, 231, 235, 0.85);
+      border-radius: 16px;
+      transform-origin: 50% 50%;
+      z-index: 2;
+      will-change: transform, opacity;
+    }
+    .frame-07-cta-lockup-ic {
+      flex: 0 0 auto;
+      display: inline-flex;
+      width: 26px;
+      height: 26px;
+      color: #6b7280; /* muted-foreground */
+    }
+    .frame-07-cta-lockup-ic svg {
+      display: block;
+      width: 26px;
+      height: 26px;
+    }
+    .frame-07-cta-lockup-field {
+      position: relative;
+      flex: 1 1 auto;
+      min-width: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    /* context-sensitive-cursor: the active segment here is the placeholder, so
+       the caret block wears the muted placeholder tone, not the ink text tone */
+    .frame-07-cta-lockup-caret {
+      flex: 0 0 auto;
+      display: inline-block;
+      width: 4px;
+      height: 28px;
+      margin-right: 12px;
+      border-radius: 1px;
+      background: #6b7280;
+      opacity: 0; /* timeline-driven only — never a CSS animation */
+    }
+    .frame-07-cta-lockup-ph {
+      font-size: 26px;
+      font-weight: 400;
+      white-space: nowrap;
+      color: rgba(107, 114, 128, 0.6); /* placeholder:text-muted-foreground/60 */
+    }
+
+    /* ── the domain, masked-slid in beneath the mark; locked (z above the
+       morph layers) so the outgoing mark's fade-tail can never bleed into it ── */
+    .frame-07-cta-lockup-domain {
+      position: absolute;
+      left: 50%;
+      margin-left: -330px; /* 660 / 2 */
+      top: 490px;
+      width: 660px;
+      height: 58px;
+      overflow: hidden; /* the mask */
+      text-align: center;
+      z-index: 3;
+    }
+    .frame-07-cta-lockup-domain-inner {
+      display: block;
+      font-family: "Geist Mono", ui-monospace, monospace;
+      font-size: 40px;
+      font-weight: 500;
+      line-height: 58px;
+      letter-spacing: 0.06em;
+      color: #ffffff;
+      will-change: transform, opacity;
+    }
+
+    /* ── click ripples, anchored on the click point (off the box's geometric
+       centre), centring folded into margins so GSAP owns `scale` alone ── */
+    .frame-07-cta-lockup-rings {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .frame-07-cta-lockup-ring {
+      position: absolute;
+      left: 50%;
+      margin-left: -68px; /* 100/2 + 18px human-aim offset */
+      top: 408px;
+      margin-top: -62px; /* 100/2 + 12px human-aim offset */
+      width: 100px;
+      height: 100px;
+      box-sizing: border-box;
+      border: 2px solid rgba(255, 59, 48, 0.75);
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ── the cursor: arrow TIP is the click point, so the path starts at the
+       svg origin and transform-origin is 0 0 (scaling about the tip) ── */
+    .frame-07-cta-lockup-aim {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+      pointer-events: none;
+    }
+    .frame-07-cta-lockup-cursor {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: block;
+      overflow: visible; /* the 1.2px stroke is not clipped at the tip */
+      transform-origin: 0 0;
+      pointer-events: none;
+      will-change: transform;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="07-cta-lockup"
+    data-start="0"
+    data-width="1920"
+    data-height="1080"
+    data-duration="2.965"
+    data-fps="30"
+  >
+    <!-- full-bleed ink ground, lowest content track -->
+    <div
+      id="frame-07-cta-lockup-bg"
+      class="clip frame-07-cta-lockup-bg"
+      data-start="0"
+      data-duration="2.965"
+      data-track-index="0"
+    ></div>
+
+    <!-- the shot -->
+    <div
+      id="frame-07-cta-lockup-stage"
+      class="clip frame-07-cta-lockup-stage"
+      data-start="0"
+      data-duration="2.965"
+      data-track-index="1"
+    >
+      <!-- mono chrome -->
+      <div class="frame-07-cta-lockup-chrome" id="frame-07-cta-lockup-chrome">
+        <span class="frame-07-cta-lockup-rule"></span>
+        <span class="frame-07-cta-lockup-num">No. 07</span>
+      </div>
+
+      <!-- the same-centre swap: hero mark → empty paste box -->
+      <div id="frame-07-cta-lockup-swap" class="frame-07-cta-lockup-swap">
+        <div id="frame-07-cta-lockup-glow" class="frame-07-cta-lockup-glow"></div>
+
+        <div id="frame-07-cta-lockup-lockup" class="frame-07-cta-lockup-lockup">
+          <div id="frame-07-cta-lockup-mark" class="frame-07-cta-lockup-mark">
+            <img
+              id="frame-07-cta-lockup-glyph"
+              class="frame-07-cta-lockup-glyph"
+              src="assets/logo-efec6514.svg"
+              alt=""
+            />
+          </div>
+          <div class="frame-07-cta-lockup-word">YT Toolkit</div>
+        </div>
+
+        <div id="frame-07-cta-lockup-box" class="frame-07-cta-lockup-box">
+          <span
+            id="frame-07-cta-lockup-ic"
+            class="frame-07-cta-lockup-ic"
+            aria-hidden="true"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 17H7A5 5 0 0 1 7 7h2" />
+              <path d="M15 7h2a5 5 0 1 1 0 10h-2" />
+              <line x1="8" x2="16" y1="12" y2="12" />
+            </svg>
+          </span>
+          <div class="frame-07-cta-lockup-field">
+            <span id="frame-07-cta-lockup-caret" class="frame-07-cta-lockup-caret"></span>
+            <span id="frame-07-cta-lockup-ph" class="frame-07-cta-lockup-ph"
+              >Paste YouTube URL...</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- the domain, beneath the mark, locked above the morph layers -->
+      <div id="frame-07-cta-lockup-domain" class="frame-07-cta-lockup-domain">
+        <span
+          id="frame-07-cta-lockup-domain-inner"
+          class="frame-07-cta-lockup-domain-inner"
+          >yttools.pro</span
+        >
+      </div>
+
+      <!-- release ripples at the click point -->
+      <div class="frame-07-cta-lockup-rings">
+        <div
+          id="frame-07-cta-lockup-ring-1"
+          class="frame-07-cta-lockup-ring"
+        ></div>
+        <div
+          id="frame-07-cta-lockup-ring-2"
+          class="frame-07-cta-lockup-ring"
+        ></div>
+      </div>
+
+      <!-- the cursor (high z for the whole sequence) -->
+      <div
+        id="frame-07-cta-lockup-aim"
+        class="frame-07-cta-lockup-aim"
+        data-layout-allow-overflow
+      >
+        <svg
+          id="frame-07-cta-lockup-cursor"
+          class="frame-07-cta-lockup-cursor"
+          width="71"
+          height="88"
+          viewBox="0 0 17 21"
+          aria-hidden="true"
+        >
+          <path
+            d="M0 0 L0 16.5 L4.3 12.7 L7.2 19.3 L10.2 18 L7.3 11.4 L12.7 11.4 Z"
+            fill="#ffffff"
+            stroke="#111827"
+            stroke-width="1.2"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var DUR = 2.965;
+
+      /* ── the shot's beats (voiceover: "YT Tools dot pro. | Paste your first
+         link.") ──
+         0.00–0.90  Scene 1  presence — mark lockup dead-centre, domain slides in
+         0.90–1.70  Scene 2  the morph — mark condenses into the paste box
+         1.70–2.50  Scene 3  approach · press · ripple · caret
+         2.50–2.97  Scene 4  hold — only the caret blinks (no exit; final frame) */
+      var TRIGGER = 0.95; // the morph (EXIT_DUR 0.42, OVERLAP 0.15 → box in at 1.22)
+      var APPROACH_AT = 1.7; // "Paste your first link."
+      var APPROACH_DUR = 0.45;
+      var PRESS_AT = APPROACH_AT + APPROACH_DUR; // 2.15 — cursor lands, press begins
+      var PRESS_DOWN_DUR = 0.1;
+      var RELEASE_AT = 2.28; // brief hold, then back.out
+      var RIPPLE_AT = PRESS_AT + 0.04;
+      var GLOW_PEAK = 0.32;
+
+      var CLICK_X = 942; // 18px left of the box centre — human aim
+      var CLICK_Y = 408; // 12px above it
+      var CURSOR_START_X = 2010; // off-stage right
+      var CURSOR_START_Y = 700;
+      var PRESS_INTENSITY = 0.1;
+      var ROT_AMP = 0.6; // resting breath, rotation only, scoped to the mark
+      var BLINK_CYCLES = 1; // whole number over the post-focus window (0.815s)
+
+      var tl = gsap.timeline({ paused: true });
+
+      // full-span anchor so the sub-composition timeline spans the whole slot
+      tl.to({}, { duration: DUR }, 0);
+
+      /* ── Scene 1 (0.0–0.9) — presence. Mark lockup enters and holds
+         dead-centre; the domain masked-slides in beneath it on the first cue;
+         everything else rock-still. ── */
+      tl.fromTo(
+        "#frame-07-cta-lockup-lockup",
+        { scale: 0.94, opacity: 0, y: 14 },
+        { scale: 1, opacity: 1, y: 0, duration: 0.38, ease: "power3.out" },
+        0.04,
+      );
+      tl.fromTo(
+        "#frame-07-cta-lockup-chrome",
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" },
+        0.1,
+      );
+      // masked slide: the inner line rides up out of an overflow:hidden mask
+      tl.fromTo(
+        "#frame-07-cta-lockup-domain-inner",
+        { yPercent: 112, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 0.5, ease: "power3.out" },
+        0.3,
+      );
+
+      // resting breath — sine-wave-loop, rotation register only, one bounded
+      // half-cycle (sin 0 → 0, so it lands exactly on the morph with no jump)
+      var markEl = document.getElementById("frame-07-cta-lockup-mark");
+      var breath = { p: 0 };
+      tl.to(
+        breath,
+        {
+          p: Math.PI,
+          duration: 0.64,
+          ease: "none",
+          onUpdate: function () {
+            markEl.style.transform =
+              "rotate(" + (Math.sin(breath.p) * ROT_AMP).toFixed(4) + "deg)";
+          },
+        },
+        0.56,
+      );
+
+      /* ── Scene 2 (0.9–1.7) — the morph (signature). Hero condenses at the
+         same screen centre exactly as the paste box scales up in its place:
+         both share transform-origin 50% 50%, incoming sits above the outgoing,
+         and the outgoing is never display:none'd. ── */
+      tl.to(
+        "#frame-07-cta-lockup-lockup",
+        { scale: 0.72, opacity: 0, duration: 0.42, ease: "power2.in" },
+        TRIGGER,
+      );
+      tl.fromTo(
+        "#frame-07-cta-lockup-box",
+        { scale: 0.72, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.55, ease: "back.out(1.8)" },
+        TRIGGER + 0.27,
+      );
+      // one soft glow blooms behind the settling box (un-triggered, bounded,
+      // bloom-and-hold: the scene is short, so no idle breathe)
+      tl.fromTo(
+        "#frame-07-cta-lockup-glow",
+        { opacity: 0, scale: 0.9 },
+        { opacity: GLOW_PEAK, scale: 1, duration: 0.5, ease: "power2.out" },
+        1.3,
+      );
+      // the box's inner content reveals once the container has settled
+      tl.fromTo(
+        "#frame-07-cta-lockup-ic",
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" },
+        1.6,
+      );
+      tl.fromTo(
+        "#frame-07-cta-lockup-ph",
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" },
+        1.68,
+      );
+
+      /* ── Scene 3 (1.7–2.5) — approach, then press. The cursor decel-arrives
+         from off-stage (power2.out — it arrives, it does not pass through) and
+         lands a few px off the box's geometric centre. ── */
+      var cursor = document.getElementById("frame-07-cta-lockup-cursor");
+      gsap.set(cursor, { x: CURSOR_START_X, y: CURSOR_START_Y });
+      tl.to(
+        cursor,
+        { x: CLICK_X, y: CLICK_Y, duration: APPROACH_DUR, ease: "power2.out" },
+        APPROACH_AT,
+      );
+
+      // physics-press-reaction — ONE targets array so cursor and box compress
+      // in lockstep, then spring back together with the overshoot.
+      tl.to(
+        [cursor, "#frame-07-cta-lockup-box"],
+        { scale: 1 - PRESS_INTENSITY, duration: PRESS_DOWN_DUR, ease: "power1.in" },
+        PRESS_AT,
+      );
+      tl.to(
+        [cursor, "#frame-07-cta-lockup-box"],
+        { scale: 1, duration: 0.3, ease: "back.out(1.8)" },
+        RELEASE_AT,
+      );
+      // release feedback: the halo takes the energy, then settles
+      tl.to(
+        "#frame-07-cta-lockup-glow",
+        { opacity: 0.38, duration: 0.18, ease: "power1.in" },
+        PRESS_AT,
+      );
+      tl.to(
+        "#frame-07-cta-lockup-glow",
+        { opacity: 0.3, duration: 0.4, ease: "power2.out" },
+        RELEASE_AT + 0.06,
+      );
+
+      // soft click ripple — rings live in the DOM from t=0 at the click point
+      tl.fromTo(
+        ".frame-07-cta-lockup-ring",
+        { scale: 0, opacity: 0.85 },
+        {
+          scale: 3.2,
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.out",
+          stagger: 0.09,
+        },
+        RIPPLE_AT,
+      );
+
+      // the caret begins blinking in the now-focused empty input — one whole
+      // sin cycle over the post-focus window, driven by a full-span clock so
+      // the opacity is a PURE function of time (identical at any seek, either
+      // direction; no mutable tracker, no CSS animation).
+      var caretEl = document.getElementById("frame-07-cta-lockup-caret");
+      var BLINK_WIN = DUR - PRESS_AT; // 0.815s → one 0.815s-period blink
+      var caretClock = { t: 0 };
+      tl.to(
+        caretClock,
+        {
+          t: DUR,
+          duration: DUR,
+          ease: "none",
+          onUpdate: function () {
+            if (caretClock.t < PRESS_AT) {
+              caretEl.style.opacity = "0"; // unfocused empty input — no caret
+              return;
+            }
+            var p =
+              (Math.PI * 2 * BLINK_CYCLES * (caretClock.t - PRESS_AT)) / BLINK_WIN;
+            caretEl.style.opacity = Math.cos(p) >= 0 ? "1" : "0";
+          },
+        },
+        0,
+      );
+
+      /* ── Scene 4 (2.5–2.97) — hold. Domain, box and mark lockup still to the
+         last frame; only the caret blinks. No exit tween (this frame is the
+         video's ending) and no camera move (camera-static). ── */
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["07-cta-lockup"] = tl;
+    })();
+  </script>
+</template>

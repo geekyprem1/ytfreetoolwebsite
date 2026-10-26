@@ -1,0 +1,700 @@
+<template>
+  <!--
+    03-tags-transcript — device-surface-showcase (Adapt), 3.392s, 1920x1080, captions on (keep-out y <= 900).
+    Scene 1 (0.00-0.70): ink field; left rail = real scroll-036 plate cropped 1:1 to a tall
+      Extractors index strip, masked-slid in at full strength; the site's real white tool
+      card (60% width, right of center) drifts in with a tilt that settles flat, header =
+      "Tags Extractor" + the sample URL pasted into the input. Static camera from here.
+    Scene 2 (0.70-2.00): 12 demo tag chips cascade into the window body, one beat each;
+      the last three land slightly apart so the eye finishes the cluster.
+    Scene 3 (2.00-3.00): body scale-swaps to the transcript state (shrink-out + sprung
+      pop-in at the same center; header + state chip swap out-up / in-up); timestamped
+      lines stream top-down while the clipped list translates gently under them.
+    Scene 4 (3.00-3.392): hold — the stream stops on the final line, its caret blinks
+      (sin-driven, deterministic). No camera drift, no exit.
+  -->
+  <style>
+    @font-face {
+      font-family: "Instrument Sans";
+      font-style: normal;
+      font-weight: 400 700;
+      font-stretch: 100%;
+      font-display: swap;
+      src: url("assets/fonts/captured-c7f47671e39f7787-s.0klc_mi0-5f4_.woff2") format("woff2");
+      unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329,
+        U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+        U+2C60-2C7F, U+A720-A7FF;
+    }
+    @font-face {
+      font-family: "Instrument Sans";
+      font-style: normal;
+      font-weight: 400 700;
+      font-stretch: 100%;
+      font-display: swap;
+      src: url("assets/fonts/captured-f06bf9da926bae75-s.p.2874ccu1_u7jf.woff2") format("woff2");
+      unicode-range: U+??, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329,
+        U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: "Geist Mono";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("assets/fonts/captured-5ce348bf30bf5439-s.31988l_ccedte.woff2") format("woff2");
+      unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+    @font-face {
+      font-family: "Geist Mono";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("assets/fonts/captured-4fa387ec64143e14-s.2tuy5pz7dlieh.woff2") format("woff2");
+      unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116;
+    }
+    @font-face {
+      font-family: "Geist Mono";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("assets/fonts/captured-6306c77e7c8268e4-s.2dbetqa9o8jxf.woff2") format("woff2");
+      unicode-range: U+2000-2001, U+2004-2008, U+200A, U+23B8-23BD, U+2500-259F;
+    }
+    @font-face {
+      font-family: "Geist Mono";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("assets/fonts/captured-7d817b4c03b0c5f1-s.1uyisp29ctx0d.woff2") format("woff2");
+      unicode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1B0, U+300-301,
+        U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB;
+    }
+    @font-face {
+      font-family: "Geist Mono";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("assets/fonts/captured-bbc41e54d2fcbd21-s.1rgnod-3esatf.woff2") format("woff2");
+      unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329,
+        U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+        U+2C60-2C7F, U+A720-A7FF;
+    }
+    @font-face {
+      font-family: "Geist Mono";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+      src: url("assets/fonts/captured-797e433ab948586e-s.p.0r6juujl39pe6.woff2") format("woff2");
+      unicode-range: U+??, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329,
+        U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    #root,
+    #root * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      container-type: size;
+      overflow: hidden;
+      font-family: "Instrument Sans";
+      font-weight: 400;
+      color: #111827;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---------- ground (full-bleed clip, never on #root) ---------- */
+    .f03-ground {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .f03-ink {
+      position: absolute;
+      inset: 0;
+      background: #111827;
+    }
+
+    /* ---------- frame chrome: hairline + mono label / catalogue number ---------- */
+    .f03-chrome {
+      position: absolute;
+      left: 96px;
+      right: 212px;
+      top: 66px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+    .f03-chrome-line {
+      flex: 1 1 auto;
+      height: 1px;
+      background: #282626;
+    }
+    .f03-mono {
+      font-family: "Geist Mono";
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .f03-chrome-label {
+      color: #6b7280;
+    }
+    .f03-chrome-num {
+      color: #ff3b30;
+    }
+
+    /* ---------- stage ---------- */
+    .f03-stage {
+      position: absolute;
+      inset: 0;
+    }
+
+    /* ---------- left index rail: real plate, 1:1 tall crop, full strength ---------- */
+    .f03-rail {
+      position: absolute;
+      left: 96px;
+      top: 116px;
+      width: 340px;
+      height: 740px;
+      overflow: hidden;
+      clip-path: inset(0px 100% 0px 0px);
+      -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 70%, rgba(0, 0, 0, 0) 100%);
+      mask-image: linear-gradient(90deg, #000 0%, #000 70%, rgba(0, 0, 0, 0) 100%);
+    }
+    .f03-rail-img {
+      position: absolute;
+      left: -300px;
+      top: -170px;
+      width: 1920px;
+      height: 1080px;
+      display: block;
+    }
+
+    /* ---------- the tool window (hero surface) ---------- */
+    .f03-win {
+      position: absolute;
+      left: 556px;
+      top: 152px;
+      width: 1152px;
+      height: 688px;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .f03-bar {
+      flex: 0 0 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 46px;
+      border-bottom: 1px solid rgba(17, 24, 39, 0.1);
+    }
+    .f03-src {
+      color: #6b7280;
+    }
+    .f03-state-box {
+      position: relative;
+      width: 210px;
+      height: 22px;
+    }
+    .f03-state-a,
+    .f03-state-b {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform-origin: 50% 50%;
+    }
+    .f03-state-b {
+      opacity: 0;
+    }
+    .f03-state-rule {
+      width: 3px;
+      height: 15px;
+      background: #ff3b30;
+    }
+    .f03-state-txt {
+      color: #ff3b30;
+    }
+
+    .f03-head-swap {
+      position: relative;
+      flex: 0 0 118px;
+      margin: 26px 46px 0;
+    }
+    .f03-head {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      transform-origin: 50% 50%;
+    }
+    .f03-head-b {
+      opacity: 0;
+    }
+    .f03-title {
+      font-size: 44px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.06;
+      color: #111827;
+    }
+    .f03-sub {
+      margin-top: 10px;
+      max-width: 860px;
+      font-size: 19px;
+      line-height: 1.35;
+      color: #6b7280;
+    }
+
+    .f03-input {
+      flex: 0 0 62px;
+      margin: 20px 46px 0;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 12px 0 22px;
+      border: 1px solid rgba(17, 24, 39, 0.14);
+      border-radius: 10px;
+    }
+    .f03-url-wrap {
+      flex: 1 1 auto;
+      overflow: hidden;
+    }
+    .f03-url {
+      font-family: "Geist Mono";
+      font-size: 20px;
+      line-height: 1;
+      color: #111827;
+      white-space: nowrap;
+      clip-path: inset(0px 100% 0px 0px);
+    }
+    .f03-go {
+      flex: 0 0 38px;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: #ff3b30;
+      color: #ffffff;
+      font-family: "Geist Mono";
+      font-size: 21px;
+      line-height: 1;
+      opacity: 0;
+    }
+
+    /* ---------- window body: two screen states, same footprint, same center ---------- */
+    .f03-body {
+      position: relative;
+      flex: 1 1 auto;
+      margin: 22px 46px 34px;
+      overflow: hidden;
+    }
+    .f03-body-a,
+    .f03-body-b {
+      position: absolute;
+      inset: 0;
+      transform-origin: 50% 50%;
+    }
+    .f03-body-a {
+      z-index: 1;
+    }
+    .f03-body-b {
+      z-index: 2;
+      opacity: 0;
+    }
+
+    /* state A — tag chips */
+    .f03-chips {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      gap: 14px;
+    }
+    .f03-chip {
+      display: flex;
+      align-items: center;
+      height: 46px;
+      padding: 0 20px;
+      border: 1px solid rgba(17, 24, 39, 0.14);
+      border-radius: 8px;
+      font-size: 20px;
+      line-height: 1;
+      color: #111827;
+      white-space: nowrap;
+      opacity: 0;
+    }
+
+    /* state B — transcript stream */
+    .f03-tx-list {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      padding-top: 22px;
+    }
+    .f03-tx-row {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      height: 72px;
+      border-top: 1px solid rgba(17, 24, 39, 0.1);
+      opacity: 0;
+    }
+    .f03-tx-row:last-child {
+      border-bottom: 1px solid rgba(17, 24, 39, 0.1);
+    }
+    .f03-ts {
+      flex: 0 0 86px;
+      font-family: "Geist Mono";
+      font-size: 16px;
+      letter-spacing: 0.06em;
+      color: #6b7280;
+    }
+    .f03-line {
+      font-size: 21px;
+      line-height: 1.2;
+      color: #111827;
+    }
+    .f03-caret-slot {
+      margin-left: 10px;
+      opacity: 0;
+    }
+    .f03-caret {
+      display: inline-block;
+      width: 10px;
+      height: 24px;
+      background: #ff3b30;
+      vertical-align: -4px;
+    }
+  </style>
+
+  <div id="root" data-composition-id="03-tags-transcript" data-width="1920" data-height="1080">
+    <div class="clip f03-ground" data-start="0" data-duration="3.392" data-track-index="0">
+      <div class="f03-ink"></div>
+      <div class="f03-chrome">
+        <span class="f03-mono f03-chrome-label">Extractors</span>
+        <span class="f03-chrome-line"></span>
+        <span class="f03-mono f03-chrome-num">No. 03</span>
+      </div>
+    </div>
+
+    <div class="clip f03-stage" data-start="0" data-duration="3.392" data-track-index="1">
+      <!-- left index rail: the real Extractors rows plate, 1:1 crop of the left column -->
+      <div class="f03-rail" data-layout-allow-overflow>
+        <img
+          class="f03-rail-img"
+          data-layout-allow-overflow
+          src="assets/scroll-036.png"
+          alt=""
+        />
+      </div>
+
+      <!-- the tool window -->
+      <div class="f03-win">
+        <div class="f03-bar">
+          <span class="f03-mono f03-src">YouTube</span>
+          <div class="f03-state-box">
+            <div class="f03-state-a">
+              <span class="f03-state-rule"></span>
+              <span class="f03-mono f03-state-txt">Tags</span>
+            </div>
+            <div class="f03-state-b">
+              <span class="f03-state-rule"></span>
+              <span class="f03-mono f03-state-txt">Transcript</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="f03-head-swap">
+          <div class="f03-head f03-head-a">
+            <div class="f03-title">Tags Extractor</div>
+            <div class="f03-sub">
+              Extract all tags from any YouTube video instantly. Copy or download as TXT.
+            </div>
+          </div>
+          <div class="f03-head f03-head-b">
+            <div class="f03-title">Transcript Extractor</div>
+            <div class="f03-sub">
+              Get full video transcripts with timestamps. Copy, download, or AI summarize.
+            </div>
+          </div>
+        </div>
+
+        <div class="f03-input">
+          <div class="f03-url-wrap">
+            <div class="f03-url">youtube.com/watch?v=vT8s2KqL9xQ</div>
+          </div>
+          <div class="f03-go">&rsaquo;</div>
+        </div>
+
+        <div class="f03-body">
+          <div class="f03-body-a">
+            <div class="f03-chips">
+              <span class="f03-chip">youtube seo</span>
+              <span class="f03-chip">video editing</span>
+              <span class="f03-chip">grow a channel</span>
+              <span class="f03-chip">youtube shorts</span>
+              <span class="f03-chip">thumbnail design</span>
+              <span class="f03-chip">monetization</span>
+              <span class="f03-chip">content strategy</span>
+              <span class="f03-chip">video ideas</span>
+              <span class="f03-chip">youtube algorithm</span>
+              <span class="f03-chip">channel growth</span>
+              <span class="f03-chip">youtube tips</span>
+              <span class="f03-chip">creators</span>
+            </div>
+          </div>
+
+          <div class="f03-body-b">
+            <div class="f03-tx-list" data-layout-allow-overflow>
+              <div class="f03-tx-row">
+                <span class="f03-ts">00:00</span>
+                <span class="f03-line">welcome back to the channel</span>
+              </div>
+              <div class="f03-tx-row">
+                <span class="f03-ts">00:12</span>
+                <span class="f03-line">today we're building something small</span>
+              </div>
+              <div class="f03-tx-row">
+                <span class="f03-ts">00:28</span>
+                <span class="f03-line">watch how fast this one moves</span>
+              </div>
+              <div class="f03-tx-row">
+                <span class="f03-ts">00:41</span>
+                <span class="f03-line"
+                  >that's it for this section<span class="f03-caret-slot"
+                    ><span class="f03-caret"></span></span
+                ></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      const ROOT_ID = "03-tags-transcript";
+      const DUR = 3.392;
+
+      const tl = gsap.timeline({ paused: true });
+
+      /* ------------------------------------------------------------------
+         Scene 1 (0.00-0.70) — the surface establishes. Static camera.
+         ------------------------------------------------------------------ */
+
+      // Left rail: masked slide — a clip sweep with the plate drifting in under it.
+      tl.fromTo(
+        ".f03-rail",
+        { clipPath: "inset(0px 100% 0px 0px)" },
+        { clipPath: "inset(0px 0px 0px 0px)", duration: 0.38, ease: "power3.out" },
+        0.08,
+      );
+      tl.fromTo(
+        ".f03-rail-img",
+        { x: -46 },
+        { x: 0, duration: 0.52, ease: "power3.out" },
+        0.08,
+      );
+
+      // Frame chrome.
+      tl.fromTo(
+        ".f03-chrome",
+        { opacity: 0, y: -10 },
+        { opacity: 1, y: 0, duration: 0.32, ease: "power2.out" },
+        0.02,
+      );
+
+      // Hero surface: drifts in with a slight tilt, settles flat (settled well before 0.5s).
+      tl.fromTo(
+        ".f03-win",
+        { opacity: 0, y: -46, rotation: -2.4, scale: 0.985 },
+        { opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.46, ease: "power3.out" },
+        0,
+      );
+
+      // Window header, state chip and the pasted sample URL.
+      tl.fromTo(
+        ".f03-state-a",
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.28, ease: "power3.out" },
+        0.16,
+      );
+      tl.fromTo(
+        ".f03-head-a",
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.34, ease: "power3.out" },
+        0.19,
+      );
+      tl.fromTo(
+        ".f03-input",
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" },
+        0.3,
+      );
+      tl.fromTo(
+        ".f03-url",
+        { clipPath: "inset(0px 100% 0px 0px)" },
+        { clipPath: "inset(0px 0px 0px 0px)", duration: 0.3, ease: "power2.out" },
+        0.34,
+      );
+      tl.fromTo(
+        ".f03-go",
+        { opacity: 0, scale: 0.4 },
+        { opacity: 1, scale: 1, duration: 0.34, ease: "back.out(1.8)" },
+        0.54,
+      );
+
+      /* ------------------------------------------------------------------
+         Scene 2 (0.70-2.00) — tag chips cascade in, one landing per beat.
+         The last three land slightly apart so the eye finishes the cluster.
+         ------------------------------------------------------------------ */
+      const CHIP_AT = [
+        0.72, 0.792, 0.864, 0.936, 1.008, 1.08, 1.152, 1.224, 1.296, 1.36, 1.49, 1.62,
+      ];
+      document.querySelectorAll(".f03-chip").forEach((chip, i) => {
+        tl.fromTo(
+          chip,
+          { opacity: 0, y: 18, scale: 0.86 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "back.out(1.7)" },
+          CHIP_AT[i],
+        );
+      });
+
+      /* ------------------------------------------------------------------
+         Scene 3 (2.00-3.00) — body scale-swap to the transcript state.
+         Outgoing shrinks away (power2.in), incoming pops in (back.out),
+         overlapping by ~0.15s; inner content reveals once the swap settles.
+         ------------------------------------------------------------------ */
+      const SWAP = 2.02;
+      const EXIT_DUR = 0.3;
+      const OVERLAP = 0.15;
+
+      tl.to(
+        ".f03-body-a",
+        { scale: 0.7, opacity: 0, duration: EXIT_DUR, ease: "power2.in" },
+        SWAP,
+      );
+      tl.fromTo(
+        ".f03-body-b",
+        { scale: 0.7, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.46, ease: "back.out(1.7)" },
+        SWAP + EXIT_DUR - OVERLAP,
+      );
+
+      // Header + state chip swap (old slides up and out, new slides up and in).
+      tl.to(
+        ".f03-head-a",
+        { opacity: 0, y: -18, duration: 0.26, ease: "power2.in" },
+        SWAP,
+      );
+      tl.fromTo(
+        ".f03-head-b",
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" },
+        SWAP + 0.16,
+      );
+      tl.to(
+        ".f03-state-a",
+        { opacity: 0, y: -12, duration: 0.22, ease: "power2.in" },
+        SWAP,
+      );
+      tl.fromTo(
+        ".f03-state-b",
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.34, ease: "power3.out" },
+        SWAP + 0.14,
+      );
+
+      // Timestamped lines stream in top-down; the active row's timestamp inks up
+      // (the final row inks orange — the segment the caret ends on).
+      const TX_AT = [2.34, 2.47, 2.6, 2.73];
+      document.querySelectorAll(".f03-tx-row").forEach((row, i) => {
+        const at = TX_AT[i];
+        tl.fromTo(
+          row,
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.26, ease: "power3.out" },
+          at,
+        );
+        tl.fromTo(
+          row.querySelector(".f03-ts"),
+          { color: "#6b7280" },
+          { color: i === 3 ? "#ff3b30" : "#111827", duration: 0.22, ease: "power2.out" },
+          at + 0.06,
+        );
+      });
+
+      // The clipped list translates gently as the lines fill.
+      tl.fromTo(
+        ".f03-tx-list",
+        { y: 20 },
+        { y: -14, duration: 0.88, ease: "power2.out" },
+        2.24,
+      );
+
+      // The final line's caret appears as the stream stops.
+      tl.fromTo(
+        ".f03-caret-slot",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.08, ease: "none" },
+        2.96,
+      );
+
+      /* ------------------------------------------------------------------
+         Scene 4 (3.00-3.392) — hold. One deterministic driver writes both the
+         caret's segment colour and its whole-cycle sin blink. No exit tween.
+         ------------------------------------------------------------------ */
+      const CARET_SEGMENTS = [
+        { t: 0, color: "#6b7280" },
+        { t: 2.96, color: "#ff3b30" },
+      ];
+      function segmentAt(time) {
+        for (let i = CARET_SEGMENTS.length - 1; i >= 0; i--) {
+          if (time >= CARET_SEGMENTS[i].t) return CARET_SEGMENTS[i];
+        }
+        return CARET_SEGMENTS[0];
+      }
+
+      const caretEl = document.querySelector(".f03-caret");
+      const BLINK_CYCLES = 4; // whole cycles across DUR -> period 0.848s
+      const driver = { t: 0 };
+      tl.to(
+        driver,
+        {
+          t: DUR,
+          duration: DUR,
+          ease: "none",
+          onUpdate: () => {
+            caretEl.style.background = segmentAt(driver.t).color;
+            const phase = (driver.t / DUR) * BLINK_CYCLES * Math.PI * 2;
+            caretEl.style.opacity = Math.sin(phase) > 0 ? "1" : "0";
+          },
+        },
+        0,
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines[ROOT_ID] = tl;
+    })();
+  </script>
+</template>

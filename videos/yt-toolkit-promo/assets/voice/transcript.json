@@ -1,0 +1,86 @@
+[
+  {
+    "id": "w0",
+    "text": "One",
+    "start": 0,
+    "end": 0.32
+  },
+  {
+    "id": "w1",
+    "text": "tab",
+    "start": 0.32,
+    "end": 0.64
+  },
+  {
+    "id": "w2",
+    "text": "for",
+    "start": 0.64,
+    "end": 0.8
+  },
+  {
+    "id": "w3",
+    "text": "tags,",
+    "start": 0.8,
+    "end": 1.36
+  },
+  {
+    "id": "w4",
+    "text": "one",
+    "start": 1.36,
+    "end": 1.6
+  },
+  {
+    "id": "w5",
+    "text": "for",
+    "start": 1.6,
+    "end": 1.76
+  },
+  {
+    "id": "w6",
+    "text": "titles,",
+    "start": 1.76,
+    "end": 2.32
+  },
+  {
+    "id": "w7",
+    "text": "one",
+    "start": 2.32,
+    "end": 2.56
+  },
+  {
+    "id": "w8",
+    "text": "for",
+    "start": 2.56,
+    "end": 2.72
+  },
+  {
+    "id": "w9",
+    "text": "thumbnails,",
+    "start": 2.72,
+    "end": 3.52
+  },
+  {
+    "id": "w10",
+    "text": "one",
+    "start": 3.52,
+    "end": 3.68
+  },
+  {
+    "id": "w11",
+    "text": "for",
+    "start": 3.68,
+    "end": 3.76
+  },
+  {
+    "id": "w12",
+    "text": "the",
+    "start": 3.76,
+    "end": 3.92
+  },
+  {
+    "id": "w13",
+    "text": "math.",
+    "start": 3.92,
+    "end": 4.4
+  }
+]

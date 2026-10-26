@@ -1,0 +1,651 @@
+<template>
+  <style>
+    /* Instrument Sans (display / reading) + Geist Mono (chrome) — real files, project-root relative */
+    @font-face{font-family:Instrument Sans;font-style:normal;font-weight:400 700;font-stretch:100%;font-display:swap;src:url("assets/fonts/captured-c7f47671e39f7787-s.0klc_mi0-5f4_.woff2")format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+    @font-face{font-family:Instrument Sans;font-style:normal;font-weight:400 700;font-stretch:100%;font-display:swap;src:url("assets/fonts/captured-f06bf9da926bae75-s.p.2874ccu1_u7jf.woff2")format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-5ce348bf30bf5439-s.31988l_ccedte.woff2")format("woff2");unicode-range:U+460-52F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-4fa387ec64143e14-s.2tuy5pz7dlieh.woff2")format("woff2");unicode-range:U+301,U+400-45F,U+490-491,U+4B0-4B1,U+2116}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-6306c77e7c8268e4-s.2dbetqa9o8jxf.woff2")format("woff2");unicode-range:U+2000-2001,U+2004-2008,U+200A,U+23B8-23BD,U+2500-259F}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-7d817b4c03b0c5f1-s.1uyisp29ctx0d.woff2")format("woff2");unicode-range:U+102-103,U+110-111,U+128-129,U+168-169,U+1A0-1A1,U+1AF-1B0,U+300-301,U+303-304,U+308-309,U+323,U+329,U+1EA0-1EF9,U+20AB}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-bbc41e54d2fcbd21-s.1rgnod-3esatf.woff2")format("woff2");unicode-range:U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+    @font-face{font-family:Geist Mono;font-style:normal;font-weight:100 900;font-display:swap;src:url("assets/fonts/captured-797e433ab948586e-s.p.0r6juujl39pe6.woff2")format("woff2");unicode-range:U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  </style>
+
+  <style>
+    /* ── frame root (contract selector; never a class on the data-composition-id element) ── */
+    #root {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      container-type: size;
+      font-family: "Instrument Sans", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* full-bleed layers: ground on the lowest clip track, content above it.
+       Type sizes are authored in cqw (1cqw = 19.2px at 1920) per the frame container law. */
+    .hf04-field,
+    .hf04-stage {
+      position: absolute;
+      inset: 0;
+    }
+    .hf04-field {
+      background: #ff3b30; /* fire register — the whole environment */
+    }
+    .hf04-stage {
+      overflow: hidden;
+    }
+
+    /* ── slide chrome: top hairline bar, mono label left / catalogue numeral right ── */
+    .hf04-kicker,
+    .hf04-num {
+      position: absolute;
+      top: 52px;
+      font-family: "Geist Mono", monospace;
+      font-weight: 500;
+      font-size: 0.885cqw;
+      line-height: 1;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(17, 17, 17, 0.68);
+      white-space: nowrap;
+    }
+    .hf04-kicker {
+      left: 105px;
+    }
+    .hf04-num {
+      right: 105px;
+      text-align: right;
+    }
+    .hf04-toprule {
+      position: absolute;
+      left: 105px;
+      top: 100px;
+      width: 1710px;
+      height: 1px;
+      background: rgba(17, 17, 17, 0.22);
+      transform-origin: 0% 50%;
+    }
+
+    /* ── the working-state theatre lockup (home: centre; docks: top-left corner header) ── */
+    .hf04-theater {
+      position: absolute;
+      left: 490px;
+      top: 300px;
+      width: 940px;
+      height: 170px;
+      transform-origin: 0% 0%;
+    }
+    .hf04-spinner {
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 56px;
+      height: 56px;
+      transform-origin: 50% 50%;
+    }
+    .hf04-spinner svg {
+      display: block;
+      width: 56px;
+      height: 56px;
+    }
+    .hf04-asterisk path {
+      fill: none;
+      stroke: #111827;
+      stroke-width: 7;
+      stroke-linecap: round;
+    }
+    .hf04-phrase,
+    .hf04-state {
+      position: absolute;
+      left: 96px;
+      width: 844px;
+    }
+    .hf04-phrase {
+      top: 6px;
+      height: 72px;
+    }
+    .hf04-state {
+      top: 84px;
+      height: 30px;
+    }
+    .hf04-ph-state {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      font-family: "Instrument Sans", sans-serif;
+      font-weight: 600;
+      font-size: 3.54cqw; /* h2 4.5cqw stepped down so the longest working label fits the slot */
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: #111827;
+      white-space: nowrap;
+      transform-origin: 0% 50%;
+    }
+    .hf04-st-state {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      font-family: "Geist Mono", monospace;
+      font-weight: 500;
+      font-size: 1.25cqw;
+      line-height: 1;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(17, 17, 17, 0.72);
+      white-space: nowrap;
+      transform-origin: 0% 50%;
+    }
+    /* single-pass travelling sheen through the working label (masked to the label box) */
+    .hf04-sheen-mask {
+      position: absolute;
+      left: 96px;
+      top: 6px;
+      width: 844px;
+      height: 72px;
+      overflow: hidden;
+    }
+    .hf04-sheen {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 180px;
+      height: 72px;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.42) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    }
+
+    /* ── the receipt: flat ink rows on fire, hairline rules, badge state mutation ── */
+    .hf04-group {
+      position: absolute;
+      inset: 0;
+      transform-origin: 50% 50%;
+    }
+    .hf04-row {
+      position: absolute;
+      left: 105px;
+      width: 1710px;
+      height: 76px;
+      display: flex;
+      align-items: center;
+    }
+    .hf04-badge {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      flex: 0 0 44px;
+      margin-right: 44px;
+    }
+    .hf04-badge-num {
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(17, 17, 17, 0.45);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Geist Mono", monospace;
+      font-weight: 500;
+      font-size: 0.78cqw;
+      line-height: 1;
+      color: rgba(17, 17, 17, 0.72);
+      transform-origin: 50% 50%;
+    }
+    .hf04-badge-done {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #111827; /* ink-on-fire: the done circle, white check reads on the circle only */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform-origin: 50% 50%;
+      z-index: 2;
+    }
+    .hf04-check {
+      display: block;
+      width: 22px;
+      height: 22px;
+    }
+    .hf04-check-path {
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 2.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .hf04-row-text {
+      font-family: "Instrument Sans", sans-serif;
+      font-weight: 500;
+      font-size: 1.56cqw;
+      line-height: 1.15;
+      letter-spacing: -0.005em;
+      color: #111827;
+    }
+    .hf04-desc {
+      font-weight: 400;
+      font-size: 1.41cqw;
+      color: rgba(17, 17, 17, 0.72);
+    }
+    .hf04-rule {
+      position: absolute;
+      left: 105px;
+      width: 1710px;
+      height: 1px;
+      background: rgba(17, 17, 17, 0.22);
+      transform-origin: 0% 50%;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="04-generated"
+    data-start="0"
+    data-duration="3.648"
+    data-width="1920"
+    data-height="1080"
+  >
+    <!-- full-bleed ground: the fire field -->
+    <div class="clip hf04-field" data-start="0" data-duration="3.648" data-track-index="0"></div>
+
+    <div class="clip hf04-stage" data-start="0" data-duration="3.648" data-track-index="1">
+      <!-- slide chrome -->
+      <div class="hf04-kicker">AI GENERATORS · 13 TOOLS</div>
+      <div class="hf04-num">NO. 04</div>
+      <div class="hf04-toprule"></div>
+
+      <!-- Scene 1 — working couplet: spinner + label (+ shimmer), holding centre -->
+      <div class="hf04-theater">
+        <div class="hf04-spinner">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <g class="hf04-asterisk">
+              <path d="M60 16 L60 104" />
+              <path d="M21.9 38 L98.1 82" />
+              <path d="M21.9 82 L98.1 38" />
+            </g>
+          </svg>
+        </div>
+        <div class="hf04-phrase">
+          <div class="hf04-ph-state" data-hf04-state="p1">writing titles…</div>
+          <div class="hf04-ph-state" data-hf04-state="p2">writing descriptions…</div>
+          <div class="hf04-ph-state" data-hf04-state="p3">writing hooks…</div>
+          <div class="hf04-ph-state" data-hf04-state="p4">all written</div>
+        </div>
+        <div class="hf04-sheen-mask"><div class="hf04-sheen"></div></div>
+        <div class="hf04-state">
+          <div class="hf04-st-state" data-hf04-state="s1">using AI Title Generator</div>
+          <div class="hf04-st-state" data-hf04-state="s2">used AI Title Generator</div>
+          <div class="hf04-st-state" data-hf04-state="s3">using AI Description Generator</div>
+          <div class="hf04-st-state" data-hf04-state="s4">using AI Hook Generator</div>
+          <div class="hf04-st-state" data-hf04-state="s5">used AI Hook Generator</div>
+        </div>
+      </div>
+
+      <!-- Scene 2 receipt — generated titles -->
+      <div class="hf04-group hf04-group-titles">
+        <div class="hf04-row" style="top: 455px">
+          <div class="hf04-badge">
+            <div class="hf04-badge-num">1</div>
+            <div class="hf04-badge-done">
+              <svg class="hf04-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path class="hf04-check-path" d="M4.5 12.8 L9.6 18 L19.5 6.6" />
+              </svg>
+            </div>
+          </div>
+          <div class="hf04-row-text">How I Grew My Channel With Shorts</div>
+        </div>
+        <div class="hf04-rule" style="top: 533px"></div>
+
+        <div class="hf04-row" style="top: 565px">
+          <div class="hf04-badge">
+            <div class="hf04-badge-num">2</div>
+            <div class="hf04-badge-done">
+              <svg class="hf04-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path class="hf04-check-path" d="M4.5 12.8 L9.6 18 L19.5 6.6" />
+              </svg>
+            </div>
+          </div>
+          <div class="hf04-row-text">The Editing Trick Nobody Told Me</div>
+        </div>
+        <div class="hf04-rule" style="top: 643px"></div>
+
+        <div class="hf04-row" style="top: 675px">
+          <div class="hf04-badge">
+            <div class="hf04-badge-num">3</div>
+            <div class="hf04-badge-done">
+              <svg class="hf04-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path class="hf04-check-path" d="M4.5 12.8 L9.6 18 L19.5 6.6" />
+              </svg>
+            </div>
+          </div>
+          <div class="hf04-row-text">Why Your First Videos Flopped</div>
+        </div>
+        <div class="hf04-rule" style="top: 753px"></div>
+
+        <div class="hf04-row" style="top: 785px">
+          <div class="hf04-badge">
+            <div class="hf04-badge-num">4</div>
+            <div class="hf04-badge-done">
+              <svg class="hf04-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path class="hf04-check-path" d="M4.5 12.8 L9.6 18 L19.5 6.6" />
+              </svg>
+            </div>
+          </div>
+          <div class="hf04-row-text">Stop Uploading at the Wrong Time</div>
+        </div>
+        <div class="hf04-rule" style="top: 863px"></div>
+      </div>
+
+      <!-- Scene 3 receipt — generated descriptions -->
+      <div class="hf04-group hf04-group-descs">
+        <div class="hf04-row" style="top: 455px">
+          <div class="hf04-badge">
+            <div class="hf04-badge-num">1</div>
+            <div class="hf04-badge-done">
+              <svg class="hf04-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path class="hf04-check-path" d="M4.5 12.8 L9.6 18 L19.5 6.6" />
+              </svg>
+            </div>
+          </div>
+          <div class="hf04-row-text hf04-desc">
+            A beginner-friendly walkthrough — chapters, links, and a clear call to action.
+          </div>
+        </div>
+        <div class="hf04-rule" style="top: 533px"></div>
+
+        <div class="hf04-row" style="top: 565px">
+          <div class="hf04-badge">
+            <div class="hf04-badge-num">2</div>
+            <div class="hf04-badge-done">
+              <svg class="hf04-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path class="hf04-check-path" d="M4.5 12.8 L9.6 18 L19.5 6.6" />
+              </svg>
+            </div>
+          </div>
+          <div class="hf04-row-text hf04-desc">
+            Every step in order, with timestamps, links and the tools I used.
+          </div>
+        </div>
+        <div class="hf04-rule" style="top: 643px"></div>
+
+        <div class="hf04-row" style="top: 675px">
+          <div class="hf04-badge">
+            <div class="hf04-badge-num">3</div>
+            <div class="hf04-badge-done">
+              <svg class="hf04-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path class="hf04-check-path" d="M4.5 12.8 L9.6 18 L19.5 6.6" />
+              </svg>
+            </div>
+          </div>
+          <div class="hf04-row-text hf04-desc">
+            A short overview so viewers know exactly what they'll get.
+          </div>
+        </div>
+        <div class="hf04-rule" style="top: 753px"></div>
+      </div>
+
+      <!-- Scene 4 receipt — generated hooks -->
+      <div class="hf04-group hf04-group-hooks">
+        <div class="hf04-row" style="top: 455px">
+          <div class="hf04-badge">
+            <div class="hf04-badge-num">1</div>
+            <div class="hf04-badge-done">
+              <svg class="hf04-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path class="hf04-check-path" d="M4.5 12.8 L9.6 18 L19.5 6.6" />
+              </svg>
+            </div>
+          </div>
+          <div class="hf04-row-text">Nobody talks about this part of YouTube.</div>
+        </div>
+        <div class="hf04-rule" style="top: 533px"></div>
+
+        <div class="hf04-row" style="top: 565px">
+          <div class="hf04-badge">
+            <div class="hf04-badge-num">2</div>
+            <div class="hf04-badge-done">
+              <svg class="hf04-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path class="hf04-check-path" d="M4.5 12.8 L9.6 18 L19.5 6.6" />
+              </svg>
+            </div>
+          </div>
+          <div class="hf04-row-text">Your first views are the hardest — here's why.</div>
+        </div>
+        <div class="hf04-rule" style="top: 643px"></div>
+
+        <div class="hf04-row" style="top: 675px">
+          <div class="hf04-badge">
+            <div class="hf04-badge-num">3</div>
+            <div class="hf04-badge-done">
+              <svg class="hf04-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path class="hf04-check-path" d="M4.5 12.8 L9.6 18 L19.5 6.6" />
+              </svg>
+            </div>
+          </div>
+          <div class="hf04-row-text">The upload mistake costing you views.</div>
+        </div>
+        <div class="hf04-rule" style="top: 753px"></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        var root = document.querySelector('[data-composition-id="04-generated"]');
+        if (!root) return;
+
+        var DUR = 3.648;
+
+        function all(sel) {
+          return Array.prototype.slice.call(root.querySelectorAll(sel));
+        }
+        function one(sel) {
+          return root.querySelector(sel);
+        }
+
+        // ── check marks: measure the real path, prime the draw, then tween the offset ──
+        all(".hf04-check-path").forEach(function (p) {
+          var len = p.getTotalLength();
+          p.style.strokeDasharray = "" + len;
+          p.style.strokeDashoffset = "" + len;
+        });
+
+        window.__timelines = window.__timelines || {};
+        var tl = gsap.timeline({ paused: true });
+
+        /* ───────────────────────── Scene 1 (0.00–0.70) — the field, the chrome,
+           the working couplet holding centre: spinner turning, label shimmering. ───────────────── */
+        tl.fromTo(
+          [one(".hf04-kicker"), one(".hf04-num")],
+          { opacity: 0, y: -10 },
+          { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" },
+          0.02,
+        );
+        tl.fromTo(
+          one(".hf04-toprule"),
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.45, ease: "power2.out" },
+          0.03,
+        );
+        tl.fromTo(
+          one(".hf04-theater"),
+          { opacity: 0, y: 18, scale: 0.94 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "power3.out" },
+          0.04,
+        );
+        tl.fromTo(
+          one(".hf04-spinner"),
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.38, ease: "power3.out" },
+          0.06,
+        );
+        tl.fromTo(
+          one('[data-hf04-state="p1"]'),
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.38, ease: "power3.out" },
+          0.06,
+        );
+        tl.fromTo(
+          one('[data-hf04-state="s1"]'),
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.32, ease: "power2.out" },
+          0.2,
+        );
+
+        // machinery: finite, timeline-driven asterisk rotation (SVG transform attribute,
+        // explicit centre — never CSS transform-origin on an SVG part). Stops dead at the
+        // resolve beat so nothing breathes in the final hold.
+        var asterisk = one(".hf04-asterisk");
+        var spin = { deg: 0 };
+        tl.to(
+          spin,
+          {
+            deg: 1440,
+            duration: 2.9,
+            ease: "none",
+            onUpdate: function () {
+              asterisk.setAttribute("transform", "rotate(" + spin.deg + " 60 60)");
+            },
+          },
+          0.08,
+        );
+
+        var sheen = one(".hf04-sheen");
+        tl.fromTo(sheen, { x: -180 }, { x: 844, duration: 0.42, ease: "power2.inOut" }, 0.22);
+
+        /* ───────────────────────── Scene 2 (0.60–1.60) — "Titles that get clicked."
+           The receipt opens mid-work: four title rows cascade in on hairline rules with
+           numbered outline badges, then each badge flips to a solid ink circle whose
+           check draws in while the rest of the list is still arriving. ───────────────── */
+        // the couplet docks into the top-left corner as the rows take the canvas
+        tl.to(
+          one(".hf04-theater"),
+          { x: -385, y: -170, scale: 0.9, duration: 0.44, ease: "power3.inOut" },
+          0.6,
+        );
+
+        // one badge's state mutation: numbered outline → solid ink circle + drawn check
+        function flipBadge(row, at) {
+          var num = row.querySelector(".hf04-badge-num");
+          var done = row.querySelector(".hf04-badge-done");
+          var path = row.querySelector(".hf04-check-path");
+          tl.to(num, { scale: 0.66, opacity: 0, duration: 0.18, ease: "power2.in" }, at);
+          tl.fromTo(
+            done,
+            { scale: 0.66, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.26, ease: "back.out(1.9)" },
+            at + 0.1,
+          );
+          tl.to(path, { strokeDashoffset: 0, duration: 0.18, ease: "power2.out" }, at + 0.2);
+        }
+
+        // one stacked label state → the next (shrink-out + spring pop-in at the same origin)
+        function swapLabel(selOut, selIn, at, inDur, bounce) {
+          tl.to(one(selOut), { scale: 0.72, opacity: 0, duration: 0.14, ease: "power2.in" }, at);
+          tl.fromTo(
+            one(selIn),
+            { scale: 0.72, opacity: 0 },
+            { scale: 1, opacity: 1, duration: inDur, ease: "back.out(" + bounce + ")" },
+            at + 0.08,
+          );
+        }
+
+        var titleRows = all(".hf04-group-titles .hf04-row");
+        var titleRules = all(".hf04-group-titles .hf04-rule");
+        titleRows.forEach(function (row, i) {
+          var at = 0.62 + i * 0.06;
+          tl.fromTo(
+            row,
+            { opacity: 0, y: 26, scale: 0.97 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "power3.out" },
+            at,
+          );
+          tl.fromTo(titleRules[i], { scaleX: 0 }, { scaleX: 1, duration: 0.36, ease: "power2.out" }, at);
+        });
+
+        // the mutation runs mid-list, straddling the next cue
+        titleRows.forEach(function (row, i) {
+          flipBadge(row, 1.0 + i * 0.07);
+        });
+        swapLabel('[data-hf04-state="s1"]', '[data-hf04-state="s2"]', 1.42, 0.22, 1.6);
+
+        /* ───────────────────────── Scene 3 (1.58–2.46) — "Descriptions that rank."
+           The row group swaps to demo description lines; the theatre label briefly returns
+           between groups ("writing descriptions…", shimmer) then docks away. ───────────────── */
+        tl.to(one(".hf04-group-titles"), { opacity: 0, scale: 0.74, duration: 0.3, ease: "power2.in" }, 1.61);
+
+        var descGroup = one(".hf04-group-descs");
+        var descRows = all(".hf04-group-descs .hf04-row");
+        var descRules = all(".hf04-group-descs .hf04-rule");
+        tl.fromTo(
+          descGroup,
+          { opacity: 0, scale: 0.74 },
+          { opacity: 1, scale: 1, duration: 0.36, ease: "back.out(1.6)" },
+          1.65,
+        );
+        swapLabel('[data-hf04-state="p1"]', '[data-hf04-state="p2"]', 1.6, 0.24, 1.5);
+        descRows.forEach(function (row, i) {
+          var at = 1.68 + i * 0.04;
+          tl.fromTo(row, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.18, ease: "power3.out" }, at);
+          tl.fromTo(descRules[i], { scaleX: 0 }, { scaleX: 1, duration: 0.26, ease: "power2.out" }, at);
+        });
+        // the label steps forward with its shimmer, then recedes into the corner
+        tl.to(one(".hf04-theater"), { y: -140, scale: 1.06, duration: 0.3, ease: "power3.out" }, 1.7);
+        tl.fromTo(sheen, { x: -180 }, { x: 844, duration: 0.38, ease: "power2.inOut" }, 1.78);
+        swapLabel('[data-hf04-state="s2"]', '[data-hf04-state="s3"]', 1.78, 0.22, 1.6);
+        descRows.forEach(function (row, i) {
+          flipBadge(row, 1.9 + i * 0.05);
+        });
+        tl.to(
+          one(".hf04-theater"),
+          { y: -182, scale: 0.82, duration: 0.3, ease: "power3.inOut" },
+          2.06,
+        );
+
+        /* ───────────────────────── Scene 4 (2.38–3.65) — "Hooks that hold."
+           Three hook rows slam in and check off; the label resolves to a past ("used …")
+           and "all written", then the frame holds dead still. ───────────────── */
+        tl.to(one(".hf04-group-descs"), { opacity: 0, scale: 0.74, duration: 0.26, ease: "power2.in" }, 2.42);
+
+        var hookGroup = one(".hf04-group-hooks");
+        var hookRows = all(".hf04-group-hooks .hf04-row");
+        var hookRules = all(".hf04-group-hooks .hf04-rule");
+        tl.fromTo(
+          hookGroup,
+          { opacity: 0, scale: 0.74 },
+          { opacity: 1, scale: 1, duration: 0.34, ease: "back.out(1.6)" },
+          2.48,
+        );
+        swapLabel('[data-hf04-state="p2"]', '[data-hf04-state="p3"]', 2.26, 0.22, 1.5);
+        swapLabel('[data-hf04-state="s3"]', '[data-hf04-state="s4"]', 2.4, 0.22, 1.6);
+        hookRows.forEach(function (row, i) {
+          var at = 2.48 + i * 0.06;
+          tl.fromTo(
+            row,
+            { opacity: 0, y: 34, scale: 0.95 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.26, ease: "power4.out" },
+            at,
+          );
+          tl.fromTo(hookRules[i], { scaleX: 0 }, { scaleX: 1, duration: 0.28, ease: "power2.out" }, at);
+        });
+        hookRows.forEach(function (row, i) {
+          flipBadge(row, 2.76 + i * 0.06);
+        });
+        // resolve: everything reads as written (last check lands 3.26, then stillness)
+        swapLabel('[data-hf04-state="p3"]', '[data-hf04-state="p4"]', 2.88, 0.24, 1.5);
+        swapLabel('[data-hf04-state="s4"]', '[data-hf04-state="s5"]', 2.92, 0.22, 1.6);
+
+        // full-span anchor so the sub-composition timeline covers its whole window
+        tl.to({}, { duration: DUR }, 0);
+
+        window.__timelines["04-generated"] = tl;
+      })();
+    </script>
+  </div>
+</template>
