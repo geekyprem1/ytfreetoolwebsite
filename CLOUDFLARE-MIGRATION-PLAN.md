@@ -42,6 +42,7 @@
 - [x] Linux CI build + `wrangler deploy --dry-run` green
 - [x] R2 enabled + `yt-toolkit-cache` bucket created (APAC)
 - [x] GitHub Actions build + deploy pipeline (same Linux job)
+- [x] Auto-deploy on every push to `cloudflare-opennext` (workers.dev preview)
 - [x] Build-time data secrets + runtime secrets set in Cloudflare
 - [x] **Live preview:** https://yt-toolkit.geekyprem4.workers.dev
 - [x] Phase 3 runtime tests (home, YouTube APIs, transcript, AI, OG, ISR)
