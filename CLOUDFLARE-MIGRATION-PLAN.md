@@ -47,9 +47,12 @@
 - [x] **Live preview:** https://yt-toolkit.geekyprem4.workers.dev
 - [x] Phase 3 runtime tests (home, YouTube APIs, transcript, AI, OG, ISR)
 - [x] Phase 4 ISR cache populated (172 entries) + cron endpoint verified
-- [ ] Phase 5 custom domain + DNS cutover
+- [x] Phase 5 custom domain + DNS cutover
+- [x] **Production:** https://yttools.pro (Cloudflare Worker)
+- [x] `www.yttools.pro` → `https://yttools.pro` 301 redirect (path preserved)
+- [x] Google Search Console verification TXT preserved
 
-> **Domain status:** `yttools.pro` abhi Hostinger DNS pe hai (`orbit.dns-parking.com`, `horizon.dns-parking.com`) aur `www` CNAME Vercel ko point karta hai. Custom domain ke liye nameservers Cloudflare pe move karne padenge. Tab tak `workers.dev` preview URL use hoga.
+> **DNS note:** `yttools.pro` ab Cloudflare nameservers pe hai. Agar kisi local machine pe purana Vercel IP dikhe, `ipconfig /flushdns` karo ya DNS `1.1.1.1` / `8.8.8.8` set karo. Authoritative Cloudflare DNS aur edge routing correct hain.
 
 > Local Windows build OpenNext ke bundling step pe `Access is denied` deta hai (known Windows/pnpm symlink issue). Isliye build + deploy Linux GitHub Actions job me ho raha hai. Workers Builds ki zaroorat nahi.
 
