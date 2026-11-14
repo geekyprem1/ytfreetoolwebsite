@@ -6,7 +6,8 @@ import { ThemeToggle } from '@/components/layout/theme-toggle';
 import { MobileNav } from '@/components/layout/mobile-nav';
 import { ToolsDropdown } from '@/components/layout/tools-dropdown';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { SiteBrand } from '@/components/layout/site-brand';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
@@ -36,14 +37,7 @@ export function Header() {
     >
       <div className="max-w-7xl mx-auto flex h-14 sm:h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="size-7 rounded-lg bg-[#FF3B30] flex items-center justify-center transition-transform group-hover:scale-[1.03]">
-              <Play className="size-3.5 text-white fill-white" />
-            </div>
-            <span className="font-display font-semibold text-base tracking-tight hidden sm:inline">
-              YT Toolkit
-            </span>
-          </Link>
+          <SiteBrand compactOnMobile />
           <nav className="hidden md:flex items-center gap-0.5">
             {navLinks.map((link) => (
               <Link

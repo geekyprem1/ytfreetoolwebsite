@@ -1,15 +1,32 @@
-.canvas-home .url-suggestions { margin-top: 16px; padding: 15px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
-.canvas-home .url-detected { margin: 0 0 10px; font-size: 12px; font-weight: 600; color: var(--muted); }
+.canvas-home .url-suggestions { margin-top: 16px; padding: 15px; border: 1px solid var(--canvas-line); border-radius: 12px; background: var(--canvas-panel); }
+.canvas-home .url-detected { margin: 0 0 10px; font-size: 12px; font-weight: 600; color: var(--canvas-muted); }
 .canvas-home .url-suggestion-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px 12px; }
 .canvas-home .url-suggestion-links a { display: flex; align-items: center; gap: 9px; padding: 10px 6px; border-radius: 7px; font-size: 13px; min-height: 44px; }
-.canvas-home .url-suggestion-links a:hover { background: var(--accent-soft); color: var(--accent); }
+.canvas-home .url-suggestion-links a:hover { background: var(--canvas-accent-soft); color: var(--canvas-accent); }
 .canvas-home .url-suggestion-links .icon { width: 16px; height: 16px; flex-shrink: 0; }
 .canvas-home .url-suggestion-links a .icon:last-child { margin-left: auto; width: 12px; height: 12px; }
 .canvas-home .url-suggestion-links a span { min-width: 0; overflow-wrap: anywhere; }
 .canvas-home .footer-links { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; }
 .canvas-home .footer-links a { min-height: 24px; display: inline-flex; align-items: center; }
-.canvas-home .footer-links a:hover { color: var(--accent); }
+.canvas-home .footer-links a:hover { color: var(--canvas-accent); }
 .canvas-home .skip-link:focus { top: 12px; }
+.canvas-home .sidebar > .canvas-brand { padding-left: 10px; margin-bottom: 30px; }
+.canvas-home .canvas-brand { color: var(--foreground); }
+.canvas-home .topbar { background: var(--background); }
+.canvas-home .search-action { background: var(--primary); color: var(--primary-foreground); }
+.canvas-home .search-action:hover { background: color-mix(in srgb, var(--primary) 88%, black); }
+.canvas-home .side-item.selected,
+.canvas-home .filter.active { background: var(--canvas-accent-soft); color: var(--primary); border-color: color-mix(in srgb, var(--primary) 22%, var(--border)); }
+.canvas-home .filter span { color: var(--muted-foreground); background: var(--muted); }
+.canvas-home .filter.active span { color: var(--primary); background: color-mix(in srgb, var(--primary) 12%, var(--background)); }
+.canvas-home .category-analytics .tool-icon,
+.canvas-home .category-ai-generator .tool-icon,
+.canvas-home .category-extractor .tool-icon,
+.canvas-home .category-calculator .tool-icon,
+.canvas-home .category-seo .tool-icon { background: var(--canvas-accent-soft); color: var(--primary); }
+.canvas-home .quick-0 { color: var(--primary-foreground); }
+.canvas-home .quick-0 .tool-icon { color: var(--primary-foreground); }
+.canvas-home .page-footer .canvas-brand { margin-right: auto; }
 @media (max-width: 760px) {
   .canvas-home .url-suggestion-links { grid-template-columns: minmax(0, 1fr); }
   .canvas-home .url-suggestion-links a { font-size: 14px; }
