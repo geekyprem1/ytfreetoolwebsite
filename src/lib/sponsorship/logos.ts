@@ -8,7 +8,7 @@ export async function serveLogo(env: SponsorEnvironment, id: string, admin = fal
   if (!booking) throw new SponsorError(404,'Logo not found.');
   if (!admin) {
     const slot = await db.prepare('SELECT enabled FROM sponsor_slots WHERE id=?').bind(booking.slot_id).first<{enabled:number}>();
-    if (!slot?.enabled || booking.status!=='active' || !booking.starts_at || !booking.ends_at || booking.starts_at>now || booking.ends_at<=now) throw new SponsorError(404,'Logo not found.');
+    if (!slot?.enabled || booking.status!=='active' || booking.activation_kind==='paid_test' || !booking.starts_at || !booking.ends_at || booking.starts_at>now || booking.ends_at<=now) throw new SponsorError(404,'Logo not found.');
   }
   const logo=await logos.get(booking.logo_key);
   if (!logo) throw new SponsorError(404,'Logo not found.');

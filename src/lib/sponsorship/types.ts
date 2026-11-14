@@ -4,7 +4,7 @@ export interface SponsorBooking {
   contact_name: string; contact_email: string; note: string; logo_key: string; logo_type: string;
   status: SponsorStatus; created_at: number; updated_at: number;
   approval_until: number | null; starts_at: number | null; ends_at: number | null;
-  activation_kind: 'complimentary' | null;
+  activation_kind: 'complimentary' | 'paid_test' | 'paid_live' | null;
 }
 export interface SponsorSlot { id: number; kind: 'standard' | 'featured'; available: boolean }
 export interface PublicSponsor { id: string; slotId: number; brand: string; url: string; tagline: string; logo: string; expiresAt: number }
@@ -30,4 +30,11 @@ export interface SponsorEnvironment {
   SPONSOR_LOGOS?: LogoBucket;
   SPONSOR_ADMIN_TOKEN?: string;
   SPONSOR_BOOKING_ENABLED?: string;
+  SPONSOR_PAYMENT_ENABLED?: string;
+  DODO_PAYMENTS_API_KEY?: string;
+  DODO_PAYMENTS_WEBHOOK_KEY?: string;
+  DODO_SPONSOR_TEST_PRODUCT_ID?: string;
+  DODO_SPONSOR_PRODUCT_ID?: string;
+  DODO_SPONSOR_LIVE_API_KEY?: string;
+  DODO_SPONSOR_LIVE_WEBHOOK_KEY?: string;
 }

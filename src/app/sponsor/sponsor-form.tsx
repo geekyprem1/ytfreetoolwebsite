@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, Check } from 'lucide-react';
 import type { SponsorSlot } from '@/lib/sponsorship/types';
+import { SPONSOR_OFFER } from '@/lib/sponsorship/pricing';
 import { MAX_LOGO_BYTES } from '@/lib/sponsorship/validation';
 import styles from './sponsor.module.css';
 
@@ -38,7 +39,7 @@ export function SponsorForm() {
   }
   if(receipt) return <section className={styles.success} role="status"><Check aria-hidden="true" /><h2>Request received.</h2><p>Your creative is in the review queue. This is a request, not a confirmed reservation. No payment was collected.</p><p>Reference: <code>{receipt}</code></p><Link href="/">Back to your toolkit</Link></section>;
   return <div className={styles.root}>
-    <div className={styles.notice}>Sponsorship requests are reviewed before placement. Pricing and online payments are not available yet. Submitting this form does not reserve a slot or start a subscription.</div>
+    <div className={styles.notice}>Launch offer: {SPONSOR_OFFER.priceLabel} one-time for {SPONSOR_OFFER.durationLabel}, same price for Standard and Featured spaces. Every creative is reviewed before placement. Online checkout is not open yet; submitting a request does not reserve a slot or start a subscription.</div>
     {!loaded && <p role="status">Loading available spaces…</p>}
     {loaded && !enabled && <p className={styles.notice}>New sponsorship requests are not open right now. You can still preview your creative below.</p>}
     <form onSubmit={submit}>

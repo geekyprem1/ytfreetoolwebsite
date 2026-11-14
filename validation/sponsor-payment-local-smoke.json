@@ -1,0 +1,15 @@
+{
+  "verifiedAt": "2026-11-14T17:06:16.022Z",
+  "mode": "test_mode",
+  "bookingId": "5a9ea3f9-aa14-4a8c-b034-994bb9d2c6f1",
+  "paymentId": "pay_0NrwWwn2BxNSlNs8ojCws",
+  "amount": 1000,
+  "currency": "USD",
+  "durationSeconds": 2592000,
+  "realApplicationCheckout": true,
+  "deliveredWebhookActivated": true,
+  "sandboxExcludedFromPublicListing": true,
+  "sandboxPublicLogoDenied": true,
+  "syntheticPlacementEnded": true,
+  "productionChanged": false
+}

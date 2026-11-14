@@ -12,7 +12,8 @@
     "enabled": true
   },
   "vars": {
-    "SPONSOR_BOOKING_ENABLED": "false"
+    "SPONSOR_BOOKING_ENABLED": "false",
+    "SPONSOR_PAYMENT_ENABLED": "false"
   },
   "d1_databases": [
     {

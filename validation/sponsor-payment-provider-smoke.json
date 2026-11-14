@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-14",
+  "provider": "Dodo Payments",
+  "mode": "test_mode",
+  "apiOrigin": "https://test.dodopayments.com",
+  "productId": "pdt_0NrvQqnQthuYeNbNiupO0",
+  "amountMinor": 100,
+  "currency": "USD",
+  "taxInclusive": true,
+  "sessionId": "cks_0NrvRhojM5J1KOTlMAfYF",
+  "hostedCheckoutCreated": true,
+  "paymentCompleted": false,
+  "applicationWebhookRoundTripVerified": false,
+  "productionChanged": false,
+  "note": "Provider API smoke through connected test-mode account. No booking metadata supplied, no placement can activate from this session. App runtime credentials still required."
+}

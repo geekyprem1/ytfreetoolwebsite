@@ -37,6 +37,13 @@ jobs:
       - name: Verify homepage and sponsor backend
         run: pnpm exec vitest run src/lib/sponsorship/sponsorship.test.ts src/content/home-tool-suggestions.test.ts src/content/tool-search.test.ts src/lib/youtube/url-parser.test.ts src/lib/seo/schema-graph.test.ts
 
+      # Apply record-preserving D1 migrations before code that queries the new payment tables.
+      - name: Apply sponsorship database migrations
+        run: pnpm exec wrangler d1 migrations apply yt-toolkit-sponsors --remote
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
       - name: Build for Cloudflare
         run: pnpm cf:build
         env:

@@ -3,13 +3,16 @@ import { expireBookings, moderateBooking, requireStorage } from '@/lib/sponsorsh
 import { boundedBody, failure, json, requireAdmin, sameOrigin, SponsorError } from '@/lib/sponsorship/http';
 import { adminInput } from '@/lib/sponsorship/validation';
 import type { SponsorBooking } from '@/lib/sponsorship/types';
+import type { PaymentAttempt } from '@/lib/sponsorship/payments';
+import { configuredPaymentMode } from '@/lib/sponsorship/payments';
 export const dynamic = 'force-dynamic';
 export async function GET(request: Request) {
   try {
     const env = await sponsorEnvironment(); requireAdmin(request,env);
     const {db} = requireStorage(env); await expireBookings(db);
     const rows = await db.prepare('SELECT * FROM sponsor_bookings ORDER BY created_at DESC LIMIT 100').all<SponsorBooking>();
-    return json({bookings:rows.results.map(b => ({id:b.id,slot_id:b.slot_id,brand:b.brand,url:b.url,tagline:b.tagline,contact_name:b.contact_name,contact_email:b.contact_email,note:b.note,logo_type:b.logo_type,status:b.status,created_at:b.created_at,updated_at:b.updated_at,approval_until:b.approval_until,starts_at:b.starts_at,ends_at:b.ends_at,activation_kind:b.activation_kind,logo:`/api/admin/sponsors/${b.id}/logo`}))});
+    const payments=await db.prepare('SELECT booking_id,status,payment_id,mode,amount,currency,duration_seconds FROM sponsor_payments ORDER BY created_at DESC LIMIT 100').all<Pick<PaymentAttempt,'booking_id'|'status'|'payment_id'|'mode'|'amount'|'currency'|'duration_seconds'>>();
+    return json({paymentMode:configuredPaymentMode(env),bookings:rows.results.map(b => ({id:b.id,slot_id:b.slot_id,brand:b.brand,url:b.url,tagline:b.tagline,contact_name:b.contact_name,contact_email:b.contact_email,note:b.note,logo_type:b.logo_type,status:b.status,created_at:b.created_at,updated_at:b.updated_at,approval_until:b.approval_until,starts_at:b.starts_at,ends_at:b.ends_at,activation_kind:b.activation_kind,payment:payments.results.find(p=>p.booking_id===b.id)??null,logo:`/api/admin/sponsors/${b.id}/logo`}))});
   } catch(error) { return failure(error); }
 }
 export async function POST(request: Request) {

@@ -1,6 +1,6 @@
 # Sponsor booking backend
 
-Implemented 14 November 2026. This is the request/review/inventory foundation; paid checkout and subscriptions are not connected.
+Implemented 14 November 2026. The request/review/inventory foundation is deployed. Dodo test/live checkout and webhook code is implemented locally; see [payment integration status](SPONSOR-PAYMENTS.md). The selected launch offer for this YouTube creator toolkit is a one-time **$10 USD for 30 days**, flat across Standard and Featured homepage placements. Production payments and public booking remain disabled until live setup and launch terms are ready.
 
 ## Provisioned resources
 
@@ -32,7 +32,7 @@ Use Webpack for this local binding preview: the Turbopack preview returned 404 f
 1. An available slot accepts a request with a PNG/JPG/WebP logo, brand, HTTPS URL, tagline and private contact details.
 2. `pending` requests do **not** reserve inventory or guarantee a placement. Multiple requests can enter review for the same currently available slot.
 3. Owner approval changes `pending → approved` and claims the slot for 24 hours. A D1 unique partial index prevents two approvals from holding it concurrently.
-4. Paid activation is unavailable. An owner may explicitly mark a placement **complimentary**, choose an end date (within one year), and activate it. No payment is inferred or recorded.
+4. Current production only supports explicitly approved **complimentary** placements; it never infers a payment. The local sandbox integration is test-only and hidden from public pages. The prepared live flow uses verified `paid_live` activations after an actual Dodo live payment.
 5. `active → paused → active` preserves the original end date. Paused inventory stays held.
 6. Owner can reject pending/approved requests or end approved/active/paused placements.
 7. Expired approval holds/display periods are released on inventory/admin reads and before transitions. Public listing/logo handlers enforce timestamps even before cleanup. The homepage refreshes listings every minute and removes time-expired cards using a client timer.
@@ -48,11 +48,13 @@ Use Webpack for this local binding preview: the Turbopack preview returned 404 f
 | `GET /api/sponsors/:id/logo` | Public only for an active placement | R2 image served after status/date/slot checks |
 | `GET /api/admin/sponsors` | Owner bearer key | Latest 100 requests with contact details |
 | `POST /api/admin/sponsors` | Owner bearer key + same origin | Approve/reject/activate complimentary/pause/resume/end |
+| `POST /api/admin/sponsors/checkout` | Owner bearer key + same origin | Create or reopen the fixed $10 Dodo checkout for an approved request |
+| `POST /api/sponsorship/webhook` | Dodo signed delivery | Verify provider payment and activate a paid placement once |
 | `GET /api/admin/sponsors/:id/logo` | Owner bearer key | Private review image |
 
 Logo requests use `no-store`, `nosniff` and a restrictive content security policy. Pending/paused/expired logos have no public access. R2 public hosting is not enabled. Upload size is bounded while reading; file signatures/MIME must match and SVG is rejected. D1 counters limit public submissions to five per IP-derived time bucket in 15 minutes; existing edge limits also apply. Admin access fails closed without a key of at least 32 characters. Secrets are hashed before constant-time comparison. Admin mutations require a matching Origin.
 
-The upload checks validate signatures and size, not a full image decode/re-encode or moderation service. Owner review remains mandatory. There is no automatic email delivery, payment collection, receipt/invoice generation, advertiser login, future-date booking calendar or click/impression reporting in this release.
+The upload checks validate signatures and size, not a full image decode/re-encode or moderation service. Owner review remains mandatory. There is no automatic checkout email delivery, advertiser login, future-date booking calendar or click/impression reporting. Live payments are not enabled in production.
 
 ## Before production release
 
@@ -62,7 +64,7 @@ The upload checks validate signatures and size, not a full image decode/re-encod
 4. The form stores private contact details and optional notes. Decide and document retention/deletion procedure before accepting real requests; avoid notes containing sensitive information.
 5. Deploy through the existing master → GitHub Actions → Cloudflare pipeline. Schema is already initialized. Apply future D1 migrations before code that depends on them.
 6. Check disabled/enabled form, owner authorization, public data privacy and an end-to-end complimentary placement after release using an explicitly labelled test creative.
-7. Choose actual prices/currency/billing period, provider account and cancellation/refund terms before implementing paid reservations, payment webhooks or subscriptions. Current approval/complimentary actions must not be treated as proof of payment.
+7. The approved launch offer is one-time $10 USD for 30 days, with no auto-renewal. Confirm Dodo accepts this website sponsorship service, set the merchant brand, add cancellation/refund terms and support contact, then configure live credentials and the permanent webhook before opening paid bookings.
 
 ## Validation
 

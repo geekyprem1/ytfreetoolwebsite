@@ -26,7 +26,7 @@ export async function availability(db: SponsorDatabase) {
 export async function publicSponsors(db: SponsorDatabase): Promise<PublicSponsor[]> {
   const now = nowSeconds();
   const { results } = await db.prepare(`SELECT b.id,b.slot_id,b.brand,b.url,b.tagline,b.ends_at FROM sponsor_bookings b
-    JOIN sponsor_slots s ON s.id=b.slot_id WHERE s.enabled=1 AND b.status='active' AND b.starts_at<=? AND b.ends_at>? ORDER BY s.id`).bind(now,now).all<Pick<SponsorBooking,'id'|'slot_id'|'brand'|'url'|'tagline'|'ends_at'>>();
+    JOIN sponsor_slots s ON s.id=b.slot_id WHERE s.enabled=1 AND b.status='active' AND b.activation_kind IN ('complimentary','paid_live') AND b.starts_at<=? AND b.ends_at>? ORDER BY s.id`).bind(now,now).all<Pick<SponsorBooking,'id'|'slot_id'|'brand'|'url'|'tagline'|'ends_at'>>();
   return results.map(b => ({id:b.id,slotId:b.slot_id,brand:b.brand,url:b.url,tagline:b.tagline,logo:`/api/sponsors/${b.id}/logo`,expiresAt:b.ends_at!}));
 }
 export async function bookingById(db: SponsorDatabase, id: string) {
@@ -66,7 +66,8 @@ export async function moderateBooking(db: SponsorDatabase, input: z.infer<typeof
       values = [now,input.id]; break;
     case 'activate':
       if (input.endsAt <= now || input.endsAt > now+366*86400) throw new SponsorError(422, 'Choose an end date within the next year.');
-      sql = `UPDATE sponsor_bookings SET status='active',activation_kind='complimentary',starts_at=?,ends_at=?,updated_at=? WHERE id=? AND status='approved' AND approval_until>?`;
+      sql = `UPDATE sponsor_bookings SET status='active',activation_kind='complimentary',starts_at=?,ends_at=?,updated_at=? WHERE id=? AND status='approved' AND approval_until>?
+        AND NOT EXISTS(SELECT 1 FROM sponsor_payments WHERE booking_id=sponsor_bookings.id)`;
       values = [now,input.endsAt,now,input.id,now]; break;
     case 'pause':
       sql = `UPDATE sponsor_bookings SET status='paused',updated_at=? WHERE id=? AND status='active' AND ends_at>?`;
