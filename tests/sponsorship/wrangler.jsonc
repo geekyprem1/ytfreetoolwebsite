@@ -1,0 +1,6 @@
+{
+  "name": "yt-toolkit-sponsor-tests",
+  "compatibility_date": "2026-10-01",
+  "d1_databases": [{"binding":"SPONSOR_DB","database_name":"sponsor-tests","database_id":"00000000-0000-0000-0000-000000000001"}],
+  "r2_buckets": [{"binding":"SPONSOR_LOGOS","bucket_name":"sponsor-test-logos"}]
+}

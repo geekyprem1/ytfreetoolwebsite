@@ -1,0 +1,17 @@
+.canvas-home .url-suggestions { margin-top: 16px; padding: 15px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+.canvas-home .url-detected { margin: 0 0 10px; font-size: 12px; font-weight: 600; color: var(--muted); }
+.canvas-home .url-suggestion-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px 12px; }
+.canvas-home .url-suggestion-links a { display: flex; align-items: center; gap: 9px; padding: 10px 6px; border-radius: 7px; font-size: 13px; min-height: 44px; }
+.canvas-home .url-suggestion-links a:hover { background: var(--accent-soft); color: var(--accent); }
+.canvas-home .url-suggestion-links .icon { width: 16px; height: 16px; flex-shrink: 0; }
+.canvas-home .url-suggestion-links a .icon:last-child { margin-left: auto; width: 12px; height: 12px; }
+.canvas-home .url-suggestion-links a span { min-width: 0; overflow-wrap: anywhere; }
+.canvas-home .footer-links { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; }
+.canvas-home .footer-links a { min-height: 24px; display: inline-flex; align-items: center; }
+.canvas-home .footer-links a:hover { color: var(--accent); }
+.canvas-home .skip-link:focus { top: 12px; }
+@media (max-width: 760px) {
+  .canvas-home .url-suggestion-links { grid-template-columns: minmax(0, 1fr); }
+  .canvas-home .url-suggestion-links a { font-size: 14px; }
+  .canvas-home .footer-links { width: 100%; }
+}

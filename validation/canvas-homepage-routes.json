@@ -1,0 +1,310 @@
+{
+  "checkedAt": "2026-11-14T05:59:57.862Z",
+  "base": "http://localhost:4180",
+  "toolCount": 67,
+  "canonicalUrl": "http://localhost:3000",
+  "seo": {
+    "status": 200,
+    "oneH1": true,
+    "canonical": true,
+    "title": true,
+    "description": true,
+    "structuredData": true,
+    "allToolsServerRendered": true
+  },
+  "warnings": [
+    "Local preview canonical uses localhost. Configure NEXT_PUBLIC_SITE_URL to the production origin before deployment."
+  ],
+  "checkedRoutes": 72,
+  "failed": [],
+  "results": [
+    {
+      "route": "/tags-extractor",
+      "status": 200
+    },
+    {
+      "route": "/thumbnail-downloader",
+      "status": 200
+    },
+    {
+      "route": "/channel-tags",
+      "status": 200
+    },
+    {
+      "route": "/title-generator",
+      "status": 200
+    },
+    {
+      "route": "/transcript-extractor",
+      "status": 200
+    },
+    {
+      "route": "/description-generator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-playlist-title-description-generator",
+      "status": 200
+    },
+    {
+      "route": "/hashtag-generator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-tag-generator",
+      "status": 200
+    },
+    {
+      "route": "/channel-statistics",
+      "status": 200
+    },
+    {
+      "route": "/monetization-checker",
+      "status": 200
+    },
+    {
+      "route": "/video-statistics",
+      "status": 200
+    },
+    {
+      "route": "/hook-generator",
+      "status": 200
+    },
+    {
+      "route": "/keyword-generator",
+      "status": 200
+    },
+    {
+      "route": "/timestamp-generator",
+      "status": 200
+    },
+    {
+      "route": "/shorts-ideas",
+      "status": 200
+    },
+    {
+      "route": "/seo-score-checker",
+      "status": 200
+    },
+    {
+      "route": "/title-analyzer",
+      "status": 200
+    },
+    {
+      "route": "/youtube-rpm-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-money-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-cpm-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-watch-time-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-engagement-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-subscriber-growth-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-shorts-earnings-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-views-to-money-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-live-earnings-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-creator-income-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-upload-frequency-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-average-view-duration-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-dislike-checker",
+      "status": 200
+    },
+    {
+      "route": "/youtube-profile-picture-downloader",
+      "status": 200
+    },
+    {
+      "route": "/channel-id-finder",
+      "status": 200
+    },
+    {
+      "route": "/subtitle-downloader",
+      "status": 200
+    },
+    {
+      "route": "/playlist-length-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-banner-downloader",
+      "status": 200
+    },
+    {
+      "route": "/live-subscriber-count",
+      "status": 200
+    },
+    {
+      "route": "/youtube-embed-code-generator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-timestamp-link-generator",
+      "status": 200
+    },
+    {
+      "route": "/channel-upload-history",
+      "status": 200
+    },
+    {
+      "route": "/live-like-count",
+      "status": 200
+    },
+    {
+      "route": "/live-view-count",
+      "status": 200
+    },
+    {
+      "route": "/youtube-tap-tempo",
+      "status": 200
+    },
+    {
+      "route": "/youtube-url-inspector",
+      "status": 200
+    },
+    {
+      "route": "/youtube-comment-picker",
+      "status": 200
+    },
+    {
+      "route": "/youtube-comment-sentiment-analyzer",
+      "status": 200
+    },
+    {
+      "route": "/youtube-comment-exporter",
+      "status": 200
+    },
+    {
+      "route": "/channel-comparison",
+      "status": 200
+    },
+    {
+      "route": "/youtube-video-summarizer",
+      "status": 200
+    },
+    {
+      "route": "/youtube-script-generator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-channel-name-generator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-video-ideas-generator",
+      "status": 200
+    },
+    {
+      "route": "/thumbnail-preview-tester",
+      "status": 200
+    },
+    {
+      "route": "/youtube-monetization-progress-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-trending",
+      "status": 200
+    },
+    {
+      "route": "/youtube-shorts-eligibility-checker",
+      "status": 200
+    },
+    {
+      "route": "/youtube-end-screen-planner",
+      "status": 200
+    },
+    {
+      "route": "/youtube-upload-time-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-banner-safe-area-checker",
+      "status": 200
+    },
+    {
+      "route": "/youtube-chapter-validator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-channel-age-checker",
+      "status": 200
+    },
+    {
+      "route": "/youtube-subscribe-link-generator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-title-length-checker",
+      "status": 200
+    },
+    {
+      "route": "/youtube-views-ratio-calculator",
+      "status": 200
+    },
+    {
+      "route": "/youtube-title-capitalizer",
+      "status": 200
+    },
+    {
+      "route": "/youtube-description-extractor",
+      "status": 200
+    },
+    {
+      "route": "/youtube-title-extractor",
+      "status": 200
+    },
+    {
+      "route": "/about",
+      "status": 200
+    },
+    {
+      "route": "/contact",
+      "status": 200
+    },
+    {
+      "route": "/privacy",
+      "status": 200
+    },
+    {
+      "route": "/terms",
+      "status": 200
+    },
+    {
+      "route": "/blog",
+      "status": 200
+    }
+  ]
+}

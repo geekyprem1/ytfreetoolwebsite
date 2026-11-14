@@ -11,10 +11,25 @@
   "observability": {
     "enabled": true
   },
+  "vars": {
+    "SPONSOR_BOOKING_ENABLED": "false"
+  },
+  "d1_databases": [
+    {
+      "binding": "SPONSOR_DB",
+      "database_name": "yt-toolkit-sponsors",
+      "database_id": "27d43bad-21b7-45cd-8518-733f3fa07604",
+      "migrations_dir": "migrations/sponsorship"
+    }
+  ],
   "r2_buckets": [
     {
       "binding": "NEXT_INC_CACHE_R2_BUCKET",
       "bucket_name": "yt-toolkit-cache"
+    },
+    {
+      "binding": "SPONSOR_LOGOS",
+      "bucket_name": "yt-toolkit-sponsor-logos"
     }
   ],
   "durable_objects": {

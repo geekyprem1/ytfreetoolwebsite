@@ -1,5 +1,10 @@
 import type { NextConfig } from 'next';
 import path from 'path';
+import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare';
+
+if (process.env.SPONSORSHIP_LOCAL === '1') {
+  void initOpenNextCloudflareForDev();
+}
 
 const nextConfig: NextConfig = {
   // Prevent Turbopack from treating C:\Users\user as the workspace root

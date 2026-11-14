@@ -1,10 +1,5 @@
 import type { Metadata } from 'next';
-import { Header } from '@/components/layout/header';
-import { Footer } from '@/components/layout/footer';
-import { HeroSection } from '@/components/home/hero';
-import { FeaturedTools } from '@/components/home/featured-tools';
-import { TrustSection } from '@/components/home/trust-section';
-import { ToolsGrid } from '@/components/home/tools-grid';
+import { CanvasHome } from '@/components/home/canvas-home';
 import { HowItWorks } from '@/components/home/how-it-works';
 import { HomeFAQ } from '@/components/home/faq-section';
 import { JsonLd } from '@/components/seo/json-ld';
@@ -21,16 +16,10 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={homepageGraph(homeFaqs)} />
-      <Header />
-      <main id="main-content" className="flex-1">
-        <HeroSection />
-        <FeaturedTools />
-        <TrustSection />
-        <ToolsGrid />
+      <CanvasHome>
         <HowItWorks />
         <HomeFAQ />
-      </main>
-      <Footer />
+      </CanvasHome>
     </>
   );
 }

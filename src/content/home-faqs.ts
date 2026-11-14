@@ -27,6 +27,6 @@ export const homeFaqs = [
   },
   {
     q: 'Do you store my data?',
-    a: 'We do not require accounts or offer saved tool history as a product feature. See our Privacy Policy for cookies, analytics, and advertising details.',
+    a: 'No account is required. Favourite tool choices are saved in this browser; they are not a history of your tool inputs or results. See our Privacy Policy for cookies, analytics, and advertising details.',
   },
 ] as const;

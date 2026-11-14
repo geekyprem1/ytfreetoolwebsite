@@ -33,6 +33,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Booking invariants use isolated local D1/R2, never production data.
+      - name: Verify homepage and sponsor backend
+        run: pnpm exec vitest run src/lib/sponsorship/sponsorship.test.ts src/content/home-tool-suggestions.test.ts src/content/tool-search.test.ts src/lib/youtube/url-parser.test.ts src/lib/seo/schema-graph.test.ts
+
       - name: Build for Cloudflare
         run: pnpm cf:build
         env:
