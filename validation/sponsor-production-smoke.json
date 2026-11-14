@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-11-14T11:02:05.212Z",
+  "base": "https://yttools.pro",
+  "results": {
+    "home": true,
+    "canonical": true,
+    "/sponsor": true,
+    "/admin/sponsors": true,
+    "/thumbnail-downloader": true,
+    "/playlist-length-calculator": true,
+    "storageBound": true,
+    "publicBookingClosed": true,
+    "adminProtected": true,
+    "ownerAuthorized": true,
+    "ownerResponseNotCached": true,
+    "publicListing": true,
+    "contactsPrivate": true,
+    "closedSubmissionRejected": true
+  }
+}

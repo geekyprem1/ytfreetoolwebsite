@@ -7,7 +7,7 @@ Implemented 14 November 2026. This is the request/review/inventory foundation; p
 - D1: `yt-toolkit-sponsors`, binding `SPONSOR_DB`.
 - Private R2: `yt-toolkit-sponsor-logos`, binding `SPONSOR_LOGOS`.
 - Remote and local schema initialized with `migrations/sponsorship/0001_sponsorship.sql`.
-- Production booking flag in `wrangler.jsonc` stays **false** until owner access, public policy and release configuration are ready. No website deployment performed in this task.
+- Production booking flag in `wrangler.jsonc` stays **false** until public policy and payment/release configuration are ready. Homepage and backend were deployed successfully on 14 November 2026; closed-booking behaviour was verified live.
 - Existing cache bucket and other projects' databases/buckets are not reused.
 
 ## Local preview
@@ -86,4 +86,16 @@ Implementation references: [OpenNext bindings](https://opennext.js.org/cloudflar
 - A second local placement was given an eight-second end time. Real clock expiry removed it from the public listing, made its logo return 404, released inventory and marked the request ended. Synthetic records remain ended in local storage; no remote production booking records were created.
 - `npm run build` passed and generated all 275 static pages. Existing rankings snapshot/history storage warnings appeared without failing the build. ESLint passed for the extended smoke script.
 - The earlier automatic approval-review usage-limit failure is resolved for these checks; it is no longer a pending verification blocker.
-- Production owner-secret configuration completed after the user authorized release. Cloudflare CI/adapter deployment and post-deploy smoke verification are the current release steps. Public production bookings stay disabled.
+- Production owner-secret configuration, Cloudflare CI/adapter deployment and post-deploy smoke verification completed successfully on 14 November 2026. Public production bookings remain disabled.
+
+## Production deployment — 14 November 2026
+
+- Live homepage: https://yttools.pro/
+- Sponsor form: https://yttools.pro/sponsor (requests disabled; creative preview available).
+- Owner panel: https://yttools.pro/admin/sponsors. Use the production key from ignored `.sponsor-production-owner.key`; the local `.dev.vars` key is different.
+- Application commit: `230d066d4d9e5afb2b1434c0707a7a2ce2e78298`.
+- [Successful Cloudflare workflow](https://github.com/geekyprem1/ytfreetoolwebsite/actions/runs/43587781289): focused tests, Linux OpenNext build, Worker dry-run bundle and deploy all passed.
+- Live smoke checks passed: homepage/canonical, sponsor and admin pages, representative tools, eight-slot D1 inventory, owner-key authorization, unauthorized admin denial, private contact protection and no-store owner response. Closed public submission was rejected without creating a production booking.
+- Browser verified 67 homepage tool cards, the closed-booking notice, and no page overflow at tested desktop/mobile widths.
+- Reproducible live check: `node scripts/verify-sponsor-production.mjs`; results in `validation/sponsor-production-smoke.json`. It does not print the owner key or create real sponsor bookings.
+- No payment collection/subscriptions were enabled. Actual payment setup, advertiser terms and opening requests remain separate work.
